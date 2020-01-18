@@ -1,17 +1,12 @@
 import React from 'react';
 import {
   Card,
-  Typography,
-  Alert,
   Icon,
   Form,
-  Upload,
-  message,
   Button,
   Modal,
   Divider,
   Descriptions,
-  Checkbox,
   Row,
   Col,
   Steps,
@@ -20,14 +15,39 @@ import {
   Popconfirm,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
+import ReactTable from 'react-table';
 import { programEmployees } from '../Utils';
 
-// Import React Table
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 const EditableContext = React.createContext();
+
+const programTitleStyle = {
+  fontSize: '32px',
+  color: 'black',
+};
+
+const labelStyle = {
+  fontSize: '24px',
+  color: 'black',
+  fontWeight: 500,
+  letterSpacing: '0.5px',
+};
+
+const valueStyle = {
+  marginLeft: '20px',
+  color: '#525257',
+  fontWeight: 600,
+  fontSize: '18px',
+  paddingLeft: '10px',
+};
+
+const editStyle = {
+  color: '#525257',
+  fontWeight: 600,
+  fontSize: '18px',
+  marginLeft: '5px',
+};
 
 const EditableRow = ({ form, index, ...props }) => (
   <EditableContext.Provider value={form}>
@@ -44,11 +64,14 @@ class EditableCell extends React.Component {
 
   toggleEdit = () => {
     const editing = !this.state.editing;
-    this.setState({ editing }, () => {
-      if (editing) {
-        this.input.focus();
-      }
-    });
+    this.setState(
+      prevState => ({ editing: prevState.editing }),
+      () => {
+        if (editing) {
+          this.input.focus();
+        }
+      },
+    );
   };
 
   save = e => {
@@ -76,7 +99,15 @@ class EditableCell extends React.Component {
             },
           ],
           initialValue: record[dataIndex],
-        })(<Input ref={node => (this.input = node)} onPressEnter={this.save} onBlur={this.save} />)}
+        })(
+          <Input
+            ref={node => {
+              this.input = node;
+            }}
+            onPressEnter={this.save}
+            onBlur={this.save}
+          />,
+        )}
       </Form.Item>
     ) : (
       <div
@@ -149,21 +180,17 @@ class ProgramInformation extends React.Component {
         editable: true,
       },
       {
-        title: '',
-        width: '20%',
-        dataIndex: 'operation',
-        render: (text, record) =>
+        render: record =>
           this.state.dataSource.length >= 1 ? (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
               <a>Delete</a>
             </Popconfirm>
           ) : null,
+        title: '',
+        width: '20%',
+        dataIndex: 'operation',
       },
     ];
-  }
-
-  handleOriginal(value) {
-    console.log('handleOriginal', value);
   }
 
   showSelectedCareerTrackModal = () => {
@@ -200,9 +227,45 @@ class ProgramInformation extends React.Component {
     this.setState({ recommendedCareerTrackVisible: false });
   };
 
+  handleDelete = key => {
+    this.setState(prevState => ({
+      dataSource: prevState.dataSource.filter(item => item.key !== key),
+    }));
+  };
+
+  handleAdd = () => {
+    const { count, dataSource } = this.state;
+    const newData = {
+      key: count,
+      name: `Career Track ${count}`,
+    };
+    this.setState({
+      dataSource: [...dataSource, newData],
+      count: count + 1,
+    });
+  };
+
+  handleOriginal = value => {
+    console.log('handleOriginal', value);
+  };
+
+  handleSave = row => {
+    this.setState(prevState => {
+      const newData = prevState.dataSource;
+      const index = prevState.newData.findIndex(item => row.key === item.key);
+      const item = newData[index];
+      newData.splice(index, 1, {
+        ...item,
+        ...row,
+      });
+      return { dataSource: newData };
+    });
+  };
+
   showRow(row) {
     const { info } = Modal;
     console.log('modalrow', row);
+
     info({
       style: { top: 20 },
       width: 1200,
@@ -237,7 +300,7 @@ class ProgramInformation extends React.Component {
             >
               <Descriptions.Item label="Trainings">
                 Advanced Networking -{' '}
-                <span class="attention">
+                <span className="attention">
                   Training Recently Shown Interest, Needs Action
                   <Icon type="warning" theme="filled" />
                 </span>
@@ -246,7 +309,7 @@ class ProgramInformation extends React.Component {
               </Descriptions.Item>
               <Descriptions.Item label="Certifications">
                 CCNA -{' '}
-                <span class="in-progress">
+                <span className="in-progress">
                   Certification Test Scheduled
                   <Icon type="calendar" theme="outlined" />
                 </span>
@@ -278,32 +341,32 @@ class ProgramInformation extends React.Component {
             >
               <Descriptions.Item label="Trainings">
                 Programming Level 3 Training -{' '}
-                <span class="in-progress">
+                <span className="in-progress">
                   Training Scheduled
                   <Icon type="calendar" theme="outlined" />
                 </span>
                 <br />
                 Database Level 3 Training -{' '}
-                <span class="in-progress">
+                <span className="in-progress">
                   Training in Progress
                   <Icon type="sync" spin />
                 </span>
                 <br />
                 Advanced Agile Training-{' '}
-                <span class="completed">
+                <span className="completed">
                   Training Complete
                   <Icon type="check-circle" theme="outlined" />
                 </span>
               </Descriptions.Item>
               <Descriptions.Item label="Certifications">
                 CCISP -{' '}
-                <span class="attention">
+                <span className="attention">
                   Certification Recently Shown Interest, Needs Action
                   <Icon type="warning" theme="filled" />
                 </span>
                 <br />
                 AWS Developer -{' '}
-                <span class="completed">
+                <span className="completed">
                   Certification Complete
                   <Icon type="check-circle" theme="outlined" />
                 </span>
@@ -315,33 +378,6 @@ class ProgramInformation extends React.Component {
       onOk() {},
     });
   }
-  handleDelete = key => {
-    const dataSource = [...this.state.dataSource];
-    this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
-  };
-
-  handleAdd = () => {
-    const { count, dataSource } = this.state;
-    const newData = {
-      key: count,
-      name: `Career Track ${count}`,
-    };
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1,
-    });
-  };
-
-  handleSave = row => {
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex(item => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      ...row,
-    });
-    this.setState({ dataSource: newData });
-  };
 
   render() {
     const {
@@ -379,48 +415,68 @@ class ProgramInformation extends React.Component {
       };
     });
 
+    const formData = [
+      {
+        label: 'Program Manager',
+        value: 'Sidney Watkins',
+      },
+      {
+        label: 'Number of Employees',
+        value: '15',
+      },
+      {
+        label: 'Clearance Level',
+        value: 'PUBLIC TRUST',
+      },
+      {
+        label: 'Salary Average',
+        value: '$123,989.87',
+      },
+    ];
+
     return (
       <PageHeaderWrapper>
-        <Card>
-          <h1>Department of Defense Space Program</h1>
+        <Card style={{ margin: '20px', padding: '10px' }}>
+          <p style={programTitleStyle}>Department of Defense Space Program</p>
+          <Divider />
           <Form {...formItemLayout}>
-            <Form.Item label="Program Manager:">
-              <span className="ant-form-text">Sidney Watkins</span>
-            </Form.Item>
-            <Form.Item label="Number of Employees:">
-              <span className="ant-form-text">15</span>
-            </Form.Item>
-            <Form.Item label="Clearance Level:">
-              <span className="ant-form-text">PUBLIC TRUST</span>
-            </Form.Item>
-            <Form.Item label="Salary Average:">
-              <span className="ant-form-text">$123,989.87</span>
-            </Form.Item>
+            {formData.map(d => (
+              <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
+                <p style={labelStyle}>{d.label}</p>
+                <Row>
+                  <Col xs={20}>
+                    <p style={valueStyle} className="ant-form-text">
+                      {d.value}
+                    </p>
+                  </Col>
+                  <Col xs={4}>
+                    <Icon type="edit" />
+                    <span style={editStyle}>Edit</span>
+                  </Col>
+                </Row>
+              </Form.Item>
+            ))}
           </Form>
-
+          <Divider />
           <ReactTable
             data={data}
-            resolveData={data => data.map(row => row)}
+            resolveData={d => d.map(row => row)}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            getTdProps={(state, rowInfo, column, instance) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
-            getTrProps={(state, rowInfo, column) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  this.showRow(rowInfo.original);
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
+            getTdProps={() => ({
+              onClick: (e, handleOriginal) => {
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            getTrProps={rowInfo => ({
+              onClick: (e, handleOriginal) => {
+                this.showRow(rowInfo.original);
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
             columns={[
               {
                 Header: 'Employees',
@@ -432,19 +488,19 @@ class ProgramInformation extends React.Component {
                     Cell: props => (
                       <span>
                         {props.value === 'Yellow' && (
-                          <span class="in-progress">
+                          <span className="in-progress">
                             <Icon type="sync" spin />
                             In Progress
                           </span>
                         )}
                         {props.value === 'Green' && (
-                          <span class="completed">
+                          <span className="completed">
                             <Icon type="check-circle" theme="outlined" />
                             Complete
                           </span>
                         )}
                         {props.value === 'Red' && (
-                          <span class="attention">
+                          <span className="attention">
                             <Icon type="warning" theme="filled" />
                             Needs Attention: {props.original.progressInformation}
                           </span>
@@ -459,7 +515,7 @@ class ProgramInformation extends React.Component {
                   {
                     id: 'currentCareerTrack',
                     Header: 'Current Career Track',
-                    accessor: d => `${d.careerTrackName}` + ' Tier ' + `${d.careerTrackTier}`,
+                    accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
                   },
                   {
                     Header: 'Location',
