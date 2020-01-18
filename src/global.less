@@ -23,7 +23,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
-  font-family: GCentra, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial,
+  font-family: 'GCentra', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial,
     sans-serif;
 }
 
@@ -64,9 +64,40 @@ ol {
   }
 }
 
+@font-face {
+  font-family: 'Gcentra';
+  src: url('https://assets.gusto.com/assets/brand_refresh/gcentra/gcentra-book-42b9d90eae07740796ffa7942c73fc35bcaf811a16286b3eff59eed9a2bed5f7.woff2')
+    format('woff2');
+}
+
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 /* stylelint-disable no-duplicate-selectors */
 /* stylelint-disable */
+
+.ant-table-thead > tr > th {
+  font-size: 14px;
+  line-height: 20px;
+  color: #6c6c72;
+  background-color: #fbfafa;
+  border-bottom: 1px solid #eaeaea;
+  padding-top: 6px;
+  padding-left: 16px;
+  padding-bottom: 4px;
+  vertical-align: bottom;
+}
+
+.ant-menu-submenu-title > span {
+  padding-left: 5px;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: none;
+}
+
+.ant-table-row-cell-break-word {
+  font-size: 16px;
+  color: #1c1c1c;
+}
 
 .ant-menu {
   box-sizing: border-box;
@@ -132,10 +163,12 @@ ol {
 }
 .ant-menu-item > a {
   display: block;
+  padding: 5px;
+  line-height: 1.5;
   color: #6c6c72;
 }
 .ant-menu-item > a:hover {
-  color: #54565a;
+  color: #1c1c1c;
 }
 .ant-menu-item > a::before {
   position: absolute;
@@ -157,8 +190,9 @@ ol {
 .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
 .ant-menu-submenu-active,
 .ant-menu-submenu-title:hover {
-  font-weight: 600;
+  font-weight: 400;
   transition: 0.1s;
+  color: #1c1c1c;
 }
 .ant-menu-item:hover {
   i {
@@ -173,12 +207,22 @@ ol {
 }
 
 .ant-menu-submenu-title:hover {
+  i {
+    color: #722ed1;
+  }
+  span {
+    color: #1c1c1c;
+  }
+}
+
+ant-menu-item-active > a > p:hover {
   color: #1c1c1c;
 }
 
 .ant-menu-item-active > a > p > i,
 .ant-menu-item-active > a > p > i:hover {
-  font-weight: 600;
+  font-weight: 400;
+  color: #1c1c1c;
   transition: 0.1s;
 }
 .ant-menu-horizontal .ant-menu-item,
@@ -191,12 +235,12 @@ ol {
   background-color: transparent;
 }
 .ant-menu-item-selected {
-  font-weight: 600;
+  font-weight: 400;
   color: #1c1c1c;
 }
 .ant-menu-item-selected > a,
 .ant-menu-item-selected > a:hover {
-  font-weight: 600;
+  font-weight: 400;
   color: #1c1c1c;
 }
 .ant-menu-item-selected > a > p > i,
@@ -623,6 +667,7 @@ ol {
 .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
   height: 40px;
   line-height: 40px;
+  padding-left: 30px;
   list-style-position: inside;
   list-style-type: disc;
 }
@@ -2382,7 +2427,8 @@ a.ant-btn-sm {
   color: white;
   font-weight: 600;
   font-size: 20px;
-  font-family: 'Century Gothic';
+  font-family: GCentra, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif;
   vertical-align: middle;
 }
 .ant-pro-sider-menu-sider {
@@ -3015,9 +3061,8 @@ a.ant-btn-sm {
   height: 32px;
   margin-right: 8px;
   font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: GCentra, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif;
   line-height: 32px;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.25);
