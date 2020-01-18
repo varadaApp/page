@@ -107,7 +107,7 @@ export default () => (
       <Row gutter={[8, 8]}>
         <Col xs={1} />
         <Col xs={22}>
-          <h1 style={titleStyle}>Pay it forward.</h1>
+          <h1 style={titleStyle}>Profile details</h1>
           <Divider />
           <Form {...formItemLayout}>
             <Row gutter={[8, 8]}>
