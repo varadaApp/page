@@ -1,22 +1,6 @@
 import React from 'react';
-import {
-  Card,
-  Typography,
-  Alert,
-  Descriptions,
-  Row,
-  Col,
-  Icon,
-  Divider,
-  Modal,
-  Button,
-  Steps,
-  Checkbox,
-  AutoComplete,
-  Select,
-} from 'antd';
+import { Card, Row, Col, Icon, Divider, Modal, Button, Steps, Checkbox, AutoComplete } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
 
 class CurrentCareerTrack extends React.Component {
   constructor(props) {
@@ -34,34 +18,13 @@ class CurrentCareerTrack extends React.Component {
       visible3: false,
       positionsLoading3: false,
       positionsVisible3: false,
-      programValue: 'Department of Homeland Security Satellite Network',
-      loading4: false,
-      visible4: false,
-      positionsLoading4: false,
-      positionsVisible4: false,
-      loading5: false,
-      visible5: false,
-      positionsLoading5: false,
-      positionsVisible5: false,
+      programValue: 'AWS Technical Support Program',
       programValue2: 'Department of Defense Space Program',
     };
     this.handleProgramChange = this.handleProgramChange.bind(this);
     this.handleProgramSelect = this.handleProgramSelect.bind(this);
     this.handleProgramChange2 = this.handleProgramChange2.bind(this);
     this.handleProgramSelect2 = this.handleProgramSelect2.bind(this);
-  }
-
-  handleProgramChange(value) {
-    this.setState({ programValue: value });
-  }
-  handleProgramSelect(value) {
-    this.setState({ programValue: value });
-  }
-  handleProgramChange2(value) {
-    this.setState({ programValue2: value });
-  }
-  handleProgramSelect2(value) {
-    this.setState({ programValue2: value });
   }
 
   showModal = () => {
@@ -166,73 +129,21 @@ class CurrentCareerTrack extends React.Component {
     this.setState({ positionsVisible3: false });
   };
 
-  showModal4 = () => {
-    this.setState({
-      visible4: true,
-    });
-  };
+  handleProgramChange(value) {
+    this.setState({ programValue: value });
+  }
 
-  handleOk4 = () => {
-    this.setState({ loading4: true });
-    setTimeout(() => {
-      this.setState({ loading4: false, visible4: false });
-    }, 500);
-  };
+  handleProgramSelect(value) {
+    this.setState({ programValue: value });
+  }
 
-  handleCancel4 = () => {
-    this.setState({ visible4: false });
-  };
+  handleProgramChange2(value) {
+    this.setState({ programValue2: value });
+  }
 
-  showPositionsModal4 = () => {
-    this.setState({
-      positionsVisible4: true,
-    });
-  };
-
-  handlePositionsOk4 = () => {
-    this.setState({ positionsLoading4: true });
-    setTimeout(() => {
-      this.setState({ positionsLoading4: false, positionsVisible4: false });
-    }, 500);
-  };
-
-  handlePositionsCancel4 = () => {
-    this.setState({ positionsVisible4: false });
-  };
-
-  showModal5 = () => {
-    this.setState({
-      visible5: true,
-    });
-  };
-
-  handleOk5 = () => {
-    this.setState({ loading5: true });
-    setTimeout(() => {
-      this.setState({ loading5: false, visible5: false });
-    }, 500);
-  };
-
-  handleCancel5 = () => {
-    this.setState({ visible5: false });
-  };
-
-  showPositionsModal5 = () => {
-    this.setState({
-      positionsVisible5: true,
-    });
-  };
-
-  handlePositionsOk5 = () => {
-    this.setState({ positionsLoading5: true });
-    setTimeout(() => {
-      this.setState({ positionsLoading5: false, positionsVisible5: false });
-    }, 500);
-  };
-
-  handlePositionsCancel5 = () => {
-    this.setState({ positionsVisible5: false });
-  };
+  handleProgramSelect2(value) {
+    this.setState({ programValue2: value });
+  }
 
   render() {
     const {
@@ -248,14 +159,6 @@ class CurrentCareerTrack extends React.Component {
       loading3,
       positionsVisible3,
       positionsLoading3,
-      visible4,
-      loading4,
-      positionsVisible4,
-      positionsLoading4,
-      visible5,
-      loading5,
-      positionsVisible5,
-      positionsLoading5,
     } = this.state;
     const { Step } = Steps;
     const dataSourceProgram = [
@@ -269,214 +172,364 @@ class CurrentCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <h1>Sidney's Career Track</h1>
-          <Row type="flex" justify="start">
-            <Col span={4}>Current Program</Col>
-            <Col span={6}>Department of Defense Space Program</Col>
-          </Row>
-          <Row type="flex" justify="start">
-            <Col span={4}>Current Career Track</Col>
-            <Col span={4}>Software Developer</Col>
-          </Row>
-          <Row type="flex" justify="start">
-            <Col span={4}>Current Tier</Col>
-            <Col span={4}>Level 2</Col>
-          </Row>
-          <Row type="flex" justify="start" style={{ paddingBottom: 20 }}>
-            <Col span={4}>Next Tier </Col>
-            <Col span={4}>Level 3</Col>
-          </Row>
-          <Divider orientation="left">
-            <strong>
-              Requirements for Primary Selected Career Track: Network Engineer Tier 2 (Program:{' '}
-              {this.state.programValue})
-            </strong>
-          </Divider>
-          Select another program:
-          <AutoComplete
-            style={{ width: 350 }}
-            allowClear={true}
-            dataSource={dataSourceProgram}
-            placeholder="Program"
-            onSelect={this.handleProgramSelect}
-            onChange={this.handleProgramChange}
-            //value={this.state.programValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <div
-            style={
-              this.state.programValue === 'Department of Homeland Security Satellite Network'
-                ? {}
-                : { display: 'none' }
-            }
-          >
-            <a onClick={this.showPositionsModal}>Current Open Positions: 12</a>
-            <p>
-              <a onClick={this.showModal}>Current Percentage Complete: 25%</a>
-            </p>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Trainings">
-                Advanced Networking -{' '}
-                <span class="attention">
-                  Training Recently Shown Interest, Needs Action
-                  <Icon type="warning" theme="filled" />
-                </span>
-                <br />
-                Networking Circuits <Checkbox>Select to Show Interest in Training</Checkbox>
-              </Descriptions.Item>
-              <Descriptions.Item label="Certifications">
-                CCNA -{' '}
-                <span class="in-progress">
-                  Certification Test Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                CCNP <Checkbox>Select to Show Interest in Certification</Checkbox>
-              </Descriptions.Item>
-            </Descriptions>
+          <div style={{ fontSize: '32px', color: 'black', fontWeight: 600 }}>
+            Sidney&apos;s Career Track
           </div>
-          <div
-            style={
-              this.state.programValue === 'AWS Technical Support Program' ? {} : { display: 'none' }
-            }
-          >
-            <a onClick={this.showPositionsModal2}>Current Open Positions: 3</a>
-            <p>
-              <a onClick={this.showModal2}>Current Percentage Complete: 85%</a>
-            </p>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Certifications">
-                Security+ -{' '}
-                <span class="in-progress">
-                  Certification Test Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                AWS Developer -{' '}
-                <span class="completed">
-                  Certification Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-            </Descriptions>{' '}
-          </div>
-          <br />
-          <Divider orientation="left">
-            <strong>
-              Recommended Career Track: Software Developer Level 3 (Program: Department of Defense
-              Space Program)
-            </strong>
-          </Divider>
-          Select another program:
-          <AutoComplete
-            style={{ width: 350 }}
-            allowClear={true}
-            dataSource={dataSourceProgram2}
-            placeholder="Program"
-            onSelect={this.handleProgramSelect2}
-            onChange={this.handleProgramChange2}
-            //value={this.state.programValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <div
-            style={
-              this.state.programValue2 === 'Department of Defense Space Program'
-                ? {}
-                : { display: 'none' }
-            }
-          >
-            <a onClick={this.showPositionsModal3}>Current Open Positions: 4</a>
-            <p>
-              <a onClick={this.showModal3}>Current Percentage Complete: 35%</a>
-            </p>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Trainings">
-                Programming Level 3 Training -{' '}
-                <span class="in-progress">
-                  Training Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                Database Level 3 Training -{' '}
-                <span class="in-progress">
-                  Training in Progress
-                  <Icon type="sync" spin />
-                </span>
-                <br />
-                Advanced Agile Training-{' '}
-                <span class="completed">
-                  Training Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-              <Descriptions.Item label="Certifications">
-                CCISP -{' '}
-                <span class="attention">
-                  Certification Recently Shown Interest, Needs Action
-                  <Icon type="warning" theme="filled" />
-                </span>
-                <br />
-                AWS Developer -{' '}
-                <span class="completed">
-                  Certification Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-            </Descriptions>
-          </div>
-          <div
-            style={
-              this.state.programValue2 === 'AWS Technical Support Program'
-                ? {}
-                : { display: 'none' }
-            }
-          >
-            <a onClick={this.showPositionsModal2}>Current Open Positions: 3</a>
-            <p>
-              <a onClick={this.showModal2}>Current Percentage Complete: 85%</a>
-            </p>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Certifications">
-                Security+ -{' '}
-                <span class="in-progress">
-                  Certification Test Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                AWS Developer -{' '}
-                <span class="completed">
-                  Certification Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-            </Descriptions>{' '}
-          </div>
+          <Row style={{ margin: '20px', padding: '10px' }}>
+            <Col xs={6}>
+              <Row
+                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+              >
+                Department of Defense Space Program
+              </Row>
+              <Row style={{ textAlign: 'center' }}>Current Program</Row>
+            </Col>
+            <Col xs={6}>
+              <Row
+                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+              >
+                Software Developer
+              </Row>
+              <Row style={{ textAlign: 'center' }}>Current Career Track</Row>
+            </Col>
+            <Col xs={6}>
+              <Row
+                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+              >
+                Level 2
+              </Row>
+              <Row style={{ textAlign: 'center' }}>Current Tier</Row>
+            </Col>
+            <Col xs={6}>
+              <Row
+                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+              >
+                Level 3
+              </Row>
+              <Row style={{ textAlign: 'center' }}>Next Tier</Row>
+            </Col>
+          </Row>
+          <Divider />
+          <Row>
+            <Col xs={12}>
+              <h2>Requirements for Primary Selected Career Track</h2>
+              <h3 style={{ color: '#525257', marginLeft: '20px', paddingLeft: '10px' }}>
+                Network Engineer Tier 2 (Program: {this.state.programValue || 'none'})
+              </h3>
+              <div style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <p style={{ marginTop: '15px', paddingTop: '5px' }}>
+                  <h3 style={{ color: '#525257' }}>Select another program:</h3>
+                </p>
+                <AutoComplete
+                  style={{ width: 350 }}
+                  allowClear
+                  dataSource={dataSourceProgram}
+                  placeholder="Program"
+                  onSelect={this.handleProgramSelect}
+                  onChange={this.handleProgramChange}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+              </div>
+              <div
+                style={
+                  this.state.programValue === 'Department of Homeland Security Satellite Network'
+                    ? { marginTop: '10px', paddingTop: '5px' }
+                    : { display: 'none' }
+                }
+              >
+                <Row>
+                  <Col xs={8}>
+                    <a onClick={this.showPositionsModal2}>Current Open Positions: 12</a>
+                  </Col>
+                  <Col xs={8}>
+                    <a onClick={this.showModal2}>Current Percentage Complete: 25%</a>
+                  </Col>
+                </Row>
+                <p style={{ marginTop: '10px', paddingTop: '5px' }}>
+                  Overall Expected Completion Date: 2/1/2020
+                </p>
+              </div>
+              <div
+                style={
+                  this.state.programValue === 'AWS Technical Support Program'
+                    ? { marginTop: '10px', paddingTop: '5px' }
+                    : { display: 'none' }
+                }
+              >
+                <Row>
+                  <Col xs={8}>
+                    <a onClick={this.showPositionsModal2}>Current Open Positions: 3</a>
+                  </Col>
+                  <Col xs={8}>
+                    <a onClick={this.showModal2}>Current Percentage Complete: 85%</a>
+                  </Col>
+                </Row>
+                <p style={{ marginTop: '10px', paddingTop: '5px' }}>
+                  Overall Expected Completion Date: 2/1/2020
+                </p>
+              </div>
+            </Col>
+            <Col xs={12}>
+              <br />
+              <div
+                style={
+                  this.state.programValue === 'Department of Homeland Security Satellite Network'
+                    ? {}
+                    : { display: 'none' }
+                }
+              >
+                <div style={{ backgroundColor: '#f0f2f5', padding: '10px' }}>
+                  <h3>Trainings</h3>
+                </div>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Advanced Networking</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="attention">
+                      Training Recently Shown Interest, Needs Action
+                      <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Networking Circuits</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <Checkbox>Select to Show Interest in Training</Checkbox>
+                  </Col>
+                </Row>
+                <div style={{ backgroundColor: '#f0f2f5', padding: '10px' }}>
+                  <h3>Certifications</h3>
+                </div>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>CCNA</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="in-progress">
+                      Certification Test Scheduled
+                      <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>CCNP</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <Checkbox>Select to Show Interest in Certification</Checkbox>
+                  </Col>
+                </Row>
+              </div>
+              <div
+                style={
+                  this.state.programValue === 'AWS Technical Support Program'
+                    ? { marginTop: '10px', paddingTop: '5px' }
+                    : { display: 'none' }
+                }
+              >
+                <div style={{ backgroundColor: '#f0f2f5', padding: '10px' }}>
+                  <h3>Certifications</h3>
+                </div>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Security+</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span style={{ margin: '5px' }} className="in-progress">
+                      Certification Test Scheduled
+                      <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>AWS Developer</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span style={{ margin: '5px' }} className="completed">
+                      Certification Complete
+                      <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+              </div>
+              <br />
+            </Col>
+          </Row>
+          {/* EDIT HERE */}
+          <Divider />
+          <Row>
+            <Col xs={12}>
+              <h2>Recommended Career Track</h2>
+              <h3 style={{ color: '#525257', marginLeft: '20px', paddingLeft: '10px' }}>
+                Software Developer Level 3 (Program: {this.state.programValue2 || 'none'})
+              </h3>
+              <div style={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <p style={{ marginTop: '15px', paddingTop: '5px' }}>
+                  <h3 style={{ color: '#525257' }}>Select another program:</h3>
+                  <AutoComplete
+                    style={{ width: 350 }}
+                    allowClear
+                    dataSource={dataSourceProgram2}
+                    placeholder="Program"
+                    onSelect={this.handleProgramSelect2}
+                    onChange={this.handleProgramChange2}
+                    filterOption={(inputValue, option) =>
+                      option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                    }
+                  />
+                </p>
+              </div>
+              <div
+                style={
+                  this.state.programValue2 === 'Department of Defense Space Program'
+                    ? {}
+                    : { display: 'none' }
+                }
+              >
+                <Row>
+                  <Col xs={8}>
+                    <a onClick={this.showPositionsModal3}>Current Open Positions: 4</a>
+                  </Col>
+                  <Col xs={8}>
+                    <a onClick={this.showModal3}>Current Percentage Complete: 35%</a>
+                  </Col>
+                </Row>
+                <p style={{ marginTop: '10px', paddingTop: '5px' }}>
+                  Overall Expected Completion Date: 2/1/2020
+                </p>
+              </div>
+              <div
+                style={
+                  this.state.programValue2 === 'AWS Technical Support Program'
+                    ? {}
+                    : { display: 'none' }
+                }
+              >
+                <Row>
+                  <Col xs={8}>
+                    <a onClick={this.showPositionsModal2}>Current Open Positions: 3</a>
+                  </Col>
+                  <Col xs={8}>
+                    <a onClick={this.showModal2}>Current Percentage Complete: 85%</a>
+                  </Col>
+                </Row>
+                <p style={{ marginTop: '10px', paddingTop: '5px' }}>
+                  Overall Expected Completion Date: 2/1/2020
+                </p>
+              </div>
+            </Col>
+            {/* DIVIDER | */}
+            <Col xs={12}>
+              <div
+                style={
+                  this.state.programValue2 === 'Department of Defense Space Program'
+                    ? {}
+                    : { display: 'none' }
+                }
+              >
+                <div style={{ backgroundColor: '#f0f2f5', padding: '10px' }}>
+                  <h3>Trainings</h3>
+                </div>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Programming Level 3 Training</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="in-progress">
+                      Training Scheduled
+                      <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Database Level 3 Training</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="in-progress">
+                      Training in Progress
+                      <Icon style={{ margin: '5px' }} type="sync" spin />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Advanced Agile Training</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="completed">
+                      Training Complete
+                      <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+                <div style={{ backgroundColor: '#f0f2f5', padding: '10px' }}>
+                  <h3>Certifications</h3>
+                </div>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>CCISP</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="attention">
+                      Certification Recently Shown Interest, Needs Action
+                      <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>AWS Developer</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span className="completed">
+                      Certification Complete
+                      <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+              </div>
+              <div
+                style={
+                  this.state.programValue2 === 'AWS Technical Support Program'
+                    ? { marginTop: '10px', paddingTop: '5px' }
+                    : { display: 'none' }
+                }
+              >
+                <div style={{ backgroundColor: '#f0f2f5', padding: '10px' }}>
+                  <h3>Certifications</h3>
+                </div>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>Security+</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span style={{ margin: '5px' }} className="in-progress">
+                      Certification Test Scheduled
+                      <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+                <Row style={{ marginLeft: '15px', padding: '10px' }}>
+                  <Col xs={12}>
+                    <h3 style={{ color: '#525257' }}>AWS Developer</h3>
+                  </Col>
+                  <Col xs={12}>
+                    <span style={{ margin: '5px' }} className="completed">
+                      Certification Complete
+                      <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+                    </span>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
         </Card>
         <Modal
           visible={visible}
@@ -491,7 +544,11 @@ class CurrentCareerTrack extends React.Component {
           ]}
         >
           <Row gutter={[8, 8]}>
-            <Col span={24}>Program: Department of Homeland Security Satellite Network</Col>
+            <Col span={24}>
+              Overall Expected Completion Date: 2/1/2020
+              <br />
+              Program: Department of Homeland Security Satellite Network
+            </Col>
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={12}>
@@ -556,7 +613,11 @@ class CurrentCareerTrack extends React.Component {
           ]}
         >
           <Row gutter={[8, 8]}>
-            <Col span={24}>Program: AWS Technical Support Program</Col>
+            <Col span={24}>
+              Overall Expected Completion Date: 2/1/2020
+              <br />
+              Program: AWS Technical Support Program
+            </Col>
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={24}>
@@ -606,7 +667,11 @@ class CurrentCareerTrack extends React.Component {
           ]}
         >
           <Row gutter={[8, 8]}>
-            <Col span={24}>Program: Department of Defense Space Program</Col>
+            <Col span={24}>
+              Overall Expected Completion Date: 2/1/2020
+              <br />
+              Program: Department of Defense Space Program
+            </Col>
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={24}>
