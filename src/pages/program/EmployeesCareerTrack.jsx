@@ -1,12 +1,20 @@
 import React from 'react';
-import { Card, Typography, Alert, Icon, Form, Upload, message, Button, Modal, Steps } from 'antd';
+import { Card, Icon, Modal, Steps } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
+import ReactTable from 'react-table';
 import { employeesWithSelectedCareerTrackData } from '../Utils';
 
 // Import React Table
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+
+const employeeCareerTrackHeaderStyle = {
+  margin: '10px',
+  padding: '5px',
+  fontSize: '32px',
+  color: 'black',
+  fontWeight: 500,
+  letterSpacing: '0.5px',
+};
 
 class EmployeesCareerTrack extends React.Component {
   constructor(props) {
@@ -17,10 +25,12 @@ class EmployeesCareerTrack extends React.Component {
     this.showRow = this.showRow.bind(this);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   handleOriginal(value) {
     console.log('handleOriginal', value);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   showRow(row) {
     const { info } = Modal;
     const { Step } = Steps;
@@ -44,39 +54,33 @@ class EmployeesCareerTrack extends React.Component {
       onOk() {},
     });
   }
+
   render() {
     const { data } = this.state;
-    const formItemLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 12 },
-    };
-
     return (
       <PageHeaderWrapper>
         <Card>
+          <p style={employeeCareerTrackHeaderStyle}>Employees Current Career Track Timelines</p>
           <ReactTable
             data={data}
+            // eslint-disable-next-line no-shadow
             resolveData={data => data.map(row => row)}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            getTdProps={(state, rowInfo, column, instance) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
-            getTrProps={(state, rowInfo, column) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  this.showRow(rowInfo.original);
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
+            getTdProps={() => ({
+              onClick: (e, handleOriginal) => {
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            getTrProps={rowInfo => ({
+              onClick: (e, handleOriginal) => {
+                this.showRow(rowInfo.original);
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
             columns={[
               {
                 Header: 'Employees Current Career Track Timelines',
@@ -88,7 +92,7 @@ class EmployeesCareerTrack extends React.Component {
                   {
                     id: 'currentCareerTrack',
                     Header: 'Current Career Track',
-                    accessor: d => `${d.careerTrackName}` + ' Tier ' + `${d.careerTrackTier}`,
+                    accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
                   },
                   {
                     Header: 'Desired Career Track',

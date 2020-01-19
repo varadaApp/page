@@ -86,6 +86,23 @@ ol {
   vertical-align: bottom;
 }
 
+.program-info-career-track-table {
+  th {
+    font-size: 24px !important;
+    color: black !important;
+    padding: 20px !important;
+  }
+  .editable-row,
+  .tr > .td > .editable-cell-value-wrap {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    padding-left: 10px;
+  }
+  .ant-table-tbody > tr > td {
+    color: rgb(82, 82, 87);
+  }
+}
 .report-table {
   td,
   tr > th {
@@ -94,7 +111,7 @@ ol {
 }
 
 .ReactTable .rt-thead.-headerGroups {
-  background-color: #fbfafa !important;
+  display: none !important;
 }
 
 .ant-menu-submenu-title > span {
@@ -2520,6 +2537,12 @@ a.ant-btn-sm {
   padding: 0;
 }
 
+.employees-table {
+  .ReactTable.-striped .rt-tr.-odd {
+    background-color: transparent !important;
+  }
+}
+
 .ReactTable {
   position: relative;
   display: -webkit-box;
@@ -2529,7 +2552,7 @@ a.ant-btn-sm {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 .ReactTable * {
@@ -2576,7 +2599,9 @@ a.ant-btn-sm {
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   background-color: #592c82;
-  color: white;
+  color: #1c1c1c;
+  font-size: 24px;
+  text-align: left;
 }
 
 .ReactTable .rt-thead.-headerGroups rt-th {
@@ -2620,7 +2645,8 @@ a.ant-btn-sm {
 }
 
 .ReactTable .rt-thead .rt-tr {
-  text-align: center;
+  text-align: left;
+  padding: 10px;
 }
 
 .ReactTable .rt-thead .rt-th,
@@ -2652,6 +2678,12 @@ a.ant-btn-sm {
   cursor: pointer;
 }
 
+.ReactTable .rt-thead .rt-th:last-child {
+  font-weight: 500;
+  padding: 0px;
+  font-size: 32px;
+}
+
 .ReactTable .rt-thead .rt-th:last-child,
 .ReactTable .rt-thead .rt-td:last-child {
   border-right: 0;
@@ -2663,6 +2695,7 @@ a.ant-btn-sm {
 
 .ReactTable .rt-thead .rt-resizable-header {
   overflow: visible;
+  padding-left: 0px;
   border-right: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -2672,6 +2705,8 @@ a.ant-btn-sm {
 
 .ReactTable .rt-thead .rt-resizable-header-content {
   overflow: hidden;
+  font-size: 24px !important;
+  font-weight: 500 !important;
   text-overflow: ellipsis;
 }
 
@@ -2719,14 +2754,6 @@ a.ant-btn-sm {
   overflow: auto;
 }
 
-.ReactTable .rt-tbody .rt-tr-group {
-  border-bottom: solid 1px rgba(0, 0, 0, 0.05);
-}
-
-.ReactTable .rt-tbody .rt-tr-group:last-child {
-  border-bottom: 0;
-}
-
 .ReactTable .rt-tbody .rt-td {
   border-right: 1px solid rgba(0, 0, 0, 0.02);
 }
@@ -2770,6 +2797,9 @@ a.ant-btn-sm {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 0px;
   flex: 1 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #525257;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding: 7px 5px;
@@ -2849,8 +2879,12 @@ a.ant-btn-sm {
   border-right: 0;
 }
 
+.ReactTable .rt-tbody .rt-tr-group {
+  border-bottom: none !important;
+}
+
 .ReactTable.-striped .rt-tr.-odd {
-  background: rgba(0, 0, 0, 0.03);
+  background: none;
 }
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {

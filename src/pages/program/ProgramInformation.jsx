@@ -27,6 +27,15 @@ const programTitleStyle = {
   color: 'black',
 };
 
+const employeeHeaderStyle = {
+  margin: '10px',
+  padding: '5px',
+  fontSize: '32px',
+  color: 'black',
+  fontWeight: 500,
+  letterSpacing: '0.5px',
+};
+
 const labelStyle = {
   fontSize: '24px',
   color: 'black',
@@ -180,12 +189,14 @@ class ProgramInformation extends React.Component {
         editable: true,
       },
       {
-        render: record =>
-          this.state.dataSource.length >= 1 ? (
+        render: record => {
+          const { dataSource } = this.state;
+          return dataSource.length >= 1 ? (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
               <a>Delete</a>
             </Popconfirm>
-          ) : null,
+          ) : null;
+        },
         title: '',
         width: '20%',
         dataIndex: 'operation',
@@ -389,10 +400,6 @@ class ProgramInformation extends React.Component {
       dataSource,
     } = this.state;
     const { Step } = Steps;
-    const formItemLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 12 },
-    };
     const components = {
       body: {
         row: EditableFormRow,
@@ -439,26 +446,51 @@ class ProgramInformation extends React.Component {
         <Card style={{ margin: '20px', padding: '10px' }}>
           <p style={programTitleStyle}>Department of Defense Space Program</p>
           <Divider />
-          <Form {...formItemLayout}>
-            {formData.map(d => (
-              <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
-                <p style={labelStyle}>{d.label}</p>
-                <Row>
-                  <Col xs={20}>
-                    <p style={valueStyle} className="ant-form-text">
-                      {d.value}
-                    </p>
-                  </Col>
-                  <Col xs={4}>
-                    <Icon type="edit" />
-                    <span style={editStyle}>Edit</span>
-                  </Col>
-                </Row>
-              </Form.Item>
-            ))}
-          </Form>
+          <Row style={{ margin: '20px', padding: '10px' }}>
+            <Col xs={12}>
+              <Form>
+                {formData.map(d => (
+                  <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
+                    <p style={labelStyle}>{d.label}</p>
+                    <Row>
+                      <Col xs={20}>
+                        <p style={valueStyle} className="ant-form-text">
+                          {d.value}
+                        </p>
+                      </Col>
+                      <Col xs={4}>
+                        <Icon type="edit" />
+                        <span style={editStyle}>Edit</span>
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                ))}
+              </Form>
+            </Col>
+            <Col style={{ padding: '10px', backgroundColor: 'rgb(240, 242, 245)' }} xs={12}>
+              <Form layout="inline">
+                <Form.Item>
+                  <Input style={{ width: 400 }} placeholder="Career Track Name" />
+                </Form.Item>
+                <Form.Item>
+                  <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                    Add a Career Track
+                  </Button>
+                </Form.Item>
+              </Form>
+              <Table
+                className="program-info-career-track-table"
+                components={components}
+                rowClassName={() => 'editable-row'}
+                dataSource={dataSource}
+                columns={columns}
+              />
+            </Col>
+          </Row>
           <Divider />
+          <p style={employeeHeaderStyle}>Employees</p>
           <ReactTable
+            style={{ marginLeft: '20px', paddingLeft: '10px' }}
             data={data}
             resolveData={d => d.map(row => row)}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
@@ -526,25 +558,6 @@ class ProgramInformation extends React.Component {
             ]}
             defaultPageSize={10}
             className="-striped -highlight"
-          />
-          <br />
-          <Form layout="inline">
-            <Form.Item>
-              <Input style={{ width: 400 }} placeholder="Career Track Name" />
-            </Form.Item>
-            <Form.Item>
-              <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
-                Add a Career Track
-              </Button>
-            </Form.Item>
-          </Form>
-          <Table
-            style={{ width: 700 }}
-            components={components}
-            rowClassName={() => 'editable-row'}
-            bordered
-            dataSource={dataSource}
-            columns={columns}
           />
           <p
             style={{
