@@ -110,10 +110,6 @@ ol {
   }
 }
 
-.ReactTable .rt-thead.-headerGroups {
-  display: none !important;
-}
-
 .ant-menu-submenu-title > span {
   padding-left: 5px;
 }
@@ -2595,13 +2591,17 @@ a.ant-btn-sm {
   user-select: none;
 }
 
+.ReactTable .rt-thead.-headerGroups > .rt-tr > .rt-th {
+  font-weight: 600 !important;
+  text-align: center !important;
+}
+
 .ReactTable .rt-thead.-headerGroups {
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: #592c82;
+  background-color: rgb(240, 242, 245);
   color: #1c1c1c;
-  font-size: 24px;
-  text-align: left;
+  align-items: center;
 }
 
 .ReactTable .rt-thead.-headerGroups rt-th {
@@ -2649,6 +2649,11 @@ a.ant-btn-sm {
   padding: 10px;
 }
 
+.rt-tr > :first-child {
+  color: #1c1c1c !important;
+  font-weight: 600 !important;
+}
+
 .ReactTable .rt-thead .rt-th,
 .ReactTable .rt-thead .rt-td {
   padding: 5px 5px;
@@ -2678,16 +2683,18 @@ a.ant-btn-sm {
   cursor: pointer;
 }
 
-.ReactTable .rt-thead .rt-th:last-child {
-  font-weight: 500;
-  padding: 0px;
-  font-size: 32px;
-}
+// .ReactTable .rt-thead .rt-th:last-child {
+//   font-weight: 600;
+//   padding: 0px;
+//   color: black;
+//   font-size: 16px;
+//   text-align: center;
+// }
 
-.ReactTable .rt-thead .rt-th:last-child,
-.ReactTable .rt-thead .rt-td:last-child {
-  border-right: 0;
-}
+// .ReactTable .rt-thead .rt-th:last-child,
+// .ReactTable .rt-thead .rt-td:last-child {
+//   border-right: 0;
+// }
 
 .ReactTable .rt-thead .rt-th:focus {
   outline-width: 0;
@@ -2703,11 +2710,23 @@ a.ant-btn-sm {
   overflow: hidden;
 }
 
+.rt-tr {
+  line-height: 20px;
+  color: #525257 !important;
+  padding-top: 6px;
+  padding-left: 16px;
+  padding-bottom: 4px;
+  vertical-align: bottom;
+}
+
 .ReactTable .rt-thead .rt-resizable-header-content {
-  overflow: hidden;
-  font-size: 24px !important;
-  font-weight: 500 !important;
-  text-overflow: ellipsis;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  color: #6c6c72;
+  padding-top: 6px !important;
+  padding-left: 16px !important;
+  padding-bottom: 4px !important;
+  vertical-align: bottom !important;
 }
 
 .ReactTable .rt-thead .rt-header-pivot {
@@ -2793,12 +2812,17 @@ a.ant-btn-sm {
 }
 
 .ReactTable .rt-th,
+.ReactTable .rt-td :nth-child(1) {
+  font-weight: 400 !important;
+}
+
+.ReactTable .rt-th,
 .ReactTable .rt-td {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 0px;
   flex: 1 0 0;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   color: #525257;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -7,15 +7,6 @@ import { employeesWithSelectedCareerTrackData } from '../Utils';
 // Import React Table
 import 'react-table/react-table.css';
 
-const employeeCareerTrackHeaderStyle = {
-  margin: '10px',
-  padding: '5px',
-  fontSize: '32px',
-  color: 'black',
-  fontWeight: 500,
-  letterSpacing: '0.5px',
-};
-
 class EmployeesCareerTrack extends React.Component {
   constructor(props) {
     super(props);
@@ -60,7 +51,6 @@ class EmployeesCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <p style={employeeCareerTrackHeaderStyle}>Employees Current Career Track Timelines</p>
           <ReactTable
             data={data}
             // eslint-disable-next-line no-shadow
