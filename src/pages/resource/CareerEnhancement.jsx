@@ -1,23 +1,11 @@
+/* eslint-disable class-methods-use-this */
 import React from 'react';
-import {
-  Card,
-  Typography,
-  Alert,
-  Icon,
-  AutoComplete,
-  Form,
-  Button,
-  Radio,
-  Modal,
-  Checkbox,
-} from 'antd';
+import { Card, Icon, Row, Col, AutoComplete, Button, Radio, Modal, Checkbox } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { makeData, Logo, Tips, enhancementSearchData } from '../Utils';
-import matchSorter from 'match-sorter';
 
 // Import React Table
 import ReactTable from 'react-table';
+import { enhancementSearchData } from '../Utils';
 import 'react-table/react-table.css';
 
 class CareerEnhancement extends React.Component {
@@ -25,13 +13,15 @@ class CareerEnhancement extends React.Component {
     super(props);
     this.state = {
       data: enhancementSearchData(),
-      value: 1,
+      enhancementType: 1,
       hideTable: true,
       programValue: '',
       locationValue: '',
       certificationValue: '',
       clearanceValue: '',
       careerTrackValue: '',
+      showDuration: true,
+      showFutureDate: true,
     };
     this.handleProgramSearch = this.handleProgramSearch.bind(this);
     this.handleLocationSearch = this.handleLocationSearch.bind(this);
@@ -39,149 +29,179 @@ class CareerEnhancement extends React.Component {
     this.handleClearanceSearch = this.handleClearanceSearch.bind(this);
     this.handleCareerTrackSearch = this.handleCareerTrackSearch.bind(this);
     this.handleClear = this.handleClear.bind(this);
-    this.handleOriginal = this.handleOriginal.bind(this);
     this.showRow = this.showRow.bind(this);
   }
 
+  // eslint-disable-next-line react/sort-comp
   handleOriginal(value) {
     console.log('handleOriginal', value);
   }
+
   radioChange = e => {
     console.log('radio checked', e.target.value);
     this.setState({
-      value: e.target.value,
+      enhancementType: e.target.value,
     });
+
+    if (e.target.value === 1) {
+      this.setState({
+        showDuration: true,
+        showFutureDate: true,
+      });
+    }
+    if (e.target.value === 2) {
+      this.setState({
+        showDuration: true,
+        showFutureDate: false,
+      });
+    }
+    if (e.target.value === 3) {
+      this.setState({
+        showDuration: false,
+        showFutureDate: true,
+      });
+    }
+    if (e.target.value === 4) {
+      this.setState({
+        showDuration: true,
+        showFutureDate: true,
+      });
+    }
   };
 
   handleProgramSearch(value) {
-    var filteredCareerTracks = enhancementSearchData().filter(function(careerTrack) {
-      return careerTrack.programName == value;
-    });
+    let filteredCareerTracks = enhancementSearchData().filter(
+      careerTrack => careerTrack.programName === value,
+    );
     if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
     }
     if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
     }
     if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
     }
     this.setState({ programValue: value });
     this.setState({ data: filteredCareerTracks });
     this.setState({ hideTable: false });
   }
+
   handleLocationSearch(value) {
-    var filteredCareerTracks = enhancementSearchData().filter(function(careerTrack) {
-      return careerTrack.locationName == value;
-    });
+    let filteredCareerTracks = enhancementSearchData().filter(
+      careerTrack => careerTrack.locationName === value,
+    );
     if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
     }
     if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
     }
     if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
     }
     this.setState({ locationValue: value });
     this.setState({ data: filteredCareerTracks });
     this.setState({ hideTable: false });
   }
+
   handleCertificationSearch(value) {
-    var filteredCareerTracks = enhancementSearchData();
+    let filteredCareerTracks = enhancementSearchData();
     if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
     }
     if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
     }
     if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
     }
     if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
     }
     this.setState({ certificationValue: value });
     this.setState({ data: filteredCareerTracks });
     this.setState({ hideTable: false });
   }
+
   handleClearanceSearch(value) {
-    var filteredCareerTracks = enhancementSearchData().filter(function(careerTrack) {
-      return careerTrack.clearanceLevel == value;
-    });
+    let filteredCareerTracks = enhancementSearchData().filter(
+      careerTrack => careerTrack.clearanceLevel === value,
+    );
     if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
     }
     if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
     }
     if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
     }
     this.setState({ clearanceValue: value });
     this.setState({ data: filteredCareerTracks });
     this.setState({ hideTable: false });
   }
+
   handleCareerTrackSearch(value) {
-    var filteredCareerTracks = enhancementSearchData().filter(function(careerTrack) {
-      return careerTrack.careerTrackName == value;
-    });
+    let filteredCareerTracks = enhancementSearchData().filter(
+      careerTrack => careerTrack.careerTrackName === value,
+    );
     if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
     }
     if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
     }
     if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
     }
     this.setState({ careerTrackValue: value });
     this.setState({ data: filteredCareerTracks });
@@ -197,6 +217,7 @@ class CareerEnhancement extends React.Component {
     this.setState({ hideTable: true });
   };
 
+  // eslint-disable-next-line class-methods-use-this
   showRow(row) {
     const { info } = Modal;
     console.log('modalrow', row);
@@ -224,11 +245,7 @@ class CareerEnhancement extends React.Component {
   render() {
     const { data } = this.state;
     const styleHide = this.state.hideTable ? { display: 'none' } : {};
-    const NoDataComponent = props => {
-      const { children, loading } = props;
-
-      return <div className="rt-noData">No rows found</div>;
-    };
+    const NoDataComponent = () => <div className="rt-noData">No rows found</div>;
     const dataSourceProgram = [
       'AWS Technical Support Program',
       'DoD Space Program',
@@ -313,158 +330,183 @@ class CareerEnhancement extends React.Component {
       height: '30px',
       lineHeight: '30px',
     };
+
+    const autoCompleteStyle = {
+      width: '100%',
+      margin: '5px',
+      padding: '2px',
+    };
     return (
       <PageHeaderWrapper>
         <Card>
-          <h2>What kind of career enhancement opportunity are you looking for?</h2>
-          <Radio.Group onChange={this.radioChange} value={this.state.value}>
-            <Radio style={radioStyle} value={1}>
-              All
-            </Radio>
-            <Radio style={radioStyle} value={2}>
-              Temporary/Short-Term Coverage
-            </Radio>
-            <Radio style={radioStyle} value={3}>
-              Future Open Position
-            </Radio>
-            <Radio style={radioStyle} value={4}>
-              Proposal Position
-            </Radio>
-          </Radio.Group>
-          <br />
-          <h2>Filter by:</h2>
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceProgram}
-            placeholder="Program"
-            onChange={this.handleProgramSearch}
-            value={this.state.programValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceLocation}
-            placeholder="Location"
-            onChange={this.handleLocationSearch}
-            value={this.state.locationValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceCertification}
-            placeholder="Certification"
-            onChange={this.handleCertificationSearch}
-            value={this.state.certificationValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceClearance}
-            placeholder="Clearance"
-            onChange={this.handleClearanceSearch}
-            value={this.state.clearanceValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceCareerTrack}
-            placeholder="Career Track"
-            onChange={this.handleCareerTrackSearch}
-            value={this.state.careerTrackValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <Button onClick={this.handleClear}>Clear</Button>
-          <ReactTable
-            data={data}
-            resolveData={data => data.map(row => row)}
-            // filterable
-            style={styleHide}
-            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            //noDataText={!this.state.loading ? 'No rows found' : ''}
-            NoDataComponent={NoDataComponent}
-            getTdProps={(state, rowInfo, column, instance) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  if (handleOriginal) {
-                    handleOriginal();
+          <Row gutter={[4, 4]}>
+            <Col style={{ paddingRight: '5px' }} xs={4}>
+              <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>
+                <h2 style={{ fontSize: '24px', color: 'black' }}>
+                  What kind of career enhancement opportunity are you looking for?
+                </h2>
+                <Radio.Group onChange={this.radioChange} value={this.state.enhancementType}>
+                  <Radio style={radioStyle} value={1}>
+                    All
+                  </Radio>
+                  <Radio style={radioStyle} value={2}>
+                    Temporary/Short-Term Coverage
+                  </Radio>
+                  <Radio style={radioStyle} value={3}>
+                    Future Open Position
+                  </Radio>
+                  <Radio style={radioStyle} value={4}>
+                    Proposal Position
+                  </Radio>
+                </Radio.Group>
+                <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceProgram}
+                  placeholder="Program"
+                  onChange={this.handleProgramSearch}
+                  value={this.state.programValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                   }
-                },
-              };
-            }}
-            getTrProps={(state, rowInfo, column) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  this.showRow(rowInfo.original);
-                  if (handleOriginal) {
-                    handleOriginal();
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceLocation}
+                  placeholder="Location"
+                  onChange={this.handleLocationSearch}
+                  value={this.state.locationValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                   }
-                },
-              };
-            }}
-            columns={[
-              {
-                Header: 'Career Enhancement Information',
-                columns: [
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceCertification}
+                  placeholder="Certification"
+                  onChange={this.handleCertificationSearch}
+                  value={this.state.certificationValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceClearance}
+                  placeholder="Clearance"
+                  onChange={this.handleClearanceSearch}
+                  value={this.state.clearanceValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceCareerTrack}
+                  placeholder="Career Track"
+                  onChange={this.handleCareerTrackSearch}
+                  value={this.state.careerTrackValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                <br />
+                <div style={{ float: 'right' }}>
+                  <Button style={{ width: '100px' }} onClick={this.handleClear}>
+                    Clear
+                  </Button>
+                </div>
+              </div>
+            </Col>
+            <Col xs={20}>
+              <ReactTable
+                data={data}
+                resolveData={d => d.map(row => row)}
+                // filterable
+                style={styleHide}
+                defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+                // noDataText={!this.state.loading ? 'No rows found' : ''}
+                NoDataComponent={NoDataComponent}
+                getTdProps={() => ({
+                  onClick: (e, handleOriginal) => {
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
+                  },
+                })}
+                getTrProps={(state, rowInfo) => ({
+                  onClick: (e, handleOriginal) => {
+                    this.showRow(rowInfo.original);
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
+                  },
+                })}
+                columns={[
                   {
-                    Header: 'Position Title',
-                    accessor: 'positionTitle',
+                    Header: 'Career Enhancement Information',
+                    columns: [
+                      {
+                        Header: 'Position Title',
+                        accessor: 'positionTitle',
+                      },
+                      {
+                        Header: 'Career Track',
+                        accessor: 'careerTrackName',
+                      },
+                      {
+                        Header: 'Career Track Tier',
+                        accessor: 'careerTrackTier',
+                      },
+                    ],
                   },
                   {
-                    Header: 'Career Track',
-                    accessor: 'careerTrackName',
+                    Header: 'Program Information',
+                    columns: [
+                      {
+                        Header: 'Name',
+                        accessor: 'programName',
+                      },
+                      {
+                        Header: 'Program Manager',
+                        accessor: 'programManagerName',
+                      },
+                      {
+                        Header: 'Clearance Required',
+                        accessor: 'clearanceLevel',
+                      },
+                      {
+                        Header: 'Location',
+                        accessor: 'locationName',
+                      },
+                      {
+                        Header: 'Future Date',
+                        accessor: 'futureDate',
+                        show: this.state.showFutureDate,
+                      },
+                      {
+                        Header: 'Duration',
+                        accessor: 'duration',
+                        show: this.state.showDuration,
+                      },
+                    ],
                   },
-                  {
-                    Header: 'Career Track Tier',
-                    accessor: 'careerTrackTier',
-                  },
-                ],
-              },
-              {
-                Header: 'Program Information',
-                columns: [
-                  {
-                    Header: 'Name',
-                    accessor: 'programName',
-                  },
-                  {
-                    Header: 'Program Manager',
-                    accessor: 'programManagerName',
-                  },
-                  {
-                    Header: 'Clearance Required',
-                    accessor: 'clearanceLevel',
-                  },
-                  {
-                    Header: 'Location',
-                    accessor: 'locationName',
-                  },
-                ],
-              },
-            ]}
-            defaultPageSize={10}
-            className="-striped -highlight"
-          />
-
+                ]}
+                defaultPageSize={10}
+                className="-striped -highlight"
+              />
+            </Col>
+          </Row>
+          <br />
           <p
             style={{
               textAlign: 'center',

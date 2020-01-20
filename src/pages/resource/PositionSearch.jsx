@@ -1,13 +1,19 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable max-len */
 import React from 'react';
-import { Card, Typography, Alert, Icon, AutoComplete, Form, Button, Modal, Checkbox } from 'antd';
+import { Card, Icon, Row, Col, AutoComplete, Button, Modal, Checkbox } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { makeData, Logo, Tips, positionSearchData } from '../Utils';
-import matchSorter from 'match-sorter';
+import ReactTable from 'react-table';
+import { positionSearchData } from '../Utils';
 
 // Import React Table
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+
+const autoCompleteStyle = {
+  width: '100%',
+  margin: '5px',
+  padding: '2px',
+};
 
 class PositionSearch extends React.Component {
   constructor(props) {
@@ -20,6 +26,10 @@ class PositionSearch extends React.Component {
       certificationValue: '',
       clearanceValue: '',
       careerTrackValue: '',
+      applyButtonEnable: false,
+      styleEnable: { display: 'none' },
+      rowLoading: false,
+      rowVisible: false,
     };
     this.handleProgramSearch = this.handleProgramSearch.bind(this);
     this.handleLocationSearch = this.handleLocationSearch.bind(this);
@@ -29,145 +39,26 @@ class PositionSearch extends React.Component {
     this.handleClear = this.handleClear.bind(this);
     this.handleOriginal = this.handleOriginal.bind(this);
     this.showRow = this.showRow.bind(this);
+    this.enableApplyButton = this.enableApplyButton.bind(this);
+    this.showRowModal = this.showRowModal.bind(this);
   }
 
-  handleOriginal(value) {
-    console.log('handleOriginal', value);
-  }
-  handleProgramSearch(value) {
-    var filteredCareerTracks = positionSearchData().filter(function(careerTrack) {
-      return careerTrack.programName == value;
+  showRowModal = () => {
+    this.setState({
+      rowVisible: true,
     });
-    if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
-    }
-    if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
-    }
-    if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
-    }
-    this.setState({ programValue: value });
-    this.setState({ data: filteredCareerTracks });
-    this.setState({ hideTable: false });
-  }
-  handleLocationSearch(value) {
-    var filteredCareerTracks = positionSearchData().filter(function(careerTrack) {
-      return careerTrack.locationName == value;
-    });
-    if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
-    }
-    if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
-    }
-    if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
-    }
-    this.setState({ locationValue: value });
-    this.setState({ data: filteredCareerTracks });
-    this.setState({ hideTable: false });
-  }
-  handleCertificationSearch(value) {
-    var filteredCareerTracks = positionSearchData();
-    if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
-    }
-    if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
-    }
-    if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
-    }
-    if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
-    }
-    this.setState({ certificationValue: value });
-    this.setState({ data: filteredCareerTracks });
-    this.setState({ hideTable: false });
-  }
-  handleClearanceSearch(value) {
-    var filteredCareerTracks = positionSearchData().filter(function(careerTrack) {
-      return careerTrack.clearanceLevel == value;
-    });
-    if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
-    }
-    if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
-    }
-    if (this.state.careerTrackValue) {
-      var selectedCareerTrack = this.state.careerTrackValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.careerTrackName == selectedCareerTrack;
-      });
-    }
-    this.setState({ clearanceValue: value });
-    this.setState({ data: filteredCareerTracks });
-    this.setState({ hideTable: false });
-  }
-  handleCareerTrackSearch(value) {
-    var filteredCareerTracks = positionSearchData().filter(function(careerTrack) {
-      return careerTrack.careerTrackName == value;
-    });
-    if (this.state.programValue) {
-      var selectedProgram = this.state.programValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.programName == selectedProgram;
-      });
-    }
-    if (this.state.locationValue) {
-      var selectedLocation = this.state.locationValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.locationName == selectedLocation;
-      });
-    }
-    if (this.state.clearanceValue) {
-      var selectedClearance = this.state.clearanceValue;
-      filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-        return careerTrack.clearanceLevel == selectedClearance;
-      });
-    }
-    this.setState({ careerTrackValue: value });
-    this.setState({ data: filteredCareerTracks });
-    this.setState({ hideTable: false });
-  }
+  };
+
+  handleRowOk = () => {
+    this.setState({ rowLoading: true });
+    setTimeout(() => {
+      this.setState({ rowLoading: false, rowVisible: false });
+    }, 500);
+  };
+
+  handleRowCancel = () => {
+    this.setState({ rowVisible: false });
+  };
 
   handleClear = () => {
     this.setState({ programValue: '' });
@@ -178,24 +69,188 @@ class PositionSearch extends React.Component {
     this.setState({ hideTable: true });
   };
 
-  showRow(row) {
+  enableApplyButton(checked) {
+    const styleEnable = this.state.applyButtonEnable ? { display: 'none' } : {};
+    this.setState({
+      applyButtonEnable: checked,
+      styleEnable,
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleOriginal(value) {
+    console.log('handleOriginal', value);
+  }
+
+  handleProgramSearch(value) {
+    let filteredCareerTracks = positionSearchData().filter(
+      careerTrack => careerTrack.programName === value,
+    );
+    if (this.state.locationValue) {
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
+    }
+    if (this.state.clearanceValue) {
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
+    }
+    if (this.state.careerTrackValue) {
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
+    }
+    this.setState({ programValue: value });
+    this.setState({ data: filteredCareerTracks });
+    this.setState({ hideTable: false });
+  }
+
+  handleLocationSearch(value) {
+    let filteredCareerTracks = positionSearchData().filter(
+      careerTrack => careerTrack.locationName === value,
+    );
+    if (this.state.programValue) {
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
+    }
+    if (this.state.clearanceValue) {
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
+    }
+    if (this.state.careerTrackValue) {
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
+    }
+    this.setState({ locationValue: value });
+    this.setState({ data: filteredCareerTracks });
+    this.setState({ hideTable: false });
+  }
+
+  handleCertificationSearch(value) {
+    let filteredCareerTracks = positionSearchData();
+    if (this.state.programValue) {
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
+    }
+    if (this.state.locationValue) {
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
+    }
+    if (this.state.clearanceValue) {
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
+    }
+    if (this.state.careerTrackValue) {
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
+    }
+    this.setState({ certificationValue: value });
+    this.setState({ data: filteredCareerTracks });
+    this.setState({ hideTable: false });
+  }
+
+  handleClearanceSearch(value) {
+    let filteredCareerTracks = positionSearchData().filter(
+      careerTrack => careerTrack.clearanceLevel === value,
+    );
+    if (this.state.programValue) {
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
+    }
+    if (this.state.locationValue) {
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
+    }
+    if (this.state.careerTrackValue) {
+      const selectedCareerTrack = this.state.careerTrackValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.careerTrackName === selectedCareerTrack,
+      );
+    }
+    this.setState({ clearanceValue: value });
+    this.setState({ data: filteredCareerTracks });
+    this.setState({ hideTable: false });
+  }
+
+  handleCareerTrackSearch(value) {
+    let filteredCareerTracks = positionSearchData().filter(
+      careerTrack => careerTrack.careerTrackName === value,
+    );
+    if (this.state.programValue) {
+      const selectedProgram = this.state.programValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.programName === selectedProgram,
+      );
+    }
+    if (this.state.locationValue) {
+      const selectedLocation = this.state.locationValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.locationName === selectedLocation,
+      );
+    }
+    if (this.state.clearanceValue) {
+      const selectedClearance = this.state.clearanceValue;
+      filteredCareerTracks = filteredCareerTracks.filter(
+        careerTrack => careerTrack.clearanceLevel === selectedClearance,
+      );
+    }
+    this.setState({ careerTrackValue: value });
+    this.setState({ data: filteredCareerTracks });
+    this.setState({ hideTable: false });
+  }
+
+  showRow() {
     const { info } = Modal;
-    console.log('modalrow', row);
+    this.setState({ modalText: '1234' });
     info({
       width: 600,
       title: 'You will be redirected to the job requisition page...',
+      content: (
+        <div>
+          <Checkbox onChange={e => this.enableApplyButton(e.target.checked)}>
+            Are you interested in this open position? Checking the box allow you to apply to the
+            open position.
+          </Checkbox>
+          <br />
+          test2: {this.state.modalText}
+          <br />
+          <Button type="primary" style={this.state.styleEnable}>
+            Apply
+          </Button>
+        </div>
+      ),
       onOk() {},
     });
   }
 
   render() {
-    const { data } = this.state;
-    const styleHide = this.state.hideTable ? { display: 'none' } : {};
-    const NoDataComponent = props => {
-      const { children, loading } = props;
-
-      return <div className="rt-noData">No rows found</div>;
-    };
+    const { data, rowVisible, rowLoading } = this.state;
+    const styleHide = this.state.hideTable
+      ? { display: 'none' }
+      : { padding: '10px', margin: '20px' };
+    const NoDataComponent = () => <div className="rt-noData">No rows found</div>;
     const dataSourceProgram = [
       'AWS Technical Support Program',
       'DoD Space Program',
@@ -278,139 +333,151 @@ class PositionSearch extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <h2>Filter by:</h2>
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceProgram}
-            placeholder="Program"
-            onChange={this.handleProgramSearch}
-            value={this.state.programValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceLocation}
-            placeholder="Location"
-            onChange={this.handleLocationSearch}
-            value={this.state.locationValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceCertification}
-            placeholder="Certification"
-            onChange={this.handleCertificationSearch}
-            value={this.state.certificationValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceClearance}
-            placeholder="Clearance"
-            onChange={this.handleClearanceSearch}
-            value={this.state.clearanceValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <AutoComplete
-            style={{ width: 200 }}
-            //allowClear={true}
-            dataSource={dataSourceCareerTrack}
-            placeholder="Career Track"
-            onChange={this.handleCareerTrackSearch}
-            value={this.state.careerTrackValue}
-            filterOption={(inputValue, option) =>
-              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-          />
-          <br />
-          <Button onClick={this.handleClear}>Clear</Button>
-          <ReactTable
-            data={data}
-            resolveData={data => data.map(row => row)}
-            // filterable
-            style={styleHide}
-            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            //noDataText={!this.state.loading ? 'No rows found' : ''}
-            NoDataComponent={NoDataComponent}
-            getTdProps={(state, rowInfo, column, instance) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  if (handleOriginal) {
-                    handleOriginal();
+          <Row gutter={[4, 4]}>
+            <Col style={{ paddingRight: '5px' }} xs={4}>
+              <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>
+                <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceProgram}
+                  placeholder="Program"
+                  onChange={this.handleProgramSearch}
+                  value={this.state.programValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                   }
-                },
-              };
-            }}
-            getTrProps={(state, rowInfo, column) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  this.showRow(rowInfo.original);
-                  if (handleOriginal) {
-                    handleOriginal();
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceLocation}
+                  placeholder="Location"
+                  onChange={this.handleLocationSearch}
+                  value={this.state.locationValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                   }
-                },
-              };
-            }}
-            columns={[
-              {
-                Header: 'Open Position Information',
-                columns: [
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceCertification}
+                  placeholder="Certification"
+                  onChange={this.handleCertificationSearch}
+                  value={this.state.certificationValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceClearance}
+                  placeholder="Clearance"
+                  onChange={this.handleClearanceSearch}
+                  value={this.state.clearanceValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                <br />
+                <AutoComplete
+                  style={autoCompleteStyle}
+                  // allowClear={true}
+                  dataSource={dataSourceCareerTrack}
+                  placeholder="Career Track"
+                  onChange={this.handleCareerTrackSearch}
+                  value={this.state.careerTrackValue}
+                  filterOption={(inputValue, option) =>
+                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+                <div style={{ float: 'right' }}>
+                  <Button style={{ width: '100px' }} onClick={this.handleClear}>
+                    Clear
+                  </Button>
+                </div>
+              </div>
+            </Col>
+            <Col xs={20}>
+              <ReactTable
+                data={data}
+                resolveData={d => d.map(row => row)}
+                // filterable
+                style={styleHide}
+                defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+                // noDataText={!this.state.loading ? 'No rows found' : ''}
+                NoDataComponent={NoDataComponent}
+                getTdProps={() => ({
+                  onClick: (e, handleOriginal) => {
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
+                  },
+                })}
+                getTrProps={() => ({
+                  onClick: (e, handleOriginal) => {
+                    this.showRowModal();
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
+                  },
+                })}
+                columns={[
                   {
-                    Header: 'Position Title',
-                    accessor: 'positionTitle',
+                    Header: 'Open Position Information',
+                    columns: [
+                      {
+                        Header: 'Position Title',
+                        accessor: 'positionTitle',
+                      },
+                      {
+                        Header: 'Career Track',
+                        accessor: 'careerTrackName',
+                      },
+                      {
+                        Header: 'Career Track Tier',
+                        accessor: 'careerTrackTier',
+                      },
+                    ],
                   },
                   {
-                    Header: 'Career Track',
-                    accessor: 'careerTrackName',
+                    Header: 'Program Information',
+                    columns: [
+                      {
+                        Header: 'Name',
+                        accessor: 'programName',
+                      },
+                      {
+                        Header: 'Program Manager',
+                        accessor: 'programManagerName',
+                      },
+                      {
+                        Header: 'Clearance Required',
+                        accessor: 'clearanceLevel',
+                      },
+                      {
+                        Header: 'Location',
+                        accessor: 'locationName',
+                      },
+                    ],
                   },
-                  {
-                    Header: 'Career Track Tier',
-                    accessor: 'careerTrackTier',
-                  },
-                ],
-              },
-              {
-                Header: 'Program Information',
-                columns: [
-                  {
-                    Header: 'Name',
-                    accessor: 'programName',
-                  },
-                  {
-                    Header: 'Program Manager',
-                    accessor: 'programManagerName',
-                  },
-                  {
-                    Header: 'Clearance Required',
-                    accessor: 'clearanceLevel',
-                  },
-                  {
-                    Header: 'Location',
-                    accessor: 'locationName',
-                  },
-                ],
-              },
-            ]}
-            defaultPageSize={10}
-            className="-striped -highlight"
-          />
-
+                ]}
+                defaultPageSize={10}
+                className="-striped -highlight"
+              />
+            </Col>
+          </Row>
+          <br />
+          <div style={{ float: 'right' }}>
+            <Button style={{ width: '100px' }} onClick={this.handleClear}>
+              Clear
+            </Button>
+          </div>
           <p
             style={{
               textAlign: 'center',
@@ -420,6 +487,27 @@ class PositionSearch extends React.Component {
             We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
           </p>
         </Card>
+        <Modal
+          visible={rowVisible}
+          title="You will be redirected to the job requisition page..."
+          onOk={this.handleRowOk}
+          onCancel={this.handleRowCancel}
+          width={600}
+          footer={[
+            <Button key="submit" type="primary" loading={rowLoading} onClick={this.handleRowOk}>
+              Close
+            </Button>,
+          ]}
+        >
+          <Checkbox onChange={e => this.enableApplyButton(e.target.checked)}>
+            Are you interested in this open position? Checking the box allow you to apply to the
+            open position.
+          </Checkbox>
+          <br />
+          <Button type="primary" style={this.state.styleEnable}>
+            Apply
+          </Button>
+        </Modal>
       </PageHeaderWrapper>
     );
   }

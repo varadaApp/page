@@ -1,28 +1,156 @@
 import React from 'react';
 import {
   Card,
-  Typography,
-  Alert,
   Icon,
   Form,
-  Upload,
-  message,
   Button,
   Modal,
   Divider,
   Descriptions,
-  Checkbox,
   Row,
   Col,
   Steps,
+  Table,
+  Input,
+  Popconfirm,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
+import ReactTable from 'react-table';
 import { programEmployees } from '../Utils';
 
-// Import React Table
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+
+const EditableContext = React.createContext();
+
+const programTitleStyle = {
+  fontSize: '32px',
+  color: 'black',
+};
+
+const employeeHeaderStyle = {
+  margin: '10px',
+  padding: '5px',
+  fontSize: '32px',
+  color: 'black',
+  fontWeight: 500,
+  letterSpacing: '0.5px',
+};
+
+const labelStyle = {
+  fontSize: '24px',
+  color: 'black',
+  fontWeight: 500,
+  letterSpacing: '0.5px',
+};
+
+const valueStyle = {
+  marginLeft: '20px',
+  color: '#525257',
+  fontWeight: 600,
+  fontSize: '18px',
+  paddingLeft: '10px',
+};
+
+const editStyle = {
+  color: '#525257',
+  fontWeight: 600,
+  fontSize: '18px',
+  marginLeft: '5px',
+};
+
+const EditableRow = ({ form, index, ...props }) => (
+  <EditableContext.Provider value={form}>
+    <tr {...props} />
+  </EditableContext.Provider>
+);
+
+const EditableFormRow = Form.create()(EditableRow);
+
+class EditableCell extends React.Component {
+  state = {
+    editing: false,
+  };
+
+  toggleEdit = () => {
+    const editing = !this.state.editing;
+    this.setState(
+      prevState => ({ editing: prevState.editing }),
+      () => {
+        if (editing) {
+          this.input.focus();
+        }
+      },
+    );
+  };
+
+  save = e => {
+    const { record, handleSave } = this.props;
+    this.form.validateFields((error, values) => {
+      if (error && error[e.currentTarget.id]) {
+        return;
+      }
+      this.toggleEdit();
+      handleSave({ ...record, ...values });
+    });
+  };
+
+  renderCell = form => {
+    this.form = form;
+    const { children, dataIndex, record, title } = this.props;
+    const { editing } = this.state;
+    return editing ? (
+      <Form.Item style={{ margin: 0 }}>
+        {form.getFieldDecorator(dataIndex, {
+          rules: [
+            {
+              required: true,
+              message: `${title} is required.`,
+            },
+          ],
+          initialValue: record[dataIndex],
+        })(
+          <Input
+            ref={node => {
+              this.input = node;
+            }}
+            onPressEnter={this.save}
+            onBlur={this.save}
+          />,
+        )}
+      </Form.Item>
+    ) : (
+      <div
+        className="editable-cell-value-wrap"
+        style={{ paddingRight: 24 }}
+        onClick={this.toggleEdit}
+      >
+        {children}
+      </div>
+    );
+  };
+
+  render() {
+    const {
+      editable,
+      dataIndex,
+      title,
+      record,
+      index,
+      handleSave,
+      children,
+      ...restProps
+    } = this.props;
+    return (
+      <td {...restProps}>
+        {editable ? (
+          <EditableContext.Consumer>{this.renderCell}</EditableContext.Consumer>
+        ) : (
+          children
+        )}
+      </td>
+    );
+  }
+}
 
 class ProgramInformation extends React.Component {
   constructor(props) {
@@ -33,12 +161,47 @@ class ProgramInformation extends React.Component {
       selectedCareerTrackLoading: false,
       recommendedCareerTrackVisible: false,
       recommendedCareerTrackLoading: false,
+      dataSource: [
+        {
+          key: '0',
+          name: 'Program Ops (Technical)',
+        },
+        {
+          key: '1',
+          name: 'Program/Project Management',
+        },
+        {
+          key: '2',
+          name: 'Software Developer',
+        },
+        {
+          key: '3',
+          name: 'Systems Administration',
+        },
+      ],
+      count: 4,
     };
     this.showRow = this.showRow.bind(this);
-  }
-
-  handleOriginal(value) {
-    console.log('handleOriginal', value);
+    this.columns = [
+      {
+        title: 'Career Track',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        render: record => {
+          const { dataSource } = this.state;
+          return dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null;
+        },
+        title: '',
+        width: '20%',
+        dataIndex: 'operation',
+      },
+    ];
   }
 
   showSelectedCareerTrackModal = () => {
@@ -75,9 +238,45 @@ class ProgramInformation extends React.Component {
     this.setState({ recommendedCareerTrackVisible: false });
   };
 
+  handleDelete = key => {
+    this.setState(prevState => ({
+      dataSource: prevState.dataSource.filter(item => item.key !== key),
+    }));
+  };
+
+  handleAdd = () => {
+    const { count, dataSource } = this.state;
+    const newData = {
+      key: count,
+      name: `Career Track ${count}`,
+    };
+    this.setState({
+      dataSource: [...dataSource, newData],
+      count: count + 1,
+    });
+  };
+
+  handleOriginal = value => {
+    console.log('handleOriginal', value);
+  };
+
+  handleSave = row => {
+    this.setState(prevState => {
+      const newData = prevState.dataSource;
+      const index = prevState.newData.findIndex(item => row.key === item.key);
+      const item = newData[index];
+      newData.splice(index, 1, {
+        ...item,
+        ...row,
+      });
+      return { dataSource: newData };
+    });
+  };
+
   showRow(row) {
     const { info } = Modal;
     console.log('modalrow', row);
+
     info({
       style: { top: 20 },
       width: 1200,
@@ -94,9 +293,16 @@ class ProgramInformation extends React.Component {
                 Homeland Security Satellite Network)
               </strong>
             </Divider>
-            <p>Open Positions Applied To: Senior Network Manager</p>
+            Open Positions Applied To:
+            <br />
+            Senior Network Manager
+            <br />
+            Job Requisition #14567
+            <br />
+            PM:Clarence Hodson
+            <br />
+            <br />
             <a onClick={this.showSelectedCareerTrackModal}>Current Percentage Complete: 25%</a>
-
             <Descriptions
               layout="vertical"
               bordered
@@ -105,7 +311,7 @@ class ProgramInformation extends React.Component {
             >
               <Descriptions.Item label="Trainings">
                 Advanced Networking -{' '}
-                <span class="attention">
+                <span className="attention">
                   Training Recently Shown Interest, Needs Action
                   <Icon type="warning" theme="filled" />
                 </span>
@@ -114,7 +320,7 @@ class ProgramInformation extends React.Component {
               </Descriptions.Item>
               <Descriptions.Item label="Certifications">
                 CCNA -{' '}
-                <span class="in-progress">
+                <span className="in-progress">
                   Certification Test Scheduled
                   <Icon type="calendar" theme="outlined" />
                 </span>
@@ -128,7 +334,15 @@ class ProgramInformation extends React.Component {
                 Space Program)
               </strong>
             </Divider>
-            <p>Open Positions Applied To: Senior Software Developer</p>
+            Open Positions Applied To:
+            <br />
+            Senior Software Developer
+            <br />
+            Job Requisition #14589
+            <br />
+            PM: Eladia Calderon
+            <br />
+            <br />
             <a onClick={this.showRecommendedCareerTrackModal}>Current Percentage Complete: 35%</a>
             <Descriptions
               layout="vertical"
@@ -138,32 +352,32 @@ class ProgramInformation extends React.Component {
             >
               <Descriptions.Item label="Trainings">
                 Programming Level 3 Training -{' '}
-                <span class="in-progress">
+                <span className="in-progress">
                   Training Scheduled
                   <Icon type="calendar" theme="outlined" />
                 </span>
                 <br />
                 Database Level 3 Training -{' '}
-                <span class="in-progress">
+                <span className="in-progress">
                   Training in Progress
                   <Icon type="sync" spin />
                 </span>
                 <br />
                 Advanced Agile Training-{' '}
-                <span class="completed">
+                <span className="completed">
                   Training Complete
                   <Icon type="check-circle" theme="outlined" />
                 </span>
               </Descriptions.Item>
               <Descriptions.Item label="Certifications">
                 CCISP -{' '}
-                <span class="attention">
+                <span className="attention">
                   Certification Recently Shown Interest, Needs Action
                   <Icon type="warning" theme="filled" />
                 </span>
                 <br />
                 AWS Developer -{' '}
-                <span class="completed">
+                <span className="completed">
                   Certification Complete
                   <Icon type="check-circle" theme="outlined" />
                 </span>
@@ -175,6 +389,7 @@ class ProgramInformation extends React.Component {
       onOk() {},
     });
   }
+
   render() {
     const {
       data,
@@ -182,55 +397,118 @@ class ProgramInformation extends React.Component {
       selectedCareerTrackLoading,
       recommendedCareerTrackVisible,
       recommendedCareerTrackLoading,
+      dataSource,
     } = this.state;
     const { Step } = Steps;
-    const formItemLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 12 },
+    const components = {
+      body: {
+        row: EditableFormRow,
+        cell: EditableCell,
+      },
     };
+    const columns = this.columns.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
+
+    const formData = [
+      {
+        label: 'Program Manager',
+        value: 'Sidney Watkins',
+      },
+      {
+        label: 'Number of Employees',
+        value: '15',
+      },
+      {
+        label: 'Clearance Level',
+        value: 'PUBLIC TRUST',
+      },
+      {
+        label: 'Salary Average',
+        value: '$123,989.87',
+      },
+    ];
 
     return (
       <PageHeaderWrapper>
-        <Card>
-          <h1>Department of Defense Space Program</h1>
-          <Form {...formItemLayout}>
-            <Form.Item label="Program Manager:">
-              <span className="ant-form-text">Sidney Watkins</span>
-            </Form.Item>
-            <Form.Item label="Number of Employees:">
-              <span className="ant-form-text">15</span>
-            </Form.Item>
-            <Form.Item label="Clearance Level:">
-              <span className="ant-form-text">PUBLIC TRUST</span>
-            </Form.Item>
-            <Form.Item label="Salary Average:">
-              <span className="ant-form-text">$123,989.87</span>
-            </Form.Item>
-          </Form>
-
+        <Card style={{ margin: '20px', padding: '10px' }}>
+          <p style={programTitleStyle}>Department of Defense Space Program</p>
+          <Divider />
+          <Row style={{ margin: '20px', padding: '10px' }}>
+            <Col xs={12}>
+              <Form>
+                {formData.map(d => (
+                  <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
+                    <p style={labelStyle}>{d.label}</p>
+                    <Row>
+                      <Col xs={20}>
+                        <p style={valueStyle} className="ant-form-text">
+                          {d.value}
+                        </p>
+                      </Col>
+                      <Col xs={4}>
+                        <Icon type="edit" />
+                        <span style={editStyle}>Edit</span>
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                ))}
+              </Form>
+            </Col>
+            <Col style={{ padding: '10px', backgroundColor: 'rgb(240, 242, 245)' }} xs={12}>
+              <Form layout="inline">
+                <Form.Item>
+                  <Input style={{ width: 400 }} placeholder="Career Track Name" />
+                </Form.Item>
+                <Form.Item>
+                  <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                    Add a Career Track
+                  </Button>
+                </Form.Item>
+              </Form>
+              <Table
+                className="program-info-career-track-table"
+                components={components}
+                rowClassName={() => 'editable-row'}
+                dataSource={dataSource}
+                columns={columns}
+              />
+            </Col>
+          </Row>
+          <Divider />
+          <p style={employeeHeaderStyle}>Employees</p>
           <ReactTable
+            style={{ marginLeft: '20px', paddingLeft: '10px' }}
             data={data}
-            resolveData={data => data.map(row => row)}
+            resolveData={d => d.map(row => row)}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            getTdProps={(state, rowInfo, column, instance) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
-            getTrProps={(state, rowInfo, column) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  this.showRow(rowInfo.original);
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
+            getTdProps={() => ({
+              onClick: (e, handleOriginal) => {
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            getTrProps={rowInfo => ({
+              onClick: (e, handleOriginal) => {
+                this.showRow(rowInfo.original);
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
             columns={[
               {
                 Header: 'Employees',
@@ -238,24 +516,25 @@ class ProgramInformation extends React.Component {
                   {
                     Header: 'Progress Status',
                     accessor: 'progressStatus',
+                    minWidth: 130,
                     Cell: props => (
                       <span>
                         {props.value === 'Yellow' && (
-                          <span class="in-progress">
-                            In Progress
+                          <span className="in-progress">
                             <Icon type="sync" spin />
+                            In Progress
                           </span>
                         )}
                         {props.value === 'Green' && (
-                          <span class="completed">
-                            Complete
+                          <span className="completed">
                             <Icon type="check-circle" theme="outlined" />
+                            Complete
                           </span>
                         )}
                         {props.value === 'Red' && (
-                          <span class="attention">
-                            Needs Attention
+                          <span className="attention">
                             <Icon type="warning" theme="filled" />
+                            Needs Attention: {props.original.progressInformation}
                           </span>
                         )}
                       </span>
@@ -268,7 +547,7 @@ class ProgramInformation extends React.Component {
                   {
                     id: 'currentCareerTrack',
                     Header: 'Current Career Track',
-                    accessor: d => `${d.careerTrackName}` + ' Tier ' + `${d.careerTrackTier}`,
+                    accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
                   },
                   {
                     Header: 'Location',
@@ -280,7 +559,6 @@ class ProgramInformation extends React.Component {
             defaultPageSize={10}
             className="-striped -highlight"
           />
-
           <p
             style={{
               textAlign: 'center',
@@ -308,7 +586,11 @@ class ProgramInformation extends React.Component {
           ]}
         >
           <Row gutter={[8, 8]}>
-            <Col span={24}>Program: Department of Homeland Security Satellite Network</Col>
+            <Col span={24}>
+              Overall Expected Completion Date: 2/1/2020
+              <br />
+              Program: Department of Homeland Security Satellite Network
+            </Col>
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={12}>
@@ -339,7 +621,7 @@ class ProgramInformation extends React.Component {
           title="Software Developer Tier 3 Progress"
           onOk={this.handleRecommendedCareerTrackOk}
           onCancel={this.handleRecommendedCareerTrackCancel}
-          width={700}
+          width={600}
           footer={[
             <Button
               key="submit"
@@ -352,7 +634,11 @@ class ProgramInformation extends React.Component {
           ]}
         >
           <Row gutter={[8, 8]}>
-            <Col span={24}>Program: Department of Defense Space Program</Col>
+            <Col span={24}>
+              Overall Expected Completion Date: 2/1/2020
+              <br />
+              Program: Department of Defense Space Program
+            </Col>
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={24}>
