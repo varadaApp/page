@@ -1,5 +1,18 @@
 import React from 'react';
-import { Card, Typography, Icon, Row, Col, Drawer, Form, Button, Input } from 'antd';
+import {
+  Card,
+  Typography,
+  Icon,
+  Row,
+  Col,
+  Checkbox,
+  Select,
+  DatePicker,
+  Drawer,
+  Form,
+  Button,
+  Input,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import ToDoList from '../common-components/ToDoList';
@@ -77,6 +90,62 @@ class Dashboard extends React.Component {
             <a style={{ color: 'black', marginRight: '5px' }}>Have any questions? </a>
             <a href="#">Visit Help Center</a>
           </Typography>
+          <div
+            style={{
+              borderRadius: 5,
+              backgroundColor: 'rgb(240, 242, 245)',
+              margin: 24,
+              padding: 24,
+            }}
+          >
+            <Typography
+              style={{
+                fontSize: '30px',
+                color: 'black',
+                borderWidth: '0px',
+              }}
+            >
+              My current status is:
+            </Typography>
+            <div>
+              <div style={{ padding: 10 }}>
+                <Checkbox>
+                  <span style={{ fontSize: 18, color: 'black' }}>
+                    Interested in Growth (ie. New Certification and/or Training)
+                  </span>
+                </Checkbox>
+              </div>
+              <div style={{ padding: 10 }}>
+                <Checkbox>
+                  <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                    Losing Coverage:
+                  </span>
+                  <DatePicker size="small" format="DD/MM/YYYY" />
+                </Checkbox>
+              </div>
+              <div style={{ padding: 10 }}>
+                <Checkbox>
+                  <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                    Location Change:
+                  </span>
+                  <Select
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Select a Location"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Select.Option value="0">Northern Virginia</Select.Option>
+                    <Select.Option value="1">Washington D.C.</Select.Option>
+                    <Select.Option value="2">Maryland</Select.Option>
+                    <Select.Option value="3">Hawaii</Select.Option>
+                  </Select>
+                </Checkbox>
+              </div>
+            </div>
+          </div>
           {/* <Divider
             orientation="center"
             style={{

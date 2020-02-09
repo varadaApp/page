@@ -1,21 +1,10 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import { Card, Icon, Table, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
-import { Chart, Axis, Coord, Geom, Guide, Shape } from 'bizcharts';
+import { Shape } from 'bizcharts';
 
-const tableContainerStyle = {
-  margin: '20px',
-  padding: '10px',
-};
-
-const tableTitleStyle = {
-  fontSize: '32px',
-  color: 'black',
-  fontWeight: 600,
-};
-
-const { Html, Arc } = Guide;
 Shape.registerShape('point', 'pointer', {
   drawShape(cfg, group) {
     let point = cfg.points[0];
@@ -47,16 +36,6 @@ Shape.registerShape('point', 'pointer', {
     });
   },
 });
-
-const data = [{ value: 1.6 }];
-const cols = {
-  value: {
-    min: 0,
-    max: 9,
-    tickInterval: 1,
-    nice: false,
-  },
-};
 
 class Reporting extends React.Component {
   constructor(props) {
@@ -172,6 +151,7 @@ class Reporting extends React.Component {
           attrition: '6.67%',
         },
       ],
+      count: 12,
     };
     this.columns = [
       {
@@ -222,95 +202,21 @@ class Reporting extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          {/* <Gauge title="January 2020 Attrition %" height={200} percent={3} /> */}
-          <Chart
-            height={window.innerHeight * 0.5}
-            data={data}
-            scale={cols}
-            padding={[0, 0, 50, 0]}
-            forceFit
-          >
-            <Coord
-              type="polar"
-              startAngle={(-9 / 8) * Math.PI}
-              endAngle={(1 / 8) * Math.PI}
-              radius={0.75}
-            />
-            <Axis
-              name="value"
-              zIndex={2}
-              line={null}
-              label={{
-                offset: -16,
-                textStyle: {
-                  fontSize: 18,
-                  textAlign: 'center',
-                  textBaseline: 'middle',
-                },
-              }}
-              subTickCount={4}
-              subTickLine={{
-                length: -8,
-                stroke: '#fff',
-                strokeOpacity: 1,
-              }}
-              tickLine={{
-                length: -18,
-                stroke: '#fff',
-                strokeOpacity: 1,
-              }}
-            />
-            <Axis name="1" visible={false} />
-            <Guide>
-              <Arc
-                zIndex={0}
-                start={[0, 0.965]}
-                end={[9, 0.965]}
-                style={{
-                  stroke: '#CBCBCB',
-                  lineWidth: 18,
-                }}
-              />
-              <Arc
-                zIndex={1}
-                start={[0, 0.965]}
-                end={[data[0].value, 0.965]}
-                style={{
-                  stroke: '#722ED1',
-                  lineWidth: 18,
-                }}
-              />
-              <Html
-                position={['50%', '95%']}
-                html={() =>
-                  `<div style="width: 100px;text-align: center;font-size: 7px!important;"><p style="font-size: 16px; color: #6c6c72;margin: 0;">January 2020 Atrittion %</p><p style="font-size: 32px;color: #1c1c1c;margin: 0;">${data[0]
-                    .value * 10}%</p></div>`
-                }
-              />
-            </Guide>
-            <Geom
-              type="point"
-              position="value*1"
-              shape="pointer"
-              color="#722ED1"
-              active={false}
-              style={{ stroke: '#fff', lineWidth: 1 }}
-            />
-          </Chart>
-
-          <div style={tableContainerStyle}>
-            <h1 style={tableTitleStyle}>Monthly Attrition Report - 2019</h1>
-            <Button type="primary" onClick={this.showDrawer} size="small">
-              Export to CSV
-            </Button>
-            <Table
-              className="report-table"
-              dataSource={dataSource}
-              columns={columns}
-              size="middle"
-              pagination={false}
-            />
+          <p className="attrition-report-label">Monthly Attrition Report - 2019</p>
+          <div className="attrition-report-table-header">
+            <div />
+            <div>
+              <Button
+                onClick={this.showDrawer}
+                className="table-action-button"
+                type="primary"
+                size="small"
+              >
+                Export to CSV
+              </Button>
+            </div>
           </div>
+          <Table bordered dataSource={dataSource} columns={columns} pagination={false} />
           <p
             style={{
               textAlign: 'center',

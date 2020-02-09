@@ -1,3 +1,8 @@
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable react/sort-comp */
 import React from 'react';
 import {
   Card,
@@ -11,6 +16,7 @@ import {
   Col,
   Steps,
   Table,
+  Select,
   Input,
   Popconfirm,
 } from 'antd';
@@ -41,21 +47,29 @@ const labelStyle = {
   color: 'black',
   fontWeight: 500,
   letterSpacing: '0.5px',
+  marginBottom: '10px !important',
 };
 
 const valueStyle = {
-  marginLeft: '20px',
-  color: '#525257',
+  marginLeft: '16px',
+  color: '#1c1c1c',
   fontWeight: 600,
   fontSize: '18px',
   paddingLeft: '10px',
 };
 
 const editStyle = {
-  color: '#525257',
+  color: '#1c1c1c',
   fontWeight: 600,
-  fontSize: '18px',
+  fontSize: '16px',
   marginLeft: '5px',
+};
+
+const tableLabelStyle = {
+  fontSize: '24px',
+  lineHeight: '30px',
+  color: 'black',
+  fontWeight: 500,
 };
 
 const EditableRow = ({ form, index, ...props }) => (
@@ -161,6 +175,8 @@ class ProgramInformation extends React.Component {
       selectedCareerTrackLoading: false,
       recommendedCareerTrackVisible: false,
       recommendedCareerTrackLoading: false,
+      selectedCareerTrack: '',
+      selectedCareerTrackTier: '',
       dataSource: [
         {
           key: '0',
@@ -180,6 +196,26 @@ class ProgramInformation extends React.Component {
         },
       ],
       count: 4,
+      dataSourceSkills: [
+        {
+          key: '0',
+          name: 'Software Development',
+        },
+        {
+          key: '1',
+          name: 'SQL Server Database',
+        },
+      ],
+      dataSourceCertifications: [
+        {
+          key: '0',
+          name: 'Security+',
+        },
+        {
+          key: '1',
+          name: 'AWS Developer',
+        },
+      ],
     };
     this.showRow = this.showRow.bind(this);
     this.columns = [
@@ -202,6 +238,56 @@ class ProgramInformation extends React.Component {
         dataIndex: 'operation',
       },
     ];
+    this.columnsSkills = [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        title: 'Action',
+        width: '20%',
+        dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
+      },
+    ];
+    this.columnsCertifications = [
+      {
+        title: 'Certification Name',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        title: 'Action',
+        width: '20%',
+        dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
+      },
+    ];
+    this.handleCareerTrackSelect = this.handleCareerTrackSelect.bind(this);
+    this.handleCareerTrackTierSelect = this.handleCareerTrackTierSelect.bind(this);
+  }
+
+  handleCareerTrackSelect(value) {
+    this.setState({ selectedCareerTrack: value });
+  }
+
+  handleCareerTrackTierSelect(value) {
+    this.setState({ selectedCareerTrackTier: value });
+  }
+
+  handleOriginal(value) {
+    console.log('handleOriginal', value);
   }
 
   showSelectedCareerTrackModal = () => {
@@ -397,7 +483,8 @@ class ProgramInformation extends React.Component {
       selectedCareerTrackLoading,
       recommendedCareerTrackVisible,
       recommendedCareerTrackLoading,
-      dataSource,
+      dataSourceCertifications,
+      dataSourceSkills,
     } = this.state;
     const { Step } = Steps;
     const components = {
@@ -407,6 +494,37 @@ class ProgramInformation extends React.Component {
       },
     };
     const columns = this.columns.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
+
+    const columnsSkills = this.columnsSkills.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
+    const columnsCertifications = this.columnsCertifications.map(col => {
       if (!col.editable) {
         return col;
       }
@@ -439,19 +557,127 @@ class ProgramInformation extends React.Component {
         label: 'Salary Average',
         value: '$123,989.87',
       },
+      {
+        label: 'Period of Performance Ends',
+        value: 'July 15, 2020',
+      },
     ];
 
+    const { Option } = Select;
     return (
       <PageHeaderWrapper>
         <Card style={{ margin: '20px', padding: '10px' }}>
           <p style={programTitleStyle}>Department of Defense Space Program</p>
           <Divider />
-          <Row style={{ margin: '20px', padding: '10px' }}>
-            <Col xs={12}>
+          <Row gutter={[8, 8]} style={{ margin: '20px', padding: '10px' }}>
+            <Col className="program-info-careertract-container" xs={16} span={18}>
+              <Col xs={12}>
+                <Select
+                  showSearch
+                  style={{ width: '100%', paddingLeft: 5, paddingRight: 5 }}
+                  placeholder="Select a Career Track"
+                  optionFilterProp="children"
+                  // onChange={onChange}
+                  // onFocus={onFocus}
+                  // onBlur={onBlur}
+                  // onSearch={onSearch}
+                  onSelect={this.handleCareerTrackSelect}
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">Program/Project Management</Option>
+                  <Option value="2">Software Developer</Option>
+                  <Option value="3">Systems Administration</Option>
+                  <Option value="4">Program Ops (Technical)</Option>
+                </Select>
+              </Col>
+              <Col xs={12}>
+                <Select
+                  showSearch
+                  style={{ width: '100%', paddingLeft: 5, paddingRight: 5 }}
+                  placeholder="Select a Career Track Tier"
+                  optionFilterProp="children"
+                  // onChange={onChange}
+                  // onFocus={onFocus}
+                  // onBlur={onBlur}
+                  // onSearch={onSearch}
+                  onSelect={this.handleCareerTrackSelectTier}
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">Tier 1</Option>
+                  <Option value="2">Tier 2</Option>
+                  <Option value="3">Tier 3</Option>
+                </Select>
+              </Col>
+              {this.state.selectedCareerTrack ? (
+                <div style={{ padding: 20, marginTop: 50 }}>
+                  <Form layout="inline">
+                    <Form.Item>
+                      <Input placeholder="Certification Name" />
+                    </Form.Item>
+                    <Form.Item>
+                      <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                        Add a Required Certification
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                  <p style={tableLabelStyle}>Certifications</p>
+                  <Table
+                    dataSource={dataSourceCertifications}
+                    columns={columnsCertifications}
+                    size="middle"
+                    pagination={false}
+                    style={{ paddingBottom: 20 }}
+                  />
+                  <Divider />
+                  <Form layout="inline">
+                    <Form.Item>
+                      <Input placeholder="Skill Name" />
+                    </Form.Item>
+                    <Form.Item>
+                      <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                        Add a Required Skill
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                  <p style={tableLabelStyle}>Skills</p>
+                  <Table
+                    dataSource={dataSourceSkills}
+                    columns={columnsSkills}
+                    size="middle"
+                    pagination={false}
+                    style={{ paddingBottom: 20 }}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <p
+                    style={{
+                      marginTop: 50,
+                      fontSize: 16,
+                      textAlign: 'center',
+                    }}
+                  >
+                    No career track selected
+                  </p>
+                </div>
+              )}
+            </Col>
+            <Col
+              style={{ backgroundColor: 'rgb(240, 242, 245)', padding: 20, borderRadius: 10 }}
+              xs={8}
+            >
               <Form>
                 {formData.map(d => (
                   <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
-                    <p style={labelStyle}>{d.label}</p>
+                    <p className="program-info-label" style={labelStyle}>
+                      {d.label}
+                    </p>
                     <Row>
                       <Col xs={20}>
                         <p style={valueStyle} className="ant-form-text">
@@ -467,7 +693,7 @@ class ProgramInformation extends React.Component {
                 ))}
               </Form>
             </Col>
-            <Col style={{ padding: '10px', backgroundColor: 'rgb(240, 242, 245)' }} xs={12}>
+            {/* <Col style={{ padding: '10px', backgroundColor: 'rgb(240, 242, 245)' }} xs={12}>
               <Form layout="inline">
                 <Form.Item>
                   <Input style={{ width: 400 }} placeholder="Career Track Name" />
@@ -485,10 +711,10 @@ class ProgramInformation extends React.Component {
                 dataSource={dataSource}
                 columns={columns}
               />
-            </Col>
+            </Col> */}
           </Row>
-          <Divider />
           <p style={employeeHeaderStyle}>Employees</p>
+          <Divider />
           <ReactTable
             style={{ marginLeft: '20px', paddingLeft: '10px' }}
             data={data}
@@ -511,49 +737,21 @@ class ProgramInformation extends React.Component {
             })}
             columns={[
               {
-                Header: 'Employees',
-                columns: [
-                  {
-                    Header: 'Progress Status',
-                    accessor: 'progressStatus',
-                    minWidth: 130,
-                    Cell: props => (
-                      <span>
-                        {props.value === 'Yellow' && (
-                          <span className="in-progress">
-                            <Icon type="sync" spin />
-                            In Progress
-                          </span>
-                        )}
-                        {props.value === 'Green' && (
-                          <span className="completed">
-                            <Icon type="check-circle" theme="outlined" />
-                            Complete
-                          </span>
-                        )}
-                        {props.value === 'Red' && (
-                          <span className="attention">
-                            <Icon type="warning" theme="filled" />
-                            Needs Attention: {props.original.progressInformation}
-                          </span>
-                        )}
-                      </span>
-                    ),
-                  },
-                  {
-                    Header: 'Employee',
-                    accessor: 'employeeName',
-                  },
-                  {
-                    id: 'currentCareerTrack',
-                    Header: 'Current Career Track',
-                    accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
-                  },
-                  {
-                    Header: 'Location',
-                    accessor: 'locationName',
-                  },
-                ],
+                Header: 'Employee',
+                accessor: 'employeeName',
+              },
+              {
+                Header: 'Current Status',
+                accessor: 'currentStatus',
+              },
+              {
+                id: 'currentCareerTrack',
+                Header: 'Current Career Track',
+                accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
+              },
+              {
+                Header: 'Location',
+                accessor: 'locationName',
               },
             ]}
             defaultPageSize={10}

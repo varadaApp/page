@@ -1,5 +1,19 @@
+/* eslint-disable max-len */
 import React from 'react';
-import { Card, Typography, Icon, Row, Col, Drawer, Form, Button, Input } from 'antd';
+import {
+  Card,
+  Typography,
+  Icon,
+  Row,
+  Col,
+  Drawer,
+  Form,
+  Button,
+  Input,
+  Select,
+  DatePicker,
+  Checkbox,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import ToDoList from './common-components/ToDoList';
@@ -27,6 +41,15 @@ class Dashboard extends React.Component {
       visible: false,
     });
   };
+  /*   componentDidMount() {
+    this.getUserAsync();
+  } */
+
+  /*   async getUserAsync() {
+    const response = await fetch('api/currentuser');
+    const data = await response.json();
+    this.setState({ userAsync: data, loading: false });
+  } */
 
   render() {
     const thingsToDo = [
@@ -78,6 +101,62 @@ class Dashboard extends React.Component {
             <a style={{ color: 'black', marginRight: '5px' }}>Have any questions? </a>
             <a href="#">Visit Help Center</a>
           </Typography>
+          <div
+            style={{
+              borderRadius: 5,
+              backgroundColor: 'rgb(240, 242, 245)',
+              margin: 24,
+              padding: 24,
+            }}
+          >
+            <Typography
+              style={{
+                fontSize: '30px',
+                color: 'black',
+                borderWidth: '0px',
+              }}
+            >
+              My current status is:
+            </Typography>
+            <div>
+              <div style={{ padding: 10 }}>
+                <Checkbox>
+                  <span style={{ fontSize: 18, color: 'black' }}>
+                    Interested in Growth (ie. New Certification and/or Training)
+                  </span>
+                </Checkbox>
+              </div>
+              <div style={{ padding: 10 }}>
+                <Checkbox>
+                  <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                    Losing Coverage:
+                  </span>
+                  <DatePicker size="small" format="DD/MM/YYYY" />
+                </Checkbox>
+              </div>
+              <div style={{ padding: 10 }}>
+                <Checkbox>
+                  <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                    Location Change:
+                  </span>
+                  <Select
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Select a Location"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Select.Option value="0">Northern Virginia</Select.Option>
+                    <Select.Option value="1">Washington D.C.</Select.Option>
+                    <Select.Option value="2">Maryland</Select.Option>
+                    <Select.Option value="3">Hawaii</Select.Option>
+                  </Select>
+                </Checkbox>
+              </div>
+            </div>
+          </div>
           <Row gutter={[8, 8]}>
             <Col xs={12} span={6}>
               <ToDoList list={thingsToDo} />
@@ -135,6 +214,33 @@ class Dashboard extends React.Component {
         </Drawer>
       </PageHeaderWrapper>
     );
+
+    /*     console.log('user fetch async', this.state);
+    return currentUser && currentUser.name && this.state.userAsync ? (
+      <PageHeaderWrapper>
+        <Card>
+          <h1>
+            {greeting}, {currentUser.name}
+          </h1>
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: 24,
+            }}
+          >
+            We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> {currentUser.name}
+          </p>
+        </Card>
+      </PageHeaderWrapper>
+    ) : (
+      <Spin
+        size="small"
+        style={{
+          marginLeft: 8,
+          marginRight: 8,
+        }}
+      />
+    ); */
   }
 }
 

@@ -89,9 +89,66 @@ class EmployeesCareerTrack extends React.Component {
                     accessor: 'desiredCareerTrack',
                   },
                   {
-                    Header: 'Estimated Career Track Completion Date',
+                    Header: 'Current Goal',
+                  },
+                  {
+                    Header: 'Estimated Goal Completion Date',
                     accessor: 'desiredCareerTrackCompletionDate',
                   },
+                  // {
+                  //   Header: 'Certifications Progress',
+                  //   accessor: 'inProgressCertifications',
+                  //   Cell: props => (
+                  //     <span>
+                  //       {props.original.inProgressCertifications.name + ' '}
+                  //       {props.original.inProgressCertifications.progress === 'Yellow' && (
+                  //         <span class="in-progress">
+                  //           In Progress
+                  //           <Icon type="sync" spin />
+                  //         </span>
+                  //       )}
+                  //       {props.original.inProgressCertifications.progress === 'Green' && (
+                  //         <span class="completed">
+                  //           Complete
+                  //           <Icon type="check-circle" theme="outlined" />
+                  //         </span>
+                  //       )}
+                  //       {props.original.inProgressCertifications.progress === 'Red' && (
+                  //         <span class="attention">
+                  //           Needs Attention
+                  //           <Icon type="warning" theme="filled" />
+                  //         </span>
+                  //       )}
+                  //     </span>
+                  //   ),
+                  // },
+                  // {
+                  //   Header: 'Trainings Progress',
+                  //   accessor: 'inProgressTrainings',
+                  //   Cell: props => (
+                  //     <span>
+                  //       {props.original.inProgressTrainings.name + ' '}
+                  //       {props.original.inProgressTrainings.progress === 'Yellow' && (
+                  //         <span class="in-progress">
+                  //           In Progress
+                  //           <Icon type="sync" spin />
+                  //         </span>
+                  //       )}
+                  //       {props.original.inProgressTrainings.progress === 'Green' && (
+                  //         <span class="completed">
+                  //           Complete
+                  //           <Icon type="check-circle" theme="outlined" />
+                  //         </span>
+                  //       )}
+                  //       {props.original.inProgressTrainings.progress === 'Red' && (
+                  //         <span class="attention">
+                  //           Needs Attention
+                  //           <Icon type="warning" theme="filled" />
+                  //         </span>
+                  //       )}
+                  //     </span>
+                  //   ),
+                  // },
                 ],
               },
             ]}

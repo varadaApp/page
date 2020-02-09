@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-plusplus */
 import namor from 'namor';
 import './table.css';
 
@@ -22,12 +24,10 @@ const newPerson = () => {
 };
 
 export function makeData(len = 5553) {
-  return range(len).map(d => {
-    return {
-      ...newPerson(),
-      children: range(10).map(newPerson),
-    };
-  });
+  return range(len).map(() => ({
+    ...newPerson(),
+    children: range(10).map(newPerson),
+  }));
 }
 
 export function trainingData() {
@@ -323,6 +323,7 @@ export function programEmployees() {
       locationName: 'Washington, DC',
       careerTrackName: ' Software Developer',
       careerTrackTier: 2,
+      currentStatus: 'Losing Coverage: 5/1/2020',
     },
     {
       progressStatus: 'Red',
@@ -331,6 +332,7 @@ export function programEmployees() {
       careerTrackName: 'Program Ops (Technical)',
       careerTrackTier: 2,
       progressInformation: 'Applied to Position',
+      currentStatus: 'Interested in Growth',
     },
     {
       progressStatus: 'Red',
@@ -339,6 +341,15 @@ export function programEmployees() {
       careerTrackName: 'Program Ops (Technical)',
       careerTrackTier: 2,
       progressInformation: 'Interested in Career Enhancement Opportunity',
+      currentStatus: 'Interested in Growth',
+    },
+    {
+      progressStatus: 'Yellow',
+      employeeName: 'Kami Najera',
+      locationName: 'Washington, DC',
+      careerTrackName: 'Program Ops (Technical)',
+      careerTrackTier: 2,
+      currentStatus: 'Location Change to California',
     },
     {
       progressStatus: 'Red',
@@ -347,6 +358,29 @@ export function programEmployees() {
       careerTrackName: 'Program/Project Management',
       careerTrackTier: 3,
       progressInformation: 'Selected a New Primary Career Track',
+      currentStatus: 'Losing Coverage: 7/1/2020',
+    },
+    {
+      progressStatus: 'Yellow',
+      employeeName: 'Brigitte Weiland',
+      locationName: 'Washington, DC',
+      careerTrackName: 'Program Ops (Technical)',
+      careerTrackTier: 2,
+      currentStatus: '',
+    },
+    {
+      progressStatus: 'Yellow',
+      employeeName: 'Emmitt Dugas',
+      locationName: 'Washington, DC',
+      careerTrackName: 'Software Development',
+      careerTrackTier: 2,
+    },
+    {
+      progressStatus: 'Yellow',
+      employeeName: 'August Stanger',
+      locationName: 'Washington, DC',
+      careerTrackName: 'Software Development',
+      careerTrackTier: 2,
     },
     {
       progressStatus: 'Green',
@@ -362,6 +396,13 @@ export function programEmployees() {
       careerTrackName: 'Software Development',
       careerTrackTier: 2,
       progressInformation: 'Showed interest in Splunk Training',
+    },
+    {
+      progressStatus: 'Yellow',
+      employeeName: 'Enoch Hector',
+      locationName: 'Washington, DC',
+      careerTrackName: 'Software Development',
+      careerTrackTier: 2,
     },
     {
       progressStatus: 'Red',
@@ -386,6 +427,13 @@ export function programEmployees() {
       careerTrackName: 'Software Development',
       careerTrackTier: 2,
       progressInformation: 'Applied to Position',
+    },
+    {
+      progressStatus: 'Yellow',
+      employeeName: 'Nickie Buie',
+      locationName: 'Washington, DC',
+      careerTrackName: 'Systems Administration',
+      careerTrackTier: 1,
     },
   ];
   return employees;

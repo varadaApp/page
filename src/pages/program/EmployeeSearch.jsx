@@ -44,30 +44,139 @@ class EmployeeSearch extends React.Component {
   };
 
   handleProgramSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.programName == value;
+    // });
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
     this.setState({ programValue: value });
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
 
   handleLocationSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.locationName == value;
+    // });
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
     this.setState({ locationValue: value });
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
 
   handleCertificationSearch(value) {
+    // var filteredCareerTracks = careerTrackData();
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
     this.setState({ certificationValue: value });
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
 
   handleClearanceSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.clearanceLevel == value;
+    // });
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
     this.setState({ clearanceValue: value });
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
 
   handleCareerTrackSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.careerTrackName == value;
+    // });
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
     this.setState({ careerTrackValue: value });
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
@@ -115,6 +224,7 @@ class EmployeeSearch extends React.Component {
     ];
     const dataSourceCertification = [
       'A+',
+      'Agile',
       'AWS',
       'BICSI',
       'CAP',
@@ -326,6 +436,21 @@ class EmployeeSearch extends React.Component {
                       {
                         Header: 'Program',
                         accessor: 'programName',
+                      },
+                      {
+                        Header: 'Interested In',
+                        accessor: 'interestedIn',
+                        minWidth: 160,
+                      },
+                    ],
+                  },
+                  {
+                    Header: 'Program Information',
+                    columns: [
+                      {
+                        Header: 'Program',
+                        accessor: 'programName',
+                        minWidth: 130,
                       },
 
                       {

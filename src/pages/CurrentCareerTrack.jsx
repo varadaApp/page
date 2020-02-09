@@ -18,7 +18,7 @@ class CurrentCareerTrack extends React.Component {
       visible3: false,
       positionsLoading3: false,
       positionsVisible3: false,
-      programValue: 'AWS Technical Support Program',
+      programValue: 'Department of Homeland Security Satellite Network',
       programValue2: 'Department of Defense Space Program',
       items: [
         {
@@ -186,9 +186,10 @@ class CurrentCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <div style={{ fontSize: '32px', color: 'black', fontWeight: 600 }}>
+          <div style={{ fontSize: '27px', color: 'black', fontWeight: 600 }}>
             Sidney&apos;s Career Track
           </div>
+          <Divider />
           <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={6}>
               <Row
@@ -226,7 +227,7 @@ class CurrentCareerTrack extends React.Component {
           <Divider />
           <div style={{ border: '1.5px solid #919197', borderRadius: 5 }}>
             <div onClick={() => this.toggleShow(0)} className="hover-div">
-              <div style={{ alignItems: 'center' }}>
+              <div style={{ alignItems: 'center', height: 49 }}>
                 <Icon
                   style={{
                     fontSize: 16,
@@ -248,8 +249,8 @@ class CurrentCareerTrack extends React.Component {
                     fontWeight: 600,
                     lineHeight: 1.5,
                     color: '#525257',
-                    margin: 10,
-                    padding: 5,
+                    // margin: 10,
+                    // padding: 5,
                   }}
                 >
                   Requirements for Primary Selected Career Track
@@ -266,8 +267,8 @@ class CurrentCareerTrack extends React.Component {
             <Row
               style={{
                 display: items[0].show ? 'block' : 'none',
-                paddingLeft: '10px',
-                marginLeft: '20px',
+                // paddingLeft: '10px',
+                // marginLeft: '20px',
               }}
             >
               <div
@@ -284,7 +285,7 @@ class CurrentCareerTrack extends React.Component {
                 }}
               >
                 <p style={{ marginTop: '15px', paddingTop: '5px' }}>
-                  <h3 style={{ color: '#525257' }}>Select another program:</h3>
+                  <h3 style={{ color: 'black' }}>Select another program</h3>
                 </p>
                 <AutoComplete
                   style={{ width: 350, marginLeft: '10px', paddingLeft: '5px' }}
@@ -301,84 +302,129 @@ class CurrentCareerTrack extends React.Component {
               <Divider />
               <div
                 style={{
-                  padding: '10px',
-                  margin: '20px',
+                  marginLeft: '20px',
+                  paddingLeft: '10px',
+                  marginRight: '20px',
+                  paddingRight: '10px',
                 }}
               >
                 <p
                   style={{
-                    color: '#525257',
+                    color: 'black',
                     fontSize: 16,
                     fontWeight: 600,
                   }}
                 >
                   Network Engineer Tier
                 </p>
-                <p
-                  style={{
-                    color: '#525257',
-                    fontSize: 15,
-                    marginLeft: '10px',
-                    paddingLeft: '5px',
-                    fontWeight: 600,
-                  }}
-                >
-                  Program
-                </p>
+                <Divider />
                 <p
                   style={{
                     color: '#525257',
                     fontSize: 15,
                     marginLeft: '20px',
                     paddingLeft: '10px',
+                    marginRight: '20px',
+                    paddingRight: '10px',
                   }}
                 >
-                  {this.state.programValue || 'No program selected'}
+                  <span>
+                    <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                    {this.state.programValue || 'No program selected'}
+                  </span>
                 </p>
                 <div
                   style={
                     this.state.programValue === 'Department of Homeland Security Satellite Network'
-                      ? { marginLeft: '10px', paddingLeft: '5px' }
+                      ? {
+                          marginLeft: '20px',
+                          paddingLeft: '10px',
+                          marginRight: '20px',
+                          paddingRight: '10px',
+                        }
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal2}>
-                      Current Open Positions: 12
-                    </a>
-                    <Divider type="vertical" />
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showModal2}>
-                      Current Percentage Complete: 25%
-                    </a>
-                    <Divider type="vertical" />
-                    <span style={{ margin: 10, padding: 5 }}>
-                      Overall Expected Completion Date: 2/1/2020
-                    </span>
+                  <div style={{ fontSize: 15 }}>
+                    <Divider className="content-divider" />
+                    <div
+                      style={{ marginTop: 10, paddingTop: 5 }}
+                      onClick={this.showPositionsModal2}
+                    >
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Open Positions:
+                        </span>
+                        <span>12</span>
+                      </a>
+                    </div>
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Percentage Complete:
+                        </span>
+                        <span>25%</span>
+                      </a>
+                    </div>
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }}>
+                      <span>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Overall Expected Completion Date:
+                        </span>
+                        2/1/2020
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div
                   style={
                     this.state.programValue === 'AWS Technical Support Program'
-                      ? { marginLeft: '10px', paddingLeft: '5px' }
+                      ? {
+                          marginLeft: '20px',
+                          paddingLeft: '10px',
+                          marginRight: '20px',
+                          paddingRight: '10px',
+                        }
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal2}>
-                      Current Open Positions: 3
-                    </a>
-                    <Divider type="vertical" />
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showModal2}>
-                      Current Percentage Complete: 85%
-                    </a>
-                    <Divider type="vertical" />
-                    <span style={{ margin: 10, padding: 5 }}>
-                      Overall Expected Completion Date: 2/1/2020
-                    </span>
+                  <div style={{ fontSize: 15 }}>
+                    <Divider className="content-divider" />
+                    <div
+                      style={{ marginTop: 10, paddingTop: 5 }}
+                      onClick={this.showPositionsModal2}
+                    >
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Open Positions:
+                        </span>
+                        <span>3</span>
+                      </a>
+                    </div>
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Percentage Complete:
+                        </span>
+                        <span>85%</span>
+                      </a>
+                    </div>
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }}>
+                      <span>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Overall Expected Completion Date:
+                        </span>
+                        2/1/2020
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <Divider />
+              {this.state.programValue && <Divider />}
               <div
                 style={
                   this.state.programValue === 'Department of Homeland Security Satellite Network'
@@ -386,12 +432,20 @@ class CurrentCareerTrack extends React.Component {
                     : { display: 'none' }
                 }
               >
-                <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                  <p style={{ fontSize: 16, fontWeight: 600 }}>Trainings</p>
+                <p style={{ fontSize: 16, fontWeight: 600 }}>Trainings</p>
+                <Divider />
+                <div
+                  style={{
+                    marginBottom: '10px',
+                    paddingBottom: '5px',
+                    marginLeft: '20px',
+                    paddingLeft: '10px',
+                  }}
+                >
                   <div
                     style={{
                       marginLeft: '20px',
-                      padding: '10px',
+                      paddingLeft: '10px',
                       flexDirection: 'row',
                       display: 'flex',
                     }}
@@ -414,10 +468,11 @@ class CurrentCareerTrack extends React.Component {
                       </span>
                     </div>
                   </div>
+                  <Divider className="content-divider" />
                   <div
                     style={{
                       marginLeft: '20px',
-                      padding: '10px',
+                      paddingLeft: '10px',
                       flexDirection: 'row',
                       display: 'flex',
                     }}
@@ -438,70 +493,89 @@ class CurrentCareerTrack extends React.Component {
                     </div>
                   </div>
                 </div>
-                <Divider />
                 <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                <Divider />
                 <div
                   style={{
+                    marginBottom: '10px',
+                    paddingBottom: '5px',
                     marginLeft: '20px',
-                    padding: '10px',
-                    flexDirection: 'row',
-                    display: 'flex',
+                    paddingLeft: '10px',
                   }}
                 >
                   <div
                     style={{
-                      width: '50%',
-                      color: '#525257',
-                      textAlign: 'left',
-                      fontSize: 15,
-                      fontWeight: 600,
+                      marginLeft: '20px',
+                      paddingLeft: '10px',
+                      flexDirection: 'row',
+                      display: 'flex',
                     }}
                   >
-                    CCNA
+                    <div
+                      style={{
+                        width: '50%',
+                        color: '#525257',
+                        textAlign: 'left',
+                        fontSize: 15,
+                        fontWeight: 600,
+                      }}
+                    >
+                      CCNA
+                    </div>
+                    <div style={{ width: '50%', textAlign: 'left' }}>
+                      <span className="in-progress">
+                        Certification Test Scheduled
+                        <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                      </span>
+                    </div>
                   </div>
-                  <div style={{ width: '50%', textAlign: 'left' }}>
-                    <span className="in-progress">
-                      Certification Test Scheduled
-                      <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
-                    </span>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    marginLeft: '20px',
-                    padding: '10px',
-                    flexDirection: 'row',
-                    display: 'flex',
-                  }}
-                >
+                  <Divider className="content-divider" />
                   <div
                     style={{
-                      width: '50%',
-                      color: '#525257',
-                      textAlign: 'left',
-                      fontSize: 15,
-                      fontWeight: 600,
+                      marginLeft: '20px',
+                      paddingLeft: '10px',
+                      flexDirection: 'row',
+                      display: 'flex',
                     }}
                   >
-                    CCNP
-                  </div>
-                  <div style={{ width: '50%', textAlign: 'left' }}>
-                    <Checkbox>Select to Show Interest in Certification</Checkbox>
+                    <div
+                      style={{
+                        width: '50%',
+                        color: '#525257',
+                        textAlign: 'left',
+                        fontSize: 15,
+                        fontWeight: 600,
+                      }}
+                    >
+                      CCNP
+                    </div>
+                    <div style={{ width: '50%', textAlign: 'left' }}>
+                      <Checkbox>Select to Show Interest in Certification</Checkbox>
+                    </div>
                   </div>
                 </div>
               </div>
+              {/* {this.state.programValue && <Divider/>} */}
               <div
                 style={
                   this.state.programValue === 'AWS Technical Support Program'
-                    ? { margin: '20px', padding: '10px' }
+                    ? {
+                        marginLeft: '20px',
+                        paddingLeft: '10px',
+                        marginRight: '20px',
+                        paddingRight: '10px',
+                      }
                     : { display: 'none' }
                 }
               >
-                <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                <Divider />
                 <div
                   style={{
                     marginLeft: '20px',
-                    padding: '10px',
+                    paddingLeft: '10px',
+                    marginRight: '20px',
+                    paddingRight: '10px',
                     flexDirection: 'row',
                     display: 'flex',
                   }}
@@ -523,6 +597,16 @@ class CurrentCareerTrack extends React.Component {
                       <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
                     </span>
                   </div>
+                </div>
+                <div
+                  style={{
+                    marginLeft: '20px',
+                    paddingLeft: '10px',
+                    marginRight: '20px',
+                    paddingRight: '10px',
+                  }}
+                >
+                  <Divider className="content-divider" />
                 </div>
                 <div
                   style={{
@@ -551,7 +635,6 @@ class CurrentCareerTrack extends React.Component {
                   </div>
                 </div>
               </div>
-              <Divider />
             </Row>
           </div>
           <Divider />
@@ -615,7 +698,7 @@ class CurrentCareerTrack extends React.Component {
                 }}
               >
                 <p style={{ marginTop: '15px', paddingTop: '5px' }}>
-                  <h3 style={{ color: '#525257' }}>Select another program:</h3>
+                  <h3 style={{ color: '#525257' }}>Select another program</h3>
                 </p>
                 <AutoComplete
                   style={{ width: 350, marginLeft: '10px', paddingLeft: '5px' }}
@@ -649,22 +732,11 @@ class CurrentCareerTrack extends React.Component {
                   style={{
                     color: '#525257',
                     fontSize: 15,
-                    marginLeft: '10px',
-                    paddingLeft: '5px',
-                    fontWeight: 600,
-                  }}
-                >
-                  Program
-                </p>
-                <p
-                  style={{
-                    color: '#525257',
-                    fontSize: 15,
                     marginLeft: '20px',
                     paddingLeft: '10px',
                   }}
                 >
-                  {this.state.programValue2 || 'No program selected'}
+                  Program: {this.state.programValue2 || 'No program selected'}
                 </p>
                 <div
                   style={
