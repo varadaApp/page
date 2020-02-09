@@ -210,7 +210,7 @@ class Reporting extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <Row>
+          <Row gutter={[8, 8]}>
             <Col xs={4}>
               <div className="mobility-header-filter-container">
                 <div className="mobility-row">

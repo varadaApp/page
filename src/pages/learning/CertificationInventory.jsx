@@ -1,9 +1,43 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Icon, Table, Button, Select, DatePicker } from 'antd';
+import { Card, Icon, Table, Button, Select, DatePicker, Row, Col } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+// import { Gauge } from 'ant-design-pro/lib/Charts';
+import { Shape } from 'bizcharts';
 
 const { MonthPicker, RangePicker } = DatePicker;
+
+Shape.registerShape('point', 'pointer', {
+  drawShape(cfg, group) {
+    let point = cfg.points[0];
+    point = this.parsePoint(point);
+    const center = this.parsePoint({
+      x: 0,
+      y: 0,
+    });
+    group.addShape('line', {
+      attrs: {
+        x1: center.x,
+        y1: center.y,
+        x2: point.x,
+        y2: point.y - 20,
+        stroke: cfg.color,
+        lineWidth: 5,
+        lineCap: 'round',
+      },
+    });
+    return group.addShape('circle', {
+      attrs: {
+        x: center.x,
+        y: center.y,
+        r: 12,
+        stroke: cfg.color,
+        lineWidth: 4.5,
+        fill: '#fff',
+      },
+    });
+  },
+});
 
 class CertificationInventory extends React.Component {
   constructor(props) {
@@ -156,7 +190,7 @@ class CertificationInventory extends React.Component {
   }
 
   render() {
-    const { dataSource } = this.state;
+    const { dataSource, selectedDateRange } = this.state;
     const columns = this.columns.map(col => {
       if (!col.editable) {
         return col;
@@ -173,201 +207,198 @@ class CertificationInventory extends React.Component {
       };
     });
 
+    const certifications = [
+      'A+',
+      'Agile',
+      'AWS',
+      'BICSI',
+      'CAP',
+      'CCNA',
+      'CCNE',
+      'CCNP',
+      'CISSP',
+      'Cloudera CDH4 Administrator',
+      'Cloudera CDH4 Developer',
+      'CSM',
+      'CTNS',
+      'GSLC',
+      'HDI',
+      'INCOSE CSEP',
+      'ISSA',
+      'ITIL',
+      'Lean Six Sigma',
+      'MCSA',
+      'MCSE',
+      'Network+',
+      'OCP DBA',
+      'Oracle',
+      'PMP',
+      'Security+',
+      'Sharepoint',
+      'Splunk',
+      'VMWare',
+    ];
     const { Option } = Select;
     return (
       <PageHeaderWrapper>
         <Card>
-          <div style={{ width: 150, display: 'inline-block' }}>Certification:</div>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a Certification"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="0">&nbsp;</Option>
-            <Option value="1">A+</Option>
-            <Option value="2">Agile</Option>
-            <Option value="3">AWS</Option>
-            <Option value="4">BICSI</Option>
-            <Option value="5">CAP</Option>
-            <Option value="6">CCNA</Option>
-            <Option value="7">CCNE</Option>
-            <Option value="8">CCNP</Option>
-            <Option value="9">CISSP</Option>
-            <Option value="10">Cloudera CDH4 Administrator</Option>
-            <Option value="11">Cloudera CDH4 Developer</Option>
-            <Option value="12">CSM</Option>
-            <Option value="13">CTNS</Option>
-            <Option value="14">GSLC</Option>
-            <Option value="15">HDI</Option>
-            <Option value="16">INCOSE CSEP</Option>
-            <Option value="17">ISSA</Option>
-            <Option value="18">ITIL</Option>
-            <Option value="19">Lean Six Sigma</Option>
-            <Option value="20">MCSA</Option>
-            <Option value="21">MCSE</Option>
-            <Option value="22">Network+</Option>
-            <Option value="23">OCP DBA</Option>
-            <Option value="24">Oracle</Option>
-            <Option value="25">PMP</Option>
-            <Option value="26">Security+</Option>
-            <Option value="27">Sharepoint</Option>
-            <Option value="28">Splunk</Option>
-            <Option value="29">VMWare</Option>
-          </Select>
-          <br />
-          <br />
-          <div style={{ width: 150, display: 'inline-block' }}>Date Range:</div>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a Date Range"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-            onSelect={this.handleDateRangeSelect}
-          >
-            <Option value="0">&nbsp;</Option>
-            <Option value="1">Annually</Option>
-            <Option value="2">Monthly</Option>
-            <Option value="3">Quarter</Option>
-            <Option value="4">Custom Date Range</Option>
-          </Select>
-          <br />
-          <br />
-          <div style={this.state.selectedDateRange === '1' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Year:</div>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder="Select a Year"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-              onSelect={this.handleDateRangeSelect}
-            >
-              <Option value="0">&nbsp;</Option>
-              <Option value="1">2020</Option>
-              <Option value="2">2019</Option>
-              <Option value="3">2018</Option>
-              <Option value="4">2017</Option>
-            </Select>
-            <br />
-            <br />
-          </div>
-          <div style={this.state.selectedDateRange === '2' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Month:</div>
-            <MonthPicker placeholder="Select month" />
-            <br />
-            <br />
-          </div>
-          <div style={this.state.selectedDateRange === '3' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Quarter:</div>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder="Select a Quarter"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-              onSelect={this.handleDateRangeSelect}
-            >
-              <Option value="0">&nbsp;</Option>
-              <Option value="1">1st Quarter</Option>
-              <Option value="2">2nd Quarter</Option>
-              <Option value="3">3rd Quarter</Option>
-              <Option value="4">4th Quarter</Option>
-            </Select>
-            <br />
-            <br />
-          </div>
-          <div style={this.state.selectedDateRange === '4' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Custom Date Range:</div>
-            <RangePicker />
-            <br />
-            <br />
-          </div>
-          <div style={{ width: 150, display: 'inline-block' }}>Select Division:</div>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a Division"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="0">&nbsp;</Option>
-            <Option value="1">Division 1</Option>
-            <Option value="2">Division 2</Option>
-            <Option value="3">Division 3</Option>
-          </Select>
-          <br />
-          <br />
-          <div style={{ width: 150, display: 'inline-block' }}>Select Program:</div>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder="Select a Program"
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="0">&nbsp;</Option>
-            <Option value="1">AWS Technical Support Program</Option>
-            <Option value="2">DoD Space Program</Option>
-            <Option value="3">DHS Satellite Network</Option>
-            <Option value="4">DoJ Networks</Option>
-            <Option value="5">DoS Nuclear Defense System</Option>
-            <Option value="6">FBI Case Management System</Option>
-          </Select>
-          <br />
-          <br />
-          <div style={{ width: 150, display: 'inline-block' }}>Group By:</div>
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            optionFilterProp="children"
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="0">&nbsp;</Option>
-            <Option value="1">Career Track</Option>
-          </Select>
-          <br />
-          <br />
-          {/* <Checkbox>Interested in Growth</Checkbox>
-          <br />
-          <Checkbox>Losing Coverage</Checkbox>
-          <br />
-          <Checkbox>Location Change</Checkbox>
-          <br />
-          <br /> */}
-          <Button type="primary">Run Report</Button>
-          <br />
-          <br />
-          <Button type="primary" size="small">
-            Export to CSV
-          </Button>
-          <Button type="primary" size="small">
-            Export to PDF
-          </Button>
-          <h1>Certification Inventory Report</h1>
-          <Table
-            style={{ width: 800 }}
-            bordered
-            dataSource={dataSource}
-            columns={columns}
-            pagination={false}
-          />
+          <Row gutter={[8, 8]}>
+            <Col xs={4}>
+              <div className="mobility-header-filter-container">
+                <div className="mobility-row">
+                  <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
+                  <Select
+                    showSearch
+                    placeholder="Select a Certification"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    {certifications.map((certification, index) => (
+                      <Option value={`${index + 1}`}>{certification}</Option>
+                    ))}
+                  </Select>
+                </div>
+                <div className="mobility-row">
+                  <Select
+                    showSearch
+                    placeholder="Select a Division"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    <Option value="1">Division 1</Option>
+                    <Option value="2">Division 2</Option>
+                    <Option value="3">Division 3</Option>
+                  </Select>
+                </div>
+                <div className="mobility-row">
+                  <Select
+                    showSearch
+                    placeholder="Select a Program"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    <Option value="1">AWS Technical Support Program</Option>
+                    <Option value="2">DoD Space Program</Option>
+                    <Option value="3">DHS Satellite Network</Option>
+                    <Option value="4">DoJ Networks</Option>
+                    <Option value="5">DoS Nuclear Defense System</Option>
+                    <Option value="6">FBI Case Management System</Option>
+                  </Select>
+                </div>
+                <div className="mobility-row">
+                  <Select
+                    showSearch
+                    placeholder="Select a Group"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    <Option value="0">Career Track</Option>
+                  </Select>
+                </div>
+                <div className="mobility-row">
+                  <Select
+                    showSearch
+                    placeholder="Select a Date Range"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    onSelect={this.handleDateRangeSelect}
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    <Option value="1">Annually</Option>
+                    <Option value="2">Monthly</Option>
+                    <Option value="3">Quarter</Option>
+                    <Option value="4">Custom Date Range</Option>
+                  </Select>
+                </div>
+                {selectedDateRange === '1' && (
+                  <div className="mobility-row">
+                    <Select
+                      showSearch
+                      placeholder="Select a Year"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      onSelect={this.handleDateRangeSelect}
+                    >
+                      <Option value="0">&nbsp;</Option>
+                      <Option value="1">2020</Option>
+                      <Option value="2">2019</Option>
+                      <Option value="3">2018</Option>
+                      <Option value="4">2017</Option>
+                    </Select>
+                  </div>
+                )}
+                {selectedDateRange === '2' && (
+                  <div className="mobility-row">
+                    <MonthPicker placeholder="Select month" />
+                  </div>
+                )}
+                {selectedDateRange === '3' && (
+                  <div className="mobility-row">
+                    <Select
+                      showSearch
+                      placeholder="Select a Quarter"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      onSelect={this.handleDateRangeSelect}
+                    >
+                      <Option value="0">&nbsp;</Option>
+                      <Option value="1">1st Quarter</Option>
+                      <Option value="2">2nd Quarter</Option>
+                      <Option value="3">3rd Quarter</Option>
+                      <Option value="4">4th Quarter</Option>
+                    </Select>
+                  </div>
+                )}
+                {selectedDateRange === '4' && (
+                  <div className="mobility-row">
+                    <RangePicker />
+                  </div>
+                )}
+                <div style={{ float: 'right', marginTop: 10 }}>
+                  <Button onClick={this.handleClear}>Run Report</Button>
+                </div>
+              </div>
+            </Col>
+            <Col xs={20}>
+              <p className="mobility-report-label">Certification Inventory Report</p>
+              <div className="mobility-report-table-header">
+                <div />
+                <div>
+                  <Button className="table-action-button" type="primary" size="small">
+                    Export to CSV
+                  </Button>
+                  <Button className="table-action-button" type="primary" size="small">
+                    Export to PDF
+                  </Button>
+                </div>
+              </div>
+              <Table
+                dataSource={dataSource}
+                columns={columns}
+                size="middle"
+                pagination={false}
+                style={{ paddingBottom: 20 }}
+              />
+            </Col>
+          </Row>
           <p
             style={{
               textAlign: 'center',
