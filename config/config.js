@@ -232,16 +232,41 @@ export default {
               component: './Program/Dashboard',
             },
             {
-              path: '/program/reporting',
-              name: 'Reporting',
-              icon: 'rise',
-              component: './Program/Reporting',
-            },
-            {
               path: '/program/profile',
               name: 'Program Information',
               icon: 'cluster',
               component: './Program/ProgramInformation',
+            },
+            {
+              path: '/program/employeeSearch',
+              name: 'Employee Search',
+              icon: 'search',
+              component: './Program/EmployeeSearch',
+            },
+            {
+              path: '/program/reporting',
+              name: 'Reporting',
+              icon: 'rise',
+              routes: [
+                {
+                  path: '/program/reporting/attrition',
+                  name: 'Attrition on Program',
+                  icon: 'environment',
+                  component: './Program/Attrition',
+                },
+                {
+                  path: '/program/reporting/employee-summary',
+                  name: 'Employee Summary',
+                  icon: 'file-done',
+                  component: './Program/EmployeeSummary',
+                },
+                {
+                  path: '/program/reporting/mobility-forecast',
+                  name: 'Mobility Forecast',
+                  icon: 'coffee',
+                  component: './Program/MobilityForecast',
+                },
+              ],
             },
             // {
             //   path: '/program/manage',
@@ -305,12 +330,6 @@ export default {
                 // },
               ],
             },
-            {
-              path: '/program/employeeSearch',
-              name: 'Employee Search',
-              icon: 'search',
-              component: './Program/EmployeeSearch',
-            },
             // {
             //   component: './404',
             // },
@@ -344,8 +363,58 @@ export default {
               path: '/learning/reporting',
               name: 'ITS Reporting',
               icon: 'rise',
-              component: './Learning/Reporting',
+              routes: [
+                {
+                  path: '/learning/reporting/certification-inventory',
+                  name: 'Certification Inventory',
+                  icon: 'environment',
+                  component: './Learning/CertificationInventory',
+                },
+                {
+                  path: '/learning/reporting/certification-forecast',
+                  name: 'Certification Forecast',
+                  icon: 'file-done',
+                  component: './Learning/CertificationForecast',
+                },
+                {
+                  path: '/learning/reporting/certification-interest',
+                  name: 'Certification Interest',
+                  icon: 'coffee',
+                  component: './Learning/CertificationInterest',
+                },
+                {
+                  path: '/learning/reporting/training-inventory',
+                  name: 'Training Inventory',
+                  icon: 'environment',
+                  component: './Learning/TrainingInventory',
+                },
+                {
+                  path: '/learning/reporting/training-forecast',
+                  name: 'Training Forecast',
+                  icon: 'file-done',
+                  component: './Learning/TrainingForecast',
+                },
+                {
+                  path: '/learning/reporting/training-interest',
+                  name: 'Training Interest',
+                  icon: 'coffee',
+                  component: './Learning/TrainingInterest',
+                },
+                {
+                  path: '/learning/reporting/clearance-inventory',
+                  name: 'Clearance Inventory',
+                  icon: 'environment',
+                  component: './Learning/ClearanceInventory',
+                },
+                {
+                  path: '/learning/reporting/clearance-forecast',
+                  name: 'Clearance Forecast',
+                  icon: 'file-done',
+                  component: './Learning/ClearanceForecast',
+                },
+              ],
             },
+
             // {
             //   path: '/learning/employee',
             //   name: 'Employee Inventory',
@@ -416,54 +485,60 @@ export default {
               component: './Resource/EmployeeSearch',
             },
             {
-              path: '/resource/employee',
-              name: 'ITS Employees',
-              icon: 'contacts',
-              routes: [
-                {
-                  path: '/resource/employee/reporting',
-                  name: 'Reporting',
-                  icon: 'rise',
-                  component: './Resource/EmployeeReporting',
-                },
-                {
-                  path: '/resource/employee/profile',
-                  name: 'Profile',
-                  icon: 'user',
-                  component: './Resource/Profile',
-                },
-                {
-                  path: '/resource/employee/current',
-                  name: 'Current Career Track',
-                  icon: 'environment',
-                  component: './Resource/CurrentCareerTrack',
-                },
-                {
-                  path: '/resource/employee/manage',
-                  name: 'Career Management',
-                  icon: 'schedule',
-                  component: './Resource/CareerManagement',
-                },
-                {
-                  path: '/resource/employee/careerTrackSearch',
-                  name: 'Career Track Search',
-                  icon: 'search',
-                  component: './Resource/CareerTrackSearch',
-                },
-                {
-                  path: '/resource/employee/positionSearch',
-                  name: 'Open Positions',
-                  icon: 'user-add',
-                  component: './Resource/PositionSearch',
-                },
-                {
-                  path: '/resource/employee/careerEnhancement',
-                  name: 'Career Enhancement',
-                  icon: 'rocket',
-                  component: './Resource/CareerEnhancement',
-                },
-              ],
+              path: '/resource/reporting',
+              name: 'ITS Employee Reporting',
+              icon: 'rise',
+              component: './Resource/EmployeeReporting',
             },
+            // {
+            //   path: '/resource/employee',
+            //   name: 'ITS Employees',
+            //   icon: 'contacts',
+            //   routes: [
+            //     {
+            //       path: '/resource/employee/reporting',
+            //       name: 'Reporting',
+            //       icon: 'rise',
+            //       component: './Resource/EmployeeReporting',
+            //     },
+            //     {
+            //       path: '/resource/employee/profile',
+            //       name: 'Profile',
+            //       icon: 'user',
+            //       component: './Resource/Profile',
+            //     },
+            //     {
+            //       path: '/resource/employee/current',
+            //       name: 'Current Career Track',
+            //       icon: 'environment',
+            //       component: './Resource/CurrentCareerTrack',
+            //     },
+            //     {
+            //       path: '/resource/employee/manage',
+            //       name: 'Career Management',
+            //       icon: 'schedule',
+            //       component: './Resource/CareerManagement',
+            //     },
+            //     {
+            //       path: '/resource/employee/careerTrackSearch',
+            //       name: 'Career Track Search',
+            //       icon: 'search',
+            //       component: './Resource/CareerTrackSearch',
+            //     },
+            //     {
+            //       path: '/resource/employee/positionSearch',
+            //       name: 'Open Positions',
+            //       icon: 'user-add',
+            //       component: './Resource/PositionSearch',
+            //     },
+            //     {
+            //       path: '/resource/employee/careerEnhancement',
+            //       name: 'Career Enhancement',
+            //       icon: 'rocket',
+            //       component: './Resource/CareerEnhancement',
+            //     },
+            //   ],
+            // },
             {
               path: '/resource/program',
               name: 'ITS Programs',
