@@ -51,6 +51,7 @@ const profileMessageContentStyle = {
 
 const profileMessageContainerStyle = {
   padding: '20px',
+  borderRadius: '5px',
   backgroundColor: '#f0f2f5',
   borderColor: '#dcdcdc',
   borderWidth: '1px',

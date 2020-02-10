@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { Card, Row, Col, Icon, Divider, Modal, Button, Steps, Checkbox, AutoComplete } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React from 'react';
@@ -192,36 +193,100 @@ class CurrentCareerTrack extends React.Component {
           <Divider />
           <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={6}>
-              <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
-              >
-                Department of Defense Space Program
-              </Row>
-              <Row style={{ textAlign: 'center' }}>Current Program</Row>
+              <div className="round-container">
+                <div className="image-container">
+                  <img
+                    className="round-item-image"
+                    src={require('../assets/program-icon.png')}
+                    alt="atl"
+                  />
+                </div>
+                <Row
+                  style={{
+                    color: 'black',
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    marginTop: 20,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                  }}
+                >
+                  Department of Defense Space Program
+                </Row>
+                <Row style={{ textAlign: 'center' }}>Current Program</Row>
+              </div>
             </Col>
             <Col xs={6}>
-              <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
-              >
-                Software Developer
-              </Row>
-              <Row style={{ textAlign: 'center' }}>Current Career Track</Row>
+              <div className="round-container">
+                <div className="image-container">
+                  <img
+                    className="round-item-image"
+                    src={require('../assets/track-icon.png')}
+                    alt="atl"
+                  />
+                </div>
+                <Row
+                  style={{
+                    color: 'black',
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    marginTop: 20,
+                  }}
+                >
+                  Software Developer
+                </Row>
+                <Row style={{ textAlign: 'center' }}>Current Career Track</Row>
+              </div>
             </Col>
             <Col xs={6}>
-              <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
-              >
-                Level 2
-              </Row>
-              <Row style={{ textAlign: 'center' }}>Current Tier</Row>
+              <div className="round-container">
+                <div className="image-container">
+                  <img
+                    className="round-item-image"
+                    src={require('../assets/tier-icon.png')}
+                    alt="atl"
+                  />
+                </div>
+                <Row
+                  style={{
+                    color: 'black',
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    marginTop: 20,
+                  }}
+                >
+                  Level 2
+                </Row>
+                <Row style={{ textAlign: 'center' }}>Current Tier</Row>
+              </div>
             </Col>
             <Col xs={6}>
-              <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
-              >
-                Level 3
-              </Row>
-              <Row style={{ textAlign: 'center' }}>Next Tier</Row>
+              <div className="round-container">
+                <div className="image-container">
+                  <img
+                    className="round-item-image"
+                    src={require('../assets/next-tier-icon.png')}
+                    alt="atl"
+                  />
+                </div>
+                <Row
+                  style={{
+                    color: 'black',
+                    textAlign: 'center',
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    marginTop: 20,
+                    paddingLeft: 10,
+                    paddingRight: 10,
+                  }}
+                >
+                  Level 3
+                </Row>
+                <Row style={{ textAlign: 'center' }}>Next Tier</Row>
+              </div>
             </Col>
           </Row>
           <Divider />
@@ -249,8 +314,8 @@ class CurrentCareerTrack extends React.Component {
                     fontWeight: 600,
                     lineHeight: 1.5,
                     color: '#525257',
-                    // margin: 10,
-                    // padding: 5,
+                    margin: 10,
+                    padding: 5,
                   }}
                 >
                   Requirements for Primary Selected Career Track
@@ -637,7 +702,7 @@ class CurrentCareerTrack extends React.Component {
               </div>
             </Row>
           </div>
-          <Divider />
+          <div className="divider-div" />
           <div style={{ border: '1.5px solid #919197', borderRadius: 5 }}>
             <div onClick={() => this.toggleShow(1)} className="hover-div">
               <div style={{ alignItems: 'center' }}>

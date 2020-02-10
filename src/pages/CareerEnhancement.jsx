@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /* eslint-disable class-methods-use-this */
 import React from 'react';
 import { Card, Icon, Divider, Row, Col, AutoComplete, Button, Radio, Modal, Checkbox } from 'antd';
@@ -283,7 +284,14 @@ class CareerEnhancement extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <Row gutter={[8, 8]}>
+          <div className="opportunity-image-container">
+            <img
+              className="opportunity-image"
+              src={require('../assets/opportunity-image.png')}
+              alt=""
+            />
+          </div>
+          <Row className="career-enhancement-container" gutter={[8, 8]}>
             <Col xs={12}>
               <h2 style={{ fontSize: '24px', color: 'black' }}>
                 What kind of career enhancement opportunity are you looking for?

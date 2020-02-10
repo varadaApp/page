@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { Card, Icon, Row, Col, Table, Divider, Upload, message, Button, Modal } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -33,10 +34,6 @@ const tableLabelStyle = {
   lineHeight: '30px',
   color: '#1c1c1c',
   fontWeight: 600,
-};
-
-const searchContainer = {
-  marginBottom: '10px',
 };
 
 const searchTextStyle = {
@@ -330,66 +327,94 @@ class CareerManagement extends React.Component {
         <Row gutter={[8, 8]}>
           <Col xs={16}>
             <Card>
-              <p style={tableLabelStyle}>Skills</p>
-              <Divider />
-              <div style={searchContainer}>
-                <a style={searchTextStyle} onClick={this.showSkillsModal}>
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Skills
-                </a>
+              <div className="career-management-item-container">
+                <img
+                  className="career-management-icon"
+                  src={require('../assets/skill-icon.png')}
+                  alt=""
+                />
+                <div className="career-management-header-container">
+                  <p style={tableLabelStyle}>Skills</p>
+                  <a style={searchTextStyle} onClick={this.showSkillsModal}>
+                    <Icon style={searchIconStyle} type="search" />
+                    Search Skills
+                  </a>
+                </div>
+                <Divider />
+                <Table
+                  dataSource={skillDataSource}
+                  columns={skillColumns}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
               </div>
-              <Table
-                dataSource={skillDataSource}
-                columns={skillColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p style={tableLabelStyle}>Certifications</p>
-              <Divider />
-              <div style={searchContainer}>
-                <a style={searchTextStyle} onClick={this.showCertsModal}>
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Skills
-                </a>
+              <div className="career-management-item-container">
+                <img
+                  className="career-management-icon"
+                  src={require('../assets/certification-icon.png')}
+                  alt=""
+                />
+                <div className="career-management-header-container">
+                  <p style={tableLabelStyle}>Certifications</p>
+                  <a style={searchTextStyle} onClick={this.showCertsModal}>
+                    <Icon style={searchIconStyle} type="search" />
+                    Search Certifications
+                  </a>
+                </div>
+                <Divider />
+                <Table
+                  dataSource={certificationDataSource}
+                  columns={certificationColumns}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
               </div>
-              <Table
-                dataSource={certificationDataSource}
-                columns={certificationColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p style={tableLabelStyle}>Desired career tracks</p>
-              <Divider />
-              <div style={searchContainer}>
-                <Link to="/employee/careerTrackSearch">
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Career Tracks
-                </Link>
+              <div className="career-management-item-container">
+                <img
+                  className="career-management-icon"
+                  src={require('../assets/desire-icon.png')}
+                  alt=""
+                />
+                <div className="career-management-header-container">
+                  <p style={tableLabelStyle}>Desired career tracks</p>
+                  <Link to="/employee/careerTrackSearch">
+                    <Icon style={searchIconStyle} type="search" />
+                    Search Career Tracks
+                  </Link>
+                </div>
+                <Divider />
+                <Table
+                  dataSource={desiredCareerTrackColumns}
+                  columns={desiredCareerTrackDataSource}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
               </div>
-              <Table
-                dataSource={desiredCareerTrackDataSource}
-                columns={desiredCareerTrackColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p style={tableLabelStyle}>Open positions interested in</p>
-              <Divider />
-              <div style={searchContainer}>
-                <Link to="/employee/positionSearch">
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Open Positions
-                </Link>
+              <div className="career-management-item-container">
+                <img
+                  className="career-management-icon"
+                  src={require('../assets/interested-icon.png')}
+                  alt=""
+                />
+                <div className="career-management-header-container">
+                  <p style={tableLabelStyle}>Open positions interested in</p>
+                  <Link to="/employee/positionSearch">
+                    <Icon style={searchIconStyle} type="search" />
+                    Search Open Positions
+                  </Link>
+                </div>
+                <Divider />
+                <Table
+                  dataSource={positionsInterestedInDataSource}
+                  columns={positionsInterestedInColumns}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
               </div>
-              <Table
-                dataSource={positionsInterestedInDataSource}
-                columns={positionsInterestedInColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
               <p
                 style={{
                   textAlign: 'center',
@@ -401,6 +426,13 @@ class CareerManagement extends React.Component {
             </Card>
           </Col>
           <Col xs={8}>
+            <div style={{ width: '100%' }}>
+              <img
+                style={{ width: '100%', height: 320 }}
+                src={require('../assets/person-with-pc.png')}
+                alt=""
+              />
+            </div>
             <div style={careerMessageContainerStyle}>
               <p style={careerMessageHeaderStyle}>Career Management</p>
               <p style={careerMessageContentStyle}>
