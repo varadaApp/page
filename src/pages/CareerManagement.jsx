@@ -245,6 +245,7 @@ class CareerManagement extends React.Component {
       {
         title: 'Action',
         key: 'action',
+        width: 300,
         render: () => (
           <span>
             <a>
@@ -306,6 +307,7 @@ class CareerManagement extends React.Component {
       {
         title: 'Action',
         key: 'action',
+        width: 300,
         render: () => (
           <span>
             <a>
@@ -386,8 +388,8 @@ class CareerManagement extends React.Component {
                 </div>
                 <Divider />
                 <Table
-                  dataSource={desiredCareerTrackColumns}
-                  columns={desiredCareerTrackDataSource}
+                  dataSource={desiredCareerTrackDataSource}
+                  columns={desiredCareerTrackColumns}
                   size="middle"
                   pagination={false}
                   style={{ paddingBottom: 20 }}

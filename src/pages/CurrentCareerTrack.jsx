@@ -1,5 +1,17 @@
 /* eslint-disable global-require */
-import { Card, Row, Col, Icon, Divider, Modal, Button, Steps, Checkbox, AutoComplete } from 'antd';
+import {
+  Card,
+  Row,
+  Col,
+  Icon,
+  Divider,
+  Modal,
+  Button,
+  Steps,
+  Checkbox,
+  AutoComplete,
+  Table,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React from 'react';
 
@@ -184,9 +196,161 @@ class CurrentCareerTrack extends React.Component {
       'Department of Defense Space Program',
       'AWS Technical Support Program',
     ];
+
+    const columns = [
+      {
+        title: 'Training',
+        dataIndex: 'training',
+        key: 'training',
+        width: 450,
+      },
+      {
+        title: 'Status',
+        key: 'status',
+        render: props => props.status,
+      },
+    ];
+
+    const dataSource1 = [
+      {
+        key: '1',
+        training: 'Advanced Networking',
+        status: (
+          <span className="attention">
+            Training Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'Networking Circuits',
+        status: <Checkbox>Select to Show Interest in Training</Checkbox>,
+      },
+    ];
+
+    const dataSource2 = [
+      {
+        key: '1',
+        training: 'CCNA',
+        status: (
+          <span className="in-progress">
+            Certification Test Scheduled
+            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'CCNP',
+        status: <Checkbox>Select to Show Interest in Certification</Checkbox>,
+      },
+    ];
+
+    const dataSource3 = [
+      {
+        key: '1',
+        training: 'Security+',
+        status: (
+          <span style={{ margin: '5px' }} className="in-progress">
+            Certification Test Scheduled
+            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'AWS Developer',
+        status: (
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+    ];
+
+    const dataSource4 = [
+      {
+        key: '1',
+        training: 'Programming Level 3 Training',
+        status: (
+          <span className="in-progress">
+            Training Scheduled
+            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'Database Level 3 Traning',
+        status: (
+          <span className="in-progress">
+            Training in Progress
+            <Icon style={{ margin: '5px' }} type="sync" spin />
+          </span>
+        ),
+      },
+      {
+        key: '3',
+        training: 'Advanced Agile Traning',
+        status: (
+          <span className="completed">
+            Training Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+    ];
+
+    const dataSource5 = [
+      {
+        key: '1',
+        training: 'CCISP',
+        status: (
+          <span className="attention">
+            Certification Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'AWS Developer',
+        status: (
+          <span className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+    ];
+
+    const dataSource6 = [
+      {
+        key: '1',
+        training: 'Security++',
+        status: (
+          <span style={{ margin: '5px' }} className="in-progress">
+            Certification Test Scheduled
+            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'AWS Developer',
+        status: (
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+    ];
     return (
       <PageHeaderWrapper>
-        <Card>
+        <Card className="current-career-track-main-container">
           <div style={{ fontSize: '27px', color: 'black', fontWeight: 600 }}>
             Sidney&apos;s Career Track
           </div>
@@ -382,7 +546,6 @@ class CurrentCareerTrack extends React.Component {
                 >
                   Network Engineer Tier
                 </p>
-                <Divider />
                 <p
                   style={{
                     color: '#525257',
@@ -497,128 +660,24 @@ class CurrentCareerTrack extends React.Component {
                     : { display: 'none' }
                 }
               >
-                <p style={{ fontSize: 16, fontWeight: 600 }}>Trainings</p>
-                <Divider />
-                <div
-                  style={{
-                    marginBottom: '10px',
-                    paddingBottom: '5px',
-                    marginLeft: '20px',
-                    paddingLeft: '10px',
-                  }}
-                >
-                  <div
-                    style={{
-                      marginLeft: '20px',
-                      paddingLeft: '10px',
-                      flexDirection: 'row',
-                      display: 'flex',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '50%',
-                        color: '#525257',
-                        textAlign: 'left',
-                        fontSize: 15,
-                        fontWeight: 600,
-                      }}
-                    >
-                      Advanced Networking
-                    </div>
-                    <div style={{ width: '50%', textAlign: 'left' }}>
-                      <span className="attention">
-                        Training Recently Shown Interest, Needs Action
-                        <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
-                      </span>
-                    </div>
-                  </div>
-                  <Divider className="content-divider" />
-                  <div
-                    style={{
-                      marginLeft: '20px',
-                      paddingLeft: '10px',
-                      flexDirection: 'row',
-                      display: 'flex',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '50%',
-                        color: '#525257',
-                        textAlign: 'left',
-                        fontSize: 15,
-                        fontWeight: 600,
-                      }}
-                    >
-                      Networking Circuits
-                    </div>
-                    <div style={{ width: '50%', textAlign: 'left' }}>
-                      <Checkbox>Select to Show Interest in Training</Checkbox>
-                    </div>
-                  </div>
-                </div>
-                <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
-                <Divider />
-                <div
-                  style={{
-                    marginBottom: '10px',
-                    paddingBottom: '5px',
-                    marginLeft: '20px',
-                    paddingLeft: '10px',
-                  }}
-                >
-                  <div
-                    style={{
-                      marginLeft: '20px',
-                      paddingLeft: '10px',
-                      flexDirection: 'row',
-                      display: 'flex',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '50%',
-                        color: '#525257',
-                        textAlign: 'left',
-                        fontSize: 15,
-                        fontWeight: 600,
-                      }}
-                    >
-                      CCNA
-                    </div>
-                    <div style={{ width: '50%', textAlign: 'left' }}>
-                      <span className="in-progress">
-                        Certification Test Scheduled
-                        <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
-                      </span>
-                    </div>
-                  </div>
-                  <Divider className="content-divider" />
-                  <div
-                    style={{
-                      marginLeft: '20px',
-                      paddingLeft: '10px',
-                      flexDirection: 'row',
-                      display: 'flex',
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: '50%',
-                        color: '#525257',
-                        textAlign: 'left',
-                        fontSize: 15,
-                        fontWeight: 600,
-                      }}
-                    >
-                      CCNP
-                    </div>
-                    <div style={{ width: '50%', textAlign: 'left' }}>
-                      <Checkbox>Select to Show Interest in Certification</Checkbox>
-                    </div>
-                  </div>
-                </div>
+                <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Trainings</p>
+                <Table
+                  className="career-track-management-table"
+                  dataSource={dataSource1}
+                  columns={columns}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
+                <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                <Table
+                  className="career-track-management-table"
+                  dataSource={dataSource2}
+                  columns={columns}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
               </div>
               {/* {this.state.programValue && <Divider/>} */}
               <div
@@ -634,71 +693,14 @@ class CurrentCareerTrack extends React.Component {
                 }
               >
                 <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
-                <Divider />
-                <div
-                  style={{
-                    marginLeft: '20px',
-                    paddingLeft: '10px',
-                    marginRight: '20px',
-                    paddingRight: '10px',
-                    flexDirection: 'row',
-                    display: 'flex',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '50%',
-                      color: '#525257',
-                      textAlign: 'left',
-                      fontSize: 15,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Security+
-                  </div>
-                  <div style={{ width: '50%', textAlign: 'left' }}>
-                    <span style={{ margin: '5px' }} className="in-progress">
-                      Certification Test Scheduled
-                      <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
-                    </span>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    marginLeft: '20px',
-                    paddingLeft: '10px',
-                    marginRight: '20px',
-                    paddingRight: '10px',
-                  }}
-                >
-                  <Divider className="content-divider" />
-                </div>
-                <div
-                  style={{
-                    marginLeft: '20px',
-                    padding: '10px',
-                    flexDirection: 'row',
-                    display: 'flex',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '50%',
-                      color: '#525257',
-                      textAlign: 'left',
-                      fontSize: 15,
-                      fontWeight: 600,
-                    }}
-                  >
-                    AWS Developer
-                  </div>
-                  <div style={{ width: '50%', textAlign: 'left' }}>
-                    <span style={{ margin: '5px' }} className="completed">
-                      Certification Complete
-                      <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
-                    </span>
-                  </div>
-                </div>
+                <Table
+                  className="career-track-management-table"
+                  dataSource={dataSource3}
+                  columns={columns}
+                  size="middle"
+                  pagination={false}
+                  style={{ paddingBottom: 20 }}
+                />
               </div>
             </Row>
           </div>
@@ -742,13 +744,7 @@ class CurrentCareerTrack extends React.Component {
                 background: '#919197',
               }}
             />
-            <Row
-              style={{
-                display: items[1].show ? 'block' : 'none',
-                paddingLeft: '10px',
-                marginLeft: '20px',
-              }}
-            >
+            <Row style={{ display: items[1].show ? 'block' : 'none' }}>
               <div
                 style={{
                   flexGrow: 1,
@@ -763,7 +759,7 @@ class CurrentCareerTrack extends React.Component {
                 }}
               >
                 <p style={{ marginTop: '15px', paddingTop: '5px' }}>
-                  <h3 style={{ color: '#525257' }}>Select another program</h3>
+                  <h3 style={{ color: 'black' }}>Select another program</h3>
                 </p>
                 <AutoComplete
                   style={{ width: 350, marginLeft: '10px', paddingLeft: '5px' }}
@@ -780,13 +776,15 @@ class CurrentCareerTrack extends React.Component {
               <Divider />
               <div
                 style={{
-                  padding: '10px',
-                  margin: '20px',
+                  marginLeft: 20,
+                  paddingLeft: 10,
+                  marginLight: 20,
+                  paddingRight: 10,
                 }}
               >
                 <p
                   style={{
-                    color: '#525257',
+                    color: 'black',
                     fontSize: 16,
                     fontWeight: 600,
                   }}
@@ -799,261 +797,153 @@ class CurrentCareerTrack extends React.Component {
                     fontSize: 15,
                     marginLeft: '20px',
                     paddingLeft: '10px',
+                    marginRight: '20px',
+                    paddingRight: '10px',
                   }}
                 >
-                  Program: {this.state.programValue2 || 'No program selected'}
+                  <span>
+                    <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                    {this.state.programValue || 'No program selected'}
+                  </span>
                 </p>
                 <div
                   style={
                     this.state.programValue2 === 'Department of Defense Space Program'
-                      ? { marginLeft: '10px', paddingLeft: '5px' }
+                      ? {
+                          marginLeft: '20px',
+                          paddingLeft: '10px',
+                          marginRight: '20px',
+                          paddingRight: '10px',
+                        }
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal2}>
-                      Current Open Positions: 4
-                    </a>
-                    <Divider type="vertical" />
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showModal2}>
-                      Current Percentage Complete: 35%
-                    </a>
-                    <Divider type="vertical" />
-                    <span style={{ margin: 10, padding: 5 }}>
-                      Overall Expected Completion Date: 2/1/2020
-                    </span>
-                  </div>
-                </div>
-                <div
-                  style={
-                    this.state.programValue2 === 'AWS Technical Support Program'
-                      ? { marginLeft: '10px', paddingLeft: '5px' }
-                      : { display: 'none' }
-                  }
-                >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal2}>
-                      Current Open Positions: 3
-                    </a>
-                    <Divider type="vertical" />
-                    <a style={{ margin: 10, padding: 5 }} onClick={this.showModal2}>
-                      Current Percentage Complete: 85%
-                    </a>
-                    <Divider type="vertical" />
-                    <span style={{ margin: 10, padding: 5 }}>
-                      Overall Expected Completion Date: 2/1/2020
-                    </span>
-                  </div>
-                </div>
-                <Divider />
-                <div
-                  style={
-                    this.state.programValue2 === 'Department of Defense Space Program'
-                      ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
-                      : { display: 'none' }
-                  }
-                >
-                  <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                    <p style={{ fontSize: 16, fontWeight: 600 }}>Trainings</p>
+                  <div style={{ fontSize: 15 }}>
+                    <Divider className="content-divider" />
                     <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
+                      style={{ marginTop: 10, paddingTop: 5 }}
+                      onClick={this.showPositionsModal2}
                     >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        Programming Level 3 Training
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span className="in-progress">
-                          Training Scheduled
-                          <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Open Positions:
                         </span>
-                      </div>
+                        <span>4</span>
+                      </a>
                     </div>
-                    <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        Database Level 3 Traning
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span className="in-progress">
-                          Training in Progress
-                          <Icon style={{ margin: '5px' }} type="sync" spin />
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Percentage Complete:
                         </span>
-                      </div>
+                        <span>35%</span>
+                      </a>
                     </div>
-                    <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        Advanced Agile Traning
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span className="completed">
-                          Training Complete
-                          <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }}>
+                      <span>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Overall Expected Completion Date:
                         </span>
-                      </div>
-                    </div>
-                    <Divider />
-                    <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
-                    <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        CCISP
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span className="attention">
-                          Certification Recently Shown Interest, Needs Action
-                          <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
-                        </span>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        AWS Developer
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span className="completed">
-                          Certification Complete
-                          <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
-                        </span>
-                      </div>
+                        2/1/2020
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div
                   style={
                     this.state.programValue2 === 'AWS Technical Support Program'
-                      ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
+                      ? {
+                          marginLeft: '20px',
+                          paddingLeft: '10px',
+                          marginRight: '20px',
+                          paddingRight: '10px',
+                        }
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                    <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                  <div style={{ fontSize: 15 }}>
                     <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
+                      style={{ marginTop: 10, paddingTop: 5 }}
+                      onClick={this.showPositionsModal2}
                     >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        Security++
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span style={{ margin: '5px' }} className="in-progress">
-                          Certification Test Scheduled
-                          <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Open Positions:
                         </span>
-                      </div>
+                        <span>3</span>
+                      </a>
                     </div>
-                    <div
-                      style={{
-                        marginLeft: '20px',
-                        padding: '10px',
-                        flexDirection: 'row',
-                        display: 'flex',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '50%',
-                          color: '#525257',
-                          textAlign: 'left',
-                          fontSize: 15,
-                          fontWeight: 600,
-                        }}
-                      >
-                        AWS Developer
-                      </div>
-                      <div style={{ width: '50%', textAlign: 'left' }}>
-                        <span style={{ margin: '5px' }} className="completed">
-                          Certification Complete
-                          <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                      <a>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Current Percentage Complete:
                         </span>
-                      </div>
+                        <span>85%</span>
+                      </a>
+                    </div>
+                    <Divider className="content-divider" />
+                    <div style={{ marginTop: 10, paddingTop: 5 }}>
+                      <span>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>
+                          Overall Expected Completion Date:
+                        </span>
+                        2/1/2020
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-              <Divider />
+              {this.state.programValue2 && <Divider />}
+              <div
+                style={
+                  this.state.programValue2 === 'Department of Defense Space Program'
+                    ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
+                    : { display: 'none' }
+                }
+              >
+                <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Trainings</p>
+                  <Table
+                    className="career-track-management-table"
+                    dataSource={dataSource4}
+                    columns={columns}
+                    size="middle"
+                    pagination={false}
+                    style={{ paddingBottom: 20 }}
+                  />
+                  <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                  <Table
+                    className="career-track-management-table"
+                    dataSource={dataSource5}
+                    columns={columns}
+                    size="middle"
+                    pagination={false}
+                    style={{ paddingBottom: 20 }}
+                  />
+                </div>
+              </div>
+              <div
+                style={
+                  this.state.programValue2 === 'AWS Technical Support Program'
+                    ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
+                    : { display: 'none' }
+                }
+              >
+                <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
+                  <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                  <Table
+                    className="career-track-management-table"
+                    dataSource={dataSource6}
+                    columns={columns}
+                    size="middle"
+                    pagination={false}
+                    style={{ paddingBottom: 20 }}
+                  />
+                </div>
+              </div>
             </Row>
           </div>
         </Card>
