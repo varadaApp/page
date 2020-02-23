@@ -284,13 +284,10 @@ class CareerEnhancement extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <div className="opportunity-image-container">
-            <img
-              className="opportunity-image"
-              src={require('../assets/opportunity-image.png')}
-              alt=""
-            />
+          <div className="screen-header">
+            <h1 className="page-title">Career Enhancement</h1>
           </div>
+          <Divider />
           <Row className="career-enhancement-container" gutter={[8, 8]}>
             <Col xs={12}>
               <h2 style={{ fontSize: '24px', color: 'black' }}>

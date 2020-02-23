@@ -84,19 +84,19 @@ export default {
   routes: [
     {
       path: '/',
-      redirect: '/employee/dashboard',
+      redirect: '/employee/overview',
     },
     {
       path: '/account/program',
-      redirect: '/program/dashboard',
+      redirect: '/program/overview',
     },
     {
       path: '/account/learning',
-      redirect: '/learning/dashboard',
+      redirect: '/learning/overview',
     },
     {
       path: '/account/resource',
-      redirect: '/resource/dashboard',
+      redirect: '/resource/overview',
     },
     {
       path: '/user',
@@ -120,13 +120,13 @@ export default {
           routes: [
             {
               path: '/employee',
-              redirect: '/employee/dashboard',
+              redirect: '/employee/verview',
             },
             {
-              path: '/employee/dashboard',
-              name: 'dashboard',
-              icon: 'dashboard',
-              component: './Dashboard',
+              path: '/employee/overview',
+              name: 'Overview',
+              icon: 'global',
+              component: './Overview',
             },
             {
               path: '/employee/goals',
@@ -136,7 +136,6 @@ export default {
             },
             {
               path: '/employee/profile',
-              name: 'profile',
               icon: 'user',
               component: './Profile',
             },
@@ -223,13 +222,13 @@ export default {
           routes: [
             {
               path: '/program',
-              redirect: '/program/dashboard',
+              redirect: '/program/overview',
             },
             {
-              path: '/program/dashboard',
-              name: 'Program Dashboard',
-              icon: 'dashboard',
-              component: './Program/Dashboard',
+              path: '/program/overview',
+              name: 'Program Overview',
+              icon: 'global',
+              component: './Program/Overview',
             },
             {
               path: '/program/profile',
@@ -351,13 +350,13 @@ export default {
           routes: [
             {
               path: '/learning',
-              redirect: '/learning/dashboard',
+              redirect: '/learning/overview',
             },
             {
-              path: '/learning/dashboard',
-              name: 'ITS Learning Dashboard',
-              icon: 'dashboard',
-              component: './Learning/Dashboard',
+              path: '/learning/overview',
+              name: 'ITS Learning Overview',
+              icon: 'global',
+              component: './Learning/Overview',
             },
             {
               path: '/learning/reporting',
@@ -464,13 +463,13 @@ export default {
           routes: [
             {
               path: '/resource',
-              redirect: '/resource/dashboard',
+              redirect: '/resource/overview',
             },
             {
-              path: '/resource/dashboard',
-              name: 'ITS Resource Dashboard',
-              icon: 'dashboard',
-              component: './Resource/Dashboard',
+              path: '/resource/overview',
+              name: 'ITS Resource Overview',
+              icon: 'global',
+              component: './Resource/Overview',
             },
             {
               path: '/resource/enterpriseReporting',

@@ -1,12 +1,11 @@
+/* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
-import { Card, Typography, Alert, Icon, Form, Button, Input } from 'antd';
+import { Card, Icon, Form, Button, Input, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { makeData, Logo, Tips, trainingData } from '../Utils';
-import matchSorter from 'match-sorter';
 
 // Import React Table
 import ReactTable from 'react-table';
+import { trainingData } from '../Utils';
 import 'react-table/react-table.css';
 
 class Skills extends React.Component {
@@ -17,6 +16,7 @@ class Skills extends React.Component {
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
+
   renderEditable(cellInfo) {
     return (
       <div
@@ -34,11 +34,16 @@ class Skills extends React.Component {
       />
     );
   }
+
   render() {
     const { data } = this.state;
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Skills</h1>
+          </div>
+          <Divider />
           <Form layout="inline">
             <Form.Item>
               <Input style={{ width: 400 }} placeholder="Skill Name" />
@@ -66,7 +71,7 @@ class Skills extends React.Component {
                 sortable: false,
                 filterable: false,
                 width: 100,
-                Cell: row => (
+                Cell: () => (
                   <div>
                     <Button type="primary">Delete</Button>
                   </div>

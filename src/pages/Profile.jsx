@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { Card, Row, Col, Divider, Icon, Form, Upload, message, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -5,15 +6,6 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 12 },
-};
-
-const titleStyle = {
-  fontSize: '32px',
-  color: 'black',
-  fontWeight: 600,
-  lineHeight: '40px',
-  marginBottom: '20px',
-  paddingBottom: '10px',
 };
 
 const labelStyle = {
@@ -105,10 +97,12 @@ const data = [
 export default () => (
   <PageHeaderWrapper>
     <Card>
+      <div className="screen-header">
+        <h1 className="page-title">Your Profile</h1>
+      </div>
       <Row gutter={[8, 8]}>
         <Col xs={1} />
         <Col xs={22}>
-          <h1 style={titleStyle}>Profile details</h1>
           <Divider />
           <Form {...formItemLayout}>
             <Row gutter={[8, 8]}>
@@ -134,7 +128,7 @@ export default () => (
                 <div style={{ width: '100%' }}>
                   <img
                     style={{ width: '100%' }}
-                    src="https://cdn.dribbble.com/users/79571/screenshots/4407347/swingvy_all_illustrations.png"
+                    src={require('../assets/profile-side.png')}
                     alt=""
                   />
                 </div>

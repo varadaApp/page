@@ -1,7 +1,7 @@
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable max-len */
 import React from 'react';
-import { Card, Icon, Row, Col, AutoComplete, Button, Modal, Checkbox } from 'antd';
+import { Card, Icon, Row, Col, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { positionSearchData } from './Utils';
@@ -277,6 +277,10 @@ class PositionSearch extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Open Positions</h1>
+          </div>
+          <Divider />
           <Row gutter={[4, 4]}>
             <Col style={{ paddingRight: '5px' }} xs={4}>
               <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>

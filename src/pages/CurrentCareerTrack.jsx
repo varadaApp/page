@@ -351,8 +351,11 @@ class CurrentCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card className="current-career-track-main-container">
-          <div style={{ fontSize: '27px', color: 'black', fontWeight: 600 }}>
-            Sidney&apos;s Career Track
+          <div
+            className="screen-header"
+            style={{ fontSize: '27px', color: 'black', fontWeight: 600 }}
+          >
+            <h1 className="page-title">Sidney&apos;s Career Track</h1>
           </div>
           <Divider />
           <Row style={{ margin: '20px', padding: '10px' }}>

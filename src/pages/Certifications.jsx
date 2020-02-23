@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Row, Col } from 'antd';
+import { Card, Icon, Row, Col, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { certData } from './Utils';
 
@@ -39,6 +39,10 @@ class Certifications extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Your Certifications</h1>
+          </div>
+          <Divider />
           <Row gutter={[8, 8]}>
             <Col xs={16}>
               <div className="skills-item-container">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, AutoComplete, Button, Col, Row, Modal, Checkbox } from 'antd';
+import { Card, Icon, AutoComplete, Button, Col, Row, Modal, Checkbox, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { careerTrackData } from './Utils';
@@ -286,6 +286,10 @@ class CareerTrackSearch extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Career Track Search</h1>
+          </div>
+          <Divider />
           <Row gutter={[4, 4]}>
             <Col style={{ paddingRight: '5px' }} xs={4}>
               <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>

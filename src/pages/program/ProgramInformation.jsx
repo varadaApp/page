@@ -567,7 +567,9 @@ class ProgramInformation extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card style={{ margin: '20px', padding: '10px' }}>
-          <p style={programTitleStyle}>Department of Defense Space Program</p>
+          <div className="screen-header">
+            <h1 className="page-title">Department of Defense Space Program</h1>
+          </div>
           <Divider />
           <Row gutter={[8, 8]} style={{ margin: '20px', padding: '10px' }}>
             <Col className="program-info-careertract-container" xs={16} span={18}>

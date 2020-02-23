@@ -22,11 +22,6 @@ import 'react-table/react-table.css';
 
 const EditableContext = React.createContext();
 
-const programTitleStyle = {
-  fontSize: '32px',
-  color: 'black',
-};
-
 const employeeHeaderStyle = {
   margin: '10px',
   padding: '5px',
@@ -444,7 +439,10 @@ class ProgramInformation extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card style={{ margin: '20px', padding: '10px' }}>
-          <p style={programTitleStyle}>Department of Defense Space Program</p>
+          <div className="screen-header">
+            <h1 className="page-title">Department of Defense Space Program</h1>
+          </div>
+          <Divider />
           <Divider />
           <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={12}>

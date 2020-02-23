@@ -329,6 +329,10 @@ class CareerManagement extends React.Component {
         <Row gutter={[8, 8]}>
           <Col xs={16}>
             <Card>
+              <div className="screen-header">
+                <h1 className="page-title">Your Career Management</h1>
+              </div>
+              <Divider />
               <div className="career-management-item-container">
                 <img
                   className="career-management-icon"

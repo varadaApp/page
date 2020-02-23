@@ -20,7 +20,6 @@ class AvatarDropdown extends React.Component {
 
       return;
     }
-
     if (key === 'program') {
       router.push('program');
     }
@@ -31,6 +30,10 @@ class AvatarDropdown extends React.Component {
       router.push('resource');
     }
     router.push(`/account/${key}`);
+
+    if (key === 'profile') {
+      router.push('/employee/profile');
+    }
   };
 
   render() {
@@ -56,6 +59,11 @@ class AvatarDropdown extends React.Component {
           </Menu.Item>
         )}
         {menu && <Menu.Divider />}
+
+        <Menu.Item className={styles.menuItem} key="profile">
+          <Icon type="profile" />
+          <FormattedMessage id="menu.profile" defaultMessage="profile" />
+        </Menu.Item>
 
         <Menu.Item className={styles.menuItem} key="program">
           <Icon type="control" />

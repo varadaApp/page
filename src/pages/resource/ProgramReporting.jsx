@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Table } from 'antd';
+import { Card, Icon, Table, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Chart, Axis, Coord, Geom, Guide, Shape } from 'bizcharts';
@@ -222,6 +222,10 @@ class ProgramReporting extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Reporting</h1>
+          </div>
+          <Divider />
           {/* <Gauge title="January 2020 Attrition %" height={200} percent={3} /> */}
           <Chart
             height={window.innerHeight * 0.5}

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Icon, Table, Button } from 'antd';
+import { Card, Icon, Table, Button, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Shape } from 'bizcharts';
@@ -202,7 +202,11 @@ class Reporting extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <p className="attrition-report-label">Monthly Attrition Report - 2019</p>
+          <div className="screen-header">
+            <h1 className="page-title">Monthly Attrition Report</h1>
+          </div>
+          <Divider />
+          <p className="attrition-report-label">Months of 2019</p>
           <div className="attrition-report-table-header">
             <div />
             <div>

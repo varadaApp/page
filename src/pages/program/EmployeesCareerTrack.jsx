@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Modal, Steps } from 'antd';
+import { Card, Icon, Modal, Steps, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { employeesWithSelectedCareerTrackData } from '../Utils';
@@ -51,6 +51,10 @@ class EmployeesCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Employee Career Track</h1>
+          </div>
+          <Divider />
           <ReactTable
             data={data}
             // eslint-disable-next-line no-shadow

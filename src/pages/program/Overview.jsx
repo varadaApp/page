@@ -26,7 +26,7 @@ const hour = new Date().getHours();
 
 const greeting = `Good ${(hour < 12 && 'morning') || (hour < 18 && 'afternoon') || 'evening'}`;
 const greetingIcon = (hour < 12 && morningIcon) || (hour < 18 && afternoonIcon) || eveningIcon;
-class Dashboard extends React.Component {
+class Overview extends React.Component {
   state = { visible: false };
 
   showDrawer = () => {
@@ -233,4 +233,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default connect(() => ({}))(Form.create()(Dashboard));
+export default connect(() => ({}))(Form.create()(Overview));

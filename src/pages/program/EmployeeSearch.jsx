@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Icon, AutoComplete, Button, Modal, Checkbox } from 'antd';
+import { Card, Row, Col, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { employeeSearch } from '../Utils';
@@ -296,6 +296,10 @@ class EmployeeSearch extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Employee Search</h1>
+          </div>
+          <Divider />
           <Row gutter={[4, 4]}>
             <Col style={{ paddingRight: '5px' }} xs={4}>
               <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>

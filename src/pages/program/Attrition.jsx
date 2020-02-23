@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Col, Row, Icon, Table, Button, Select, DatePicker } from 'antd';
+import { Card, Col, Row, Icon, Table, Button, Select, DatePicker, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Shape } from 'bizcharts';
@@ -211,6 +211,10 @@ class Reporting extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Attrition Report</h1>
+          </div>
+          <Divider />
           <Row gutter={[8, 8]}>
             <Col xs={4}>
               <div className="attrition-header-filter-container">
@@ -326,7 +330,6 @@ class Reporting extends React.Component {
               </div>
             </Col>
             <Col xs={20}>
-              <p className="attrition-report-label">Attrition Report</p>
               <div className="attrition-report-table-header">
                 <div />
                 <div>

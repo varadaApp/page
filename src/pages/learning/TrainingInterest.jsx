@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Icon, Table, Button, Select, DatePicker, Row, Col } from 'antd';
+import { Card, Icon, Table, Button, Select, DatePicker, Row, Col, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Shape } from 'bizcharts';
@@ -211,6 +211,10 @@ class TrainingInterest extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Training Interest Report</h1>
+          </div>
+          <Divider />
           <Row gutter={[8, 8]}>
             <Col xs={4}>
               <div className="mobility-header-filter-container">
@@ -386,7 +390,6 @@ class TrainingInterest extends React.Component {
               </div>
             </Col>
             <Col xs={20}>
-              <p className="mobility-report-label">Training Interest Report</p>
               <div className="mobility-report-table-header">
                 <div />
                 <div>

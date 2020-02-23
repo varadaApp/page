@@ -1,12 +1,9 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Typography, Alert, Icon } from 'antd';
+import { Card, Alert, Icon, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import { makeData, Logo, Tips, trainingData } from './Utils';
-import matchSorter from 'match-sorter';
+import { trainingData } from './Utils';
 
-// Import React Table
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 class Strategic extends React.Component {
@@ -18,10 +15,13 @@ class Strategic extends React.Component {
   }
 
   render() {
-    const { data } = this.state;
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Your Strategic Practice Areas</h1>
+          </div>
+          <Divider />
           <Alert
             message="Articles. Business Development. Mentorship. Market Capture."
             type="success"

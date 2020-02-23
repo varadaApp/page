@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Card, Row, Col, Icon } from 'antd';
+import { Card, Row, Col, Icon, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 // Import React Table
@@ -41,6 +41,10 @@ class Skills extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Your Skills</h1>
+          </div>
+          <Divider />
           <Row gutter={[8, 8]}>
             <Col xs={16}>
               <div className="skills-item-container">
