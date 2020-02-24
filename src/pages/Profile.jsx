@@ -13,6 +13,8 @@ const labelStyle = {
   color: 'black',
   fontWeight: 500,
   letterSpacing: '0.5px',
+  backgroundColor: '#dfdaeb',
+  padding: '3px 0px 3px 20px',
 };
 
 const valueStyle = {
@@ -101,12 +103,11 @@ export default () => (
         <h1 className="page-title">Your Profile</h1>
       </div>
       <Row gutter={[8, 8]}>
-        <Col xs={1} />
-        <Col xs={22}>
+        <Col>
           <Divider />
           <Form {...formItemLayout}>
             <Row gutter={[8, 8]}>
-              <Col xs={16}>
+              <Col xs={15}>
                 {data.map(d => (
                   <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
                     <p style={labelStyle}>{d.label}</p>
@@ -124,6 +125,7 @@ export default () => (
                   </Form.Item>
                 ))}
               </Col>
+              <Col xs={1} />
               <Col xs={8}>
                 <div style={{ width: '100%' }}>
                   <img
@@ -157,7 +159,6 @@ export default () => (
             We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
           </p>
         </Col>
-        <Col xs={1} />
       </Row>
     </Card>
   </PageHeaderWrapper>

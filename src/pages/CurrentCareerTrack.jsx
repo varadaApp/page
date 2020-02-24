@@ -540,15 +540,7 @@ class CurrentCareerTrack extends React.Component {
                   paddingRight: '10px',
                 }}
               >
-                <p
-                  style={{
-                    color: 'black',
-                    fontSize: 16,
-                    fontWeight: 600,
-                  }}
-                >
-                  Network Engineer Tier
-                </p>
+                <p className="row-title">Network Engineer Tier</p>
                 <p
                   style={{
                     color: '#525257',
@@ -663,7 +655,7 @@ class CurrentCareerTrack extends React.Component {
                     : { display: 'none' }
                 }
               >
-                <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Trainings</p>
+                <p className="row-title">Trainings</p>
                 <Table
                   className="career-track-management-table"
                   dataSource={dataSource1}
@@ -672,7 +664,7 @@ class CurrentCareerTrack extends React.Component {
                   pagination={false}
                   style={{ paddingBottom: 20 }}
                 />
-                <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                <p className="row-title">Certifications</p>
                 <Table
                   className="career-track-management-table"
                   dataSource={dataSource2}
@@ -695,7 +687,7 @@ class CurrentCareerTrack extends React.Component {
                     : { display: 'none' }
                 }
               >
-                <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                <p className="row-title">Certifications</p>
                 <Table
                   className="career-track-management-table"
                   dataSource={dataSource3}
@@ -785,15 +777,7 @@ class CurrentCareerTrack extends React.Component {
                   paddingRight: 10,
                 }}
               >
-                <p
-                  style={{
-                    color: 'black',
-                    fontSize: 16,
-                    fontWeight: 600,
-                  }}
-                >
-                  Software Developer Level 3
-                </p>
+                <p className="row-title">Software Developer Level 3</p>
                 <p
                   style={{
                     color: '#525257',
@@ -908,7 +892,7 @@ class CurrentCareerTrack extends React.Component {
                 }
               >
                 <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Trainings</p>
+                  <p className="row-title">Trainings</p>
                   <Table
                     className="career-track-management-table"
                     dataSource={dataSource4}
@@ -917,7 +901,7 @@ class CurrentCareerTrack extends React.Component {
                     pagination={false}
                     style={{ paddingBottom: 20 }}
                   />
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                  <p className="row-title">Certifications</p>
                   <Table
                     className="career-track-management-table"
                     dataSource={dataSource5}
@@ -936,7 +920,7 @@ class CurrentCareerTrack extends React.Component {
                 }
               >
                 <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                  <p style={{ fontSize: 16, fontWeight: 600, color: 'black' }}>Certifications</p>
+                  <p className="row-title">Certifications</p>
                   <Table
                     className="career-track-management-table"
                     dataSource={dataSource6}

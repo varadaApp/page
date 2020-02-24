@@ -47,8 +47,6 @@ const headerContentContainerStyle = {
 
 const newGoalContainerStyle = {
   backgroundColor: '#f0f2f5',
-  margin: '20px',
-  padding: '10px',
   marginTop: '32px',
 };
 
@@ -99,34 +97,36 @@ class Goals extends React.Component {
                     alt=""
                   />
                 </div>
-                <p style={newGoalHeaderStyle}>Set a new goal</p>
-                <Form layout="vertical" hideRequiredMark>
-                  <Row gutter={16}>
-                    <Col span={24}>
-                      <Form.Item label="Your New Goal:">
-                        <Input.TextArea rows={5} placeholder="Set a New Goal for Yourself!" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                </Form>
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    bottom: 0,
-                    width: '100%',
-                    borderTop: '1px solid #e9e9e9',
-                    padding: '10px 16px',
-                    background: '#fff',
-                    textAlign: 'right',
-                  }}
-                >
-                  <Button onClick={this.onClose} style={{ marginRight: 8 }}>
-                    Cancel
-                  </Button>
-                  <Button onClick={this.onClose} type="primary">
-                    Submit
-                  </Button>
+                <div className="goals-right-container">
+                  <p style={newGoalHeaderStyle}>Set a new goal</p>
+                  <Form layout="vertical" hideRequiredMark>
+                    <Row gutter={16}>
+                      <Col span={24}>
+                        <Form.Item label="Your New Goal:">
+                          <Input.TextArea rows={5} placeholder="Set a New Goal for Yourself!" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </Form>
+                  <div
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      bottom: 0,
+                      width: '100%',
+                      borderTop: '1px solid #e9e9e9',
+                      padding: '10px 16px',
+                      background: '#fff',
+                      textAlign: 'right',
+                    }}
+                  >
+                    <Button onClick={this.onClose} style={{ marginRight: 8 }}>
+                      Cancel
+                    </Button>
+                    <Button onClick={this.onClose} type="primary">
+                      Submit
+                    </Button>
+                  </div>
                 </div>
               </div>
             </Col>

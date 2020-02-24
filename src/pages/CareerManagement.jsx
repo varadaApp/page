@@ -23,9 +23,10 @@ const careerMessageContentStyle = {
 
 const careerMessageContainerStyle = {
   padding: '20px',
-  backgroundColor: '#fff',
   marginBottom: '20px',
-  borderColor: '#919197 !important',
+  borderRadius: '5px',
+  backgroundColor: '#f0f2f5',
+  borderColor: '#dcdcdc !important',
   borderWidth: '1px',
 };
 
@@ -327,12 +328,12 @@ class CareerManagement extends React.Component {
     return (
       <PageHeaderWrapper>
         <Row gutter={[8, 8]}>
-          <Col xs={16}>
-            <Card>
-              <div className="screen-header">
-                <h1 className="page-title">Your Career Management</h1>
-              </div>
-              <Divider />
+          <Card>
+            <div className="screen-header">
+              <h1 className="page-title">Your Career Management</h1>
+            </div>
+            <Divider />
+            <Col xs={15}>
               <div className="career-management-item-container">
                 <img
                   className="career-management-icon"
@@ -429,46 +430,47 @@ class CareerManagement extends React.Component {
               >
                 We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
               </p>
-            </Card>
-          </Col>
-          <Col xs={8}>
-            <div style={{ width: '100%' }}>
-              <img
-                style={{ width: '100%', height: 320 }}
-                src={require('../assets/person-with-pc.png')}
-                alt=""
-              />
-            </div>
-            <div style={careerMessageContainerStyle}>
-              <p style={careerMessageHeaderStyle}>Career Management</p>
-              <p style={careerMessageContentStyle}>
-                It is a continuing process that allows you to adapt to the changing demands of our
-                dynamic economy. The career management process embraces various concepts:
-                Self-awareness, career development planning/career exploration, life-long learning,
-                and networking.
-              </p>
-            </div>
-            <div style={{ width: '100%' }}>
-              <img
-                style={{ width: '100%' }}
-                src="https://cdn.dribbble.com/users/79571/screenshots/4407347/swingvy_all_illustrations.png"
-                alt=""
-              />
-            </div>
-            <div style={careerMessageContainerStyle}>
-              <p style={careerMessageHeaderStyle}>Your profile document</p>
-              <p style={careerMessageContentStyle}>
-                Depending on your industry and the type of job you are interested, a resume can be a
-                great way to highlight your skills and experience in a manner that is more visually
-                appealing and engaging.
-              </p>
-              <Upload {...props}>
-                <Button type="primary">
-                  <Icon type="upload" /> Click to Upload Resume
-                </Button>
-              </Upload>
-            </div>
-          </Col>
+            </Col>
+            <Col xs={1} />
+            <Col xs={8}>
+              <div style={{ width: '100%' }}>
+                <img
+                  style={{ width: '100%', height: 320 }}
+                  src={require('../assets/person-with-pc.png')}
+                  alt=""
+                />
+              </div>
+              <div style={careerMessageContainerStyle}>
+                <p style={careerMessageHeaderStyle}>Career Management</p>
+                <p style={careerMessageContentStyle}>
+                  It is a continuing process that allows you to adapt to the changing demands of our
+                  dynamic economy. The career management process embraces various concepts: learning
+                  Self-awareness, career development planning/career exploration, life-long ,and
+                  networking.
+                </p>
+              </div>
+              <div style={{ width: '100%' }}>
+                <img
+                  style={{ width: '100%' }}
+                  src="https://cdn.dribbble.com/users/79571/screenshots/4407347/swingvy_all_illustrations.png"
+                  alt=""
+                />
+              </div>
+              <div style={careerMessageContainerStyle}>
+                <p style={careerMessageHeaderStyle}>Your profile document</p>
+                <p style={careerMessageContentStyle}>
+                  Depending on your industry and the type of job you are interested, a resume can be
+                  a great way to highlight your skills and experience in a manner that is more
+                  visually appealing and engaging.
+                </p>
+                <Upload {...props}>
+                  <Button type="primary">
+                    <Icon type="upload" /> Click to Upload Resume
+                  </Button>
+                </Upload>
+              </div>
+            </Col>
+          </Card>
         </Row>
         <Modal
           visible={skillsVisible}
