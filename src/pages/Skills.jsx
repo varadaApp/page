@@ -17,13 +17,13 @@ const careerMessageContainerStyle = {
 };
 
 const careerMessageHeaderStyle = {
-  fontSize: '21px',
+  fontSize: '19px',
   color: 'black',
   fontWeight: 600,
 };
 
 const careerMessageContentStyle = {
-  fontSize: '16px',
+  fontSize: '14px',
   marginBottom: '10px',
   color: '#525257 ',
 };

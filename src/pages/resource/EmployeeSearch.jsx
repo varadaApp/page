@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
+import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { employeeSearch } from '../Utils';
@@ -101,7 +101,7 @@ class EmployeeSearch extends React.Component {
 
   render() {
     const { data } = this.state;
-    const styleHide = this.state.hideTable ? { display: 'none' } : {};
+    const styleHide = this.state.hideTable ? { display: 'none' } : { width: '100%' };
     const NoDataComponent = () => <div className="rt-noData">No rows found</div>;
     const dataSourceProgram = [
       'AWS Technical Support Program',
@@ -175,142 +175,138 @@ class EmployeeSearch extends React.Component {
             <h1 className="page-title">Employee Serach</h1>
           </div>
           <Divider />
-          <Row gutter={[4, 4]}>
-            <Col style={{ paddingRight: '5px' }} xs={4}>
-              <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>
-                <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
-                <AutoComplete
-                  style={autoCompleteStyle}
-                  // allowClear={true}
-                  dataSource={dataSourceProgram}
-                  placeholder="Program"
-                  onChange={this.handleProgramSearch}
-                  value={this.state.programValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  style={autoCompleteStyle}
-                  // allowClear={true}
-                  dataSource={dataSourceLocation}
-                  placeholder="Location"
-                  onChange={this.handleLocationSearch}
-                  value={this.state.locationValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  style={autoCompleteStyle}
-                  // allowClear={true}
-                  dataSource={dataSourceCertification}
-                  placeholder="Certification"
-                  onChange={this.handleCertificationSearch}
-                  value={this.state.certificationValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  style={autoCompleteStyle}
-                  // allowClear={true}
-                  dataSource={dataSourceClearance}
-                  placeholder="Clearance"
-                  onChange={this.handleClearanceSearch}
-                  value={this.state.clearanceValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  style={autoCompleteStyle}
-                  // allowClear={true}
-                  dataSource={dataSourceCareerTrack}
-                  placeholder="Career Track"
-                  onChange={this.handleCareerTrackSearch}
-                  value={this.state.careerTrackValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <div style={{ float: 'right' }}>
-                  <Button style={{ width: '100px' }} onClick={this.handleClear}>
-                    Clear
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col xs={20}>
-              <ReactTable
-                data={data}
-                resolveData={d => d.map(row => row)}
-                // filterable
-                style={styleHide}
-                defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-                // noDataText={!this.state.loading ? 'No rows found' : ''}
-                NoDataComponent={NoDataComponent}
-                getTdProps={() => ({
-                  onClick: (e, handleOriginal) => {
-                    if (handleOriginal) {
-                      handleOriginal();
-                    }
-                  },
-                })}
-                getTrProps={(state, rowInfo) => ({
-                  onClick: (e, handleOriginal) => {
-                    this.showRow(rowInfo.original);
-                    if (handleOriginal) {
-                      handleOriginal();
-                    }
-                  },
-                })}
-                columns={[
-                  {
-                    Header: 'Employee Information',
-                    columns: [
-                      {
-                        Header: 'Employee',
-                        accessor: 'employeeName',
-                      },
-                      {
-                        Header: 'Clearance',
-                        accessor: 'clearanceLevel',
-                      },
-                      {
-                        Header: 'Career Track',
-                        accessor: 'careerTrackName',
-                      },
-                    ],
-                  },
-                  {
-                    Header: 'Program Information',
-                    columns: [
-                      {
-                        Header: 'Program',
-                        accessor: 'programName',
-                      },
-
-                      {
-                        Header: 'Location',
-                        accessor: 'locationName',
-                      },
-                      {
-                        Header: 'Program Manager',
-                        accessor: 'programManagerName',
-                      },
-                    ],
-                  },
-                ]}
-                defaultPageSize={10}
-                className="-striped -highlight"
+          <div className="mobility-header-filter-container">
+            <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
+            <div style={{ display: 'flex' }}>
+              <AutoComplete
+                style={autoCompleteStyle}
+                // allowClear={true}
+                dataSource={dataSourceProgram}
+                placeholder="Program"
+                onChange={this.handleProgramSearch}
+                value={this.state.programValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
               />
-            </Col>
-          </Row>
+              <br />
+              <AutoComplete
+                style={autoCompleteStyle}
+                // allowClear={true}
+                dataSource={dataSourceLocation}
+                placeholder="Location"
+                onChange={this.handleLocationSearch}
+                value={this.state.locationValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <br />
+              <AutoComplete
+                style={autoCompleteStyle}
+                // allowClear={true}
+                dataSource={dataSourceCertification}
+                placeholder="Certification"
+                onChange={this.handleCertificationSearch}
+                value={this.state.certificationValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <br />
+              <AutoComplete
+                style={autoCompleteStyle}
+                // allowClear={true}
+                dataSource={dataSourceClearance}
+                placeholder="Clearance"
+                onChange={this.handleClearanceSearch}
+                value={this.state.clearanceValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <br />
+              <AutoComplete
+                style={autoCompleteStyle}
+                // allowClear={true}
+                dataSource={dataSourceCareerTrack}
+                placeholder="Career Track"
+                onChange={this.handleCareerTrackSearch}
+                value={this.state.careerTrackValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+            </div>
+            <div style={{ margin: '10px', float: 'right' }}>
+              <Button style={{ width: '100px' }} onClick={this.handleClear}>
+                Clear
+              </Button>
+            </div>
+          </div>
+          <ReactTable
+            data={data}
+            resolveData={d => d.map(row => row)}
+            // filterable
+            style={styleHide}
+            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+            // noDataText={!this.state.loading ? 'No rows found' : ''}
+            NoDataComponent={NoDataComponent}
+            getTdProps={() => ({
+              onClick: (e, handleOriginal) => {
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            getTrProps={(state, rowInfo) => ({
+              onClick: (e, handleOriginal) => {
+                this.showRow(rowInfo.original);
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            columns={[
+              {
+                Header: 'Employee Information',
+                columns: [
+                  {
+                    Header: 'Employee',
+                    accessor: 'employeeName',
+                  },
+                  {
+                    Header: 'Clearance',
+                    accessor: 'clearanceLevel',
+                  },
+                  {
+                    Header: 'Career Track',
+                    accessor: 'careerTrackName',
+                  },
+                ],
+              },
+              {
+                Header: 'Program Information',
+                columns: [
+                  {
+                    Header: 'Program',
+                    accessor: 'programName',
+                  },
+
+                  {
+                    Header: 'Location',
+                    accessor: 'locationName',
+                  },
+                  {
+                    Header: 'Program Manager',
+                    accessor: 'programManagerName',
+                  },
+                ],
+              },
+            ]}
+            defaultPageSize={10}
+            className="-striped -highlight"
+          />
           <p
             style={{
               textAlign: 'center',

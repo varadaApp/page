@@ -10,7 +10,7 @@ const tableContainerStyle = {
 };
 
 const tableTitleStyle = {
-  fontSize: '32px',
+  fontSize: '30px',
   color: 'black',
   fontWeight: 600,
 };
@@ -247,7 +247,7 @@ class ProgramReporting extends React.Component {
               label={{
                 offset: -16,
                 textStyle: {
-                  fontSize: 18,
+                  fontSize: 16,
                   textAlign: 'center',
                   textBaseline: 'middle',
                 },
@@ -287,7 +287,7 @@ class ProgramReporting extends React.Component {
               <Html
                 position={['50%', '95%']}
                 html={() =>
-                  `<div style="width: 100px;text-align: center;font-size: 7px!important;"><p style="font-size: 16px; color: #6c6c72;margin: 0;">January 2020 Atrittion %</p><p style="font-size: 32px;color: #1c1c1c;margin: 0;">${data[0]
+                  `<div style="width: 100px;text-align: center;font-size: 7px!important;"><p style="font-size: 14px; color: #6c6c72;margin: 0;">January 2020 Atrittion %</p><p style="font-size: 30px;color: #1c1c1c;margin: 0;">${data[0]
                     .value * 10}%</p></div>`
                 }
               />

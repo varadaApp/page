@@ -89,7 +89,7 @@ class Overview extends React.Component {
           <Typography
             style={{
               fontWeight: 600,
-              fontSize: '33px',
+              fontSize: '31px',
               letterSpacing: '0.1px',
               color: 'black',
               textAlign: 'center',
@@ -111,7 +111,7 @@ class Overview extends React.Component {
           >
             <Typography
               style={{
-                fontSize: '30px',
+                fontSize: '28px',
                 color: 'black',
                 borderWidth: '0px',
               }}
@@ -121,14 +121,14 @@ class Overview extends React.Component {
             <div>
               <div style={{ padding: 10 }}>
                 <Checkbox>
-                  <span style={{ fontSize: 18, color: 'black' }}>
+                  <span style={{ fontSize: 16, color: 'black' }}>
                     Interested in Growth (ie. New Certification and/or Training)
                   </span>
                 </Checkbox>
               </div>
               <div style={{ padding: 10 }}>
                 <Checkbox>
-                  <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                  <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
                     Losing Coverage:
                   </span>
                   <DatePicker size="small" format="DD/MM/YYYY" />
@@ -136,7 +136,7 @@ class Overview extends React.Component {
               </div>
               <div style={{ padding: 10 }}>
                 <Checkbox>
-                  <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                  <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
                     Location Change:
                   </span>
                   <Select

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Icon, Table, Button, Select, DatePicker, Row, Col, Divider } from 'antd';
+import { Card, Icon, Table, Button, Select, DatePicker, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Shape } from 'bizcharts';
@@ -215,89 +215,106 @@ class ClearanceInventory extends React.Component {
             <h1 className="page-title">Clearance Inventory Report</h1>
           </div>
           <Divider />
-          <Row gutter={[8, 8]}>
-            <Col xs={4}>
-              <div className="mobility-header-filter-container">
+          <div className="mobility-header-filter-container">
+            <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
+            <div style={{ display: 'flex' }}>
+              <div className="mobility-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Clearance"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">DOJ SUITABILITY</Option>
+                  <Option value="2">DOJ SUITABILITY/ TS</Option>
+                  <Option value="3">EOD SUITABILITY</Option>
+                  <Option value="4">EOD SUITABILITY / SECRET</Option>
+                  <Option value="5">EOD SUITABILITY / TS</Option>
+                  <Option value="6">EOD SUITABILITY / TS/SCI</Option>
+                  <Option value="7">INTERIM SECRET</Option>
+                  <Option value="8">INTERIM TOP SECRET</Option>
+                  <Option value="9">NO-CLRNC</Option>
+                  <Option value="10">PUBLIC TRUST</Option>
+                  <Option value="11">SECRET</Option>
+                  <Option value="12">TOP SECRET</Option>
+                  <Option value="13">TS</Option>
+                  <Option value="14">TS/SCI</Option>
+                  <Option value="15">TS/SCI CI POLY</Option>
+                  <Option value="16">TS/SCI FSP</Option>
+                  <Option value="17">UNCLASSIFIED</Option>
+                </Select>
+              </div>
+              <div className="mobility-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Division"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">Division 1</Option>
+                  <Option value="2">Division 2</Option>
+                  <Option value="3">Division 3</Option>
+                </Select>
+              </div>
+              <div className="mobility-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Program"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">AWS Technical Support Program</Option>
+                  <Option value="2">DoD Space Program</Option>
+                  <Option value="3">DHS Satellite Network</Option>
+                  <Option value="4">DoJ Networks</Option>
+                  <Option value="5">DoS Nuclear Defense System</Option>
+                  <Option value="6">FBI Case Management System</Option>
+                </Select>
+              </div>
+              <div className="mobility-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Group"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="0">Career Track</Option>
+                </Select>
+              </div>
+              <div className="mobility-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Date Range"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                  onSelect={this.handleDateRangeSelect}
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">Annually</Option>
+                  <Option value="2">Monthly</Option>
+                  <Option value="3">Quarter</Option>
+                  <Option value="4">Custom Date Range</Option>
+                </Select>
+              </div>
+              {selectedDateRange === '1' && (
                 <div className="mobility-row">
-                  <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
                   <Select
                     showSearch
-                    placeholder="Select a Clearance"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">DOJ SUITABILITY</Option>
-                    <Option value="2">DOJ SUITABILITY/ TS</Option>
-                    <Option value="3">EOD SUITABILITY</Option>
-                    <Option value="4">EOD SUITABILITY / SECRET</Option>
-                    <Option value="5">EOD SUITABILITY / TS</Option>
-                    <Option value="6">EOD SUITABILITY / TS/SCI</Option>
-                    <Option value="7">INTERIM SECRET</Option>
-                    <Option value="8">INTERIM TOP SECRET</Option>
-                    <Option value="9">NO-CLRNC</Option>
-                    <Option value="10">PUBLIC TRUST</Option>
-                    <Option value="11">SECRET</Option>
-                    <Option value="12">TOP SECRET</Option>
-                    <Option value="13">TS</Option>
-                    <Option value="14">TS/SCI</Option>
-                    <Option value="15">TS/SCI CI POLY</Option>
-                    <Option value="16">TS/SCI FSP</Option>
-                    <Option value="17">UNCLASSIFIED</Option>
-                  </Select>
-                </div>
-                <div className="mobility-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Division"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">Division 1</Option>
-                    <Option value="2">Division 2</Option>
-                    <Option value="3">Division 3</Option>
-                  </Select>
-                </div>
-                <div className="mobility-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Program"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">AWS Technical Support Program</Option>
-                    <Option value="2">DoD Space Program</Option>
-                    <Option value="3">DHS Satellite Network</Option>
-                    <Option value="4">DoJ Networks</Option>
-                    <Option value="5">DoS Nuclear Defense System</Option>
-                    <Option value="6">FBI Case Management System</Option>
-                  </Select>
-                </div>
-                <div className="mobility-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Group"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="0">Career Track</Option>
-                  </Select>
-                </div>
-                <div className="mobility-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Date Range"
+                    placeholder="Select a Year"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
                       option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -305,86 +322,65 @@ class ClearanceInventory extends React.Component {
                     onSelect={this.handleDateRangeSelect}
                   >
                     <Option value="0">&nbsp;</Option>
-                    <Option value="1">Annually</Option>
-                    <Option value="2">Monthly</Option>
-                    <Option value="3">Quarter</Option>
-                    <Option value="4">Custom Date Range</Option>
+                    <Option value="1">2020</Option>
+                    <Option value="2">2019</Option>
+                    <Option value="3">2018</Option>
+                    <Option value="4">2017</Option>
                   </Select>
                 </div>
-                {selectedDateRange === '1' && (
-                  <div className="mobility-row">
-                    <Select
-                      showSearch
-                      placeholder="Select a Year"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                      onSelect={this.handleDateRangeSelect}
-                    >
-                      <Option value="0">&nbsp;</Option>
-                      <Option value="1">2020</Option>
-                      <Option value="2">2019</Option>
-                      <Option value="3">2018</Option>
-                      <Option value="4">2017</Option>
-                    </Select>
-                  </div>
-                )}
-                {selectedDateRange === '2' && (
-                  <div className="mobility-row">
-                    <MonthPicker placeholder="Select month" />
-                  </div>
-                )}
-                {selectedDateRange === '3' && (
-                  <div className="mobility-row">
-                    <Select
-                      showSearch
-                      placeholder="Select a Quarter"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                      onSelect={this.handleDateRangeSelect}
-                    >
-                      <Option value="0">&nbsp;</Option>
-                      <Option value="1">1st Quarter</Option>
-                      <Option value="2">2nd Quarter</Option>
-                      <Option value="3">3rd Quarter</Option>
-                      <Option value="4">4th Quarter</Option>
-                    </Select>
-                  </div>
-                )}
-                {selectedDateRange === '4' && (
-                  <div className="mobility-row">
-                    <RangePicker />
-                  </div>
-                )}
-                <div style={{ float: 'right', marginTop: 10 }}>
-                  <Button onClick={this.handleClear}>Run Report</Button>
+              )}
+              {selectedDateRange === '2' && (
+                <div className="mobility-row">
+                  <MonthPicker placeholder="Select month" />
                 </div>
-              </div>
-            </Col>
-            <Col xs={20}>
-              <div className="mobility-report-table-header">
-                <div />
-                <div>
-                  <Button className="table-action-button" type="primary" size="small">
-                    Export to CSV
-                  </Button>
-                  <Button className="table-action-button" type="primary" size="small">
-                    Export to PDF
-                  </Button>
+              )}
+              {selectedDateRange === '3' && (
+                <div className="mobility-row">
+                  <Select
+                    showSearch
+                    placeholder="Select a Quarter"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    onSelect={this.handleDateRangeSelect}
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    <Option value="1">1st Quarter</Option>
+                    <Option value="2">2nd Quarter</Option>
+                    <Option value="3">3rd Quarter</Option>
+                    <Option value="4">4th Quarter</Option>
+                  </Select>
                 </div>
-              </div>
-              <Table
-                dataSource={dataSource}
-                columns={columns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-            </Col>
-          </Row>
+              )}
+              {selectedDateRange === '4' && (
+                <div className="mobility-row">
+                  <RangePicker />
+                </div>
+              )}
+            </div>
+            <div style={{ float: 'right', marginTop: 10 }}>
+              <Button onClick={this.handleClear}>Run Report</Button>
+            </div>
+          </div>
+          <div className="mobility-report-table-header">
+            <div />
+            <div>
+              <Button className="table-action-button" type="primary" size="small">
+                Export to CSV
+              </Button>
+              <Button className="table-action-button" type="primary" size="small">
+                Export to PDF
+              </Button>
+            </div>
+          </div>
+          <Table
+            dataSource={dataSource}
+            columns={columns}
+            size="middle"
+            pagination={false}
+            style={{ paddingBottom: 20 }}
+          />
           <p
             style={{
               textAlign: 'center',

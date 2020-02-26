@@ -186,13 +186,13 @@ class CurrentCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <div style={{ fontSize: '32px', color: 'black', fontWeight: 600 }}>
+          <div style={{ fontSize: '30px', color: 'black', fontWeight: 600 }}>
             Sidney&apos;s Career Track
           </div>
           <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={6}>
               <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+                style={{ color: 'black', textAlign: 'center', fontSize: '14px', fontWeight: 600 }}
               >
                 Department of Defense Space Program
               </Row>
@@ -200,7 +200,7 @@ class CurrentCareerTrack extends React.Component {
             </Col>
             <Col xs={6}>
               <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+                style={{ color: 'black', textAlign: 'center', fontSize: '14px', fontWeight: 600 }}
               >
                 Software Developer
               </Row>
@@ -208,7 +208,7 @@ class CurrentCareerTrack extends React.Component {
             </Col>
             <Col xs={6}>
               <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+                style={{ color: 'black', textAlign: 'center', fontSize: '14px', fontWeight: 600 }}
               >
                 Level 2
               </Row>
@@ -216,7 +216,7 @@ class CurrentCareerTrack extends React.Component {
             </Col>
             <Col xs={6}>
               <Row
-                style={{ color: 'black', textAlign: 'center', fontSize: '16px', fontWeight: 600 }}
+                style={{ color: 'black', textAlign: 'center', fontSize: '14px', fontWeight: 600 }}
               >
                 Level 3
               </Row>
@@ -229,7 +229,7 @@ class CurrentCareerTrack extends React.Component {
               <div style={{ alignItems: 'center' }}>
                 <Icon
                   style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     color: '#525257',
                     marginTop: 10,
                     marginLeft: 10,
@@ -244,7 +244,7 @@ class CurrentCareerTrack extends React.Component {
                 />
                 <span
                   style={{
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     lineHeight: 1.5,
                     color: '#525257',
@@ -308,7 +308,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: 600,
                   }}
                 >
@@ -317,7 +317,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 15,
+                    fontSize: 13,
                     marginLeft: '10px',
                     paddingLeft: '5px',
                     fontWeight: 600,
@@ -328,7 +328,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 15,
+                    fontSize: 13,
                     marginLeft: '20px',
                     paddingLeft: '10px',
                   }}
@@ -342,7 +342,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, textAlign: 'center' }}>
                     <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal2}>
                       Current Open Positions: 12
                     </a>
@@ -363,7 +363,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, textAlign: 'center' }}>
                     <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal2}>
                       Current Open Positions: 3
                     </a>
@@ -387,7 +387,7 @@ class CurrentCareerTrack extends React.Component {
                 }
               >
                 <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                  <p style={{ fontSize: 16, fontWeight: 600 }}>Trainings</p>
+                  <p style={{ fontSize: 14, fontWeight: 600 }}>Trainings</p>
                   <div
                     style={{
                       marginLeft: '20px',
@@ -401,7 +401,7 @@ class CurrentCareerTrack extends React.Component {
                         width: '50%',
                         color: '#525257',
                         textAlign: 'left',
-                        fontSize: 15,
+                        fontSize: 13,
                         fontWeight: 600,
                       }}
                     >
@@ -427,7 +427,7 @@ class CurrentCareerTrack extends React.Component {
                         width: '50%',
                         color: '#525257',
                         textAlign: 'left',
-                        fontSize: 15,
+                        fontSize: 13,
                         fontWeight: 600,
                       }}
                     >
@@ -439,7 +439,7 @@ class CurrentCareerTrack extends React.Component {
                   </div>
                 </div>
                 <Divider />
-                <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                <p style={{ fontSize: 14, fontWeight: 600 }}>Certifications</p>
                 <div
                   style={{
                     marginLeft: '20px',
@@ -453,7 +453,7 @@ class CurrentCareerTrack extends React.Component {
                       width: '50%',
                       color: '#525257',
                       textAlign: 'left',
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: 600,
                     }}
                   >
@@ -479,7 +479,7 @@ class CurrentCareerTrack extends React.Component {
                       width: '50%',
                       color: '#525257',
                       textAlign: 'left',
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: 600,
                     }}
                   >
@@ -497,7 +497,7 @@ class CurrentCareerTrack extends React.Component {
                     : { display: 'none' }
                 }
               >
-                <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                <p style={{ fontSize: 14, fontWeight: 600 }}>Certifications</p>
                 <div
                   style={{
                     marginLeft: '20px',
@@ -511,7 +511,7 @@ class CurrentCareerTrack extends React.Component {
                       width: '50%',
                       color: '#525257',
                       textAlign: 'left',
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: 600,
                     }}
                   >
@@ -537,7 +537,7 @@ class CurrentCareerTrack extends React.Component {
                       width: '50%',
                       color: '#525257',
                       textAlign: 'left',
-                      fontSize: 15,
+                      fontSize: 13,
                       fontWeight: 600,
                     }}
                   >
@@ -560,7 +560,7 @@ class CurrentCareerTrack extends React.Component {
               <div style={{ alignItems: 'center' }}>
                 <Icon
                   style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     color: '#525257',
                     marginTop: 10,
                     marginLeft: 10,
@@ -575,7 +575,7 @@ class CurrentCareerTrack extends React.Component {
                 />
                 <span
                   style={{
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     lineHeight: 1.5,
                     color: '#525257',
@@ -639,7 +639,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: 600,
                   }}
                 >
@@ -648,7 +648,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 15,
+                    fontSize: 13,
                     marginLeft: '10px',
                     paddingLeft: '5px',
                     fontWeight: 600,
@@ -659,7 +659,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 15,
+                    fontSize: 13,
                     marginLeft: '20px',
                     paddingLeft: '10px',
                   }}
@@ -673,7 +673,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, textAlign: 'center' }}>
                     <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal3}>
                       Current Open Positions: 4
                     </a>
@@ -694,7 +694,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15, textAlign: 'center' }}>
+                  <div style={{ fontSize: 13, textAlign: 'center' }}>
                     <a style={{ margin: 10, padding: 5 }} onClick={this.showPositionsModal3}>
                       Current Open Positions: 3
                     </a>
@@ -717,7 +717,7 @@ class CurrentCareerTrack extends React.Component {
                   }
                 >
                   <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                    <p style={{ fontSize: 16, fontWeight: 600 }}>Trainings</p>
+                    <p style={{ fontSize: 14, fontWeight: 600 }}>Trainings</p>
                     <div
                       style={{
                         marginLeft: '20px',
@@ -731,7 +731,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >
@@ -757,7 +757,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >
@@ -783,7 +783,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >
@@ -797,7 +797,7 @@ class CurrentCareerTrack extends React.Component {
                       </div>
                     </div>
                     <Divider />
-                    <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                    <p style={{ fontSize: 14, fontWeight: 600 }}>Certifications</p>
                     <div
                       style={{
                         marginLeft: '20px',
@@ -811,7 +811,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >
@@ -837,7 +837,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >
@@ -860,7 +860,7 @@ class CurrentCareerTrack extends React.Component {
                   }
                 >
                   <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                    <p style={{ fontSize: 16, fontWeight: 600 }}>Certifications</p>
+                    <p style={{ fontSize: 14, fontWeight: 600 }}>Certifications</p>
                     <div
                       style={{
                         marginLeft: '20px',
@@ -874,7 +874,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >
@@ -900,7 +900,7 @@ class CurrentCareerTrack extends React.Component {
                           width: '50%',
                           color: '#525257',
                           textAlign: 'left',
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: 600,
                         }}
                       >

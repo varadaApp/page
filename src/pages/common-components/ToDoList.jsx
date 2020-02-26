@@ -9,7 +9,7 @@ export default props => {
       bordered={false}
       headStyle={{
         textAlign: 'center',
-        fontSize: '30px',
+        fontSize: '28px',
         borderWidth: '0px',
       }}
       title="Things to Do"
@@ -20,7 +20,7 @@ export default props => {
             thing.title ? (
               <Text
                 style={{
-                  fontSize: '18px',
+                  fontSize: '16px',
                   color: 'black',
                 }}
               >
@@ -42,7 +42,7 @@ export default props => {
           bodyStyle={{
             borderWidth: '0px',
             color: 'black',
-            fontSize: '15px',
+            fontSize: '13px',
           }}
         >
           {thing.content}

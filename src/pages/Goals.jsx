@@ -3,7 +3,6 @@ import { Card, Icon, Row, Col, Input, Form, Divider, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import GoalList from './common-components/GoalList';
-import goalIcon from '../assets/goal-icon.png';
 
 const headerContainerStyle = {
   marginBottom: '20px',
@@ -13,28 +12,8 @@ const headerContainerStyle = {
 };
 
 const subHeaderStyle = {
-  fontSize: '18px',
+  fontSize: '16px',
   fontWeight: 600,
-};
-
-const headerStyle = {
-  fontSize: '32px',
-  color: 'black',
-  fontWeight: 600,
-};
-
-const iconContainer = {
-  height: '150px',
-  width: '150px',
-  margin: '20px',
-  padding: '10px',
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-const iconStyle = {
-  width: '100%',
 };
 
 const headerContentContainerStyle = {
@@ -51,7 +30,7 @@ const newGoalContainerStyle = {
 };
 
 const newGoalHeaderStyle = {
-  fontSize: '21px',
+  fontSize: '19px',
   fontWeight: 600,
   color: '#525257',
   paddingTop: '10px',
@@ -64,20 +43,19 @@ class Goals extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
+          <div className="screen-header">
+            <h1 className="page-title">Your Goals</h1>
+          </div>
+          <Divider />
           <div style={headerContainerStyle}>
-            <div style={iconContainer}>
-              <img style={iconStyle} src={goalIcon} alt="" />
-            </div>
             <div style={headerContentContainerStyle}>
               <div>
-                <p style={headerStyle}>Your primary goal</p>
                 <p style={subHeaderStyle}>
                   Apply to new position, your current program ends July 2020
                 </p>
               </div>
             </div>
           </div>
-          <Divider />
           <Row gutter={[8, 8]}>
             <Col xs={16} span={18}>
               <GoalList
@@ -88,7 +66,8 @@ class Goals extends React.Component {
                 ]}
               />
             </Col>
-            <Col xs={8}>
+            <Col xs={1} />
+            <Col xs={7}>
               <div style={newGoalContainerStyle}>
                 <div style={{ width: '100%' }}>
                   <img

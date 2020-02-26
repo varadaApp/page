@@ -10,13 +10,13 @@ import { trainingData, certData } from './Utils';
 import 'react-table/react-table.css';
 
 const careerMessageHeaderStyle = {
-  fontSize: '21px',
+  fontSize: '19px',
   color: 'black',
   fontWeight: 600,
 };
 
 const careerMessageContentStyle = {
-  fontSize: '16px',
+  fontSize: '14px',
   marginBottom: '10px',
   color: '#525257 ',
 };
@@ -31,14 +31,14 @@ const careerMessageContainerStyle = {
 };
 
 const tableLabelStyle = {
-  fontSize: '28px',
+  fontSize: '26px',
   lineHeight: '30px',
   color: '#1c1c1c',
   fontWeight: 600,
 };
 
 const searchTextStyle = {
-  fontSize: '16px',
+  fontSize: '14px',
 };
 
 const searchIconStyle = {

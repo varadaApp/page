@@ -9,7 +9,7 @@ const formItemLayout = {
 };
 
 const labelStyle = {
-  fontSize: '24px',
+  fontSize: '22px',
   color: 'black',
   fontWeight: 500,
   letterSpacing: '0.5px',
@@ -21,25 +21,25 @@ const valueStyle = {
   marginLeft: '20px',
   color: '#525257',
   fontWeight: 600,
-  fontSize: '18px',
+  fontSize: '16px',
   paddingLeft: '10px',
 };
 
 const editStyle = {
   color: '#525257',
   fontWeight: 600,
-  fontSize: '18px',
+  fontSize: '16px',
   marginLeft: '5px',
 };
 
 const profileMessageHeaderStyle = {
-  fontSize: '21px',
+  fontSize: '19px',
   color: '#525257',
   fontWeight: 600,
 };
 
 const profileMessageContentStyle = {
-  fontSize: '16px',
+  fontSize: '14px',
   color: '#525257 ',
 };
 
@@ -109,7 +109,7 @@ export default () => (
             <Row gutter={[8, 8]}>
               <Col xs={15}>
                 {data.map(d => (
-                  <Form.Item style={{ fontSize: '16px', alignItems: 'center' }}>
+                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
                     <p style={labelStyle}>{d.label}</p>
                     <Row>
                       <Col xs={20}>

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Col, Row, Icon, Table, Button, Select, DatePicker, Divider } from 'antd';
+import { Card, Icon, Table, Button, Select, DatePicker, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Shape } from 'bizcharts';
@@ -215,53 +215,71 @@ class Reporting extends React.Component {
             <h1 className="page-title">Attrition Report</h1>
           </div>
           <Divider />
-          <Row gutter={[8, 8]}>
-            <Col xs={4}>
-              <div className="attrition-header-filter-container">
+          <div className="attrition-header-filter-container">
+            <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
+            <div style={{ display: 'flex' }}>
+              <div className="attrition-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Program"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">AWS Technical Support Program</Option>
+                  <Option value="2">DoD Space Program</Option>
+                  <Option value="3">DHS Satellite Network</Option>
+                  <Option value="4">DoJ Networks</Option>
+                  <Option value="5">DoS Nuclear Defense System</Option>
+                  <Option value="6">FBI Case Management System</Option>
+                </Select>
+              </div>
+              <div className="attrition-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Group"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">Career Track</Option>
+                  <Option value="2">Title</Option>
+                  <Option value="3">Labor Category</Option>
+                  <Option value="4">Location</Option>
+                  <Option value="5">Tenure</Option>
+                  <Option value="6">Certification</Option>
+                  <Option value="7">Certification Interest</Option>
+                  <Option value="8">Training</Option>
+                  <Option value="9">Training Interest</Option>
+                </Select>
+              </div>
+              <div className="attrition-row">
+                <Select
+                  showSearch
+                  placeholder="Select a Date Range"
+                  optionFilterProp="children"
+                  filterOption={(input, option) =>
+                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  }
+                  onSelect={this.handleDateRangeSelect}
+                >
+                  <Option value="0">&nbsp;</Option>
+                  <Option value="1">Annually</Option>
+                  <Option value="2">Monthly</Option>
+                  <Option value="3">Quarter</Option>
+                  <Option value="4">Custom Date Range</Option>
+                </Select>
+              </div>
+              <br />
+              {selectedDateRange === '1' && (
                 <div className="attrition-row">
-                  <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
                   <Select
                     showSearch
-                    placeholder="Select a Program"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">AWS Technical Support Program</Option>
-                    <Option value="2">DoD Space Program</Option>
-                    <Option value="3">DHS Satellite Network</Option>
-                    <Option value="4">DoJ Networks</Option>
-                    <Option value="5">DoS Nuclear Defense System</Option>
-                    <Option value="6">FBI Case Management System</Option>
-                  </Select>
-                </div>
-                <div className="attrition-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Group"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">Career Track</Option>
-                    <Option value="2">Title</Option>
-                    <Option value="3">Labor Category</Option>
-                    <Option value="4">Location</Option>
-                    <Option value="5">Tenure</Option>
-                    <Option value="6">Certification</Option>
-                    <Option value="7">Certification Interest</Option>
-                    <Option value="8">Training</Option>
-                    <Option value="9">Training Interest</Option>
-                  </Select>
-                </div>
-                <div className="attrition-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Date Range"
+                    placeholder="Select a Year"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
                       option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -269,87 +287,65 @@ class Reporting extends React.Component {
                     onSelect={this.handleDateRangeSelect}
                   >
                     <Option value="0">&nbsp;</Option>
-                    <Option value="1">Annually</Option>
-                    <Option value="2">Monthly</Option>
-                    <Option value="3">Quarter</Option>
-                    <Option value="4">Custom Date Range</Option>
+                    <Option value="1">2020</Option>
+                    <Option value="2">2019</Option>
+                    <Option value="3">2018</Option>
+                    <Option value="4">2017</Option>
                   </Select>
                 </div>
-                <br />
-                {selectedDateRange === '1' && (
-                  <div className="attrition-row">
-                    <Select
-                      showSearch
-                      placeholder="Select a Year"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                      onSelect={this.handleDateRangeSelect}
-                    >
-                      <Option value="0">&nbsp;</Option>
-                      <Option value="1">2020</Option>
-                      <Option value="2">2019</Option>
-                      <Option value="3">2018</Option>
-                      <Option value="4">2017</Option>
-                    </Select>
-                  </div>
-                )}
-                {selectedDateRange === '2' && (
-                  <div className="attrition-row">
-                    <MonthPicker placeholder="Select month" />
-                  </div>
-                )}
-                {selectedDateRange === '3' && (
-                  <div className="attrition-row">
-                    <Select
-                      showSearch
-                      placeholder="Select a Quarter"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                      onSelect={this.handleDateRangeSelect}
-                    >
-                      <Option value="0">&nbsp;</Option>
-                      <Option value="1">1st Quarter</Option>
-                      <Option value="2">2nd Quarter</Option>
-                      <Option value="3">3rd Quarter</Option>
-                      <Option value="4">4th Quarter</Option>
-                    </Select>
-                  </div>
-                )}
-                {selectedDateRange === '4' && (
-                  <div className="attrition-row">
-                    <RangePicker />
-                  </div>
-                )}
-                <div style={{ float: 'right' }}>
-                  <Button onClick={this.handleClear}>Run Report</Button>
+              )}
+              {selectedDateRange === '2' && (
+                <div className="attrition-row">
+                  <MonthPicker placeholder="Select month" />
                 </div>
-              </div>
-            </Col>
-            <Col xs={20}>
-              <div className="attrition-report-table-header">
-                <div />
-                <div>
-                  <Button className="table-action-button" type="primary" size="small">
-                    Export to CSV
-                  </Button>
-                  <Button className="table-action-button" type="primary" size="small">
-                    Export to PDF
-                  </Button>
+              )}
+              {selectedDateRange === '3' && (
+                <div className="attrition-row">
+                  <Select
+                    showSearch
+                    placeholder="Select a Quarter"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                    onSelect={this.handleDateRangeSelect}
+                  >
+                    <Option value="0">&nbsp;</Option>
+                    <Option value="1">1st Quarter</Option>
+                    <Option value="2">2nd Quarter</Option>
+                    <Option value="3">3rd Quarter</Option>
+                    <Option value="4">4th Quarter</Option>
+                  </Select>
                 </div>
-              </div>
-              <Table
-                dataSource={dataSource}
-                columns={columns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-            </Col>
-          </Row>
+              )}
+              {selectedDateRange === '4' && (
+                <div className="attrition-row">
+                  <RangePicker />
+                </div>
+              )}
+            </div>
+            <div style={{ margin: '10px', float: 'right' }}>
+              <Button onClick={this.handleClear}>Run Report</Button>
+            </div>
+          </div>
+          <div className="attrition-report-table-header">
+            <div />
+            <div>
+              <Button className="table-action-button" type="primary" size="small">
+                Export to CSV
+              </Button>
+              <Button className="table-action-button" type="primary" size="small">
+                Export to PDF
+              </Button>
+            </div>
+          </div>
+          <Table
+            dataSource={dataSource}
+            columns={columns}
+            size="middle"
+            pagination={false}
+            style={{ paddingBottom: 20 }}
+          />
           <p
             style={{
               textAlign: 'center',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, AutoComplete, Button, Col, Row, Modal, Checkbox, Divider } from 'antd';
+import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { careerTrackData } from './Utils';
@@ -290,140 +290,136 @@ class CareerTrackSearch extends React.Component {
             <h1 className="page-title">Career Track Search</h1>
           </div>
           <Divider />
-          <Row gutter={[4, 4]}>
-            <Col style={{ paddingRight: '5px' }} xs={4}>
-              <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>
-                <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
-                <AutoComplete
-                  style={autoCompleteStyle}
-                  // allowClear={true}
-                  dataSource={dataSourceProgram}
-                  placeholder="Program"
-                  onChange={this.handleProgramSearch}
-                  value={this.state.programValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  // allowClear={true}
-                  style={autoCompleteStyle}
-                  dataSource={dataSourceLocation}
-                  placeholder="Location"
-                  onChange={this.handleLocationSearch}
-                  value={this.state.locationValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  // allowClear={true}
-                  style={autoCompleteStyle}
-                  dataSource={dataSourceCertification}
-                  placeholder="Certification"
-                  onChange={this.handleCertificationSearch}
-                  value={this.state.certificationValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  // allowClear={true}
-                  style={autoCompleteStyle}
-                  dataSource={dataSourceClearance}
-                  placeholder="Clearance"
-                  onChange={this.handleClearanceSearch}
-                  value={this.state.clearanceValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <br />
-                <AutoComplete
-                  // allowClear={true}
-                  style={autoCompleteStyle}
-                  dataSource={dataSourceCareerTrack}
-                  placeholder="Career Track"
-                  onChange={this.handleCareerTrackSearch}
-                  value={this.state.careerTrackValue}
-                  filterOption={(inputValue, option) =>
-                    option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                  }
-                />
-                <div style={{ float: 'right' }}>
-                  <Button style={{ width: '100px' }} onClick={this.handleClear}>
-                    Clear
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col xs={20}>
-              <ReactTable
-                data={data}
-                resolveData={d => d.map(row => row)}
-                // filterable
-                style={styleHide}
-                defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-                // noDataText={!this.state.loading ? 'No rows found' : ''}
-                NoDataComponent={NoDataComponent}
-                getTdProps={() => ({
-                  onClick: (e, handleOriginal) => {
-                    if (handleOriginal) {
-                      handleOriginal();
-                    }
-                  },
-                })}
-                getTrProps={(state, rowInfo) => ({
-                  onClick: (e, handleOriginal) => {
-                    this.showRow(rowInfo.original);
-                    if (handleOriginal) {
-                      handleOriginal();
-                    }
-                  },
-                })}
-                columns={[
-                  {
-                    Header: 'Career Track Information',
-                    columns: [
-                      {
-                        Header: 'Career Track',
-                        accessor: 'careerTrackName',
-                        // filterMethod: (filter, row) =>
-                        //   row[filter.id].startsWith(filter.value) &&
-                        //   row[filter.id].endsWith(filter.value),
-                      },
-                      {
-                        Header: 'Tier',
-                        accessor: 'careerTrackTier',
-                      },
-                    ],
-                  },
-                  {
-                    Header: 'Program Information',
-                    columns: [
-                      {
-                        Header: 'Name',
-                        accessor: 'programName',
-                      },
-                      {
-                        Header: 'Clearance Required',
-                        accessor: 'clearanceLevel',
-                      },
-                      {
-                        Header: 'Location',
-                        accessor: 'locationName',
-                      },
-                    ],
-                  },
-                ]}
-                defaultPageSize={10}
-                className="-striped -highlight"
+          <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
+            <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
+            <div style={{ display: 'flex' }}>
+              <AutoComplete
+                style={autoCompleteStyle}
+                // allowClear={true}
+                dataSource={dataSourceProgram}
+                placeholder="Program"
+                onChange={this.handleProgramSearch}
+                value={this.state.programValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
               />
-            </Col>
-          </Row>
+              <br />
+              <AutoComplete
+                // allowClear={true}
+                style={autoCompleteStyle}
+                dataSource={dataSourceLocation}
+                placeholder="Location"
+                onChange={this.handleLocationSearch}
+                value={this.state.locationValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <br />
+              <AutoComplete
+                // allowClear={true}
+                style={autoCompleteStyle}
+                dataSource={dataSourceCertification}
+                placeholder="Certification"
+                onChange={this.handleCertificationSearch}
+                value={this.state.certificationValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <br />
+              <AutoComplete
+                // allowClear={true}
+                style={autoCompleteStyle}
+                dataSource={dataSourceClearance}
+                placeholder="Clearance"
+                onChange={this.handleClearanceSearch}
+                value={this.state.clearanceValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+              <br />
+              <AutoComplete
+                // allowClear={true}
+                style={autoCompleteStyle}
+                dataSource={dataSourceCareerTrack}
+                placeholder="Career Track"
+                onChange={this.handleCareerTrackSearch}
+                value={this.state.careerTrackValue}
+                filterOption={(inputValue, option) =>
+                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                }
+              />
+            </div>
+            <div style={{ margin: '10px', float: 'right' }}>
+              <Button style={{ width: '100px' }} onClick={this.handleClear}>
+                Clear
+              </Button>
+            </div>
+          </div>
+          <ReactTable
+            data={data}
+            resolveData={d => d.map(row => row)}
+            // filterable
+            style={styleHide}
+            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+            // noDataText={!this.state.loading ? 'No rows found' : ''}
+            NoDataComponent={NoDataComponent}
+            getTdProps={() => ({
+              onClick: (e, handleOriginal) => {
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            getTrProps={(state, rowInfo) => ({
+              onClick: (e, handleOriginal) => {
+                this.showRow(rowInfo.original);
+                if (handleOriginal) {
+                  handleOriginal();
+                }
+              },
+            })}
+            columns={[
+              {
+                Header: 'Career Track Information',
+                columns: [
+                  {
+                    Header: 'Career Track',
+                    accessor: 'careerTrackName',
+                    // filterMethod: (filter, row) =>
+                    //   row[filter.id].startsWith(filter.value) &&
+                    //   row[filter.id].endsWith(filter.value),
+                  },
+                  {
+                    Header: 'Tier',
+                    accessor: 'careerTrackTier',
+                  },
+                ],
+              },
+              {
+                Header: 'Program Information',
+                columns: [
+                  {
+                    Header: 'Name',
+                    accessor: 'programName',
+                  },
+                  {
+                    Header: 'Clearance Required',
+                    accessor: 'clearanceLevel',
+                  },
+                  {
+                    Header: 'Location',
+                    accessor: 'locationName',
+                  },
+                ],
+              },
+            ]}
+            defaultPageSize={10}
+            className="-striped -highlight"
+          />
           <p
             style={{
               textAlign: 'center',

@@ -8,7 +8,7 @@ export default props => {
       bordered={false}
       headStyle={{
         textAlign: 'center',
-        fontSize: '30px',
+        fontSize: '28px',
         borderWidth: '0px',
       }}
       title="Goals"
@@ -26,7 +26,7 @@ export default props => {
           type="inner"
           bodyStyle={{
             color: 'black',
-            fontSize: '15px',
+            fontSize: '13px',
           }}
           style={{
             backgroundColor: '#f0f2f5',

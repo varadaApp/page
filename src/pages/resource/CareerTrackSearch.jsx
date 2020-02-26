@@ -289,7 +289,7 @@ class CareerTrackSearch extends React.Component {
           <Row gutter={[4, 4]}>
             <Col style={{ paddingRight: '5px' }} xs={4}>
               <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>
-                <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
+                <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
                 <AutoComplete
                   style={autoCompleteStyle}
                   // allowClear={true}

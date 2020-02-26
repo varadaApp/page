@@ -353,7 +353,7 @@ class CurrentCareerTrack extends React.Component {
         <Card className="current-career-track-main-container">
           <div
             className="screen-header"
-            style={{ fontSize: '27px', color: 'black', fontWeight: 600 }}
+            style={{ fontSize: '25px', color: 'black', fontWeight: 600 }}
           >
             <h1 className="page-title">Sidney&apos;s Career Track</h1>
           </div>
@@ -372,7 +372,7 @@ class CurrentCareerTrack extends React.Component {
                   style={{
                     color: 'black',
                     textAlign: 'center',
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     marginTop: 20,
                     paddingLeft: 10,
@@ -397,7 +397,7 @@ class CurrentCareerTrack extends React.Component {
                   style={{
                     color: 'black',
                     textAlign: 'center',
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     marginTop: 20,
                   }}
@@ -420,7 +420,7 @@ class CurrentCareerTrack extends React.Component {
                   style={{
                     color: 'black',
                     textAlign: 'center',
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     marginTop: 20,
                   }}
@@ -443,7 +443,7 @@ class CurrentCareerTrack extends React.Component {
                   style={{
                     color: 'black',
                     textAlign: 'center',
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     marginTop: 20,
                     paddingLeft: 10,
@@ -462,7 +462,7 @@ class CurrentCareerTrack extends React.Component {
               <div style={{ alignItems: 'center', height: 49 }}>
                 <Icon
                   style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     color: '#525257',
                     marginTop: 10,
                     marginLeft: 10,
@@ -477,7 +477,7 @@ class CurrentCareerTrack extends React.Component {
                 />
                 <span
                   style={{
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     lineHeight: 1.5,
                     color: '#525257',
@@ -544,7 +544,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 15,
+                    fontSize: 13,
                     marginLeft: '20px',
                     paddingLeft: '10px',
                     marginRight: '20px',
@@ -568,7 +568,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15 }}>
+                  <div style={{ fontSize: 13 }}>
                     <Divider className="content-divider" />
                     <div
                       style={{ marginTop: 10, paddingTop: 5 }}
@@ -613,7 +613,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15 }}>
+                  <div style={{ fontSize: 13 }}>
                     <Divider className="content-divider" />
                     <div
                       style={{ marginTop: 10, paddingTop: 5 }}
@@ -705,7 +705,7 @@ class CurrentCareerTrack extends React.Component {
               <div style={{ alignItems: 'center' }}>
                 <Icon
                   style={{
-                    fontSize: 16,
+                    fontSize: 14,
                     color: '#525257',
                     marginTop: 10,
                     marginLeft: 10,
@@ -720,7 +720,7 @@ class CurrentCareerTrack extends React.Component {
                 />
                 <span
                   style={{
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: 600,
                     lineHeight: 1.5,
                     color: '#525257',
@@ -781,7 +781,7 @@ class CurrentCareerTrack extends React.Component {
                 <p
                   style={{
                     color: '#525257',
-                    fontSize: 15,
+                    fontSize: 13,
                     marginLeft: '20px',
                     paddingLeft: '10px',
                     marginRight: '20px',
@@ -805,7 +805,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15 }}>
+                  <div style={{ fontSize: 13 }}>
                     <Divider className="content-divider" />
                     <div
                       style={{ marginTop: 10, paddingTop: 5 }}
@@ -850,7 +850,7 @@ class CurrentCareerTrack extends React.Component {
                       : { display: 'none' }
                   }
                 >
-                  <div style={{ fontSize: 15 }}>
+                  <div style={{ fontSize: 13 }}>
                     <div
                       style={{ marginTop: 10, paddingTop: 5 }}
                       onClick={this.showPositionsModal2}

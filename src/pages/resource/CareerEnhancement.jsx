@@ -342,7 +342,7 @@ class CareerEnhancement extends React.Component {
           <Row gutter={[4, 4]}>
             <Col style={{ paddingRight: '5px' }} xs={4}>
               <div style={{ height: '700px', backgroundColor: '#f0f2f5', padding: '15px' }}>
-                <h2 style={{ fontSize: '24px', color: 'black' }}>
+                <h2 style={{ fontSize: '22px', color: 'black' }}>
                   What kind of career enhancement opportunity are you looking for?
                 </h2>
                 <Radio.Group onChange={this.radioChange} value={this.state.enhancementType}>
@@ -359,7 +359,7 @@ class CareerEnhancement extends React.Component {
                     Proposal Position
                   </Radio>
                 </Radio.Group>
-                <h2 style={{ fontSize: '24px', color: 'black' }}>Filter by:</h2>
+                <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
                 <AutoComplete
                   style={autoCompleteStyle}
                   // allowClear={true}
