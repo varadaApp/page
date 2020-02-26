@@ -29,49 +29,40 @@ class Goals extends React.Component {
             <h1 className="page-title">Your Goals</h1>
           </div>
           <Divider />
-          <Card
-            title={
-              <Text
+          <Row gutter={[8, 8]}>
+            <Col xs={17}>
+              <Card
+                title={
+                  <Text
+                    style={{
+                      fontSize: '16px',
+                      color: 'black',
+                    }}
+                  >
+                    NOTIFICATION:
+                  </Text>
+                }
+                hoverable
+                type="inner"
+                headStyle={{
+                  borderWidth: '0px',
+                  backgroundColor: '#fef4d2',
+                  marginBottom: '-20px',
+                }}
                 style={{
-                  fontSize: '16px',
+                  backgroundColor: '#fef4d2',
+                  borderRadius: '10px',
+                  margin: '15px',
+                  width: '50%',
+                }}
+                bodyStyle={{
+                  borderWidth: '0px',
                   color: 'black',
+                  fontSize: '13px',
                 }}
               >
-                NOTIFICATION:
-              </Text>
-            }
-            hoverable
-            type="inner"
-            headStyle={{
-              borderWidth: '0px',
-              backgroundColor: '#fef4d2',
-              marginBottom: '-20px',
-            }}
-            style={{
-              backgroundColor: '#fef4d2',
-              borderRadius: '10px',
-              margin: '15px',
-              width: '50%',
-            }}
-            bodyStyle={{
-              borderWidth: '0px',
-              color: 'black',
-              fontSize: '13px',
-            }}
-          >
-            Apply to new position, your current program ends July 2020
-          </Card>
-          {/* <div style={headerContainerStyle}>
-            <div style={headerContentContainerStyle}>
-              <div>
-                <p style={subHeaderStyle}>
-                  Apply to new position, your current program ends July 2020
-                </p>
-              </div>
-            </div>
-          </div> */}
-          <Row gutter={[8, 8]}>
-            <Col xs={16} span={18}>
+                Apply to new position, your current program ends July 2020
+              </Card>
               <GoalList
                 list={[
                   'Complete Splunk certification in 2020!',
@@ -80,7 +71,6 @@ class Goals extends React.Component {
                 ]}
               />
             </Col>
-            <Col xs={1} />
             <Col xs={7}>
               <div style={newGoalContainerStyle}>
                 <div style={{ width: '100%' }}>
@@ -100,26 +90,15 @@ class Goals extends React.Component {
                         </Form.Item>
                       </Col>
                     </Row>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <Button onClick={this.onClose} style={{ marginRight: 8 }}>
+                        Cancel
+                      </Button>
+                      <Button onClick={this.onClose} type="primary">
+                        Submit
+                      </Button>
+                    </div>
                   </Form>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      bottom: 0,
-                      width: '100%',
-                      borderTop: '1px solid #e9e9e9',
-                      padding: '10px 16px',
-                      background: '#fff',
-                      textAlign: 'right',
-                    }}
-                  >
-                    <Button onClick={this.onClose} style={{ marginRight: 8 }}>
-                      Cancel
-                    </Button>
-                    <Button onClick={this.onClose} type="primary">
-                      Submit
-                    </Button>
-                  </div>
                 </div>
               </div>
             </Col>
