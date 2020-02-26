@@ -72,8 +72,8 @@ class Skills extends React.Component {
             <Col xs={7}>
               <div style={{ width: '100%' }}>
                 <img
-                  style={{ width: '100%', height: 320 }}
-                  src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/12482434076830.56c3515798e08.png"
+                  style={{ width: '100%' }}
+                  src={require('../assets/varada-skills.png')}
                   alt=""
                 />
               </div>

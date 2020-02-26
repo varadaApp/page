@@ -70,7 +70,7 @@ class Certifications extends React.Component {
             <Col xs={7}>
               <div style={{ width: '100%' }}>
                 <img
-                  style={{ width: '100%', height: 320 }}
+                  style={{ width: '100%' }}
                   src="https://cdn.dribbble.com/users/3786091/screenshots/8809763/media/08449c544de5d4bfab03ea58a7c68f3f.jpg"
                   alt=""
                 />

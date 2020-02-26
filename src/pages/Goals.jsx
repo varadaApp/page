@@ -1,32 +1,14 @@
+/* eslint-disable global-require */
 import React from 'react';
-import { Card, Icon, Row, Col, Input, Form, Divider, Button } from 'antd';
+import { Card, Typography, Icon, Row, Col, Input, Form, Divider, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import GoalList from './common-components/GoalList';
 
-const headerContainerStyle = {
-  marginBottom: '20px',
-  paddingBottom: '10px',
-  flexDirection: 'row',
-  display: 'flex',
-};
-
-const subHeaderStyle = {
-  fontSize: '16px',
-  fontWeight: 600,
-};
-
-const headerContentContainerStyle = {
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  margin: '20px',
-  padding: '10px',
-};
+const { Text } = Typography;
 
 const newGoalContainerStyle = {
   backgroundColor: '#f0f2f5',
-  marginTop: '32px',
 };
 
 const newGoalHeaderStyle = {
@@ -47,7 +29,39 @@ class Goals extends React.Component {
             <h1 className="page-title">Your Goals</h1>
           </div>
           <Divider />
-          <div style={headerContainerStyle}>
+          <Card
+            title={
+              <Text
+                style={{
+                  fontSize: '16px',
+                  color: 'black',
+                }}
+              >
+                NOTIFICATION:
+              </Text>
+            }
+            hoverable
+            type="inner"
+            headStyle={{
+              borderWidth: '0px',
+              backgroundColor: '#fef4d2',
+              marginBottom: '-20px',
+            }}
+            style={{
+              backgroundColor: '#fef4d2',
+              borderRadius: '10px',
+              margin: '15px',
+              width: '50%',
+            }}
+            bodyStyle={{
+              borderWidth: '0px',
+              color: 'black',
+              fontSize: '13px',
+            }}
+          >
+            Apply to new position, your current program ends July 2020
+          </Card>
+          {/* <div style={headerContainerStyle}>
             <div style={headerContentContainerStyle}>
               <div>
                 <p style={subHeaderStyle}>
@@ -55,7 +69,7 @@ class Goals extends React.Component {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
           <Row gutter={[8, 8]}>
             <Col xs={16} span={18}>
               <GoalList
@@ -72,7 +86,7 @@ class Goals extends React.Component {
                 <div style={{ width: '100%' }}>
                   <img
                     style={{ width: '100%' }}
-                    src="https://cdn.dribbble.com/users/673873/screenshots/6339059/superheroes_copy.png"
+                    src={require('../assets/varada-goals.png')}
                     alt=""
                   />
                 </div>

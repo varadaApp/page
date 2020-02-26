@@ -71,7 +71,7 @@ class Trainings extends React.Component {
             <Col xs={7}>
               <div style={{ width: '100%' }}>
                 <img
-                  style={{ width: '100%', height: 320 }}
+                  style={{ width: '100%' }}
                   src="https://cdn.dribbble.com/users/131231/screenshots/7221343/media/4bd699132d037347a1a0004a20377761.png"
                   alt=""
                 />

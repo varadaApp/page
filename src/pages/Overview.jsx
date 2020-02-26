@@ -118,11 +118,11 @@ class Overview extends React.Component {
             >
               My current status is:
             </Typography>
-            <div>
+            <div style={{ display: 'flex', padding: 10 }}>
               <div style={{ padding: 10 }}>
                 <Checkbox>
-                  <span style={{ fontSize: 16, color: 'black' }}>
-                    Interested in Growth (ie. New Certification and/or Training)
+                  <span style={{ fontSize: 16, color: 'black', marginLeft: '5px' }}>
+                    Interested in Growth & Training
                   </span>
                 </Checkbox>
               </div>
@@ -131,6 +131,7 @@ class Overview extends React.Component {
                   <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
                     Losing Coverage:
                   </span>
+                  <br />
                   <DatePicker size="small" format="DD/MM/YYYY" />
                 </Checkbox>
               </div>
@@ -139,9 +140,10 @@ class Overview extends React.Component {
                   <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
                     Location Change:
                   </span>
+                  <br />
                   <Select
+                    style={{ margin: 0, padding: 2 }}
                     showSearch
-                    style={{ width: 200 }}
                     placeholder="Select a Location"
                     optionFilterProp="children"
                     filterOption={(input, option) =>

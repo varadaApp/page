@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Card, Icon, Row, Col, Table, Divider, Upload, message, Button, Modal } from 'antd';
+import { Card, Icon, Row, Col, Table, Divider, Button, Modal } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import Link from 'umi/link';
 import ReactTable from 'react-table';
@@ -8,34 +8,6 @@ import { trainingData, certData } from './Utils';
 
 // Import React Table
 import 'react-table/react-table.css';
-
-const careerMessageHeaderStyle = {
-  fontSize: '19px',
-  color: 'black',
-  fontWeight: 600,
-};
-
-const careerMessageContentStyle = {
-  fontSize: '14px',
-  marginBottom: '10px',
-  color: '#525257 ',
-};
-
-const careerMessageContainerStyle = {
-  padding: '20px',
-  marginBottom: '20px',
-  borderRadius: '5px',
-  backgroundColor: '#f0f2f5',
-  borderColor: '#dcdcdc !important',
-  borderWidth: '1px',
-};
-
-const tableLabelStyle = {
-  fontSize: '26px',
-  lineHeight: '30px',
-  color: '#1c1c1c',
-  fontWeight: 600,
-};
 
 const searchTextStyle = {
   fontSize: '14px',
@@ -55,6 +27,20 @@ class CareerManagement extends React.Component {
       certificationsVisible: false,
       skillsData: trainingData(),
       certsData: certData(),
+      tabs: [
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+      ],
     };
   }
 
@@ -92,6 +78,11 @@ class CareerManagement extends React.Component {
     this.setState({ certificationsVisible: false });
   };
 
+  toggleShow = index =>
+    this.setState(prevState => ({
+      tabs: prevState.tabs.map((item, i) => (index === i ? { ...item, show: !item.show } : item)),
+    }));
+
   render() {
     const {
       skillsLoading,
@@ -101,23 +92,6 @@ class CareerManagement extends React.Component {
       skillsData,
       certsData,
     } = this.state;
-    const props = {
-      name: 'file',
-      action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-      headers: {
-        authorization: 'authorization-text',
-      },
-      onChange(info) {
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      },
-    };
 
     const skillDataSource = [
       {
@@ -333,143 +307,147 @@ class CareerManagement extends React.Component {
               <h1 className="page-title">Your Career Management</h1>
             </div>
             <Divider />
-            <Col xs={15}>
-              <div className="career-management-item-container">
-                <img
-                  className="career-management-icon"
-                  src={require('../assets/skill-icon.png')}
-                  alt=""
-                />
-                <div className="career-management-header-container">
-                  <p style={tableLabelStyle}>Skills</p>
-                  <a style={searchTextStyle} onClick={this.showSkillsModal}>
-                    <Icon style={searchIconStyle} type="search" />
-                    Search Skills
-                  </a>
+            <Row style={{ marginRight: 20 }}>
+              <Col style={{ padding: 20 }} xs={12}>
+                <a style={searchTextStyle} onClick={this.showSkillsModal}>
+                  <Icon style={searchIconStyle} type="search" />
+                  Search Skills
+                </a>
+                <div className="career-management-item-container">
+                  <img
+                    className="career-management-icon"
+                    src={require('../assets/skill-icon.png')}
+                    alt=""
+                  />
+                  <div className="career-management-header-container">
+                    <div
+                      style={{ width: '100%' }}
+                      className="row-title"
+                      onClick={() => this.toggleShow(0)}
+                    >
+                      Skills
+                      <Icon type={this.state.tabs[0].show ? 'up' : 'down'} />
+                    </div>
+                  </div>
+                  <div style={!this.state.tabs[0].show ? { display: 'none' } : {}}>
+                    <Table
+                      dataSource={skillDataSource}
+                      columns={skillColumns}
+                      size="middle"
+                      pagination={false}
+                      style={{ paddingBottom: 20 }}
+                    />
+                  </div>
                 </div>
-                <Divider />
-                <Table
-                  dataSource={skillDataSource}
-                  columns={skillColumns}
-                  size="middle"
-                  pagination={false}
-                  style={{ paddingBottom: 20 }}
-                />
-              </div>
-              <div className="career-management-item-container">
-                <img
-                  className="career-management-icon"
-                  src={require('../assets/certification-icon.png')}
-                  alt=""
-                />
-                <div className="career-management-header-container">
-                  <p style={tableLabelStyle}>Certifications</p>
-                  <a style={searchTextStyle} onClick={this.showCertsModal}>
-                    <Icon style={searchIconStyle} type="search" />
-                    Search Certifications
-                  </a>
+              </Col>
+              {/*  */}
+              <Col style={{ padding: 20 }} xs={12}>
+                <a style={searchTextStyle} onClick={this.showSkillsModal}>
+                  <Icon style={searchIconStyle} type="search" />
+                  Search Skills
+                </a>
+                <div className="career-management-item-container">
+                  <img
+                    className="career-management-icon"
+                    src={require('../assets/certification-icon.png')}
+                    alt=""
+                  />
+                  <div className="career-management-header-container">
+                    <div
+                      style={{ width: '100%' }}
+                      className="row-title"
+                      onClick={() => this.toggleShow(1)}
+                    >
+                      Certifications
+                      <Icon type={this.state.tabs[1].show ? 'up' : 'down'} />
+                    </div>
+                  </div>
+                  <div style={!this.state.tabs[1].show ? { display: 'none' } : {}}>
+                    <Table
+                      dataSource={certificationDataSource}
+                      columns={certificationColumns}
+                      size="middle"
+                      pagination={false}
+                      style={{ paddingBottom: 20 }}
+                    />
+                  </div>
                 </div>
-                <Divider />
-                <Table
-                  dataSource={certificationDataSource}
-                  columns={certificationColumns}
-                  size="middle"
-                  pagination={false}
-                  style={{ paddingBottom: 20 }}
-                />
-              </div>
-              <div className="career-management-item-container">
-                <img
-                  className="career-management-icon"
-                  src={require('../assets/desire-icon.png')}
-                  alt=""
-                />
-                <div className="career-management-header-container">
-                  <p style={tableLabelStyle}>Desired career tracks</p>
-                  <Link to="/employee/careerTrackSearch">
-                    <Icon style={searchIconStyle} type="search" />
-                    Search Career Tracks
-                  </Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col style={{ padding: 20 }} xs={12}>
+                <Link to="/employee/careerTrackSearch">
+                  <Icon style={searchIconStyle} type="search" />
+                  Search Career Tracks
+                </Link>
+                <div className="career-management-item-container">
+                  <img
+                    className="career-management-icon"
+                    src={require('../assets/desire-icon.png')}
+                    alt=""
+                  />
+                  <div className="career-management-header-container">
+                    <div
+                      style={{ width: '100%' }}
+                      className="row-title"
+                      onClick={() => this.toggleShow(2)}
+                    >
+                      Desired career tracks
+                      <Icon type={this.state.tabs[2].show ? 'up' : 'down'} />
+                    </div>
+                  </div>
+                  <div style={!this.state.tabs[2].show ? { display: 'none' } : {}}>
+                    <Table
+                      dataSource={desiredCareerTrackDataSource}
+                      columns={desiredCareerTrackColumns}
+                      size="middle"
+                      pagination={false}
+                      style={{ paddingBottom: 20 }}
+                    />
+                  </div>
                 </div>
-                <Divider />
-                <Table
-                  dataSource={desiredCareerTrackDataSource}
-                  columns={desiredCareerTrackColumns}
-                  size="middle"
-                  pagination={false}
-                  style={{ paddingBottom: 20 }}
-                />
-              </div>
-              <div className="career-management-item-container">
-                <img
-                  className="career-management-icon"
-                  src={require('../assets/interested-icon.png')}
-                  alt=""
-                />
-                <div className="career-management-header-container">
-                  <p style={tableLabelStyle}>Open positions interested in</p>
-                  <Link to="/employee/positionSearch">
-                    <Icon style={searchIconStyle} type="search" />
-                    Search Open Positions
-                  </Link>
+              </Col>
+              <Col style={{ padding: 20 }} xs={12}>
+                <Link to="/employee/positionSearch">
+                  <Icon style={searchIconStyle} type="search" />
+                  Search Open Positions
+                </Link>
+                <div className="career-management-item-container">
+                  <img
+                    className="career-management-icon"
+                    src={require('../assets/interested-icon.png')}
+                    alt=""
+                  />
+                  <div className="career-management-header-container">
+                    <div
+                      style={{ width: '100%' }}
+                      className="row-title"
+                      onClick={() => this.toggleShow(3)}
+                    >
+                      Open positions interested in
+                      <Icon type={this.state.tabs[3].show ? 'up' : 'down'} />
+                    </div>
+                  </div>
+                  <div style={!this.state.tabs[3].show ? { display: 'none' } : {}}>
+                    <Table
+                      dataSource={positionsInterestedInDataSource}
+                      columns={positionsInterestedInColumns}
+                      size="middle"
+                      pagination={false}
+                      style={{ paddingBottom: 20 }}
+                    />
+                  </div>
                 </div>
-                <Divider />
-                <Table
-                  dataSource={positionsInterestedInDataSource}
-                  columns={positionsInterestedInColumns}
-                  size="middle"
-                  pagination={false}
-                  style={{ paddingBottom: 20 }}
-                />
-              </div>
-              <p
-                style={{
-                  textAlign: 'center',
-                  marginTop: 24,
-                }}
-              >
-                We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
-              </p>
-            </Col>
-            <Col xs={1} />
-            <Col xs={8}>
-              <div style={{ width: '100%' }}>
-                <img
-                  style={{ width: '100%', height: 320 }}
-                  src={require('../assets/person-with-pc.png')}
-                  alt=""
-                />
-              </div>
-              <div style={careerMessageContainerStyle}>
-                <p style={careerMessageHeaderStyle}>Career Management</p>
-                <p style={careerMessageContentStyle}>
-                  It is a continuing process that allows you to adapt to the changing demands of our
-                  dynamic economy. The career management process embraces various concepts: learning
-                  Self-awareness, career development planning/career exploration, life-long ,and
-                  networking.
-                </p>
-              </div>
-              <div style={{ width: '100%' }}>
-                <img
-                  style={{ width: '100%' }}
-                  src="https://cdn.dribbble.com/users/79571/screenshots/4407347/swingvy_all_illustrations.png"
-                  alt=""
-                />
-              </div>
-              <div style={careerMessageContainerStyle}>
-                <p style={careerMessageHeaderStyle}>Your profile document</p>
-                <p style={careerMessageContentStyle}>
-                  Depending on your industry and the type of job you are interested, a resume can be
-                  a great way to highlight your skills and experience in a manner that is more
-                  visually appealing and engaging.
-                </p>
-                <Upload {...props}>
-                  <Button type="primary">
-                    <Icon type="upload" /> Click to Upload Resume
-                  </Button>
-                </Upload>
-              </div>
-            </Col>
+              </Col>
+            </Row>
+            <p
+              style={{
+                textAlign: 'center',
+                marginTop: 24,
+              }}
+            >
+              We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
+            </p>
           </Card>
         </Row>
         <Modal
