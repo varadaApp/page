@@ -30,7 +30,7 @@ class Goals extends React.Component {
           </div>
           <Divider />
           <Row gutter={[8, 8]}>
-            <Col xs={17}>
+            <Col xs={16}>
               <Card
                 title={
                   <Text
@@ -71,6 +71,7 @@ class Goals extends React.Component {
                 ]}
               />
             </Col>
+            <Col xs={1} />
             <Col xs={7}>
               <div style={newGoalContainerStyle}>
                 <div style={{ width: '100%' }}>
