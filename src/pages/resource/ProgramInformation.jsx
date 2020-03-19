@@ -1,57 +1,39 @@
 import React from 'react';
 import {
   Card,
+  Typography,
+  Alert,
   Icon,
   Form,
+  Upload,
+  message,
   Button,
   Modal,
   Divider,
   Descriptions,
+  Checkbox,
   Row,
   Col,
   Steps,
   Table,
   Input,
   Popconfirm,
+  Select,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ReactTable from 'react-table';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import { programEmployees } from '../Utils';
 
+// Import React Table
+import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
+const formItemLayout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 12 },
+};
+
 const EditableContext = React.createContext();
-
-const employeeHeaderStyle = {
-  margin: '10px',
-  padding: '5px',
-  fontSize: '30px',
-  color: 'black',
-  fontWeight: 500,
-  letterSpacing: '0.5px',
-};
-
-const labelStyle = {
-  fontSize: '22px',
-  color: 'black',
-  fontWeight: 500,
-  letterSpacing: '0.5px',
-};
-
-const valueStyle = {
-  marginLeft: '20px',
-  color: '#525257',
-  fontWeight: 600,
-  fontSize: '16px',
-  paddingLeft: '10px',
-};
-
-const editStyle = {
-  color: '#525257',
-  fontWeight: 600,
-  fontSize: '16px',
-  marginLeft: '5px',
-};
 
 const EditableRow = ({ form, index, ...props }) => (
   <EditableContext.Provider value={form}>
@@ -68,14 +50,11 @@ class EditableCell extends React.Component {
 
   toggleEdit = () => {
     const editing = !this.state.editing;
-    this.setState(
-      prevState => ({ editing: prevState.editing }),
-      () => {
-        if (editing) {
-          this.input.focus();
-        }
-      },
-    );
+    this.setState({ editing }, () => {
+      if (editing) {
+        this.input.focus();
+      }
+    });
   };
 
   save = e => {
@@ -103,15 +82,7 @@ class EditableCell extends React.Component {
             },
           ],
           initialValue: record[dataIndex],
-        })(
-          <Input
-            ref={node => {
-              this.input = node;
-            }}
-            onPressEnter={this.save}
-            onBlur={this.save}
-          />,
-        )}
+        })(<Input ref={node => (this.input = node)} onPressEnter={this.save} onBlur={this.save} />)}
       </Form.Item>
     ) : (
       <div
@@ -151,11 +122,14 @@ class ProgramInformation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      programValue: '',
       data: programEmployees(),
       selectedCareerTrackVisible: false,
       selectedCareerTrackLoading: false,
       recommendedCareerTrackVisible: false,
       recommendedCareerTrackLoading: false,
+      selectedCareerTrack: '',
+      selectedCareerTrackTier: '',
       dataSource: [
         {
           key: '0',
@@ -163,18 +137,48 @@ class ProgramInformation extends React.Component {
         },
         {
           key: '1',
-          name: 'Program/Project Management',
+          name: 'Software Development',
         },
         {
           key: '2',
-          name: 'Software Developer',
-        },
-        {
-          key: '3',
           name: 'Systems Administration',
         },
       ],
       count: 4,
+      dataSourceCareerTracks: [
+        {
+          key: '0',
+          name: 'Program Ops (Technical)',
+        },
+        {
+          key: '1',
+          name: 'Software Development',
+        },
+        {
+          key: '2',
+          name: 'Systems Administration',
+        },
+      ],
+      dataSourceSkills: [
+        {
+          key: '0',
+          name: 'Software Development',
+        },
+        {
+          key: '1',
+          name: 'SQL Server Database',
+        },
+      ],
+      dataSourceCertifications: [
+        {
+          key: '0',
+          name: 'Security+',
+        },
+        {
+          key: '1',
+          name: 'AWS Developer',
+        },
+      ],
     };
     this.showRow = this.showRow.bind(this);
     this.columns = [
@@ -184,19 +188,93 @@ class ProgramInformation extends React.Component {
         editable: true,
       },
       {
-        render: record => {
-          const { dataSource } = this.state;
-          return dataSource.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-              <a>Delete</a>
-            </Popconfirm>
-          ) : null;
-        },
         title: '',
         width: '20%',
         dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
       },
     ];
+    this.columnsCareerTracks = [
+      {
+        title: 'Career Track',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        title: '',
+        width: '20%',
+        dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
+      },
+    ];
+    this.columnsSkills = [
+      {
+        title: 'Skill Name',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        title: '',
+        width: '20%',
+        dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
+      },
+    ];
+    this.columnsCertifications = [
+      {
+        title: 'Certification Name',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        title: '',
+        width: '20%',
+        dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
+      },
+    ];
+    this.handleCareerTrackSelect = this.handleCareerTrackSelect.bind(this);
+    this.handleCareerTrackTierSelect = this.handleCareerTrackTierSelect.bind(this);
+    this.handleProgramChange = this.handleProgramChange.bind(this);
+    this.handleProgramSelect = this.handleProgramSelect.bind(this);
+  }
+
+  handleProgramChange(value) {
+    this.setState({ programValue: value });
+  }
+  handleProgramSelect(value) {
+    this.setState({ programValue: value });
+  }
+
+  handleCareerTrackSelect(value) {
+    this.setState({ selectedCareerTrack: value });
+  }
+  handleCareerTrackTierSelect(value) {
+    this.setState({ selectedCareerTrackTier: value });
+  }
+
+  handleOriginal(value) {
+    console.log('handleOriginal', value);
   }
 
   showSelectedCareerTrackModal = () => {
@@ -233,10 +311,50 @@ class ProgramInformation extends React.Component {
     this.setState({ recommendedCareerTrackVisible: false });
   };
 
+  showRow(row) {
+    const { info } = Modal;
+    const { Step } = Steps;
+    console.log('modalrow', row);
+    info({
+      width: 800,
+      title: row.employeeName,
+      content: (
+        <div>
+          <Form {...formItemLayout}>
+            <Form.Item label="Position Title:">
+              <span className="ant-form-text">Linux System Administrator</span>
+            </Form.Item>
+            <Form.Item label="Labor Category and Level:">
+              <span className="ant-form-text">System Admin Level 2</span>
+            </Form.Item>
+            <Form.Item label="Current Career Track:">
+              <span className="ant-form-text">System Administration Level 2</span>
+            </Form.Item>
+            <Form.Item label="Program Name:">
+              <span className="ant-form-text">Department of Defense Space Program</span>
+            </Form.Item>
+            <Form.Item label="Program Location:">
+              <span className="ant-form-text">Washington, D.C.</span>
+            </Form.Item>
+            <Form.Item label="Current Salary:">
+              <span className="ant-form-text">$110,000</span>
+            </Form.Item>
+            <Form.Item label="Current Certifications:">
+              <span className="ant-form-text">A+, Security+, Linux+, Splunk</span>
+            </Form.Item>
+            <Form.Item label="Current Clearance:">
+              <span className="ant-form-text">Secret</span>
+            </Form.Item>
+          </Form>
+        </div>
+      ),
+      onOk() {},
+    });
+  }
+
   handleDelete = key => {
-    this.setState(prevState => ({
-      dataSource: prevState.dataSource.filter(item => item.key !== key),
-    }));
+    const dataSource = [...this.state.dataSource];
+    this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
   };
 
   handleAdd = () => {
@@ -251,139 +369,16 @@ class ProgramInformation extends React.Component {
     });
   };
 
-  handleOriginal = value => {
-    console.log('handleOriginal', value);
-  };
-
   handleSave = row => {
-    this.setState(prevState => {
-      const newData = prevState.dataSource;
-      const index = prevState.newData.findIndex(item => row.key === item.key);
-      const item = newData[index];
-      newData.splice(index, 1, {
-        ...item,
-        ...row,
-      });
-      return { dataSource: newData };
+    const newData = [...this.state.dataSource];
+    const index = newData.findIndex(item => row.key === item.key);
+    const item = newData[index];
+    newData.splice(index, 1, {
+      ...item,
+      ...row,
     });
+    this.setState({ dataSource: newData });
   };
-
-  showRow(row) {
-    const { info } = Modal;
-    console.log('modalrow', row);
-
-    info({
-      style: { top: 20 },
-      width: 1200,
-      title: row.employeeName,
-      content: (
-        <div>
-          <p>Location: {row.locationName}</p>
-          <p>Career Track: {row.careerTrackName}</p>
-          <p>Career Track Tier: {row.careerTrackTier}</p>
-          <div style={row.employeeName === 'Sharyn Ballard' ? {} : { display: 'none' }}>
-            <Divider orientation="left">
-              <strong>
-                Primary Selected Career Track: Network Engineer Tier 2 (Program: Department of
-                Homeland Security Satellite Network)
-              </strong>
-            </Divider>
-            Open Positions Applied To:
-            <br />
-            Senior Network Manager
-            <br />
-            Job Requisition #14567
-            <br />
-            PM:Clarence Hodson
-            <br />
-            <br />
-            <a onClick={this.showSelectedCareerTrackModal}>Current Percentage Complete: 25%</a>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Trainings">
-                Advanced Networking -{' '}
-                <span className="attention">
-                  Training Recently Shown Interest, Needs Action
-                  <Icon type="warning" theme="filled" />
-                </span>
-                <br />
-                Networking Circuits - Interest Not Selected
-              </Descriptions.Item>
-              <Descriptions.Item label="Certifications">
-                CCNA -{' '}
-                <span className="in-progress">
-                  Certification Test Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                CCNP - Interest Not Selected
-              </Descriptions.Item>
-            </Descriptions>
-            <Divider orientation="left">
-              <strong>
-                Recommended Career Track: Software Developer Level 3 (Program: Department of Defense
-                Space Program)
-              </strong>
-            </Divider>
-            Open Positions Applied To:
-            <br />
-            Senior Software Developer
-            <br />
-            Job Requisition #14589
-            <br />
-            PM: Eladia Calderon
-            <br />
-            <br />
-            <a onClick={this.showRecommendedCareerTrackModal}>Current Percentage Complete: 35%</a>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Trainings">
-                Programming Level 3 Training -{' '}
-                <span className="in-progress">
-                  Training Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                Database Level 3 Training -{' '}
-                <span className="in-progress">
-                  Training in Progress
-                  <Icon type="sync" spin />
-                </span>
-                <br />
-                Advanced Agile Training-{' '}
-                <span className="completed">
-                  Training Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-              <Descriptions.Item label="Certifications">
-                CCISP -{' '}
-                <span className="attention">
-                  Certification Recently Shown Interest, Needs Action
-                  <Icon type="warning" theme="filled" />
-                </span>
-                <br />
-                AWS Developer -{' '}
-                <span className="completed">
-                  Certification Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-            </Descriptions>
-          </div>
-        </div>
-      ),
-      onOk() {},
-    });
-  }
 
   render() {
     const {
@@ -393,8 +388,15 @@ class ProgramInformation extends React.Component {
       recommendedCareerTrackVisible,
       recommendedCareerTrackLoading,
       dataSource,
+      dataSourceCertifications,
+      dataSourceSkills,
+      dataSourceCareerTracks,
     } = this.state;
     const { Step } = Steps;
+    const formItemLayout = {
+      labelCol: { span: 4 },
+      wrapperCol: { span: 12 },
+    };
     const components = {
       body: {
         row: EditableFormRow,
@@ -416,56 +418,109 @@ class ProgramInformation extends React.Component {
         }),
       };
     });
-
-    const formData = [
-      {
-        label: 'Program Manager',
-        value: 'Sidney Watkins',
-      },
-      {
-        label: 'Number of Employees',
-        value: '15',
-      },
-      {
-        label: 'Clearance Level',
-        value: 'PUBLIC TRUST',
-      },
-      {
-        label: 'Salary Average',
-        value: '$123,989.87',
-      },
-    ];
+    const columnsSkills = this.columnsSkills.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
+    const columnsCertifications = this.columnsCertifications.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
+    const columnsCareerTracks = this.columnsCareerTracks.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
 
     return (
       <PageHeaderWrapper>
-        <Card style={{ margin: '20px', padding: '10px' }}>
-          <div className="screen-header">
-            <h1 className="page-title">Department of Defense Space Program</h1>
-          </div>
-          <Divider />
-          <Divider />
-          <Row style={{ margin: '20px', padding: '10px' }}>
-            <Col xs={12}>
-              <Form>
-                {formData.map(d => (
-                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
-                    <p style={labelStyle}>{d.label}</p>
-                    <Row>
-                      <Col xs={20}>
-                        <p style={valueStyle} className="ant-form-text">
-                          {d.value}
-                        </p>
-                      </Col>
-                      <Col xs={4}>
-                        <Icon type="edit" />
-                        <span style={editStyle}>Edit</span>
-                      </Col>
-                    </Row>
+        <Card>
+          <h2>Select program:</h2>
+          <Select
+            showSearch
+            style={{ width: 350 }}
+            placeholder="Program"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            onSelect={this.handleProgramSelect}
+            onChange={this.handleProgramChange}
+          >
+            <Option value="All">All Programs</Option>
+            <Option value="Department of Defense Space Program">
+              Department of Defense Space Program
+            </Option>
+            <Option value="Department of Homeland Security Network">
+              Department of Homeland Security Network
+            </Option>
+            <Option value="AWS Technical Support Program">AWS Technical Support Program</Option>
+          </Select>
+          <br />
+          <div
+            style={
+              this.state.programValue === 'Department of Defense Space Program'
+                ? {}
+                : { display: 'none' }
+            }
+          >
+            <Row gutter={[8, 8]}>
+              <Col xs={12} span={6}>
+                <h1>Department of Defense Space Program</h1>
+                <Form {...formItemLayout}>
+                  <Form.Item label="Program Location:">
+                    <span className="ant-form-text">Washington, DC</span>
                   </Form.Item>
-                ))}
-              </Form>
-            </Col>
-            <Col style={{ padding: '10px', backgroundColor: 'rgb(240, 242, 245)' }} xs={12}>
+                  <Form.Item label="Program Manager:">
+                    <span className="ant-form-text">Sidney Watkins</span>
+                  </Form.Item>
+                  <Form.Item label="Number of Employees:">
+                    <span className="ant-form-text">14</span>
+                  </Form.Item>
+                  <Form.Item label="Clearance Level:">
+                    <span className="ant-form-text">PUBLIC TRUST</span>
+                  </Form.Item>
+                  <Form.Item label="Salary Average:">
+                    <span className="ant-form-text">$123,989.87</span>
+                  </Form.Item>
+                  <Form.Item label="Period of Performance Ends:">
+                    <span className="ant-form-text">December 15, 2020</span>
+                  </Form.Item>
+                </Form>
+              </Col>
+              {/* <Col xs={12} span={18}>
               <Form layout="inline">
                 <Form.Item>
                   <Input style={{ width: 400 }} placeholder="Career Track Name" />
@@ -477,86 +532,175 @@ class ProgramInformation extends React.Component {
                 </Form.Item>
               </Form>
               <Table
-                className="program-info-career-track-table"
+                style={{ width: 700 }}
                 components={components}
                 rowClassName={() => 'editable-row'}
-                dataSource={dataSource}
-                columns={columns}
+                bordered
+                dataSource={dataSourceCareerTracks}
+                columns={columnsCareerTracks}
+                pagination={false}
               />
-            </Col>
-          </Row>
-          <Divider />
-          <p style={employeeHeaderStyle}>Employees</p>
-          <ReactTable
-            style={{ marginLeft: '20px', paddingLeft: '10px' }}
-            data={data}
-            resolveData={d => d.map(row => row)}
-            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            getTdProps={() => ({
-              onClick: (e, handleOriginal) => {
-                if (handleOriginal) {
-                  handleOriginal();
+              <br />
+              <Divider></Divider>
+              <Select
+                showSearch
+                style={{ width: 400 }}
+                placeholder="Select a Career Track"
+                optionFilterProp="children"
+                // onChange={onChange}
+                // onFocus={onFocus}
+                // onBlur={onBlur}
+                // onSearch={onSearch}
+                onSelect={this.handleCareerTrackSelect}
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
-              },
-            })}
-            getTrProps={rowInfo => ({
-              onClick: (e, handleOriginal) => {
-                this.showRow(rowInfo.original);
-                if (handleOriginal) {
-                  handleOriginal();
+              >
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">Program Ops (Technical)</Option>
+                <Option value="2">Software Development</Option>
+                <Option value="3">Systems Administration</Option>
+              </Select>
+              <Select
+                showSearch
+                style={{ width: 250 }}
+                placeholder="Select a Career Track Tier"
+                optionFilterProp="children"
+                // onChange={onChange}
+                // onFocus={onFocus}
+                // onBlur={onBlur}
+                // onSearch={onSearch}
+                onSelect={this.handleCareerTrackSelectTier}
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
-              },
-            })}
-            columns={[
-              {
-                Header: 'Employees',
-                columns: [
-                  {
-                    Header: 'Progress Status',
-                    accessor: 'progressStatus',
-                    minWidth: 130,
-                    Cell: props => (
-                      <span>
-                        {props.value === 'Yellow' && (
-                          <span className="in-progress">
-                            <Icon type="sync" spin />
-                            In Progress
-                          </span>
-                        )}
-                        {props.value === 'Green' && (
-                          <span className="completed">
-                            <Icon type="check-circle" theme="outlined" />
-                            Complete
-                          </span>
-                        )}
-                        {props.value === 'Red' && (
-                          <span className="attention">
-                            <Icon type="warning" theme="filled" />
-                            Needs Attention: {props.original.progressInformation}
-                          </span>
-                        )}
-                      </span>
-                    ),
+              >
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">Tier 1</Option>
+                <Option value="2">Tier 2</Option>
+                <Option value="3">Tier 3</Option>
+              </Select>
+
+              <div style={this.state.selectedCareerTrack ? {} : { display: 'none' }}>
+                <Form layout="inline">
+                  <Form.Item>
+                    <Input style={{ width: 400 }} placeholder="Certification Name" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                      Add a Required Certification
+                    </Button>
+                  </Form.Item>
+                </Form>
+                <Table
+                  style={{ width: 700 }}
+                  components={components}
+                  rowClassName={() => 'editable-row'}
+                  bordered
+                  dataSource={dataSourceCertifications}
+                  columns={columnsCertifications}
+                  pagination={false}
+                />
+                <br />
+                <Form layout="inline">
+                  <Form.Item>
+                    <Input style={{ width: 400 }} placeholder="Skill Name" />
+                  </Form.Item>
+                  <Form.Item>
+                    <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                      Add a Required Skill
+                    </Button>
+                  </Form.Item>
+                </Form>
+                <Table
+                  style={{ width: 700 }}
+                  components={components}
+                  rowClassName={() => 'editable-row'}
+                  bordered
+                  dataSource={dataSourceSkills}
+                  columns={columnsSkills}
+                  pagination={false}
+                />
+              </div>
+            </Col> */}
+            </Row>
+            <br />
+            <Button type="primary" size="small">
+              Export to CSV
+            </Button>
+            <Button type="primary" size="small">
+              Export to PDF
+            </Button>
+            <br />
+            <ReactTable
+              data={data}
+              resolveData={data => data.map(row => row)}
+              defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+              getTdProps={(state, rowInfo, column, instance) => {
+                return {
+                  onClick: (e, handleOriginal) => {
+                    console.log('A Td Element was clicked!');
+                    console.log('it produced this event:', e);
+                    console.log('It was in this column:', column);
+                    console.log('It was in this row:', rowInfo);
+                    console.log('It was in this table instance:', instance);
+                    console.log('handleOriginal', handleOriginal);
+                    // IMPORTANT! React-Table uses onClick internally to trigger
+                    // events like expanding SubComponents and pivots.
+                    // By default a custom 'onClick' handler will override this functionality.
+                    // If you want to fire the original onClick handler, call the
+                    // 'handleOriginal' function.
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
                   },
-                  {
-                    Header: 'Employee',
-                    accessor: 'employeeName',
+                };
+              }}
+              getTrProps={(state, rowInfo, column) => {
+                return {
+                  onClick: (e, handleOriginal) => {
+                    console.log('A TR Element was clicked!');
+                    console.log('it produced this event:', e);
+                    console.log('It was in this column:', column);
+                    console.log('It was in this row:', rowInfo);
+                    //console.log('It was in this table instance:', instance);
+                    console.log('handleOriginal', handleOriginal);
+                    // IMPORTANT! React-Table uses onClick internally to trigger
+                    // events like expanding SubComponents and pivots.
+                    // By default a custom 'onClick' handler will override this functionality.
+                    // If you want to fire the original onClick handler, call the
+                    // 'handleOriginal' function.
+                    this.showRow(rowInfo.original);
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
                   },
-                  {
-                    id: 'currentCareerTrack',
-                    Header: 'Current Career Track',
-                    accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
-                  },
-                  {
-                    Header: 'Location',
-                    accessor: 'locationName',
-                  },
-                ],
-              },
-            ]}
-            defaultPageSize={10}
-            className="-striped -highlight"
-          />
+                };
+              }}
+              columns={[
+                {
+                  Header: 'Employee',
+                  accessor: 'employeeName',
+                },
+                {
+                  Header: 'Position Title',
+                  accessor: 'position',
+                },
+                {
+                  Header: 'Current Status',
+                  accessor: 'currentStatus',
+                },
+                {
+                  id: 'currentCareerTrack',
+                  Header: 'Current Career Track',
+                  accessor: d => `${d.careerTrackName}` + ' Tier ' + `${d.careerTrackTier}`,
+                },
+              ]}
+              defaultPageSize={10}
+              className="-striped -highlight"
+            />
+          </div>
+          <br />
           <p
             style={{
               textAlign: 'center',
@@ -587,7 +731,9 @@ class ProgramInformation extends React.Component {
             <Col span={24}>
               Overall Expected Completion Date: 2/1/2020
               <br />
-              Program: Department of Homeland Security Satellite Network
+              Program: Department of Homeland Security Network
+              <br />
+              Program Location: Washington, D.C.
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
@@ -607,7 +753,7 @@ class ProgramInformation extends React.Component {
               <h3>CCNA Certification</h3>
               <Steps progressDot current={2} direction="vertical">
                 <Step title="Interest Showed" description="10/15/2019" />
-                <Step title="In Progress" description="Ready to schedule exame" />
+                <Step title="In Progress" description="Ready to schedule exam" />
                 <Step title="Schedule Exam" description="Exam date scheduled on 12/1/2019" />
                 <Step title="Exam Passed" description="100%" />
               </Steps>
@@ -636,6 +782,8 @@ class ProgramInformation extends React.Component {
               Overall Expected Completion Date: 2/1/2020
               <br />
               Program: Department of Defense Space Program
+              <br />
+              Program Location: Washington, D.C.
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
@@ -643,7 +791,7 @@ class ProgramInformation extends React.Component {
               <h3>Security+ Certification</h3>
               <Steps progressDot current={2} direction="vertical">
                 <Step title="Interest Showed" description="10/15/2019" />
-                <Step title="In Progress" description="Ready to schedule exame" />
+                <Step title="In Progress" description="Ready to schedule exam" />
                 <Step title="Schedule Exam" description="Exam date scheduled on 12/1/2019" />
                 <Step title="Exam Passed" description="100%" />
               </Steps>

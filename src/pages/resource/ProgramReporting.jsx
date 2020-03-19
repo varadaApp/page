@@ -1,208 +1,218 @@
 import React from 'react';
-import { Card, Icon, Table, Divider } from 'antd';
+import {
+  Card,
+  Typography,
+  Alert,
+  Icon,
+  Table,
+  Button,
+  Select,
+  Checkbox,
+  DatePicker,
+  Col,
+  Row,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-// import { Gauge } from 'ant-design-pro/lib/Charts';
-import { Chart, Axis, Coord, Geom, Guide, Shape } from 'bizcharts';
-
-const tableContainerStyle = {
-  margin: '20px',
-  padding: '10px',
-};
-
-const tableTitleStyle = {
-  fontSize: '30px',
-  color: 'black',
-  fontWeight: 600,
-};
-
-const { Html, Arc } = Guide;
-Shape.registerShape('point', 'pointer', {
-  drawShape(cfg, group) {
-    let point = cfg.points[0];
-    point = this.parsePoint(point);
-    const center = this.parsePoint({
-      x: 0,
-      y: 0,
-    });
-    group.addShape('line', {
-      attrs: {
-        x1: center.x,
-        y1: center.y,
-        x2: point.x,
-        y2: point.y - 20,
-        stroke: cfg.color,
-        lineWidth: 5,
-        lineCap: 'round',
-      },
-    });
-    return group.addShape('circle', {
-      attrs: {
-        x: center.x,
-        y: center.y,
-        r: 12,
-        stroke: cfg.color,
-        lineWidth: 4.5,
-        fill: '#fff',
-      },
-    });
-  },
-});
-
-const data = [{ value: 1.6 }];
-const cols = {
-  value: {
-    min: 0,
-    max: 9,
-    tickInterval: 1,
-    nice: false,
-  },
-};
-
+import { FormattedMessage } from 'umi-plugin-react/locale';
 class ProgramReporting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      programValue: '',
       dataSource: [
         {
           key: '0',
-          month: 'January',
-          openingBalance: '27',
-          employeesJoined: '3',
-          employeesLeft: '0',
-          closingBalance: '30',
-          attrition: '0.00%',
+          employee: 'Sharyn Ballard',
+          positionTitle: 'Linux System Administrator',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '1',
-          month: 'February',
-          openingBalance: '30',
-          employeesJoined: '1',
-          employeesLeft: '5',
-          closingBalance: '26',
-          attrition: '19.23%',
+          employee: 'Romeo Thompson',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '2',
-          month: 'March',
-          openingBalance: '26',
-          employeesJoined: '4',
-          employeesLeft: '2',
-          closingBalance: '28',
-          attrition: '7.14%',
+          employee: 'Chere Nance',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '3',
-          month: 'April',
-          openingBalance: '28',
-          employeesJoined: '1',
-          employeesLeft: '0',
-          closingBalance: '29',
-          attrition: '0.00%',
+          employee: 'Kami Najera',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '4',
-          month: 'May',
-          openingBalance: '29',
-          employeesJoined: '0',
-          employeesLeft: '6',
-          closingBalance: '23',
-          attrition: '26.09%',
+          employee: 'Darryl Merryman',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '5',
-          month: 'June',
-          openingBalance: '23',
-          employeesJoined: '12',
-          employeesLeft: '3',
-          closingBalance: '32',
-          attrition: '9.38%',
+          employee: 'Brigitte Weiland',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '6',
-          month: 'July',
-          openingBalance: '32',
-          employeesJoined: '1',
-          employeesLeft: '2',
-          closingBalance: '31',
-          attrition: '6.45%',
+          employee: 'Emmitt Dugas',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '7',
-          month: 'August',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '0',
-          closingBalance: '32',
-          attrition: '0.00%',
+          employee: 'Chia Villalba',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '8',
-          month: 'September',
-          openingBalance: '32',
-          employeesJoined: '1',
-          employeesLeft: '2',
-          closingBalance: '31',
-          attrition: '6.45%',
+          employee: 'Hipolito Gooden',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '9',
-          month: 'October',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '1',
-          closingBalance: '31',
-          attrition: '3.23%',
+          employee: 'Enoch Hector',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '10',
-          month: 'November',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '1',
-          closingBalance: '31',
-          attrition: '3.23%',
+          employee: 'Nicolas Hadlock',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '11',
-          month: 'December',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '2',
-          closingBalance: '30',
-          attrition: '6.67%',
+          employee: 'Brock Brauer',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
+        },
+        {
+          key: '12',
+          employee: 'Phyliss Kaplan',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
+        },
+        {
+          key: '13',
+          employee: 'Nickie Buie',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
       ],
     };
     this.columns = [
       {
-        title: 'Month',
-        dataIndex: 'month',
+        title: 'Employee',
+        dataIndex: 'employee',
       },
       {
-        title: 'Opening Balance',
-        dataIndex: 'openingBalance',
+        title: 'Position Title',
+        dataIndex: 'positionTitle',
       },
       {
-        title: 'Employees Joined',
-        dataIndex: 'employeesJoined',
+        title: 'Labor Category and Level',
+        dataIndex: 'laborCategoryLevel',
       },
       {
-        title: 'Employees Left',
-        dataIndex: 'employeesLeft',
+        title: 'Current Career Track',
+        dataIndex: 'currentCareerTrack',
       },
       {
-        title: 'Closing Balance',
-        dataIndex: 'closingBalance',
+        title: 'Current Salary',
+        dataIndex: 'currentSalary',
       },
       {
-        title: 'Attrition %',
-        dataIndex: 'attrition',
+        title: 'Current Certifications',
+        dataIndex: 'currentCertifications',
+      },
+      {
+        title: 'Current Clearance',
+        dataIndex: 'currentClearance',
       },
     ];
+    this.handleProgramChange = this.handleProgramChange.bind(this);
+    this.handleProgramSelect = this.handleProgramSelect.bind(this);
+  }
+
+  handleProgramChange(value) {
+    this.setState({ programValue: value });
+  }
+  handleProgramSelect(value) {
+    this.setState({ programValue: value });
   }
 
   render() {
     const { dataSource } = this.state;
+    const dataSourceProgram = [
+      'AWS Technical Support Program',
+      'DoD Space Program',
+      'DHS Satellite Network',
+      'DoJ Networks',
+      'DoS Nuclear Defense System',
+      'FBI Case Management System',
+    ];
     const columns = this.columns.map(col => {
       if (!col.editable) {
         return col;
@@ -222,93 +232,47 @@ class ProgramReporting extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <div className="screen-header">
-            <h1 className="page-title">Reporting</h1>
-          </div>
-          <Divider />
-          {/* <Gauge title="January 2020 Attrition %" height={200} percent={3} /> */}
-          <Chart
-            height={window.innerHeight * 0.5}
-            data={data}
-            scale={cols}
-            padding={[0, 0, 50, 0]}
-            forceFit
+          <h2>Select program:</h2>
+          <Select
+            showSearch
+            style={{ width: 350 }}
+            placeholder="Program"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            onSelect={this.handleProgramSelect}
+            onChange={this.handleProgramChange}
           >
-            <Coord
-              type="polar"
-              startAngle={(-9 / 8) * Math.PI}
-              endAngle={(1 / 8) * Math.PI}
-              radius={0.75}
-            />
-            <Axis
-              name="value"
-              zIndex={2}
-              line={null}
-              label={{
-                offset: -16,
-                textStyle: {
-                  fontSize: 16,
-                  textAlign: 'center',
-                  textBaseline: 'middle',
-                },
-              }}
-              subTickCount={4}
-              subTickLine={{
-                length: -8,
-                stroke: '#fff',
-                strokeOpacity: 1,
-              }}
-              tickLine={{
-                length: -18,
-                stroke: '#fff',
-                strokeOpacity: 1,
-              }}
-            />
-            <Axis name="1" visible={false} />
-            <Guide>
-              <Arc
-                zIndex={0}
-                start={[0, 0.965]}
-                end={[9, 0.965]}
-                style={{
-                  stroke: '#CBCBCB',
-                  lineWidth: 18,
-                }}
-              />
-              <Arc
-                zIndex={1}
-                start={[0, 0.965]}
-                end={[data[0].value, 0.965]}
-                style={{
-                  stroke: '#722ED1',
-                  lineWidth: 18,
-                }}
-              />
-              <Html
-                position={['50%', '95%']}
-                html={() =>
-                  `<div style="width: 100px;text-align: center;font-size: 7px!important;"><p style="font-size: 14px; color: #6c6c72;margin: 0;">January 2020 Atrittion %</p><p style="font-size: 30px;color: #1c1c1c;margin: 0;">${data[0]
-                    .value * 10}%</p></div>`
-                }
-              />
-            </Guide>
-            <Geom
-              type="point"
-              position="value*1"
-              shape="pointer"
-              color="#722ED1"
-              active={false}
-              style={{ stroke: '#fff', lineWidth: 1 }}
-            />
-          </Chart>
-
-          <div style={tableContainerStyle}>
-            <h1 style={tableTitleStyle}>Monthly Attrition Report - 2019</h1>
+            <Option value="All">All Programs</Option>
+            <Option value="Department of Defense Space Program">
+              Department of Defense Space Program
+            </Option>
+            <Option value="Department of Homeland Security Network">
+              Department of Homeland Security Network
+            </Option>
+            <Option value="AWS Technical Support Program">AWS Technical Support Program</Option>
+          </Select>
+          <br />
+          <div
+            style={
+              this.state.programValue === 'Department of Defense Space Program'
+                ? {}
+                : { display: 'none' }
+            }
+          >
+            <h1>Employee Summary</h1>
+            <Button type="primary" size="small">
+              Export to CSV
+            </Button>
+            <Button type="primary" size="small">
+              Export to PDF
+            </Button>
             <Table
-              className="report-table"
+              style={{ width: '100%' }}
+              bordered
               dataSource={dataSource}
               columns={columns}
-              size="middle"
               pagination={false}
             />
           </div>

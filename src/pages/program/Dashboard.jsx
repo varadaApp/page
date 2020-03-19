@@ -1,23 +1,26 @@
-/* eslint-disable max-len */
 import React from 'react';
 import {
   Card,
   Typography,
+  Alert,
   Icon,
+  Menu,
+  Spin,
   Row,
   Col,
+  Badge,
   Drawer,
   Form,
   Button,
   Input,
   Select,
   DatePicker,
-  Checkbox,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
-import ToDoList from './common-components/ToDoList';
-import GoalList from './common-components/GoalList';
+import ToDoList from '../common-components/Todos';
+import GoalList from '../common-components/Goals';
 
 const morningIcon = 'https://i.imgur.com/h4d6GDR.png';
 const afternoonIcon = 'https://i.imgur.com/Ti1XFhK.png';
@@ -27,7 +30,12 @@ const hour = new Date().getHours();
 
 const greeting = `Good ${(hour < 12 && 'morning') || (hour < 18 && 'afternoon') || 'evening'}`;
 const greetingIcon = (hour < 12 && morningIcon) || (hour < 18 && afternoonIcon) || eveningIcon;
-class Overview extends React.Component {
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { userAsync: [], loading: true };
+  }
+
   state = { visible: false };
 
   showDrawer = () => {
@@ -52,26 +60,38 @@ class Overview extends React.Component {
   } */
 
   render() {
+    const {
+      currentUser = {
+        avatar: '',
+        name: '',
+      },
+      menu,
+    } = this.props;
     const thingsToDo = [
       {
-        title: 'Reminder',
+        title: '',
         content:
           'Have you signed up for your training for your training yet yet for your training yet?',
+        to: '/program/employee/career-track',
       },
       {
-        title: '',
-        content: 'There are new job openings for your desired career track...',
+        title: 'Reminder',
+        content: 'Have you followed up with Emmitt Dugas with his AWS training?',
+        to: '/program/profile',
       },
     ];
 
     const goals = [
-      'Complete Splunk certification in 2020!',
-      'Sign up for virtual manager training.',
-      'Explore career paths in satelite networks.',
+      {
+        content: 'Increase the Program Staffing by 10% in 2020!',
+        to: '/program/dashboard',
+      },
+      {
+        content: 'Help each employee complete at least one certification in 2020!',
+        to: '/program/dashboard',
+      },
     ];
-
     const { getFieldDecorator } = this.props.form;
-
     return (
       <PageHeaderWrapper>
         <Card>
@@ -89,7 +109,7 @@ class Overview extends React.Component {
           <Typography
             style={{
               fontWeight: 600,
-              fontSize: '31px',
+              fontSize: '33px',
               letterSpacing: '0.1px',
               color: 'black',
               textAlign: 'center',
@@ -97,91 +117,14 @@ class Overview extends React.Component {
           >
             {greeting}, Sidney
           </Typography>
-          <Typography style={{ textAlign: 'center' }}>
-            <a style={{ color: 'black', marginRight: '5px' }}>Have any questions? </a>
-            <a href="#">Visit Help Center</a>
-          </Typography>
-          <div
-            style={{
-              borderRadius: 5,
-              backgroundColor: 'rgb(240, 242, 245)',
-              margin: 24,
-              padding: 24,
-            }}
-          >
-            <Typography
-              style={{
-                fontSize: '28px',
-                color: 'black',
-                borderWidth: '0px',
-              }}
-            >
-              My current status is:
-            </Typography>
-            <div style={{ display: 'flex', padding: 10 }}>
-              <div style={{ padding: 10 }}>
-                <Checkbox>
-                  <span style={{ fontSize: 16, color: 'black', marginLeft: '5px' }}>
-                    Interested in Growth & Training
-                  </span>
-                </Checkbox>
-              </div>
-              <div style={{ padding: 10 }}>
-                <Checkbox>
-                  <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
-                    Losing Coverage:
-                  </span>
-                  <br />
-                  <DatePicker size="small" format="DD/MM/YYYY" />
-                </Checkbox>
-              </div>
-              <div style={{ padding: 10 }}>
-                <Checkbox>
-                  <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
-                    Location Change:
-                  </span>
-                  <br />
-                  <Select
-                    style={{ margin: 0, padding: 2 }}
-                    showSearch
-                    placeholder="Select a Location"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Select.Option value="0">Northern Virginia</Select.Option>
-                    <Select.Option value="1">Washington D.C.</Select.Option>
-                    <Select.Option value="2">Maryland</Select.Option>
-                    <Select.Option value="3">Hawaii</Select.Option>
-                  </Select>
-                  <Select showSearch style={{ width: 100 }} placeholder="Radius">
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">5</Option>
-                    <Option value="2">10</Option>
-                    <Option value="3">20</Option>
-                    <Option value="4">30</Option>
-                    <Option value="5">40</Option>
-                    <Option value="6">50</Option>
-                    <Option value="7">60</Option>
-                    <Option value="8">75</Option>
-                    <Option value="9">100</Option>
-                    <Option value="10">150</Option>
-                    <Option value="11">200</Option>
-                  </Select>
-                </Checkbox>
-              </div>
-            </div>
-          </div>
           <Row gutter={[8, 8]}>
             <Col xs={12} span={6}>
-              <ToDoList list={thingsToDo} />
+              <ToDoList title="Alerts" list={thingsToDo} />
             </Col>
             <Col xs={12} span={18}>
               <GoalList list={goals} showDrawer={this.showDrawer} />
             </Col>
           </Row>
-
           <p
             style={{
               textAlign: 'center',
@@ -238,6 +181,7 @@ class Overview extends React.Component {
           <h1>
             {greeting}, {currentUser.name}
           </h1>
+
           <p
             style={{
               textAlign: 'center',
@@ -260,4 +204,9 @@ class Overview extends React.Component {
   }
 }
 
-export default connect(() => ({}))(Form.create()(Overview));
+//const App = Form.create()(Dashboard);
+/* export default connect(({ user }) => ({
+  currentUser: user.currentUser,
+}))(Dashboard); */
+
+export default connect(({}) => ({}))(Form.create()(Dashboard));

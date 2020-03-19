@@ -110,7 +110,7 @@ const BasicLayout = props => {
         return first ? (
           <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
         ) : (
-          <span>{route.breadcrumbName}</span>
+          <span className="123">{route.breadcrumbName}</span>
         );
       }}
       footerRender={footerRender}

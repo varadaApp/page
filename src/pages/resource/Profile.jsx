@@ -1,59 +1,11 @@
 import React from 'react';
-import { Card, Row, Col, Divider, Icon, Form, Upload, message, Button } from 'antd';
+import { Card, Typography, Alert, Icon, Form, Upload, message, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 
 const formItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 12 },
-};
-
-const titleStyle = {
-  fontSize: '30px',
-  color: 'black',
-  fontWeight: 600,
-  lineHeight: '40px',
-  marginBottom: '20px',
-  paddingBottom: '10px',
-};
-
-const labelStyle = {
-  fontSize: '22px',
-  color: 'black',
-  fontWeight: 500,
-  letterSpacing: '0.5px',
-};
-
-const valueStyle = {
-  marginLeft: '20px',
-  color: '#525257',
-  fontWeight: 600,
-  fontSize: '16px',
-  paddingLeft: '10px',
-};
-
-const editStyle = {
-  color: '#525257',
-  fontWeight: 600,
-  fontSize: '16px',
-  marginLeft: '5px',
-};
-
-const profileMessageHeaderStyle = {
-  fontSize: '19px',
-  color: '#525257',
-  fontWeight: 600,
-};
-
-const profileMessageContentStyle = {
-  fontSize: '14px',
-  color: '#525257 ',
-};
-
-const profileMessageContainerStyle = {
-  padding: '20px',
-  backgroundColor: '#f0f2f5',
-  borderColor: '#dcdcdc',
-  borderWidth: '1px',
 };
 
 const props = {
@@ -74,96 +26,43 @@ const props = {
   },
 };
 
-const data = [
-  {
-    label: 'Title',
-    value: 'ASP.NET Developer',
-  },
-  {
-    label: 'Program Name',
-    value: 'Department of Defense Space Program',
-  },
-  {
-    label: 'Program Position',
-    value: 'Senior Software Engineer',
-  },
-  {
-    label: 'Program Location',
-    value: 'Washington, D.C.',
-  },
-  {
-    label: 'Current Salary',
-    value: '$110,000',
-  },
-  {
-    label: 'Current Clearance',
-    value: 'Top Secret',
-  },
-];
-
 export default () => (
   <PageHeaderWrapper>
     <Card>
-      <Row gutter={[8, 8]}>
-        <Col xs={1} />
-        <Col xs={22}>
-          <h1 style={titleStyle}>Profile details</h1>
-          <Divider />
-          <Form {...formItemLayout}>
-            <Row gutter={[8, 8]}>
-              <Col xs={16}>
-                {data.map(d => (
-                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
-                    <p style={labelStyle}>{d.label}</p>
-                    <Row>
-                      <Col xs={20}>
-                        <p style={valueStyle} className="ant-form-text">
-                          {d.value}
-                        </p>
-                      </Col>
-                      <Col xs={4}>
-                        <Icon type="edit" />
-                        <span style={editStyle}>Edit</span>
-                      </Col>
-                    </Row>
-                  </Form.Item>
-                ))}
-              </Col>
-              <Col xs={8}>
-                <div style={{ width: '100%' }}>
-                  <img
-                    style={{ width: '100%' }}
-                    src="https://cdn.dribbble.com/users/79571/screenshots/4407347/swingvy_all_illustrations.png"
-                    alt=""
-                  />
-                </div>
-                <div style={profileMessageContainerStyle}>
-                  <p style={profileMessageHeaderStyle}>Your profile document</p>
-                  <p style={profileMessageContentStyle}>
-                    Depending on your industry and the type of job you are interested, a resume can
-                    be a great way to highlight your skills and experience in a manner that is more
-                    visually appealing and engaging.
-                  </p>
-                  <Upload {...props}>
-                    <Button type="primary">
-                      <Icon type="upload" /> Click to Upload Resume
-                    </Button>
-                  </Upload>
-                </div>
-              </Col>
-            </Row>
-          </Form>
-          <p
-            style={{
-              textAlign: 'center',
-              marginTop: 24,
-            }}
-          >
-            We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
-          </p>
-        </Col>
-        <Col xs={1} />
-      </Row>
+      <h1>Sidney's Profile</h1>
+      <Form {...formItemLayout}>
+        <Form.Item label="Title:">
+          <span className="ant-form-text">ASP.NET Developer</span>
+        </Form.Item>
+        <Form.Item label="Program Name:">
+          <span className="ant-form-text">Department of Defense Space Program</span>
+        </Form.Item>
+        <Form.Item label="Program Position:">
+          <span className="ant-form-text">Senior Software Engineer</span>
+        </Form.Item>
+        <Form.Item label="Program Location:">
+          <span className="ant-form-text">Washington, D.C.</span>
+        </Form.Item>
+        <Form.Item label="Current Salary:">
+          <span className="ant-form-text">$110,000</span>
+        </Form.Item>
+        <Form.Item label="Current Clearance:">
+          <span className="ant-form-text">Top Secret</span>
+        </Form.Item>
+      </Form>
+      <Upload {...props}>
+        <Button type="primary">
+          <Icon type="upload" /> Click to Upload Resume
+        </Button>
+      </Upload>
+      <p
+        style={{
+          textAlign: 'center',
+          marginTop: 24,
+        }}
+      >
+        We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
+      </p>
     </Card>
   </PageHeaderWrapper>
 );

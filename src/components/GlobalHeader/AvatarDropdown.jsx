@@ -7,8 +7,21 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 class AvatarDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: {
+        avatar: '',
+        name: 'Sidney Watkins',
+      },
+      menukey: 'menukey',
+    };
+    this.onMenuClick = this.onMenuClick.bind(this);
+  }
+
   onMenuClick = event => {
     const { key } = event;
+    // const { currentUser } = this.state;
     if (key === 'logout') {
       const { dispatch } = this.props;
 
@@ -21,6 +34,15 @@ class AvatarDropdown extends React.Component {
       return;
     }
     if (key === 'program') {
+      this.setState({
+        menukey: 'program',
+      });
+      this.setState({
+        currentUser: {
+          avatar: '',
+          name: 'Test',
+        },
+      });
       router.push('program');
     }
     if (key === 'learning') {
@@ -37,13 +59,16 @@ class AvatarDropdown extends React.Component {
   };
 
   render() {
-    const {
-      currentUser = {
-        avatar: '',
-        name: 'Sidney Watkins',
-      },
-      menu,
-    } = this.props;
+    const { menu } = this.props;
+    const { currentUser, menukey } = this.state;
+    if (menukey === 'program') {
+      this.setState({
+        currentUser: {
+          avatar: '',
+          name: 'Test',
+        },
+      });
+    }
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         {menu && (

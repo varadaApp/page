@@ -84,19 +84,19 @@ export default {
   routes: [
     {
       path: '/',
-      redirect: '/employee/overview',
+      redirect: '/employee/dashboard',
     },
     {
       path: '/account/program',
-      redirect: '/program/overview',
+      redirect: '/program/dashboard',
     },
     {
       path: '/account/learning',
-      redirect: '/learning/overview',
+      redirect: '/learning/dashboard',
     },
     {
       path: '/account/resource',
-      redirect: '/resource/overview',
+      redirect: '/resource/dashboard',
     },
     {
       path: '/user',
@@ -120,13 +120,13 @@ export default {
           routes: [
             {
               path: '/employee',
-              redirect: '/employee/verview',
+              redirect: '/employee/dashboard',
             },
             {
-              path: '/employee/overview',
-              name: 'Overview',
-              icon: 'global',
-              component: './Overview',
+              path: '/employee/dashboard',
+              name: 'dashboard',
+              icon: 'dashboard',
+              component: './Dashboard',
             },
             {
               path: '/employee/goals',
@@ -222,13 +222,13 @@ export default {
           routes: [
             {
               path: '/program',
-              redirect: '/program/overview',
+              redirect: '/program/dashboard',
             },
             {
-              path: '/program/overview',
-              name: 'Program Overview',
-              icon: 'global',
-              component: './Program/Overview',
+              path: '/program/dashboard',
+              name: 'Program Dashboard',
+              icon: 'dashboard',
+              component: './Program/Dashboard',
             },
             {
               path: '/program/profile',
@@ -350,13 +350,13 @@ export default {
           routes: [
             {
               path: '/learning',
-              redirect: '/learning/overview',
+              redirect: '/learning/dashboard',
             },
             {
-              path: '/learning/overview',
-              name: 'ITS Learning Overview',
-              icon: 'global',
-              component: './Learning/Overview',
+              path: '/learning/dashboard',
+              name: 'ITS Learning Dashboard',
+              icon: 'dashboard',
+              component: './Learning/Dashboard',
             },
             {
               path: '/learning/reporting',
@@ -413,7 +413,6 @@ export default {
                 },
               ],
             },
-
             // {
             //   path: '/learning/employee',
             //   name: 'Employee Inventory',
@@ -463,19 +462,32 @@ export default {
           routes: [
             {
               path: '/resource',
-              redirect: '/resource/overview',
+              redirect: '/resource/dashboard',
             },
             {
-              path: '/resource/overview',
-              name: 'ITS Resource Overview',
-              icon: 'global',
-              component: './Resource/Overview',
+              path: '/resource/dashboard',
+              name: 'ITS Resource Dashboard',
+              icon: 'dashboard',
+              component: './Resource/Dashboard',
             },
             {
               path: '/resource/enterpriseReporting',
               name: 'ITS Enterprise Reporting',
               icon: 'rise',
-              component: './Resource/EnterpriseReporting',
+              routes: [
+                {
+                  path: '/resource/enterpriseReporting/attrition',
+                  name: 'Attrition on Program',
+                  icon: 'environment',
+                  component: './Resource/Attrition',
+                },
+                {
+                  path: '/resource/enterpriseReporting/mobility-forecast',
+                  name: 'Mobility Forecast',
+                  icon: 'coffee',
+                  component: './Resource/MobilityForecast',
+                },
+              ],
             },
             {
               path: '/resource/employeeSearch',
@@ -483,12 +495,12 @@ export default {
               icon: 'search',
               component: './Resource/EmployeeSearch',
             },
-            {
-              path: '/resource/reporting',
-              name: 'ITS Employee Reporting',
-              icon: 'rise',
-              component: './Resource/EmployeeReporting',
-            },
+            // {
+            //   path: '/resource/reporting',
+            //   name: 'ITS Employee Reporting',
+            //   icon: 'rise',
+            //   component: './Resource/EmployeeReporting',
+            // },
             // {
             //   path: '/resource/employee',
             //   name: 'ITS Employees',

@@ -12,9 +12,13 @@ import {
   Checkbox,
   AutoComplete,
   Table,
+  Select,
+  Dropdown,
+  Menu,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import React from 'react';
+import Link from 'umi/link';
 
 class CurrentCareerTrack extends React.Component {
   constructor(props) {
@@ -32,7 +36,7 @@ class CurrentCareerTrack extends React.Component {
       visible3: false,
       positionsLoading3: false,
       positionsVisible3: false,
-      programValue: 'Department of Homeland Security Satellite Network',
+      programValue: 'Department of Homeland Security Network',
       programValue2: 'Department of Defense Space Program',
       tab1: [
         {
@@ -47,8 +51,14 @@ class CurrentCareerTrack extends React.Component {
         {
           show: false,
         },
+        {
+          show: false,
+        },
       ],
       tab2: [
+        {
+          show: false,
+        },
         {
           show: false,
         },
@@ -92,13 +102,20 @@ class CurrentCareerTrack extends React.Component {
     });
   };
 
-  toggleShow = (index, tab) =>
+  toggleShow = (index, tab, cName, wrapperClass) => {
     this.setState(prevState => ({
       [`tab${tab}`]: prevState[`tab${tab}`].map((item, i) =>
         index === i ? { ...item, show: !item.show } : item,
       ),
     }));
-
+    let growDiv = document.querySelector(`.${cName}`);
+    if (growDiv.clientHeight) {
+      growDiv.style.height = 0;
+    } else {
+      var wrapper = document.querySelector(`.${wrapperClass}`);
+      growDiv.style.height = wrapper.clientHeight + 'px';
+    }
+  };
   handlePositionsOk = () => {
     this.setState({ positionsLoading: true });
     setTimeout(() => {
@@ -211,7 +228,7 @@ class CurrentCareerTrack extends React.Component {
     } = this.state;
     const { Step } = Steps;
     const dataSourceProgram = [
-      'Department of Homeland Security Satellite Network',
+      'Department of Homeland Security Network',
       'AWS Technical Support Program',
     ];
     const dataSourceProgram2 = [
@@ -233,10 +250,24 @@ class CurrentCareerTrack extends React.Component {
       },
     ];
 
+    const columns2 = [
+      {
+        title: 'Certification',
+        dataIndex: 'certification',
+        key: 'certification',
+        width: 450,
+      },
+      {
+        title: 'Status',
+        key: 'status',
+        render: props => props.status,
+      },
+    ];
+
     const dataSource1 = [
       {
         key: '1',
-        training: 'Advanced Networking',
+        training: 'Systems Engineer Training Level 2',
         status: (
           <span className="attention">
             Training Recently Shown Interest, Needs Action
@@ -246,7 +277,7 @@ class CurrentCareerTrack extends React.Component {
       },
       {
         key: '2',
-        training: 'Networking Circuits',
+        training: 'Virtualized Servers',
         status: <Checkbox>Select to Show Interest in Training</Checkbox>,
       },
     ];
@@ -254,39 +285,74 @@ class CurrentCareerTrack extends React.Component {
     const dataSource2 = [
       {
         key: '1',
-        training: 'CCNA',
+        certification: 'Security+',
         status: (
-          <span className="in-progress">
-            Certification Test Scheduled
-            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
           </span>
         ),
       },
       {
         key: '2',
-        training: 'CCNP',
-        status: <Checkbox>Select to Show Interest in Certification</Checkbox>,
+        certification: 'Splunk',
+        status: (
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '3',
+        certification: 'VMWare',
+        status: (
+          <span className="attention">
+            Certification Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+          </span>
+        ),
       },
     ];
 
     const dataSource3 = [
       {
         key: '1',
-        training: 'Security+',
+        certification: 'Security+',
         status: (
-          <span style={{ margin: '5px' }} className="in-progress">
-            Certification Test Scheduled
-            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
           </span>
         ),
       },
       {
         key: '2',
-        training: 'AWS Developer',
+        certification: 'Splunk',
         status: (
           <span style={{ margin: '5px' }} className="completed">
             Certification Complete
             <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '3',
+        certification: 'AWS Administration',
+        status: (
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '4',
+        certification: 'VMWare',
+        status: (
+          <span className="attention">
+            Certification Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
           </span>
         ),
       },
@@ -295,7 +361,7 @@ class CurrentCareerTrack extends React.Component {
     const dataSource4 = [
       {
         key: '1',
-        training: 'Programming Level 3 Training',
+        training: 'System Administration Level 3 Training',
         status: (
           <span className="in-progress">
             Training Scheduled
@@ -305,7 +371,7 @@ class CurrentCareerTrack extends React.Component {
       },
       {
         key: '2',
-        training: 'Database Level 3 Traning',
+        training: 'Windows Server Administration Level 3 Training',
         status: (
           <span className="in-progress">
             Training in Progress
@@ -313,22 +379,22 @@ class CurrentCareerTrack extends React.Component {
           </span>
         ),
       },
-      {
-        key: '3',
-        training: 'Advanced Agile Traning',
-        status: (
-          <span className="completed">
-            Training Complete
-            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
-          </span>
-        ),
-      },
+      // {
+      //   key: '3',
+      //   training: 'Advanced Agile Traning',
+      //   status: (
+      //     <span className="completed">
+      //       Training Complete
+      //       <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+      //     </span>
+      //   ),
+      // },
     ];
 
     const dataSource5 = [
       {
         key: '1',
-        training: 'CCISP',
+        certification: 'VMWare',
         status: (
           <span className="attention">
             Certification Recently Shown Interest, Needs Action
@@ -338,30 +404,58 @@ class CurrentCareerTrack extends React.Component {
       },
       {
         key: '2',
-        training: 'AWS Developer',
-        status: (
-          <span className="completed">
-            Certification Complete
-            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
-          </span>
-        ),
+        certification: 'Cloudera CDH4 Administrator',
+        status: <Checkbox>Select to Show Interest in Certification</Checkbox>,
       },
     ];
 
     const dataSource6 = [
       {
         key: '1',
-        training: 'Security++',
+        training: 'System Administration Level 3 Training',
         status: (
-          <span style={{ margin: '5px' }} className="in-progress">
-            Certification Test Scheduled
+          <span className="in-progress">
+            Training Scheduled
             <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
           </span>
         ),
       },
       {
         key: '2',
-        training: 'AWS Developer',
+        training: 'Windows Server Administration Level 3 Training',
+        status: (
+          <span className="in-progress">
+            Training in Progress
+            <Icon style={{ margin: '5px' }} type="sync" spin />
+          </span>
+        ),
+      },
+      // {
+      //   key: '3',
+      //   training: 'Advanced Agile Traning',
+      //   status: (
+      //     <span className="completed">
+      //       Training Complete
+      //       <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+      //     </span>
+      //   ),
+      // },
+    ];
+
+    const dataSource7 = [
+      {
+        key: '1',
+        certification: 'VMWare',
+        status: (
+          <span className="attention">
+            Certification Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        certification: 'AWS Administration',
         status: (
           <span style={{ margin: '5px' }} className="completed">
             Certification Complete
@@ -370,6 +464,7 @@ class CurrentCareerTrack extends React.Component {
         ),
       },
     ];
+
     return (
       <PageHeaderWrapper>
         <Card className="current-career-track-main-container">
@@ -422,7 +517,7 @@ class CurrentCareerTrack extends React.Component {
                     marginTop: 20,
                   }}
                 >
-                  Software Developer
+                  System Administration
                 </div>
                 <div style={{ textAlign: 'left' }}>Current Career Track</div>
               </div>
@@ -531,17 +626,24 @@ class CurrentCareerTrack extends React.Component {
                     <p style={{ marginTop: '15px', paddingTop: '5px' }}>
                       <h3 style={{ color: 'black' }}>Select another program</h3>
                     </p>
-                    <AutoComplete
-                      style={{ width: 350, marginLeft: '10px', paddingLeft: '5px' }}
-                      allowClear
-                      dataSource={dataSourceProgram}
+                    <Select
+                      showSearch
+                      style={{ width: 350 }}
                       placeholder="Program"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
                       onSelect={this.handleProgramSelect}
                       onChange={this.handleProgramChange}
-                      filterOption={(inputValue, option) =>
-                        option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                      }
-                    />
+                    >
+                      <Option value="Department of Homeland Security Network">
+                        Department of Homeland Security Network
+                      </Option>
+                      <Option value="AWS Technical Support Program">
+                        AWS Technical Support Program
+                      </Option>
+                    </Select>
                   </div>
                   <Divider />
                   <div
@@ -552,114 +654,127 @@ class CurrentCareerTrack extends React.Component {
                       paddingRight: '10px',
                     }}
                   >
-                    <div className="row-title" onClick={() => this.toggleShow(0, 1)}>
-                      Network Engineer Tier
+                    <div
+                      className="row-title"
+                      onClick={() => this.toggleShow(0, 1, 'grow-class-1', 'measuringWrapper1')}
+                    >
+                      System Engineer Tier 2
                       <Icon type={this.state.tab1[0].show ? 'up' : 'down'} />
                     </div>
-                    <div style={!this.state.tab1[0].show ? { display: 'none' } : {}}>
-                      <p
-                        style={{
-                          color: '#525257',
-                          fontSize: 13,
-                          marginLeft: '20px',
-                          paddingLeft: '10px',
-                          marginRight: '20px',
-                          paddingRight: '10px',
-                        }}
-                      >
-                        <span>
-                          <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
-                          {this.state.programValue || 'No program selected'}
-                        </span>
-                      </p>
-                      <div
-                        style={
-                          this.state.programValue ===
-                          'Department of Homeland Security Satellite Network'
-                            ? {
-                                marginLeft: '20px',
-                                paddingLeft: '10px',
-                                marginRight: '20px',
-                                paddingRight: '10px',
-                              }
-                            : { display: 'none' }
-                        }
-                      >
-                        <div style={{ fontSize: 13 }}>
-                          <Divider className="content-divider" />
-                          <div
-                            style={{ marginTop: 10, paddingTop: 5 }}
-                            onClick={this.showPositionsModal2}
-                          >
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Open Positions:
+                    <div className="grow-class grow-class-1">
+                      <div className="measuringWrapper1">
+                        <p
+                          style={{
+                            color: '#525257',
+                            fontSize: 13,
+                            marginLeft: '20px',
+                            paddingLeft: '10px',
+                            marginRight: '20px',
+                            paddingRight: '10px',
+                          }}
+                        >
+                          <span>
+                            <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                            {this.state.programValue || 'No program selected'}
+                          </span>
+                        </p>
+                        <div
+                          style={
+                            this.state.programValue === 'Department of Homeland Security Network'
+                              ? {
+                                  marginLeft: '20px',
+                                  paddingLeft: '10px',
+                                  marginRight: '20px',
+                                  paddingRight: '10px',
+                                }
+                              : { display: 'none' }
+                          }
+                        >
+                          <div style={{ fontSize: 13 }}>
+                            <Divider className="content-divider" />
+                            <div
+                              style={{ marginTop: 10, paddingTop: 5 }}
+                              onClick={this.showPositionsModal2}
+                            >
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Open Positions:
+                                </span>
+                                <span>12</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal}>
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Percentage Complete:
+                                </span>
+                                <span>25%</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Overall Expected Completion Date:
+                                </span>
+                                5/1/2020
                               </span>
-                              <span>12</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Percentage Complete:
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Program Location:
+                                </span>
+                                Washington, D.C.
                               </span>
-                              <span>225%</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }}>
-                            <span>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Overall Expected Completion Date:
-                              </span>
-                              2/1/2020
-                            </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div
-                        style={
-                          this.state.programValue === 'AWS Technical Support Program'
-                            ? {
-                                marginLeft: '20px',
-                                paddingLeft: '10px',
-                                marginRight: '20px',
-                                paddingRight: '10px',
-                              }
-                            : { display: 'none' }
-                        }
-                      >
-                        <div style={{ fontSize: 13 }}>
-                          <Divider className="content-divider" />
-                          <div
-                            style={{ marginTop: 10, paddingTop: 5 }}
-                            onClick={this.showPositionsModal2}
-                          >
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Open Positions:
+                        <div
+                          style={
+                            this.state.programValue === 'AWS Technical Support Program'
+                              ? {
+                                  marginLeft: '20px',
+                                  paddingLeft: '10px',
+                                  marginRight: '20px',
+                                  paddingRight: '10px',
+                                }
+                              : { display: 'none' }
+                          }
+                        >
+                          <div style={{ fontSize: 13 }}>
+                            <Divider className="content-divider" />
+                            <div
+                              style={{ marginTop: 10, paddingTop: 5 }}
+                              onClick={this.showPositionsModal2}
+                            >
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Open Positions:
+                                </span>
+                                <span>3</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Percentage Complete:
+                                </span>
+                                <span>55%</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Overall Expected Completion Date:
+                                </span>
+                                5/1/2020
                               </span>
-                              <span>3</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Percentage Complete:
-                              </span>
-                              <span>85%</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }}>
-                            <span>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Overall Expected Completion Date:
-                              </span>
-                              2/1/2020
-                            </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -668,40 +783,49 @@ class CurrentCareerTrack extends React.Component {
                   {this.state.programValue && <Divider />}
                   <div
                     style={
-                      this.state.programValue ===
-                      'Department of Homeland Security Satellite Network'
+                      this.state.programValue === 'Department of Homeland Security Network'
                         ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
                         : { display: 'none' }
                     }
                   >
-                    <div className="row-title" onClick={() => this.toggleShow(1, 1)}>
+                    <div
+                      className="row-title"
+                      onClick={() => this.toggleShow(1, 1, 'grow-class-2', 'measuringWrapper2')}
+                    >
                       Trainings
-                      <Icon type={this.state.tab1[1].show ? 'up' : 'down'} />
+                      <Icon className="" type={this.state.tab1[1].show ? 'up' : 'down'} />
                     </div>
                     <Divider />
-                    <div style={!this.state.tab1[1].show ? { display: 'none' } : {}}>
-                      <Table
-                        className="career-track-management-table"
-                        dataSource={dataSource1}
-                        columns={columns}
-                        size="middle"
-                        pagination={false}
-                        style={{ paddingBottom: 20 }}
-                      />
+                    <div className="grow-class grow-class-2">
+                      <div className="measuringWrapper2">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource1}
+                          columns={columns}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
                     </div>
-                    <div className="row-title" onClick={() => this.toggleShow(2, 1)}>
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(2, 1, 'grow-class-3', 'measuringWrapper3')}
+                    >
                       Certifications
-                      <Icon type={this.state.tab1[2].show ? 'up' : 'down'} />
+                      <Icon className="" type={this.state.tab1[2].show ? 'up' : 'down'} />
                     </div>
-                    <div style={!this.state.tab1[2].show ? { display: 'none' } : {}}>
-                      <Table
-                        className="career-track-management-table"
-                        dataSource={dataSource2}
-                        columns={columns}
-                        size="middle"
-                        pagination={false}
-                        style={{ paddingBottom: 20 }}
-                      />
+                    <div className="grow-class grow-class-3">
+                      <div className="measuringWrapper3">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource2}
+                          columns={columns2}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
                     </div>
                   </div>
                   {/* {this.state.programValue && <Divider/>} */}
@@ -717,19 +841,24 @@ class CurrentCareerTrack extends React.Component {
                         : { display: 'none' }
                     }
                   >
-                    <div className="row-title" onClick={() => this.toggleShow(3, 1)}>
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(3, 1, 'grow-class-4', 'measuringWrapper4')}
+                    >
                       Certifications
-                      <Icon type={this.state.tab1[3].show ? 'up' : 'down'} />
+                      <Icon className="" type={this.state.tab1[3].show ? 'up' : 'down'} />
                     </div>
-                    <div style={!this.state.tab1[3].show ? { display: 'none' } : {}}>
-                      <Table
-                        className="career-track-management-table"
-                        dataSource={dataSource3}
-                        columns={columns}
-                        size="middle"
-                        pagination={false}
-                        style={{ paddingBottom: 20 }}
-                      />
+                    <div className="grow-class grow-class-4">
+                      <div className="measuringWrapper4">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource3}
+                          columns={columns2}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
                     </div>
                   </div>
                 </Row>
@@ -784,17 +913,24 @@ class CurrentCareerTrack extends React.Component {
                     <p style={{ marginTop: '15px', paddingTop: '5px' }}>
                       <h3 style={{ color: 'black' }}>Select another program</h3>
                     </p>
-                    <AutoComplete
-                      style={{ width: 350, marginLeft: '10px', paddingLeft: '5px' }}
-                      allowClear
-                      dataSource={dataSourceProgram2}
+                    <Select
+                      showSearch
+                      style={{ width: 350 }}
                       placeholder="Program"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
                       onSelect={this.handleProgramSelect2}
                       onChange={this.handleProgramChange2}
-                      filterOption={(inputValue, option) =>
-                        option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                      }
-                    />
+                    >
+                      <Option value="Department of Defense Space Program">
+                        Department of Defense Space Program
+                      </Option>
+                      <Option value="AWS Technical Support Program">
+                        AWS Technical Support Program
+                      </Option>
+                    </Select>
                   </div>
                   <Divider />
                   <div
@@ -805,112 +941,117 @@ class CurrentCareerTrack extends React.Component {
                       paddingRight: '10px',
                     }}
                   >
-                    <div className="row-title" onClick={() => this.toggleShow(0, 2)}>
-                      Software Developer Level 3
-                      <Icon type={this.state.tab2[0].show ? 'up' : 'down'} />
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(0, 2, 'grow-class-5', 'measuringWrapper5')}
+                    >
+                      System Administration Tier 3
+                      <Icon className="" type={this.state.tab2[0].show ? 'up' : 'down'} />
                     </div>
-                    <div style={!this.state.tab2[0].show ? { display: 'none' } : {}}>
-                      <p
-                        style={{
-                          color: '#525257',
-                          fontSize: 13,
-                          marginLeft: '20px',
-                          paddingLeft: '10px',
-                          marginRight: '20px',
-                          paddingRight: '10px',
-                        }}
-                      >
-                        <span>
-                          <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
-                          {this.state.programValue || 'No program selected'}
-                        </span>
-                      </p>
-                      <div
-                        style={
-                          this.state.programValue2 === 'Department of Defense Space Program'
-                            ? {
-                                marginLeft: '20px',
-                                paddingLeft: '10px',
-                                marginRight: '20px',
-                                paddingRight: '10px',
-                              }
-                            : { display: 'none' }
-                        }
-                      >
-                        <div style={{ fontSize: 13 }}>
-                          <Divider className="content-divider" />
-                          <div
-                            style={{ marginTop: 10, paddingTop: 5 }}
-                            onClick={this.showPositionsModal2}
-                          >
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Open Positions:
+                    <div className="grow-class grow-class-5">
+                      <div className="measuringWrapper5">
+                        <p
+                          style={{
+                            color: '#525257',
+                            fontSize: 13,
+                            marginLeft: '20px',
+                            paddingLeft: '10px',
+                            marginRight: '20px',
+                            paddingRight: '10px',
+                          }}
+                        >
+                          <span>
+                            <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                            {this.state.programValue2 || 'No program selected'}
+                          </span>
+                        </p>
+                        <div
+                          style={
+                            this.state.programValue2 === 'Department of Defense Space Program'
+                              ? {
+                                  marginLeft: '20px',
+                                  paddingLeft: '10px',
+                                  marginRight: '20px',
+                                  paddingRight: '10px',
+                                }
+                              : { display: 'none' }
+                          }
+                        >
+                          <div style={{ fontSize: 13 }}>
+                            <Divider className="content-divider" />
+                            {/* <div
+                              style={{ marginTop: 10, paddingTop: 5 }}
+                              onClick={this.showPositionsModal2}
+                            >
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Open Positions:
+                                </span>
+                                <span>4</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" /> */}
+                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal3}>
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Percentage Complete:
+                                </span>
+                                <span>35%</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Overall Expected Completion Date:
+                                </span>
+                                5/1/2020
                               </span>
-                              <span>4</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Percentage Complete:
-                              </span>
-                              <span>35%</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }}>
-                            <span>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Overall Expected Completion Date:
-                              </span>
-                              2/1/2020
-                            </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div
-                        style={
-                          this.state.programValue2 === 'AWS Technical Support Program'
-                            ? {
-                                marginLeft: '20px',
-                                paddingLeft: '10px',
-                                marginRight: '20px',
-                                paddingRight: '10px',
-                              }
-                            : { display: 'none' }
-                        }
-                      >
-                        <div style={{ fontSize: 13 }}>
-                          <div
-                            style={{ marginTop: 10, paddingTop: 5 }}
-                            onClick={this.showPositionsModal2}
-                          >
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Open Positions:
+                        <div
+                          style={
+                            this.state.programValue2 === 'AWS Technical Support Program'
+                              ? {
+                                  marginLeft: '20px',
+                                  paddingLeft: '10px',
+                                  marginRight: '20px',
+                                  paddingRight: '10px',
+                                }
+                              : { display: 'none' }
+                          }
+                        >
+                          <div style={{ fontSize: 13 }}>
+                            {/* <div
+                              style={{ marginTop: 10, paddingTop: 5 }}
+                              onClick={this.showPositionsModal2}
+                            >
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Open Positions:
+                                </span>
+                                <span>3</span>
+                              </a>
+                            </div> */}
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Percentage Complete:
+                                </span>
+                                <span>45%</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Overall Expected Completion Date:
+                                </span>
+                                5/1/2020
                               </span>
-                              <span>3</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
-                            <a>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Current Percentage Complete:
-                              </span>
-                              <span>85%</span>
-                            </a>
-                          </div>
-                          <Divider className="content-divider" />
-                          <div style={{ marginTop: 10, paddingTop: 5 }}>
-                            <span>
-                              <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                Overall Expected Completion Date:
-                              </span>
-                              2/1/2020
-                            </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -924,35 +1065,44 @@ class CurrentCareerTrack extends React.Component {
                         : { display: 'none' }
                     }
                   >
-                    <div className="row-title" onClick={() => this.toggleShow(1, 2)}>
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(1, 2, 'grow-class-6', 'measuringWrapper6')}
+                    >
                       Trainings
-                      <Icon type={this.state.tab2[1].show ? 'up' : 'down'} />
+                      <Icon className="" type={this.state.tab2[1].show ? 'up' : 'down'} />
                     </div>
-                    {/* <div style={{ marginBottom: '10px', paddingBottom: '5px' }}> */}
-                    <div style={!this.state.tab2[1].show ? { display: 'none' } : {}}>
-                      <Table
-                        className="career-track-management-table"
-                        dataSource={dataSource4}
-                        columns={columns}
-                        size="middle"
-                        pagination={false}
-                        style={{ paddingBottom: 20 }}
-                      />
+                    <div className="grow-class grow-class-6">
+                      <div className="measuringWrapper6">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource4}
+                          columns={columns}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
                     </div>
                     <Divider />
-                    <div className="row-title" onClick={() => this.toggleShow(2, 2)}>
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(2, 2, 'grow-class-7', 'measuringWrapper7')}
+                    >
                       Certifications
-                      <Icon type={this.state.tab2[2].show ? 'up' : 'down'} />
+                      <Icon className="" type={this.state.tab2[2].show ? 'up' : 'down'} />
                     </div>
-                    <div style={!this.state.tab2[2].show ? { display: 'none' } : {}}>
-                      <Table
-                        className="career-track-management-table"
-                        dataSource={dataSource5}
-                        columns={columns}
-                        size="middle"
-                        pagination={false}
-                        style={{ paddingBottom: 20 }}
-                      />
+                    <div className="grow-class grow-class-7">
+                      <div className="measuringWrapper7">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource5}
+                          columns={columns2}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div
@@ -962,12 +1112,15 @@ class CurrentCareerTrack extends React.Component {
                         : { display: 'none' }
                     }
                   >
-                    <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
-                      <div className="row-title" onClick={() => this.toggleShow(3, 2)}>
-                        Certifications
-                        <Icon type={this.state.tab2[3].show ? 'up' : 'down'} />
-                      </div>
-                      <div style={!this.state.tab2[3].show ? { display: 'none' } : {}}>
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(3, 2, 'grow-class-8', 'measuringWrapper8')}
+                    >
+                      Trainings
+                      <Icon className="" type={this.state.tab2[3].show ? 'up' : 'down'} />
+                    </div>
+                    <div className="grow-class grow-class-8">
+                      <div className="measuringWrapper8">
                         <Table
                           className="career-track-management-table"
                           dataSource={dataSource6}
@@ -976,6 +1129,28 @@ class CurrentCareerTrack extends React.Component {
                           pagination={false}
                           style={{ paddingBottom: 20 }}
                         />
+                      </div>
+                    </div>
+                    <Divider />
+                    <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
+                      <div
+                        className="row-title "
+                        onClick={() => this.toggleShow(4, 2, 'grow-class-9', 'measuringWrapper9')}
+                      >
+                        Certifications
+                        <Icon className="" type={this.state.tab2[4].show ? 'up' : 'down'} />
+                      </div>
+                      <div className="grow-class grow-class-9">
+                        <div className="measuringWrapper9">
+                          <Table
+                            className="career-track-management-table"
+                            dataSource={dataSource7}
+                            columns={columns2}
+                            size="middle"
+                            pagination={false}
+                            style={{ paddingBottom: 20 }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -999,30 +1174,32 @@ class CurrentCareerTrack extends React.Component {
         >
           <Row gutter={[8, 8]}>
             <Col span={24}>
-              Overall Expected Completion Date: 2/1/2020
+              Overall Expected Completion Date: 5/1/2020
               <br />
-              Program: Department of Homeland Security Satellite Network
+              Program: Department of Homeland Security Network
+              <br />
+              Program Location: Washington, D.C.
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={12}>
-              <h3>Advanced Networking Training</h3>
+              <h3>Systems Engineer Training Level 2</h3>
               <Steps progressDot current={0} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"
-                  description="11/1/2019: PM contacted. Please schedule your training"
+                  description="2/1/2020: PM contacted. Please schedule your training"
                 />
-                <Step title="Scheduled" description="Expected completion date: 11/15/2019" />
-                <Step title="In Progress" description="Expected completion date: 12/15/2019" />
+                <Step title="Scheduled" description="Expected completion date: 3/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 4/15/2020" />
                 <Step title="Completed" description="100%" />
               </Steps>
             </Col>
             <Col span={12}>
-              <h3>CCNA Certification</h3>
-              <Steps progressDot current={2} direction="vertical">
-                <Step title="Interest Showed" description="10/15/2019" />
-                <Step title="In Progress" description="Ready to schedule exame" />
-                <Step title="Schedule Exam" description="Exam date scheduled on 12/1/2019" />
+              <h3>VMWare Certification</h3>
+              <Steps progressDot current={0} direction="vertical">
+                <Step title="Interest Showed" description="2/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 3/15/2020" />
+                <Step title="Schedule Exam" description="Expected completion date: 4/15/2020" />
                 <Step title="Exam Passed" description="100%" />
               </Steps>
             </Col>
@@ -1045,7 +1222,7 @@ class CurrentCareerTrack extends React.Component {
             </Button>,
           ]}
         >
-          <p>Program: Department of Homeland Security Satellite Network</p>
+          <p>Program: Department of Homeland Security Network</p>
           <p>Selected Career Track: Network Engineer Tier 2</p>
           <div>
             <Checkbox>Senior Network Engineer (10 Positions Available)</Checkbox>
@@ -1056,7 +1233,7 @@ class CurrentCareerTrack extends React.Component {
         </Modal>
         <Modal
           visible={visible2}
-          title="Network Engineer Tier 2 Progress"
+          title="System Administration Tier 3"
           onOk={this.handleOk2}
           onCancel={this.handleCancel2}
           width={700}
@@ -1068,18 +1245,42 @@ class CurrentCareerTrack extends React.Component {
         >
           <Row gutter={[8, 8]}>
             <Col span={24}>
-              Overall Expected Completion Date: 2/1/2020
+              Overall Expected Completion Date: 5/1/2020
               <br />
               Program: AWS Technical Support Program
+              <br />
+              Program Location: Washington, D.C.
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
-            <Col span={24}>
-              <h3>Security+ Certification</h3>
-              <Steps progressDot current={2} direction="vertical">
-                <Step title="Interest Showed" description="10/15/2019" />
-                <Step title="In Progress" description="Ready to schedule exame" />
-                <Step title="Schedule Exam" description="Exam date scheduled on 12/1/2019" />
+            <Col span={12}>
+              <h3>System Administration Level 3 Training</h3>
+              <Steps progressDot current={1} direction="vertical" size="small">
+                <Step
+                  title="Interest Showed"
+                  description="2/1/2020: PM contacted. Please schedule your training"
+                />
+                <Step title="Scheduled" description="Training scheduled to start on 3/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 4/15/2020" />
+                <Step title="Completed" description="100%" />
+              </Steps>
+              <h3>Windows Server Administration Level 3 Training</h3>
+              <Steps progressDot current={2} direction="vertical" size="small">
+                <Step
+                  title="Interest Showed"
+                  description="2/1/2020: PM contacted. Please schedule your training"
+                />
+                <Step title="Scheduled" description="Training scheduled to start on 2/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 4/15/2020" />
+                <Step title="Completed" description="100%" />
+              </Steps>
+            </Col>
+            <Col span={12}>
+              <h3>VMWare Certification</h3>
+              <Steps progressDot current={0} direction="vertical">
+                <Step title="Interest Showed" description="2/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 3/15/2020" />
+                <Step title="Schedule Exam" description="Expected completion date: 4/15/2020" />
                 <Step title="Exam Passed" description="100%" />
               </Steps>
             </Col>
@@ -1103,14 +1304,17 @@ class CurrentCareerTrack extends React.Component {
           ]}
         >
           <p>Program: AWS Technical Support Program</p>
-          <p>Selected Career Track: Network Engineer Tier 2</p>
+          <p>Program Location: Washington, D.C.</p>
+          <p>Selected Career Track: System Engineer Tier 2</p>
           <div>
-            <Checkbox>Senior Network Engineer (3 Positions Available)</Checkbox>
+            <Link to="/employee/positionSearch">
+              Senior Splunk System Engineer (3 Positions Available)
+            </Link>
           </div>
         </Modal>
         <Modal
           visible={visible3}
-          title="Software Developer Tier 3 Progress"
+          title="System Administration Tier 3 Progress"
           onOk={this.handleOk3}
           onCancel={this.handleCancel3}
           width={700}
@@ -1122,18 +1326,42 @@ class CurrentCareerTrack extends React.Component {
         >
           <Row gutter={[8, 8]}>
             <Col span={24}>
-              Overall Expected Completion Date: 2/1/2020
+              Overall Expected Completion Date: 5/1/2020
               <br />
               Program: Department of Defense Space Program
+              <br />
+              Program Location: Washington, D.C.
             </Col>
           </Row>
           <Row gutter={[8, 8]}>
-            <Col span={24}>
-              <h3>Security+ Certification</h3>
-              <Steps progressDot current={2} direction="vertical">
-                <Step title="Interest Showed" description="10/15/2019" />
-                <Step title="In Progress" description="Ready to schedule exame" />
-                <Step title="Schedule Exam" description="Exam date scheduled on 12/1/2019" />
+            <Col span={12}>
+              <h3>System Administration Level 3 Training</h3>
+              <Steps progressDot current={1} direction="vertical" size="small">
+                <Step
+                  title="Interest Showed"
+                  description="2/1/2020: PM contacted. Please schedule your training"
+                />
+                <Step title="Scheduled" description="Training scheduled to start on 3/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 4/15/2020" />
+                <Step title="Completed" description="100%" />
+              </Steps>
+              <h3>Windows Server Administration Level 3 Training</h3>
+              <Steps progressDot current={2} direction="vertical" size="small">
+                <Step
+                  title="Interest Showed"
+                  description="2/1/2020: PM contacted. Please schedule your training"
+                />
+                <Step title="Scheduled" description="Training scheduled to start on 2/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 4/15/2020" />
+                <Step title="Completed" description="100%" />
+              </Steps>
+            </Col>
+            <Col span={12}>
+              <h3>VMWare Certification</h3>
+              <Steps progressDot current={0} direction="vertical">
+                <Step title="Interest Showed" description="2/15/2020" />
+                <Step title="In Progress" description="Expected completion date: 3/15/2020" />
+                <Step title="Schedule Exam" description="Expected completion date: 4/15/2020" />
                 <Step title="Exam Passed" description="100%" />
               </Steps>
             </Col>

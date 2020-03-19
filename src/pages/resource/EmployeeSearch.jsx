@@ -1,15 +1,33 @@
 import React from 'react';
-import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
+import {
+  Card,
+  Typography,
+  Alert,
+  Icon,
+  AutoComplete,
+  Form,
+  Button,
+  Modal,
+  Checkbox,
+  Select,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ReactTable from 'react-table';
-import { employeeSearch } from '../Utils';
+import { FormattedMessage } from 'umi-plugin-react/locale';
+import { employeeSearch, Logo, Tips } from '../Utils';
+import matchSorter from 'match-sorter';
 
 // Import React Table
+import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 const autoCompleteStyle = {
   width: '100%',
   margin: '5px',
+  padding: '2px',
+};
+const radiusStyle = {
+  width: '100%',
+  marginTop: '5px',
   padding: '2px',
 };
 
@@ -31,7 +49,145 @@ class EmployeeSearch extends React.Component {
     this.handleClearanceSearch = this.handleClearanceSearch.bind(this);
     this.handleCareerTrackSearch = this.handleCareerTrackSearch.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleOriginal = this.handleOriginal.bind(this);
     this.showRow = this.showRow.bind(this);
+  }
+  handleOriginal(value) {
+    console.log('handleOriginal', value);
+  }
+  handleProgramSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.programName == value;
+    // });
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
+    this.setState({ programValue: value });
+    this.setState({ data: employeeSearch() });
+    this.setState({ hideTable: false });
+  }
+  handleLocationSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.locationName == value;
+    // });
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
+    this.setState({ locationValue: value });
+    this.setState({ data: employeeSearch() });
+    this.setState({ hideTable: false });
+  }
+  handleCertificationSearch(value) {
+    // var filteredCareerTracks = careerTrackData();
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
+    this.setState({ certificationValue: value });
+    this.setState({ data: employeeSearch() });
+    this.setState({ hideTable: false });
+  }
+  handleClearanceSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.clearanceLevel == value;
+    // });
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.careerTrackValue) {
+    //   var selectedCareerTrack = this.state.careerTrackValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.careerTrackName == selectedCareerTrack;
+    //   });
+    // }
+    this.setState({ clearanceValue: value });
+    this.setState({ data: employeeSearch() });
+    this.setState({ hideTable: false });
+  }
+  handleCareerTrackSearch(value) {
+    // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
+    //   return careerTrack.careerTrackName == value;
+    // });
+    // if (this.state.programValue) {
+    //   var selectedProgram = this.state.programValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.programName == selectedProgram;
+    //   });
+    // }
+    // if (this.state.locationValue) {
+    //   var selectedLocation = this.state.locationValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.locationName == selectedLocation;
+    //   });
+    // }
+    // if (this.state.clearanceValue) {
+    //   var selectedClearance = this.state.clearanceValue;
+    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
+    //     return careerTrack.clearanceLevel == selectedClearance;
+    //   });
+    // }
+    this.setState({ careerTrackValue: value });
+    this.setState({ data: employeeSearch() });
+    this.setState({ hideTable: false });
   }
 
   handleClear = () => {
@@ -43,48 +199,12 @@ class EmployeeSearch extends React.Component {
     this.setState({ hideTable: true });
   };
 
-  handleProgramSearch(value) {
-    this.setState({ programValue: value });
-    this.setState({ data: employeeSearch() });
-    this.setState({ hideTable: false });
-  }
-
-  handleLocationSearch(value) {
-    this.setState({ locationValue: value });
-    this.setState({ data: employeeSearch() });
-    this.setState({ hideTable: false });
-  }
-
-  handleCertificationSearch(value) {
-    this.setState({ certificationValue: value });
-    this.setState({ data: employeeSearch() });
-    this.setState({ hideTable: false });
-  }
-
-  handleClearanceSearch(value) {
-    this.setState({ clearanceValue: value });
-    this.setState({ data: employeeSearch() });
-    this.setState({ hideTable: false });
-  }
-
-  handleCareerTrackSearch(value) {
-    this.setState({ careerTrackValue: value });
-    this.setState({ data: employeeSearch() });
-    this.setState({ hideTable: false });
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  handleOriginal(value) {
-    console.log('handleOriginal', value);
-  }
-
-  // eslint-disable-next-line class-methods-use-this
   showRow(row) {
     const { info } = Modal;
     console.log('modalrow', row);
     info({
       width: 600,
-      title: `${row.programName}: ${row.careerTrackName} Tier ${row.careerTrackTier}`,
+      title: row.programName + ': ' + row.careerTrackName + ' Tier ' + row.careerTrackTier,
       content: (
         <div>
           <p>Location: {row.locationName}</p>
@@ -98,11 +218,14 @@ class EmployeeSearch extends React.Component {
       onOk() {},
     });
   }
-
   render() {
     const { data } = this.state;
-    const styleHide = this.state.hideTable ? { display: 'none' } : { width: '100%' };
-    const NoDataComponent = () => <div className="rt-noData">No rows found</div>;
+    const styleHide = this.state.hideTable ? { display: 'none' } : {};
+    const NoDataComponent = props => {
+      const { children, loading } = props;
+
+      return <div className="rt-noData">No rows found</div>;
+    };
     const dataSourceProgram = [
       'AWS Technical Support Program',
       'DoD Space Program',
@@ -161,7 +284,21 @@ class EmployeeSearch extends React.Component {
       'TS/SCI FSP',
       'UNCLASSIFIED',
     ];
-    const dataSourceCareerTrack = ['Cyber IA', 'Cyber IT'];
+    const dataSourceCareerTrack = [
+      'Cyber IA',
+      'Cyber IT',
+      'Database Administration',
+      'Deskside/Field Services',
+      'Help Desk',
+      'Network Administration',
+      'Network Engineering',
+      'Program Ops (Technical)',
+      'Program/Project Management',
+      'Software Development',
+      'Systems Administration',
+      'Systems Engineering',
+      'Telecommunications/VOIP',
+    ];
     const dataSourceLocation = [
       'Washington DC',
       'National Harbor MD',
@@ -172,15 +309,14 @@ class EmployeeSearch extends React.Component {
       <PageHeaderWrapper>
         <Card>
           <div className="screen-header">
-            <h1 className="page-title">Employee Serach</h1>
+            <h1 className="page-title">Employee Search</h1>
           </div>
-          <Divider />
-          <div className="mobility-header-filter-container">
+          <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
               <AutoComplete
+                //allowClear={true}
                 style={autoCompleteStyle}
-                // allowClear={true}
                 dataSource={dataSourceProgram}
                 placeholder="Program"
                 onChange={this.handleProgramSearch}
@@ -191,8 +327,8 @@ class EmployeeSearch extends React.Component {
               />
               <br />
               <AutoComplete
+                //allowClear={true}
                 style={autoCompleteStyle}
-                // allowClear={true}
                 dataSource={dataSourceLocation}
                 placeholder="Location"
                 onChange={this.handleLocationSearch}
@@ -201,10 +337,24 @@ class EmployeeSearch extends React.Component {
                   option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                 }
               />
+              <Select showSearch style={radiusStyle} placeholder="Radius">
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">5</Option>
+                <Option value="2">10</Option>
+                <Option value="3">20</Option>
+                <Option value="4">30</Option>
+                <Option value="5">40</Option>
+                <Option value="6">50</Option>
+                <Option value="7">60</Option>
+                <Option value="8">75</Option>
+                <Option value="9">100</Option>
+                <Option value="10">150</Option>
+                <Option value="11">200</Option>
+              </Select>
               <br />
               <AutoComplete
+                //allowClear={true}
                 style={autoCompleteStyle}
-                // allowClear={true}
                 dataSource={dataSourceCertification}
                 placeholder="Certification"
                 onChange={this.handleCertificationSearch}
@@ -215,8 +365,8 @@ class EmployeeSearch extends React.Component {
               />
               <br />
               <AutoComplete
+                //allowClear={true}
                 style={autoCompleteStyle}
-                // allowClear={true}
                 dataSource={dataSourceClearance}
                 placeholder="Clearance"
                 onChange={this.handleClearanceSearch}
@@ -227,8 +377,8 @@ class EmployeeSearch extends React.Component {
               />
               <br />
               <AutoComplete
+                //allowClear={true}
                 style={autoCompleteStyle}
-                // allowClear={true}
                 dataSource={dataSourceCareerTrack}
                 placeholder="Career Track"
                 onChange={this.handleCareerTrackSearch}
@@ -244,29 +394,56 @@ class EmployeeSearch extends React.Component {
               </Button>
             </div>
           </div>
+          <br />
           <ReactTable
             data={data}
-            resolveData={d => d.map(row => row)}
+            resolveData={data => data.map(row => row)}
             // filterable
             style={styleHide}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            // noDataText={!this.state.loading ? 'No rows found' : ''}
+            //noDataText={!this.state.loading ? 'No rows found' : ''}
             NoDataComponent={NoDataComponent}
-            getTdProps={() => ({
-              onClick: (e, handleOriginal) => {
-                if (handleOriginal) {
-                  handleOriginal();
-                }
-              },
-            })}
-            getTrProps={(state, rowInfo) => ({
-              onClick: (e, handleOriginal) => {
-                this.showRow(rowInfo.original);
-                if (handleOriginal) {
-                  handleOriginal();
-                }
-              },
-            })}
+            getTdProps={(state, rowInfo, column, instance) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  console.log('A Td Element was clicked!');
+                  console.log('it produced this event:', e);
+                  console.log('It was in this column:', column);
+                  console.log('It was in this row:', rowInfo);
+                  console.log('It was in this table instance:', instance);
+                  console.log('handleOriginal', handleOriginal);
+                  // IMPORTANT! React-Table uses onClick internally to trigger
+                  // events like expanding SubComponents and pivots.
+                  // By default a custom 'onClick' handler will override this functionality.
+                  // If you want to fire the original onClick handler, call the
+                  // 'handleOriginal' function.
+                  if (handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+              };
+            }}
+            getTrProps={(state, rowInfo, column) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  console.log('A TR Element was clicked!');
+                  console.log('it produced this event:', e);
+                  console.log('It was in this column:', column);
+                  console.log('It was in this row:', rowInfo);
+                  //console.log('It was in this table instance:', instance);
+                  console.log('handleOriginal', handleOriginal);
+                  // IMPORTANT! React-Table uses onClick internally to trigger
+                  // events like expanding SubComponents and pivots.
+                  // By default a custom 'onClick' handler will override this functionality.
+                  // If you want to fire the original onClick handler, call the
+                  // 'handleOriginal' function.
+                  this.showRow(rowInfo.original);
+                  if (handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+              };
+            }}
             columns={[
               {
                 Header: 'Employee Information',
@@ -282,6 +459,10 @@ class EmployeeSearch extends React.Component {
                   {
                     Header: 'Career Track',
                     accessor: 'careerTrackName',
+                  },
+                  {
+                    Header: 'Interested In',
+                    accessor: 'interestedIn',
                   },
                 ],
               },
@@ -307,6 +488,7 @@ class EmployeeSearch extends React.Component {
             defaultPageSize={10}
             className="-striped -highlight"
           />
+
           <p
             style={{
               textAlign: 'center',

@@ -1,7 +1,19 @@
 /* eslint-disable global-require */
 /* eslint-disable class-methods-use-this */
 import React from 'react';
-import { Card, Icon, Divider, Row, Col, AutoComplete, Button, Radio, Modal, Checkbox } from 'antd';
+import {
+  Card,
+  Icon,
+  Divider,
+  Row,
+  Col,
+  AutoComplete,
+  Button,
+  Radio,
+  Modal,
+  Checkbox,
+  Select,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 // Import React Table
@@ -247,8 +259,46 @@ class CareerEnhancement extends React.Component {
     const { data } = this.state;
     const styleHide = this.state.hideTable ? { display: 'none' } : {};
     const NoDataComponent = () => <div className="rt-noData">No rows found</div>;
-    const dataSourceProgram = ['DoD Space Program'];
-    const dataSourceCertification = ['AWS', 'Security+'];
+    const dataSourceProgram = [
+      'AWS Technical Support Program',
+      'DoD Space Program',
+      'DHS Satellite Network',
+      'DoJ Networks',
+      'DoS Nuclear Defense System',
+      'FBI Case Management System',
+    ];
+    const dataSourcePositionTitle = ['System Administrator', 'System Engineer'];
+    const dataSourceCertification = [
+      'A+',
+      'Agile',
+      'AWS',
+      'BICSI',
+      'CAP',
+      'CCNA',
+      'CCNE',
+      'CCNP',
+      'CISSP',
+      'Cloudera CDH4 Administrator',
+      'Cloudera CDH4 Developer',
+      'CSM',
+      'CTNS',
+      'GSLC',
+      'HDI',
+      'INCOSE CSEP',
+      'ISSA',
+      'ITIL',
+      'Lean Six Sigma',
+      'MCSA',
+      'MCSE',
+      'Network+',
+      'OCP DBA',
+      'Oracle',
+      'PMP',
+      'Security+',
+      'Sharepoint',
+      'Splunk',
+      'VMWare',
+    ];
     const dataSourceClearance = [
       'DOJ SUITABILITY',
       'DOJ SUITABILITY/ TS',
@@ -268,8 +318,27 @@ class CareerEnhancement extends React.Component {
       'TS/SCI FSP',
       'UNCLASSIFIED',
     ];
-    const dataSourceCareerTrack = ['Cyber IA', 'Cyber IT'];
-    const dataSourceLocation = ['Fort Belvoir VA'];
+    const dataSourceCareerTrack = [
+      'Cyber IA',
+      'Cyber IT',
+      'Database Administration',
+      'Deskside/Field Services',
+      'Help Desk',
+      'Network Administration',
+      'Network Engineering',
+      'Program Ops (Technical)',
+      'Program/Project Management',
+      'Software Development',
+      'Systems Administration',
+      'Systems Engineering',
+      'Telecommunications/VOIP',
+    ];
+    const dataSourceLocation = [
+      'Washington DC',
+      'National Harbor MD',
+      'Chantilly VA',
+      'Fort Belvoir VA',
+    ];
     const radioStyle = {
       display: 'block',
       height: '30px',
@@ -279,6 +348,11 @@ class CareerEnhancement extends React.Component {
     const autoCompleteStyle = {
       width: '100%',
       margin: '5px',
+      padding: '2px',
+    };
+    const radiusStyle = {
+      width: '40%',
+      marginTop: '5px',
       padding: '2px',
     };
     return (
@@ -333,6 +407,21 @@ class CareerEnhancement extends React.Component {
                   option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                 }
               />
+              <br />
+              <Select showSearch style={radiusStyle} placeholder="Radius">
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">5</Option>
+                <Option value="2">10</Option>
+                <Option value="3">20</Option>
+                <Option value="4">30</Option>
+                <Option value="5">40</Option>
+                <Option value="6">50</Option>
+                <Option value="7">60</Option>
+                <Option value="8">75</Option>
+                <Option value="9">100</Option>
+                <Option value="10">150</Option>
+                <Option value="11">200</Option>
+              </Select>
               <br />
               <AutoComplete
                 style={autoCompleteStyle}

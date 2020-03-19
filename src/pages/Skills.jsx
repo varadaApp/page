@@ -45,50 +45,26 @@ class Skills extends React.Component {
             <h1 className="page-title">Your Skills</h1>
           </div>
           <Divider />
-          <Row gutter={[8, 8]}>
-            <Col xs={16}>
-              <div className="skills-item-container">
-                <div className="skills-table-container">
-                  <ReactTable
-                    data={data}
-                    filterable
-                    defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-                    columns={[
-                      {
-                        Header: 'Skill Name',
-                        accessor: 'name',
-                        filterMethod: (filter, row) =>
-                          row[filter.id].startsWith(filter.value) &&
-                          row[filter.id].endsWith(filter.value),
-                      },
-                    ]}
-                    defaultPageSize={10}
-                    className="-striped -highlight"
-                  />
-                </div>
-              </div>
-            </Col>
-            <Col xs={1} />
-            <Col xs={7}>
-              <div style={{ width: '100%' }}>
-                <img
-                  style={{ width: '100%' }}
-                  src={require('../assets/varada-skills.png')}
-                  alt=""
-                />
-              </div>
-              <div style={careerMessageContainerStyle}>
-                <p style={careerMessageHeaderStyle}>Why Skills Are Important</p>
-                <p style={careerMessageContentStyle}>
-                  Many of the skills employers want are needed in all types of jobs. Discover the
-                  types of employability and occupational skills employers are looking for. Once
-                  skills are lacking, then more practical training may be needed, so as to apply the
-                  knowledge on-the-job. If abilities are not tapped into, employers should provide
-                  opportunities for such abilities to be refined.
-                </p>
-              </div>
-            </Col>
-          </Row>
+          <div className="skills-item-container">
+            <div className="skills-table-container">
+              <ReactTable
+                data={data}
+                filterable
+                defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+                columns={[
+                  {
+                    Header: 'Skill Name',
+                    accessor: 'name',
+                    filterMethod: (filter, row) =>
+                      row[filter.id].startsWith(filter.value) &&
+                      row[filter.id].endsWith(filter.value),
+                  },
+                ]}
+                defaultPageSize={10}
+                className="-striped -highlight"
+              />
+            </div>
+          </div>
           <p
             style={{
               textAlign: 'center',

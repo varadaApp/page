@@ -1,15 +1,34 @@
 import React from 'react';
-import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
+import {
+  Card,
+  Typography,
+  Alert,
+  Icon,
+  AutoComplete,
+  Form,
+  Button,
+  Modal,
+  Checkbox,
+  Select,
+  Divider,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-import ReactTable from 'react-table';
-import { employeeSearch } from '../Utils';
+import { FormattedMessage } from 'umi-plugin-react/locale';
+import { employeeSearch, Logo, Tips } from '../Utils';
+import matchSorter from 'match-sorter';
 
 // Import React Table
+import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 const autoCompleteStyle = {
   width: '100%',
   margin: '5px',
+  padding: '2px',
+};
+const radiusStyle = {
+  width: '100%',
+  marginTop: '5px',
   padding: '2px',
 };
 
@@ -20,29 +39,25 @@ class EmployeeSearch extends React.Component {
       data: employeeSearch(),
       hideTable: true,
       programValue: '',
+      positionTitleValue: '',
       locationValue: '',
       certificationValue: '',
       clearanceValue: '',
       careerTrackValue: '',
     };
     this.handleProgramSearch = this.handleProgramSearch.bind(this);
+    this.handlePositionTitleSearch = this.handlePositionTitleSearch.bind(this);
     this.handleLocationSearch = this.handleLocationSearch.bind(this);
     this.handleCertificationSearch = this.handleCertificationSearch.bind(this);
     this.handleClearanceSearch = this.handleClearanceSearch.bind(this);
     this.handleCareerTrackSearch = this.handleCareerTrackSearch.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.handleOriginal = this.handleOriginal.bind(this);
     this.showRow = this.showRow.bind(this);
   }
-
-  handleClear = () => {
-    this.setState({ programValue: '' });
-    this.setState({ locationValue: '' });
-    this.setState({ certificationValue: '' });
-    this.setState({ clearanceValue: '' });
-    this.setState({ careerTrackValue: '' });
-    this.setState({ hideTable: true });
-  };
-
+  handleOriginal(value) {
+    console.log('handleOriginal', value);
+  }
   handleProgramSearch(value) {
     // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
     //   return careerTrack.programName == value;
@@ -69,7 +84,40 @@ class EmployeeSearch extends React.Component {
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
+  handlePositionTitleSearch(value) {
+    var filteredEmployees = employeeSearch().filter(function(employee) {
+      return employee.position == value;
+    });
 
+    if (this.state.programValue) {
+      var selectedProgram = this.state.programValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.programName == selectedProgram;
+      });
+    }
+    if (this.state.locationValue) {
+      var selectedLocation = this.state.locationValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.locationName == selectedLocation;
+      });
+    }
+    if (this.state.clearanceValue) {
+      var selectedClearance = this.state.clearanceValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.clearanceLevel == selectedClearance;
+      });
+    }
+    if (this.state.careerTrackValue) {
+      var selectedCareerTrack = this.state.careerTrackValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.careerTrackName == selectedCareerTrack;
+      });
+    }
+
+    this.setState({ positionTitleValue: value });
+    this.setState({ data: filteredEmployees });
+    this.setState({ hideTable: false });
+  }
   handleLocationSearch(value) {
     // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
     //   return careerTrack.locationName == value;
@@ -96,38 +144,41 @@ class EmployeeSearch extends React.Component {
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
-
   handleCertificationSearch(value) {
-    // var filteredCareerTracks = careerTrackData();
-    // if (this.state.programValue) {
-    //   var selectedProgram = this.state.programValue;
-    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-    //     return careerTrack.programName == selectedProgram;
-    //   });
-    // }
-    // if (this.state.locationValue) {
-    //   var selectedLocation = this.state.locationValue;
-    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-    //     return careerTrack.locationName == selectedLocation;
-    //   });
-    // }
-    // if (this.state.clearanceValue) {
-    //   var selectedClearance = this.state.clearanceValue;
-    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-    //     return careerTrack.clearanceLevel == selectedClearance;
-    //   });
-    // }
-    // if (this.state.careerTrackValue) {
-    //   var selectedCareerTrack = this.state.careerTrackValue;
-    //   filteredCareerTracks = filteredCareerTracks.filter(function(careerTrack) {
-    //     return careerTrack.careerTrackName == selectedCareerTrack;
-    //   });
-    // }
+    var filteredEmployees = employeeSearch();
+    if (value.includes('Linux'))
+      filteredEmployees = employeeSearch().filter(function(employee) {
+        return employee.certification.includes('Linux');
+      });
+
+    if (this.state.programValue) {
+      var selectedProgram = this.state.programValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.programName == selectedProgram;
+      });
+    }
+    if (this.state.locationValue) {
+      var selectedLocation = this.state.locationValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.locationName == selectedLocation;
+      });
+    }
+    if (this.state.clearanceValue) {
+      var selectedClearance = this.state.clearanceValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.clearanceLevel == selectedClearance;
+      });
+    }
+    if (this.state.careerTrackValue) {
+      var selectedCareerTrack = this.state.careerTrackValue;
+      filteredEmployees = filteredEmployees.filter(function(employee) {
+        return employee.careerTrackName == selectedCareerTrack;
+      });
+    }
     this.setState({ certificationValue: value });
-    this.setState({ data: employeeSearch() });
+    this.setState({ data: filteredEmployees });
     this.setState({ hideTable: false });
   }
-
   handleClearanceSearch(value) {
     // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
     //   return careerTrack.clearanceLevel == value;
@@ -154,7 +205,6 @@ class EmployeeSearch extends React.Component {
     this.setState({ data: employeeSearch() });
     this.setState({ hideTable: false });
   }
-
   handleCareerTrackSearch(value) {
     // var filteredCareerTracks = careerTrackData().filter(function(careerTrack) {
     //   return careerTrack.careerTrackName == value;
@@ -182,26 +232,32 @@ class EmployeeSearch extends React.Component {
     this.setState({ hideTable: false });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  handleOriginal(value) {
-    console.log('handleOriginal', value);
-  }
+  handleClear = () => {
+    this.setState({ programValue: '' });
+    this.setState({ locationValue: '' });
+    this.setState({ certificationValue: '' });
+    this.setState({ clearanceValue: '' });
+    this.setState({ careerTrackValue: '' });
+    this.setState({ hideTable: true });
+  };
 
-  // eslint-disable-next-line class-methods-use-this
   showRow(row) {
     const { info } = Modal;
     console.log('modalrow', row);
     info({
       width: 600,
-      title: `${row.programName}: ${row.careerTrackName} Tier ${row.careerTrackTier}`,
+      title: row.programName + ': ' + row.careerTrackName,
       content: (
         <div>
+          <p>Position Title: {row.position}</p>
+          <p>Interested In: {row.interestedIn}</p>
           <p>Location: {row.locationName}</p>
           <p>Required Clearance: {row.clearanceLevel}</p>
-          <p>Certifications:</p>
-          <p>Trainings:</p>
-          <p>Skills:</p>
-          <Checkbox>Make this your primary selected career track?</Checkbox>
+          <p>Certifications: A+, Security+, Linux+</p>
+          <Checkbox>
+            Would you like to contact Program Manager {row.programManagerName} regarding this
+            employee?
+          </Checkbox>
         </div>
       ),
       onOk() {},
@@ -300,7 +356,7 @@ class EmployeeSearch extends React.Component {
             <h1 className="page-title">Employee Search</h1>
           </div>
           <Divider />
-          <div style={{ backgroundColor: '#f0f2f5', padding: '15px' }}>
+          <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
               <AutoComplete
@@ -326,6 +382,20 @@ class EmployeeSearch extends React.Component {
                   option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                 }
               />
+              <Select showSearch style={radiusStyle} placeholder="Radius">
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">5</Option>
+                <Option value="2">10</Option>
+                <Option value="3">20</Option>
+                <Option value="4">30</Option>
+                <Option value="5">40</Option>
+                <Option value="6">50</Option>
+                <Option value="7">60</Option>
+                <Option value="8">75</Option>
+                <Option value="9">100</Option>
+                <Option value="10">150</Option>
+                <Option value="11">200</Option>
+              </Select>
               <br />
               <AutoComplete
                 style={autoCompleteStyle}
@@ -371,99 +441,84 @@ class EmployeeSearch extends React.Component {
           </div>
           <ReactTable
             data={data}
-            resolveData={d => d.map(row => row)}
+            resolveData={data => data.map(row => row)}
             // filterable
             style={styleHide}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            // noDataText={!this.state.loading ? 'No rows found' : ''}
+            //noDataText={!this.state.loading ? 'No rows found' : ''}
             NoDataComponent={NoDataComponent}
-            getTdProps={(state, rowInfo, column, instance) => ({
-              onClick: (e, handleOriginal) => {
-                console.log('A Td Element was clicked!');
-                console.log('it produced this event:', e);
-                console.log('It was in this column:', column);
-                console.log('It was in this row:', rowInfo);
-                console.log('It was in this table instance:', instance);
-                console.log('handleOriginal', handleOriginal);
-                // IMPORTANT! React-Table uses onClick internally to trigger
-                // events like expanding SubComponents and pivots.
-                // By default a custom 'onClick' handler will override this functionality.
-                // If you want to fire the original onClick handler, call the
-                // 'handleOriginal' function.
-                if (handleOriginal) {
-                  handleOriginal();
-                }
-              },
-            })}
-            getTrProps={(state, rowInfo, column) => ({
-              onClick: (e, handleOriginal) => {
-                console.log('A TR Element was clicked!');
-                console.log('it produced this event:', e);
-                console.log('It was in this column:', column);
-                console.log('It was in this row:', rowInfo);
-                // console.log('It was in this table instance:', instance);
-                console.log('handleOriginal', handleOriginal);
-                // IMPORTANT! React-Table uses onClick internally to trigger
-                // events like expanding SubComponents and pivots.
-                // By default a custom 'onClick' handler will override this functionality.
-                // If you want to fire the original onClick handler, call the
-                // 'handleOriginal' function.
-                this.showRow(rowInfo.original);
-                if (handleOriginal) {
-                  handleOriginal();
-                }
-              },
-            })}
+            getTdProps={(state, rowInfo, column, instance) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  console.log('A Td Element was clicked!');
+                  console.log('it produced this event:', e);
+                  console.log('It was in this column:', column);
+                  console.log('It was in this row:', rowInfo);
+                  console.log('It was in this table instance:', instance);
+                  console.log('handleOriginal', handleOriginal);
+                  // IMPORTANT! React-Table uses onClick internally to trigger
+                  // events like expanding SubComponents and pivots.
+                  // By default a custom 'onClick' handler will override this functionality.
+                  // If you want to fire the original onClick handler, call the
+                  // 'handleOriginal' function.
+                  if (handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+              };
+            }}
+            getTrProps={(state, rowInfo, column) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  console.log('A TR Element was clicked!');
+                  console.log('it produced this event:', e);
+                  console.log('It was in this column:', column);
+                  console.log('It was in this row:', rowInfo);
+                  //console.log('It was in this table instance:', instance);
+                  console.log('handleOriginal', handleOriginal);
+                  // IMPORTANT! React-Table uses onClick internally to trigger
+                  // events like expanding SubComponents and pivots.
+                  // By default a custom 'onClick' handler will override this functionality.
+                  // If you want to fire the original onClick handler, call the
+                  // 'handleOriginal' function.
+                  this.showRow(rowInfo.original);
+                  if (handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+              };
+            }}
             columns={[
               {
-                Header: 'Employee Information',
-                columns: [
-                  {
-                    Header: 'Employee',
-                    accessor: 'employeeName',
-                  },
-                  {
-                    Header: 'Clearance',
-                    accessor: 'clearanceLevel',
-                  },
-                  {
-                    Header: 'Career Track',
-                    accessor: 'careerTrackName',
-                  },
-                ],
+                Header: 'Employee',
+                accessor: 'employeeName',
               },
               {
-                Header: 'Program Information',
-                columns: [
-                  {
-                    Header: 'Program',
-                    accessor: 'programName',
-                  },
-                  {
-                    Header: 'Interested In',
-                    accessor: 'interestedIn',
-                    minWidth: 160,
-                  },
-                ],
+                Header: 'Clearance',
+                accessor: 'clearanceLevel',
               },
               {
-                Header: 'Program Information',
-                columns: [
-                  {
-                    Header: 'Program',
-                    accessor: 'programName',
-                    minWidth: 130,
-                  },
+                Header: 'Career Track',
+                accessor: 'careerTrackName',
+              },
+              {
+                Header: 'Interested In',
+                accessor: 'interestedIn',
+                minWidth: 300,
+              },
+              {
+                Header: 'Program',
+                accessor: 'programName',
+                minWidth: 200,
+              },
 
-                  {
-                    Header: 'Location',
-                    accessor: 'locationName',
-                  },
-                  {
-                    Header: 'Program Manager',
-                    accessor: 'programManagerName',
-                  },
-                ],
+              {
+                Header: 'Location',
+                accessor: 'locationName',
+              },
+              {
+                Header: 'Program Manager',
+                accessor: 'programManagerName',
               },
             ]}
             defaultPageSize={10}

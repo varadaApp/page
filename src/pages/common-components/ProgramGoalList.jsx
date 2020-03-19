@@ -27,7 +27,7 @@ export default props => {
             {goal}
           </Card>
         ))} */}
-        <Link to="/employee/manage">
+        <Link to="">
           <Card
             hoverable
             type="inner"
@@ -39,10 +39,10 @@ export default props => {
               backgroundColor: '#f0f2f5',
             }}
           >
-            Prepare for and schedule VMWare Certification exam (Interest Showed).
+            Increase the Program Staffing by 10% in 2020!
           </Card>
         </Link>
-        <Link to="/employee/manage">
+        <Link to="">
           <Card
             hoverable
             type="inner"
@@ -54,37 +54,7 @@ export default props => {
               backgroundColor: '#f0f2f5',
             }}
           >
-            Enroll in Systems Engineer Level 2 Training Class (Interest Showed).
-          </Card>
-        </Link>
-        <Link to="/employee/manage">
-          <Card
-            hoverable
-            type="inner"
-            bodyStyle={{
-              color: 'black',
-              fontSize: '13px',
-            }}
-            style={{
-              backgroundColor: '#f0f2f5',
-            }}
-          >
-            Begin System Administration Level 3 Training Course (Training Scheduled).
-          </Card>
-        </Link>
-        <Link to="/employee/manage">
-          <Card
-            hoverable
-            type="inner"
-            bodyStyle={{
-              color: 'black',
-              fontSize: '13px',
-            }}
-            style={{
-              backgroundColor: '#f0f2f5',
-            }}
-          >
-            Complete Windows Server Administration Level 3 Training (Currently in Progress).
+            Help each employee complete at least one certification in 2020!
           </Card>
         </Link>
       </div>

@@ -1,11 +1,12 @@
-/* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
-import { Card, Icon, Form, Button, Input, Divider } from 'antd';
+import { Card, Typography, Alert, Icon, Form, Button, Input, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
+import { makeData, Logo, Tips, trainingData } from '../Utils';
+import matchSorter from 'match-sorter';
 
 // Import React Table
 import ReactTable from 'react-table';
-import { trainingData } from '../Utils';
 import 'react-table/react-table.css';
 
 class Skills extends React.Component {
@@ -16,7 +17,6 @@ class Skills extends React.Component {
     };
     this.renderEditable = this.renderEditable.bind(this);
   }
-
   renderEditable(cellInfo) {
     return (
       <div
@@ -34,7 +34,6 @@ class Skills extends React.Component {
       />
     );
   }
-
   render() {
     const { data } = this.state;
     return (
@@ -57,13 +56,15 @@ class Skills extends React.Component {
           <ReactTable
             data={data}
             filterable
-            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+            defaultFilterMethod={(filter, row) =>
+              row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())
+            }
             columns={[
               {
                 Header: 'Skill Name',
                 accessor: 'name',
-                filterMethod: (filter, row) =>
-                  row[filter.id].startsWith(filter.value) && row[filter.id].endsWith(filter.value),
+                // filterMethod: (filter, row) =>
+                //   row[filter.id].startsWith(filter.value) && row[filter.id].endsWith(filter.value),
                 Cell: this.renderEditable,
               },
               {
@@ -71,7 +72,7 @@ class Skills extends React.Component {
                 sortable: false,
                 filterable: false,
                 width: 100,
-                Cell: () => (
+                Cell: row => (
                   <div>
                     <Button type="primary">Delete</Button>
                   </div>

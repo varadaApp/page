@@ -9,6 +9,7 @@ const { Text } = Typography;
 
 const newGoalContainerStyle = {
   backgroundColor: '#f0f2f5',
+  padding: '20px',
 };
 
 const newGoalHeaderStyle = {
@@ -29,7 +30,7 @@ class Goals extends React.Component {
             <h1 className="page-title">Your Goals</h1>
           </div>
           <Divider />
-          <Row gutter={[8, 8]}>
+          <Row gutter={[18, 18]}>
             <Col xs={16}>
               <Card
                 title={
@@ -39,7 +40,7 @@ class Goals extends React.Component {
                       color: 'black',
                     }}
                   >
-                    NOTIFICATION:
+                    Overarching Fiscal Year Goals:
                   </Text>
                 }
                 hoverable
@@ -61,8 +62,12 @@ class Goals extends React.Component {
                   fontSize: '13px',
                 }}
               >
-                Apply to new position, your current program ends July 2020
+                <ul>
+                  <li>Apply to new position, your current program ends July 2020.</li>
+                  <li>Career track change to System Engineer from System Administration.</li>
+                </ul>
               </Card>
+              <h1 style={{ marginTop: '20px' }}>Quarterly Goals:</h1>
               <GoalList
                 list={[
                   'Complete Splunk certification in 2020!',
@@ -71,16 +76,8 @@ class Goals extends React.Component {
                 ]}
               />
             </Col>
-            <Col xs={1} />
             <Col xs={7}>
               <div style={newGoalContainerStyle}>
-                <div style={{ width: '100%' }}>
-                  <img
-                    style={{ width: '100%' }}
-                    src={require('../assets/varada-goals.png')}
-                    alt=""
-                  />
-                </div>
                 <div className="goals-right-container">
                   <p style={newGoalHeaderStyle}>Set a new goal</p>
                   <Form layout="vertical" hideRequiredMark>

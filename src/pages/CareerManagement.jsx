@@ -78,11 +78,18 @@ class CareerManagement extends React.Component {
     this.setState({ certificationsVisible: false });
   };
 
-  toggleShow = index =>
+  toggleShow = (index, cName, wrapperClass) => {
     this.setState(prevState => ({
       tabs: prevState.tabs.map((item, i) => (index === i ? { ...item, show: !item.show } : item)),
     }));
-
+    let growDiv = document.querySelector(`.${cName}`);
+    if (growDiv.clientHeight) {
+      growDiv.style.height = 0;
+    } else {
+      var wrapper = document.querySelector(`.${wrapperClass}`);
+      growDiv.style.height = wrapper.clientHeight + 'px';
+    }
+  };
   render() {
     const {
       skillsLoading,
@@ -96,12 +103,12 @@ class CareerManagement extends React.Component {
     const skillDataSource = [
       {
         key: '1',
-        name: 'Web Development',
+        name: 'Server Configuration Basics',
         status: 'Acquired: 100% Completed',
       },
       {
         key: '2',
-        name: 'Leadership',
+        name: 'Windows Server Administration Level 1',
         status: 'Desired - Training Scheduled: 35% Completed',
       },
     ];
@@ -141,13 +148,33 @@ class CareerManagement extends React.Component {
     const certificationDataSource = [
       {
         key: '1',
-        name: 'Security+',
+        name: 'A+',
         status: 'Acquired: 100% Completed',
       },
       {
         key: '2',
-        name: 'AWS Developer',
-        status: 'Desired - Training In Progess: 40% Completed',
+        name: 'Security+',
+        status: 'Acquired: 100% Completed',
+      },
+      {
+        key: '3',
+        name: 'MCSA',
+        status: 'Acquired: 100% Completed',
+      },
+      {
+        key: '4',
+        name: 'Splunk',
+        status: 'Acquired: 100% Completed',
+      },
+      {
+        key: '5',
+        name: 'AWS Administration',
+        status: 'Acquired: 100% Completed',
+      },
+      {
+        key: '6',
+        name: 'VMWare',
+        status: 'Showed Interest: 0% Completed',
       },
     ];
 
@@ -186,16 +213,17 @@ class CareerManagement extends React.Component {
     const desiredCareerTrackDataSource = [
       {
         key: '1',
-        name: 'Department of Homeland Security Systems Administrator Tier 3',
+        name: 'Department of Homeland Security Network: System Engineer Tier 2 ',
         status: 'Training In Progress: 10% Completed',
         position: '8',
       },
-      {
-        key: '2',
-        name: 'State Department Nuclear Program Software Engineer Tier 3',
-        status: 'Training In Progress, Program Manager Notified: 25% Completed',
-        position: '15',
-      },
+      //System Engineer Tier 2 (Program: Department of Homeland Security Network)
+      // {
+      //   key: '2',
+      //   name: 'State Department Nuclear Program Software Engineer Tier 3',
+      //   status: 'Training In Progress, Program Manager Notified: 25% Completed',
+      //   position: '15',
+      // },
     ];
 
     const desiredCareerTrackColumns = [
@@ -240,17 +268,17 @@ class CareerManagement extends React.Component {
     const positionsInterestedInDataSource = [
       {
         key: '1',
-        position: 'Sr. Software Developer',
-        program: 'Department of Defense Project 1',
+        position: 'Senior Network Engineer',
+        program: 'Department of Homeland Security Network',
         location: 'Washington, D.C.',
-        status: 'Resume Sent: 5% Completed',
+        status: 'Resume Sent',
       },
       {
         key: '2',
-        position: 'Software Engineer Tech Lead',
+        position: 'System Administrator',
         program: 'FBI Project 3',
         location: 'Chantilly, VA',
-        status: 'Contacted by Program Manager: 30% Completed',
+        status: 'Contacted by Program Manager',
       },
     ];
 
@@ -309,10 +337,14 @@ class CareerManagement extends React.Component {
             <Divider />
             <Row style={{ marginRight: 20 }}>
               <Col style={{ padding: 20 }} xs={12}>
-                <a style={searchTextStyle} onClick={this.showSkillsModal}>
-                  <Icon style={searchIconStyle} type="search" />
+                {/* <a onClick={this.showSkillsModal}>
+            <Icon type="search" />
+            Search Skills
+          </a> */}
+                <Link to="/employee/growth/skills">
+                  <Icon type="search" />
                   Search Skills
-                </a>
+                </Link>
                 <div className="career-management-item-container">
                   <img
                     className="career-management-icon"
@@ -323,29 +355,35 @@ class CareerManagement extends React.Component {
                     <div
                       style={{ width: '100%' }}
                       className="row-title"
-                      onClick={() => this.toggleShow(0)}
+                      onClick={() => this.toggleShow(0, 'grow-class-a', 'measuringWrapperA')}
                     >
                       Skills
                       <Icon type={this.state.tabs[0].show ? 'up' : 'down'} />
                     </div>
                   </div>
-                  <div style={!this.state.tabs[0].show ? { display: 'none' } : {}}>
-                    <Table
-                      dataSource={skillDataSource}
-                      columns={skillColumns}
-                      size="middle"
-                      pagination={false}
-                      style={{ paddingBottom: 20 }}
-                    />
+                  <div className="grow-class grow-class-a">
+                    <div className="measuringWrapperA">
+                      <Table
+                        dataSource={skillDataSource}
+                        columns={skillColumns}
+                        size="middle"
+                        pagination={false}
+                        style={{ paddingBottom: 20 }}
+                      />
+                    </div>
                   </div>
                 </div>
               </Col>
               {/*  */}
               <Col style={{ padding: 20 }} xs={12}>
-                <a style={searchTextStyle} onClick={this.showSkillsModal}>
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Skills
-                </a>
+                {/* <a onClick={this.showCertsModal}>
+            <Icon type="search" />
+            Search Certifcations
+          </a> */}
+                <Link to="/employee/growth/certifications">
+                  <Icon type="search" />
+                  Search Certifcations
+                </Link>
                 <div className="career-management-item-container">
                   <img
                     className="career-management-icon"
@@ -356,20 +394,22 @@ class CareerManagement extends React.Component {
                     <div
                       style={{ width: '100%' }}
                       className="row-title"
-                      onClick={() => this.toggleShow(1)}
+                      onClick={() => this.toggleShow(1, 'grow-class-b', 'measuringWrapperB')}
                     >
                       Certifications
                       <Icon type={this.state.tabs[1].show ? 'up' : 'down'} />
                     </div>
                   </div>
-                  <div style={!this.state.tabs[1].show ? { display: 'none' } : {}}>
-                    <Table
-                      dataSource={certificationDataSource}
-                      columns={certificationColumns}
-                      size="middle"
-                      pagination={false}
-                      style={{ paddingBottom: 20 }}
-                    />
+                  <div className="grow-class grow-class-b">
+                    <div className="measuringWrapperB">
+                      <Table
+                        dataSource={certificationDataSource}
+                        columns={certificationColumns}
+                        size="middle"
+                        pagination={false}
+                        style={{ paddingBottom: 20 }}
+                      />
+                    </div>
                   </div>
                 </div>
               </Col>
@@ -390,20 +430,22 @@ class CareerManagement extends React.Component {
                     <div
                       style={{ width: '100%' }}
                       className="row-title"
-                      onClick={() => this.toggleShow(2)}
+                      onClick={() => this.toggleShow(2, 'grow-class-c', 'measuringWrapperC')}
                     >
                       Desired career tracks
                       <Icon type={this.state.tabs[2].show ? 'up' : 'down'} />
                     </div>
                   </div>
-                  <div style={!this.state.tabs[2].show ? { display: 'none' } : {}}>
-                    <Table
-                      dataSource={desiredCareerTrackDataSource}
-                      columns={desiredCareerTrackColumns}
-                      size="middle"
-                      pagination={false}
-                      style={{ paddingBottom: 20 }}
-                    />
+                  <div className="grow-class grow-class-c">
+                    <div className="measuringWrapperC">
+                      <Table
+                        dataSource={desiredCareerTrackDataSource}
+                        columns={desiredCareerTrackColumns}
+                        size="middle"
+                        pagination={false}
+                        style={{ paddingBottom: 20 }}
+                      />
+                    </div>
                   </div>
                 </div>
               </Col>
@@ -422,20 +464,22 @@ class CareerManagement extends React.Component {
                     <div
                       style={{ width: '100%' }}
                       className="row-title"
-                      onClick={() => this.toggleShow(3)}
+                      onClick={() => this.toggleShow(3, 'grow-class-d', 'measuringWrapperD')}
                     >
                       Open positions interested in
                       <Icon type={this.state.tabs[3].show ? 'up' : 'down'} />
                     </div>
                   </div>
-                  <div style={!this.state.tabs[3].show ? { display: 'none' } : {}}>
-                    <Table
-                      dataSource={positionsInterestedInDataSource}
-                      columns={positionsInterestedInColumns}
-                      size="middle"
-                      pagination={false}
-                      style={{ paddingBottom: 20 }}
-                    />
+                  <div className="grow-class grow-class-d">
+                    <div className="measuringWrapperD">
+                      <Table
+                        dataSource={positionsInterestedInDataSource}
+                        columns={positionsInterestedInColumns}
+                        size="middle"
+                        pagination={false}
+                        style={{ paddingBottom: 20 }}
+                      />
+                    </div>
                   </div>
                 </div>
               </Col>

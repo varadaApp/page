@@ -1,51 +1,24 @@
 import React from 'react';
-import { Card, Icon, Row, Col, Table, Divider, Upload, message, Button, Modal } from 'antd';
+import {
+  Card,
+  Typography,
+  Alert,
+  Icon,
+  Table,
+  Divider,
+  Upload,
+  message,
+  Button,
+  Modal,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import Link from 'umi/link';
-import ReactTable from 'react-table';
 import { trainingData, certData } from '../Utils';
 
 // Import React Table
+import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-
-const careerMessageHeaderStyle = {
-  fontSize: '19px',
-  color: 'black',
-  fontWeight: 600,
-};
-
-const careerMessageContentStyle = {
-  fontSize: '14px',
-  marginBottom: '10px',
-  color: '#525257 ',
-};
-
-const careerMessageContainerStyle = {
-  padding: '20px',
-  backgroundColor: '#fff',
-  marginBottom: '20px',
-  borderColor: '#919197 !important',
-  borderWidth: '1px',
-};
-
-const tableLabelStyle = {
-  fontSize: '26px',
-  lineHeight: '30px',
-  color: '#1c1c1c',
-  fontWeight: 600,
-};
-
-const searchContainer = {
-  marginBottom: '10px',
-};
-
-const searchTextStyle = {
-  fontSize: '14px',
-};
-
-const searchIconStyle = {
-  margin: '5px',
-};
 
 class CareerManagement extends React.Component {
   constructor(props) {
@@ -55,6 +28,8 @@ class CareerManagement extends React.Component {
       skillsVisible: false,
       certificationsLoading: false,
       certificationsVisible: false,
+      // trainingsLoading: false,
+      // trainingsVisible: false,
       skillsData: trainingData(),
       certsData: certData(),
     };
@@ -93,13 +68,14 @@ class CareerManagement extends React.Component {
   handleCertsCancel = () => {
     this.setState({ certificationsVisible: false });
   };
-
   render() {
     const {
       skillsLoading,
       skillsVisible,
       certificationsLoading,
       certificationsVisible,
+      // trainingsLoading,
+      // trainingsVisible,
       skillsData,
       certsData,
     } = this.state;
@@ -150,7 +126,7 @@ class CareerManagement extends React.Component {
       {
         title: 'Action',
         key: 'action',
-        render: () => (
+        render: (text, record) => (
           <span>
             <a>
               <Icon type="edit" />
@@ -195,7 +171,7 @@ class CareerManagement extends React.Component {
       {
         title: 'Action',
         key: 'action',
-        render: () => (
+        render: (text, record) => (
           <span>
             <a>
               <Icon type="edit" />
@@ -248,7 +224,7 @@ class CareerManagement extends React.Component {
       {
         title: 'Action',
         key: 'action',
-        render: () => (
+        render: (text, record) => (
           <span>
             <a>
               <Icon type="edit" />
@@ -309,7 +285,7 @@ class CareerManagement extends React.Component {
       {
         title: 'Action',
         key: 'action',
-        render: () => (
+        render: (text, record) => (
           <span>
             <a>
               <Icon type="edit" />
@@ -327,111 +303,78 @@ class CareerManagement extends React.Component {
 
     return (
       <PageHeaderWrapper>
-        <Row gutter={[8, 8]}>
-          <Col xs={16}>
-            <Card>
-              <p style={tableLabelStyle}>Skills</p>
-              <Divider />
-              <div style={searchContainer}>
-                <a style={searchTextStyle} onClick={this.showSkillsModal}>
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Skills
-                </a>
-              </div>
-              <Table
-                dataSource={skillDataSource}
-                columns={skillColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p style={tableLabelStyle}>Certifications</p>
-              <Divider />
-              <div style={searchContainer}>
-                <a style={searchTextStyle} onClick={this.showCertsModal}>
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Skills
-                </a>
-              </div>
-              <Table
-                dataSource={certificationDataSource}
-                columns={certificationColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p style={tableLabelStyle}>Desired career tracks</p>
-              <Divider />
-              <div style={searchContainer}>
-                <Link to="/employee/careerTrackSearch">
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Career Tracks
-                </Link>
-              </div>
-              <Table
-                dataSource={desiredCareerTrackDataSource}
-                columns={desiredCareerTrackColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p style={tableLabelStyle}>Open positions interested in</p>
-              <Divider />
-              <div style={searchContainer}>
-                <Link to="/employee/positionSearch">
-                  <Icon style={searchIconStyle} type="search" />
-                  Search Open Positions
-                </Link>
-              </div>
-              <Table
-                dataSource={positionsInterestedInDataSource}
-                columns={positionsInterestedInColumns}
-                size="middle"
-                pagination={false}
-                style={{ paddingBottom: 20 }}
-              />
-              <p
-                style={{
-                  textAlign: 'center',
-                  marginTop: 24,
-                }}
-              >
-                We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
-              </p>
-            </Card>
-          </Col>
-          <Col xs={8}>
-            <div style={careerMessageContainerStyle}>
-              <p style={careerMessageHeaderStyle}>Career Management</p>
-              <p style={careerMessageContentStyle}>
-                It is a continuing process that allows you to adapt to the changing demands of our
-                dynamic economy. The career management process embraces various concepts:
-                Self-awareness, career development planning/career exploration, life-long learning,
-                and networking.
-              </p>
-            </div>
-            <div style={{ width: '100%' }}>
-              <img
-                style={{ width: '100%' }}
-                src="https://cdn.dribbble.com/users/79571/screenshots/4407347/swingvy_all_illustrations.png"
-                alt=""
-              />
-            </div>
-            <div style={careerMessageContainerStyle}>
-              <p style={careerMessageHeaderStyle}>Your profile document</p>
-              <p style={careerMessageContentStyle}>
-                Depending on your industry and the type of job you are interested, a resume can be a
-                great way to highlight your skills and experience in a manner that is more visually
-                appealing and engaging.
-              </p>
-              <Upload {...props}>
-                <Button type="primary">
-                  <Icon type="upload" /> Click to Upload Resume
-                </Button>
-              </Upload>
-            </div>
-          </Col>
-        </Row>
+        <Card>
+          <Upload {...props}>
+            <Button type="primary">
+              <Icon type="upload" /> Click to Upload Resume
+            </Button>
+          </Upload>
+          <Divider orientation="left">
+            <h1>Sidney's Skills</h1>
+          </Divider>
+          <a onClick={this.showSkillsModal}>
+            <Icon type="search" />
+            Search Skills
+          </a>
+          <Table
+            dataSource={skillDataSource}
+            columns={skillColumns}
+            size="middle"
+            pagination={false}
+            style={{ paddingBottom: 20 }}
+          />
+          <Divider orientation="left">
+            <h1>Sidney's Certifications</h1>
+          </Divider>
+          <a onClick={this.showCertsModal}>
+            <Icon type="search" />
+            Search Certifcations
+          </a>
+          <Table
+            dataSource={certificationDataSource}
+            columns={certificationColumns}
+            size="middle"
+            pagination={false}
+            style={{ paddingBottom: 20 }}
+          />
+          <Divider orientation="left">
+            <h1>Sidney's Desired Career Tracks</h1>
+          </Divider>
+          <Link to="/employee/careerTrackSearch">
+            <Icon type="search" />
+            Search Career Tracks
+          </Link>
+
+          <Table
+            dataSource={desiredCareerTrackDataSource}
+            columns={desiredCareerTrackColumns}
+            size="middle"
+            pagination={false}
+            style={{ paddingBottom: 20 }}
+          />
+          <Divider orientation="left">
+            <h1>Sidney's Open Positions Interested In</h1>
+          </Divider>
+          <Link to="/employee/positionSearch">
+            <Icon type="search" />
+            Search Open Positions
+          </Link>
+          <Table
+            dataSource={positionsInterestedInDataSource}
+            columns={positionsInterestedInColumns}
+            size="middle"
+            pagination={false}
+            style={{ paddingBottom: 20 }}
+          />
+          <p
+            style={{
+              textAlign: 'center',
+              marginTop: 24,
+            }}
+          >
+            We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney
+          </p>
+        </Card>
         <Modal
           visible={skillsVisible}
           title="Skills"

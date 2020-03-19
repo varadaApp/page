@@ -3,27 +3,9 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
-  background: #f0f2f5;
-}
-
-.logoContainer {
-  padding: 20px;
-}
-
-.contentContainer {
-  background: 'black';
-}
-
-.loginImageContainer {
-  max-width: 100%;
-  max-height: 150px;
-}
-
-.loginImage {
-  width: 100%;
+  overflow: auto;
+  background: @layout-body-background;
 }
 
 .lang {
@@ -37,6 +19,7 @@
 }
 
 .content {
+  flex: 1;
   padding: 32px 0;
 }
 
@@ -66,20 +49,22 @@
 
 .logo {
   height: 44px;
-  padding-right: 16px;
+  margin-right: 16px;
   vertical-align: top;
 }
 
 .title {
+  position: relative;
+  top: 2px;
   color: @heading-color;
-  font-weight: bold;
-  font-size: 28px;
-  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-size: 33px;
+  font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 .desc {
-  padding-top: 12px;
-  padding-bottom: 40px;
+  margin-top: 12px;
+  margin-bottom: 40px;
   color: @text-color-secondary;
   font-size: @font-size-base;
 }

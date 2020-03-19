@@ -44,49 +44,26 @@ class Trainings extends React.Component {
             <h1 className="page-title">Your Trainings</h1>
           </div>
           <Divider />
-          <Row gutter={[8, 8]}>
-            <Col xs={16}>
-              <div className="skills-item-container">
-                <div className="skills-table-container">
-                  <ReactTable
-                    data={data}
-                    filterable
-                    defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-                    columns={[
-                      {
-                        Header: 'Training Name',
-                        accessor: 'name',
-                        filterMethod: (filter, row) =>
-                          row[filter.id].startsWith(filter.value) &&
-                          row[filter.id].endsWith(filter.value),
-                      },
-                    ]}
-                    defaultPageSize={10}
-                    className="-striped -highlight"
-                  />
-                </div>
-              </div>
-            </Col>
-            <Col xs={1} />
-            <Col xs={7}>
-              <div style={{ width: '100%' }}>
-                <img
-                  style={{ width: '100%' }}
-                  src="https://cdn.dribbble.com/users/131231/screenshots/7221343/media/4bd699132d037347a1a0004a20377761.png"
-                  alt=""
-                />
-              </div>
-              <div style={careerMessageContainerStyle}>
-                <p style={careerMessageHeaderStyle}>Importance of Trainings</p>
-                <p style={careerMessageContentStyle}>
-                  Training allows employees to acquire new skills, sharpen existing ones, perform
-                  better, increase productivity and be better leaders. Since a company is the sum
-                  total of what employees achieve individually, organizations should do everything
-                  in their power to ensure that employees perform at their peak.
-                </p>
-              </div>
-            </Col>
-          </Row>
+          <div className="skills-item-container">
+            <div className="skills-table-container">
+              <ReactTable
+                data={data}
+                filterable
+                defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
+                columns={[
+                  {
+                    Header: 'Training Name',
+                    accessor: 'name',
+                    filterMethod: (filter, row) =>
+                      row[filter.id].startsWith(filter.value) &&
+                      row[filter.id].endsWith(filter.value),
+                  },
+                ]}
+                defaultPageSize={10}
+                className="-striped -highlight"
+              />
+            </div>
+          </div>
           <p
             style={{
               textAlign: 'center',

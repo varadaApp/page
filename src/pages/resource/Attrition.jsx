@@ -1,9 +1,23 @@
-/* eslint-disable react/no-unused-state */
 import React from 'react';
-import { Card, Icon, Table, Button, Select, DatePicker, Divider, Checkbox, Col, Row } from 'antd';
+import {
+  Card,
+  Typography,
+  Alert,
+  Icon,
+  Table,
+  Button,
+  Select,
+  DatePicker,
+  Checkbox,
+  Col,
+  Row,
+  Divider,
+} from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 
-const { MonthPicker, RangePicker } = DatePicker;
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
+
 class Reporting extends React.Component {
   constructor(props) {
     super(props);
@@ -235,7 +249,7 @@ class Reporting extends React.Component {
   }
 
   render() {
-    const { dataSource, selectedDateRange } = this.state;
+    const { dataSource } = this.state;
     const columns = this.columns.map(col => {
       if (!col.editable) {
         return col;
@@ -252,12 +266,11 @@ class Reporting extends React.Component {
       };
     });
 
-    const { Option } = Select;
     return (
       <PageHeaderWrapper>
         <Card>
           <div className="screen-header">
-            <h1 className="page-title">Attrition Report</h1>
+            <h1 className="page-title">Attrition on Program</h1>
           </div>
           <Divider />
           <div className="attrition-header-filter-container">
@@ -289,133 +302,146 @@ class Reporting extends React.Component {
                   </Row>
                 </div>
               </div>
+            </div>
+            <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
+            <div style={{ width: 150, display: 'inline-block' }}>Date Range:</div>
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select a Date Range"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              onSelect={this.handleDateRangeSelect}
+            >
+              <Option value="0">&nbsp;</Option>
+              <Option value="1">Annually</Option>
+              <Option value="2">Monthly</Option>
+              <Option value="3">Quarter</Option>
+              <Option value="4">Custom Date Range</Option>
+            </Select>
+            <br />
+            <br />
+            <div style={this.state.selectedDateRange === '1' ? {} : { display: 'none' }}>
+              <div style={{ width: 150, display: 'inline-block' }}>Year:</div>
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Select a Year"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+                // onSelect={this.handleDateRangeSelect}
+              >
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">2020</Option>
+                <Option value="2">2019</Option>
+                <Option value="3">2018</Option>
+                <Option value="4">2017</Option>
+              </Select>
+              <br />
               <br />
             </div>
-            <br />
-            <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
-            <div>
-              <div className="attrition-row">
-                <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="Select a Date Range"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                  onSelect={this.handleDateRangeSelect}
-                >
-                  <Option value="0">&nbsp;</Option>
-                  <Option value="1">Annually</Option>
-                  <Option value="2">Monthly</Option>
-                  <Option value="3">Quarter</Option>
-                  <Option value="4">Custom Date Range</Option>
-                </Select>
-              </div>
-              {selectedDateRange === '1' && (
-                <div className="attrition-row">
-                  <Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Select a Year"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    onSelect={this.handleDateRangeSelect}
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">2020</Option>
-                    <Option value="2">2019</Option>
-                    <Option value="3">2018</Option>
-                    <Option value="4">2017</Option>
-                  </Select>
-                </div>
-              )}
-              {selectedDateRange === '2' && (
-                <div className="attrition-row">
-                  <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
-                </div>
-              )}
-              {selectedDateRange === '3' && (
-                <div className="attrition-row">
-                  <Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Select a Quarter"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    onSelect={this.handleDateRangeSelect}
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">1st Quarter</Option>
-                    <Option value="2">2nd Quarter</Option>
-                    <Option value="3">3rd Quarter</Option>
-                    <Option value="4">4th Quarter</Option>
-                  </Select>
-                </div>
-              )}
-              {selectedDateRange === '4' && (
-                <div className="attrition-row">
-                  <RangePicker format={'MM/DD/YYYY'} />
-                </div>
-              )}
+            <div style={this.state.selectedDateRange === '2' ? {} : { display: 'none' }}>
+              <div style={{ width: 150, display: 'inline-block' }}>Month:</div>
+              <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
+              <br />
+              <br />
             </div>
+            <div style={this.state.selectedDateRange === '3' ? {} : { display: 'none' }}>
+              <div style={{ width: 150, display: 'inline-block' }}>Quarter:</div>
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Select a Quarter"
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+                // onSelect={this.handleDateRangeSelect}
+              >
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">1st Quarter</Option>
+                <Option value="2">2nd Quarter</Option>
+                <Option value="3">3rd Quarter</Option>
+                <Option value="4">4th Quarter</Option>
+              </Select>
+              <br />
+              <br />
+            </div>
+            <div style={this.state.selectedDateRange === '4' ? {} : { display: 'none' }}>
+              <div style={{ width: 150, display: 'inline-block' }}>Custom Date Range:</div>
+              <RangePicker format={'MM/DD/YYYY'} />
+              <br />
+              <br />
+            </div>
+            <div style={{ width: 150, display: 'inline-block' }}>Select Program:</div>
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select a Program"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              <Option value="0">&nbsp;</Option>
+              <Option value="1">AWS Technical Support Program</Option>
+              <Option value="2">DoD Space Program</Option>
+              <Option value="3">DHS Satellite Network</Option>
+              <Option value="4">DoJ Networks</Option>
+              <Option value="5">DoS Nuclear Defense System</Option>
+              <Option value="6">FBI Case Management System</Option>
+            </Select>
+            <br />
             <br />
             <h2 style={{ fontSize: '22px', color: 'black' }}>
               How would you like this data grouped?
             </h2>
-            <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <Select
-                  showSearch
-                  placeholder="Group By"
-                  style={{ width: 200 }}
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  <Option value="0">&nbsp;</Option>
-                  <Option value="1">Career Track</Option>
-                  <Option value="2">Title</Option>
-                  <Option value="3">Labor Category</Option>
-                  <Option value="4">Location</Option>
-                  <Option value="5">Tenure</Option>
-                  <Option value="6">Certification</Option>
-                  <Option value="7">Certification Interest</Option>
-                  <Option value="8">Training</Option>
-                  <Option value="9">Training Interest</Option>
-                </Select>
-              </div>
-            </div>
+            <div style={{ width: 150, display: 'inline-block' }}>Group By:</div>
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              <Option value="0">&nbsp;</Option>
+              <Option value="1">Career Track</Option>
+              <Option value="2">Title</Option>
+              <Option value="3">Labor Category</Option>
+              <Option value="4">Location</Option>
+              <Option value="5">Tenure</Option>
+              <Option value="6">Certification</Option>
+              <Option value="7">Certification Interest</Option>
+              <Option value="8">Training</Option>
+              <Option value="9">Training Interest</Option>
+            </Select>
             <br />
-
-            <div style={{ margin: '10px', float: 'right' }}>
-              <Button onClick={this.handleRunReport}>Run Report</Button>
-            </div>
+            <br />
+            <Button type="primary" onClick={this.handleRunReport}>
+              Run Report
+            </Button>
+            <br />
+            <br />
           </div>
           <div style={this.state.runReport === 'run' ? {} : { display: 'none' }}>
             <h1>Department of Defense Space Program Attrition Report</h1>
-            <div className="attrition-report-table-header">
-              <div />
-              <div>
-                <Button className="table-action-button" type="primary" size="small">
-                  Export to CSV
-                </Button>
-                <Button className="table-action-button" type="primary" size="small">
-                  Export to PDF
-                </Button>
-              </div>
-            </div>
+            <Button type="primary" size="small">
+              Export to CSV
+            </Button>
+            <Button type="primary" size="small">
+              Export to PDF
+            </Button>
             <Table
+              style={{ width: 800 }}
+              bordered
               dataSource={dataSource}
               columns={columns}
-              size="middle"
               pagination={false}
-              style={{ paddingBottom: 20 }}
             />
           </div>
           <p

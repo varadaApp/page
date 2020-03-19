@@ -105,8 +105,9 @@ ol {
   margin: 0px !important;
 }
 
-.program-info-careertract-container {
-  padding-right: 50px !important;
+.export-button-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .ant-card .ant-card-bordered {
@@ -261,6 +262,10 @@ ol {
   margin-bottom: 10px;
 }
 
+.row-title:hover {
+  cursor: pointer;
+}
+
 .page-title {
   font-size: 30px;
   font-family: Montserrat;
@@ -371,6 +376,53 @@ aside {
 
 .ant-menu-submenu-title > span {
   padding-left: 5px;
+  font-size: 16px;
+}
+
+.transition-class {
+  // overflow: hidden;
+  // opacity: 0;
+  // transition: height 0ms 400ms, opacity 400ms 0ms;
+  // height: 0;
+  // transform:scaleY(0); // *squish*
+  -moz-transition: height 0.5s;
+  -ms-transition: height 0.5s;
+  -o-transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  overflow: hidden; // Hide the element content, while height = 0
+  height: 0;
+  opacity: 0;
+  transition: height 0ms 0ms, opacity 600ms 0ms;
+  // transition: height .5s;
+}
+
+.grow-class {
+  -moz-transition: height 0.5s;
+  -ms-transition: height 0.5s;
+  -o-transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  transition: height 0.5s;
+  height: 0;
+  overflow: hidden;
+}
+
+.transition-class-active {
+  height: auto;
+  opacity: 1;
+  transition: height 1s, opacity 400ms 0ms;
+  // height: auto;
+  // opacity: 1;
+  // transition: height 0ms 0ms, opacity 600ms 0ms;
+  // overflow:hidden;
+  // transition:transform 0.3s ease-out; // note that we're transitioning transform, not height!
+  // height:auto;
+  // -moz-transition: height .5s;
+  // -ms-transition: height .5s;
+  // -o-transition: height .5s;
+  // -webkit-transition: height .5s;
+  // transition: height .5s;
+  // transform:scaleY(1); // implicit, but good to specify explicitly
+  // transform-origin:top; // keep the top of the element in the same place. this is optional.
 }
 
 .ant-table-tbody > tr > td {
@@ -2863,7 +2915,7 @@ a.ant-btn-sm {
 .ReactTable .rt-thead.-headerGroups {
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: rgb(240, 242, 245);
+  background-color: transparent;
   color: #1c1c1c;
 }
 
@@ -2988,8 +3040,8 @@ a.ant-btn-sm {
   font-size: 16px !important;
   line-height: 20px !important;
   font-family: Montserrat;
-  color: #fff;
-  background: #7d69ac;
+  color: black;
+  background: transparent;
   padding-top: 6px !important;
   padding-left: 16px !important;
   padding-bottom: 4px !important;

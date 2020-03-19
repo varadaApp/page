@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider } from 'antd';
+import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider, Select } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { careerTrackData } from './Utils';
@@ -12,7 +12,11 @@ const autoCompleteStyle = {
   margin: '5px',
   padding: '2px',
 };
-
+const radiusStyle = {
+  width: '100%',
+  marginTop: '5px',
+  padding: '2px',
+};
 class CareerTrackSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -229,7 +233,15 @@ class CareerTrackSearch extends React.Component {
       ? { display: 'none' }
       : { padding: '10px', margin: '20px' };
     const NoDataComponent = () => <div className="rt-noData">No rows found</div>;
-    const dataSourceProgram = ['AWS Technical Support Program'];
+    const dataSourceProgram = [
+      'AWS Technical Support Program',
+      'DoD Space Program',
+      'DHS Satellite Network',
+      'DoJ Networks',
+      'DoS Nuclear Defense System',
+      'FBI Case Management System',
+    ];
+    const dataSourcePositionTitle = ['System Administrator', 'System Engineer'];
     const dataSourceCertification = [
       'A+',
       'Agile',
@@ -280,8 +292,27 @@ class CareerTrackSearch extends React.Component {
       'TS/SCI FSP',
       'UNCLASSIFIED',
     ];
-    const dataSourceCareerTrack = ['Cyber IA', 'Cyber IT'];
-    const dataSourceLocation = ['Washington DC'];
+    const dataSourceCareerTrack = [
+      'Cyber IA',
+      'Cyber IT',
+      'Database Administration',
+      'Deskside/Field Services',
+      'Help Desk',
+      'Network Administration',
+      'Network Engineering',
+      'Program Ops (Technical)',
+      'Program/Project Management',
+      'Software Development',
+      'Systems Administration',
+      'Systems Engineering',
+      'Telecommunications/VOIP',
+    ];
+    const dataSourceLocation = [
+      'Washington DC',
+      'National Harbor MD',
+      'Chantilly VA',
+      'Fort Belvoir VA',
+    ];
 
     return (
       <PageHeaderWrapper>
@@ -316,6 +347,21 @@ class CareerTrackSearch extends React.Component {
                   option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                 }
               />
+              <br />
+              <Select showSearch style={radiusStyle} placeholder="Radius">
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">5</Option>
+                <Option value="2">10</Option>
+                <Option value="3">20</Option>
+                <Option value="4">30</Option>
+                <Option value="5">40</Option>
+                <Option value="6">50</Option>
+                <Option value="7">60</Option>
+                <Option value="8">75</Option>
+                <Option value="9">100</Option>
+                <Option value="10">150</Option>
+                <Option value="11">200</Option>
+              </Select>
               <br />
               <AutoComplete
                 // allowClear={true}
@@ -396,6 +442,7 @@ class CareerTrackSearch extends React.Component {
                   {
                     Header: 'Tier',
                     accessor: 'careerTrackTier',
+                    width: 70,
                   },
                 ],
               },
@@ -418,7 +465,7 @@ class CareerTrackSearch extends React.Component {
               },
             ]}
             defaultPageSize={10}
-            className="-striped -highlight"
+            className="-striped -highlight customized-table"
           />
           <p
             style={{

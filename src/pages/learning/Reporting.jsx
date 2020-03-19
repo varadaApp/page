@@ -1,19 +1,9 @@
 import React from 'react';
-import { Card, Icon, Table } from 'antd';
+import { Card, Typography, Alert, Icon, Table } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 // import { Gauge } from 'ant-design-pro/lib/Charts';
 import { Chart, Axis, Coord, Geom, Guide, Shape } from 'bizcharts';
-
-const tableContainerStyle = {
-  margin: '20px',
-  padding: '10px',
-};
-
-const tableTitleStyle = {
-  fontSize: '30px',
-  color: 'black',
-  fontWeight: 600,
-};
 
 const { Html, Arc } = Guide;
 Shape.registerShape('point', 'pointer', {
@@ -172,6 +162,7 @@ class Reporting extends React.Component {
           attrition: '6.67%',
         },
       ],
+      count: 12,
     };
     this.columns = [
       {
@@ -200,7 +191,6 @@ class Reporting extends React.Component {
       },
     ];
   }
-
   render() {
     const { dataSource } = this.state;
     const columns = this.columns.map(col => {
@@ -243,7 +233,7 @@ class Reporting extends React.Component {
               label={{
                 offset: -16,
                 textStyle: {
-                  fontSize: 16,
+                  fontSize: 18,
                   textAlign: 'center',
                   textBaseline: 'middle',
                 },
@@ -283,7 +273,7 @@ class Reporting extends React.Component {
               <Html
                 position={['50%', '95%']}
                 html={() =>
-                  `<div style="width: 100px;text-align: center;font-size: 7px!important;"><p style="font-size: 14px; color: #6c6c72;margin: 0;">January 2020 Atrittion %</p><p style="font-size: 30px;color: #1c1c1c;margin: 0;">${data[0]
+                  `<div style="width: 100px;text-align: center;font-size: 7px!important;"><p style="font-size: 1.75em; color: rgba(0,0,0,0.43);margin: 0;">January 2020 Atrittion %</p><p style="font-size: 3em;color: rgba(0,0,0,0.85);margin: 0;">${data[0]
                     .value * 10}%</p></div>`
                 }
               />
@@ -298,16 +288,14 @@ class Reporting extends React.Component {
             />
           </Chart>
 
-          <div style={tableContainerStyle}>
-            <h1 style={tableTitleStyle}>Monthly Attrition Report - 2019</h1>
-            <Table
-              className="report-table"
-              dataSource={dataSource}
-              columns={columns}
-              size="middle"
-              pagination={false}
-            />
-          </div>
+          <h1>Monthly Attrition Report - 2019</h1>
+          <Table
+            style={{ width: 800 }}
+            bordered
+            dataSource={dataSource}
+            columns={columns}
+            pagination={false}
+          />
           <p
             style={{
               textAlign: 'center',

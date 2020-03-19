@@ -2,40 +2,6 @@
 import React from 'react';
 import { Card, Icon, Table, Button, Divider } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
-// import { Gauge } from 'ant-design-pro/lib/Charts';
-import { Shape } from 'bizcharts';
-
-Shape.registerShape('point', 'pointer', {
-  drawShape(cfg, group) {
-    let point = cfg.points[0];
-    point = this.parsePoint(point);
-    const center = this.parsePoint({
-      x: 0,
-      y: 0,
-    });
-    group.addShape('line', {
-      attrs: {
-        x1: center.x,
-        y1: center.y,
-        x2: point.x,
-        y2: point.y - 20,
-        stroke: cfg.color,
-        lineWidth: 5,
-        lineCap: 'round',
-      },
-    });
-    return group.addShape('circle', {
-      attrs: {
-        x: center.x,
-        y: center.y,
-        r: 12,
-        stroke: cfg.color,
-        lineWidth: 4.5,
-        fill: '#fff',
-      },
-    });
-  },
-});
 
 class Reporting extends React.Component {
   constructor(props) {
@@ -44,139 +10,174 @@ class Reporting extends React.Component {
       dataSource: [
         {
           key: '0',
-          month: 'January',
-          openingBalance: '27',
-          employeesJoined: '3',
-          employeesLeft: '0',
-          closingBalance: '30',
-          attrition: '0.00%',
+          employee: 'Sharyn Ballard',
+          positionTitle: 'Linux System Administrator',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '1',
-          month: 'February',
-          openingBalance: '30',
-          employeesJoined: '1',
-          employeesLeft: '5',
-          closingBalance: '26',
-          attrition: '19.23%',
+          employee: 'Romeo Thompson',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '2',
-          month: 'March',
-          openingBalance: '26',
-          employeesJoined: '4',
-          employeesLeft: '2',
-          closingBalance: '28',
-          attrition: '7.14%',
+          employee: 'Chere Nance',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '3',
-          month: 'April',
-          openingBalance: '28',
-          employeesJoined: '1',
-          employeesLeft: '0',
-          closingBalance: '29',
-          attrition: '0.00%',
+          employee: 'Kami Najera',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '4',
-          month: 'May',
-          openingBalance: '29',
-          employeesJoined: '0',
-          employeesLeft: '6',
-          closingBalance: '23',
-          attrition: '26.09%',
+          employee: 'Darryl Merryman',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '5',
-          month: 'June',
-          openingBalance: '23',
-          employeesJoined: '12',
-          employeesLeft: '3',
-          closingBalance: '32',
-          attrition: '9.38%',
+          employee: 'Brigitte Weiland',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '6',
-          month: 'July',
-          openingBalance: '32',
-          employeesJoined: '1',
-          employeesLeft: '2',
-          closingBalance: '31',
-          attrition: '6.45%',
+          employee: 'Emmitt Dugas',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '7',
-          month: 'August',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '0',
-          closingBalance: '32',
-          attrition: '0.00%',
+          employee: 'Chia Villalba',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '8',
-          month: 'September',
-          openingBalance: '32',
-          employeesJoined: '1',
-          employeesLeft: '2',
-          closingBalance: '31',
-          attrition: '6.45%',
+          employee: 'Hipolito Gooden',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '9',
-          month: 'October',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '1',
-          closingBalance: '31',
-          attrition: '3.23%',
+          employee: 'Enoch Hector',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '10',
-          month: 'November',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '1',
-          closingBalance: '31',
-          attrition: '3.23%',
+          employee: 'Nicolas Hadlock',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
         {
           key: '11',
-          month: 'December',
-          openingBalance: '31',
-          employeesJoined: '1',
-          employeesLeft: '2',
-          closingBalance: '30',
-          attrition: '6.67%',
+          employee: 'Brock Brauer',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
+        },
+        {
+          key: '12',
+          employee: 'Phyliss Kaplan',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
+        },
+        {
+          key: '13',
+          employee: 'Nickie Buie',
+          positionTitle: '',
+          laborCategoryLevel: 'System Admin Level 2',
+          currentCareerTrack: 'System Administration Level 2',
+          currentSalary: '$110,000',
+          currentCertifications: 'A+, Security+, Linux+, Splunk',
+          currentClearance: 'Secret',
         },
       ],
-      count: 12,
     };
     this.columns = [
       {
-        title: 'Month',
-        dataIndex: 'month',
+        title: 'Employee',
+        dataIndex: 'employee',
       },
       {
-        title: 'Opening Balance',
-        dataIndex: 'openingBalance',
+        title: 'Position Title',
+        dataIndex: 'positionTitle',
       },
       {
-        title: 'Employees Joined',
-        dataIndex: 'employeesJoined',
+        title: 'Labor Category and Level',
+        dataIndex: 'laborCategoryLevel',
       },
       {
-        title: 'Employees Left',
-        dataIndex: 'employeesLeft',
+        title: 'Current Career Track',
+        dataIndex: 'currentCareerTrack',
       },
       {
-        title: 'Closing Balance',
-        dataIndex: 'closingBalance',
+        title: 'Current Salary',
+        dataIndex: 'currentSalary',
       },
       {
-        title: 'Attrition %',
-        dataIndex: 'attrition',
+        title: 'Current Certifications',
+        dataIndex: 'currentCertifications',
+      },
+      {
+        title: 'Current Clearance',
+        dataIndex: 'currentClearance',
       },
     ];
   }
@@ -203,10 +204,9 @@ class Reporting extends React.Component {
       <PageHeaderWrapper>
         <Card>
           <div className="screen-header">
-            <h1 className="page-title">Monthly Attrition Report</h1>
+            <h1 className="page-title">Employee Summary</h1>
           </div>
           <Divider />
-          <p className="attrition-report-label">Months of 2019</p>
           <div className="attrition-report-table-header">
             <div />
             <div>
@@ -217,6 +217,14 @@ class Reporting extends React.Component {
                 size="small"
               >
                 Export to CSV
+              </Button>
+              <Button
+                onClick={this.showDrawer}
+                className="table-action-button"
+                type="primary"
+                size="small"
+              >
+                Export to PDF
               </Button>
             </div>
           </div>

@@ -71,16 +71,20 @@ const props = {
 
 const data = [
   {
-    label: 'Title',
-    value: 'ASP.NET Developer',
+    label: 'Position Title',
+    value: 'Windows Server System Administrator',
+  },
+  {
+    label: 'Labor Category and Level',
+    value: 'Server System Admin Level 2',
+  },
+  {
+    label: 'Current Career Track',
+    value: 'System Administration Level 2',
   },
   {
     label: 'Program Name',
     value: 'Department of Defense Space Program',
-  },
-  {
-    label: 'Program Position',
-    value: 'Senior Software Engineer',
   },
   {
     label: 'Program Location',
@@ -91,8 +95,12 @@ const data = [
     value: '$110,000',
   },
   {
+    label: 'Current Certifications',
+    value: 'A+, Security+, MCSA, Splunk',
+  },
+  {
     label: 'Current Clearance',
-    value: 'Top Secret',
+    value: 'Secret',
   },
 ];
 
@@ -106,49 +114,22 @@ export default () => (
         <Col>
           <Divider />
           <Form {...formItemLayout}>
-            <Row gutter={[8, 8]}>
-              <Col xs={15}>
-                {data.map(d => (
-                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
-                    <p style={labelStyle}>{d.label}</p>
-                    <Row>
-                      <Col xs={20}>
-                        <p style={valueStyle} className="ant-form-text">
-                          {d.value}
-                        </p>
-                      </Col>
-                      <Col xs={4}>
-                        <Icon type="edit" />
-                        <span style={editStyle}>Edit</span>
-                      </Col>
-                    </Row>
-                  </Form.Item>
-                ))}
-              </Col>
-              <Col xs={1} />
-              <Col xs={8}>
-                <div style={{ width: '100%' }}>
-                  <img
-                    style={{ width: '100%' }}
-                    src={require('../assets/profile-side.png')}
-                    alt=""
-                  />
-                </div>
-                <div style={profileMessageContainerStyle}>
-                  <p style={profileMessageHeaderStyle}>Your profile document</p>
-                  <p style={profileMessageContentStyle}>
-                    Depending on your industry and the type of job you are interested, a resume can
-                    be a great way to highlight your skills and experience in a manner that is more
-                    visually appealing and engaging.
-                  </p>
-                  <Upload {...props}>
-                    <Button type="primary">
-                      <Icon type="upload" /> Click to Upload Resume
-                    </Button>
-                  </Upload>
-                </div>
-              </Col>
-            </Row>
+            {data.map(d => (
+              <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
+                <p style={labelStyle}>{d.label}</p>
+                <Row>
+                  <Col xs={20}>
+                    <p style={valueStyle} className="ant-form-text">
+                      {d.value}
+                    </p>
+                  </Col>
+                  <Col xs={4}>
+                    {/* <Icon type="edit" />
+                        <span style={editStyle}>Edit</span> */}
+                  </Col>
+                </Row>
+              </Form.Item>
+            ))}
           </Form>
           <p
             style={{

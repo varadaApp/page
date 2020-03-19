@@ -12,11 +12,13 @@ import {
   Form,
   Button,
   Input,
+  Divider,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { connect } from 'dva';
 import ToDoList from '../common-components/ToDoList';
 import GoalList from '../common-components/GoalList';
+import Alerts from '../common-components/Alerts';
 
 const morningIcon = 'https://i.imgur.com/h4d6GDR.png';
 const afternoonIcon = 'https://i.imgur.com/Ti1XFhK.png';
@@ -42,6 +44,20 @@ class Overview extends React.Component {
   };
 
   render() {
+    const alerts = [
+      {
+        title: '',
+        content: '10 New Employees are interested in Juniper training',
+      },
+      {
+        title: '',
+        content: 'An Employee completed Security+',
+      },
+      {
+        title: '',
+        content: ' Have you updated the list of trainings with the latest 2020 offerings?',
+      },
+    ];
     const thingsToDo = [
       {
         title: 'Reminder',
@@ -90,95 +106,9 @@ class Overview extends React.Component {
             <a style={{ color: 'black', marginRight: '5px' }}>Have any questions? </a>
             <a href="#">Visit Help Center</a>
           </Typography>
-          <div
-            style={{
-              borderRadius: 5,
-              backgroundColor: 'rgb(240, 242, 245)',
-              margin: 24,
-              padding: 24,
-            }}
-          >
-            <Typography
-              style={{
-                fontSize: '28px',
-                color: 'black',
-                borderWidth: '0px',
-              }}
-            >
-              My current status is:
-            </Typography>
-            <div>
-              <div style={{ padding: 10 }}>
-                <Checkbox>
-                  <span style={{ fontSize: 16, color: 'black' }}>
-                    Interested in Growth (ie. New Certification and/or Training)
-                  </span>
-                </Checkbox>
-              </div>
-              <div style={{ padding: 10 }}>
-                <Checkbox>
-                  <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
-                    Losing Coverage:
-                  </span>
-                  <DatePicker size="small" format="DD/MM/YYYY" />
-                </Checkbox>
-              </div>
-              <div style={{ padding: 10 }}>
-                <Checkbox>
-                  <span style={{ fontSize: 16, marginRight: 10, color: 'black' }}>
-                    Location Change:
-                  </span>
-                  <Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Select a Location"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    <Select.Option value="0">Northern Virginia</Select.Option>
-                    <Select.Option value="1">Washington D.C.</Select.Option>
-                    <Select.Option value="2">Maryland</Select.Option>
-                    <Select.Option value="3">Hawaii</Select.Option>
-                  </Select>
-                </Checkbox>
-              </div>
-            </div>
-          </div>
-          {/* <Divider
-            orientation="center"
-            style={{
-              marginTop: '30px',
-            }}
-            type="horizontal"
-          >
-            {managementModules.map(m => (
-              <Button
-                style={{
-                  marginLeft: '5px',
-                  marginRight: '5px',
-                  height: '50px',
-                }}
-              >
-                <Link to={m.path}>
-                  <Text
-                    style={{
-                      fontSize: '18px',
-                    }}
-                  >
-                    {m.title}
-                  </Text>
-                </Link>
-              </Button>
-            ))}
-          </Divider> */}
           <Row gutter={[8, 8]}>
             <Col xs={12} span={6}>
-              <ToDoList list={thingsToDo} />
-            </Col>
-            <Col xs={12} span={18}>
-              <GoalList list={goals} showDrawer={this.showDrawer} />
+              <Alerts list={alerts} />
             </Col>
           </Row>
 

@@ -2,33 +2,41 @@ import React from 'react';
 import {
   Card,
   Typography,
+  Alert,
   Icon,
+  Menu,
+  Spin,
   Row,
   Col,
+  Badge,
   Drawer,
-  Checkbox,
-  DatePicker,
-  Select,
   Form,
   Button,
   Input,
+  Select,
+  DatePicker,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import { FormattedMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
-import ToDoList from '../common-components/ToDoList';
-import GoalList from '../common-components/GoalList';
-import Alerts from '../common-components/Alerts';
-import ProgramGoalList from '../common-components/ProgramGoalList';
+
+import ToDoList from '../common-components/Todos';
+import GoalList from '../common-components/Goals';
 
 const morningIcon = 'https://i.imgur.com/h4d6GDR.png';
 const afternoonIcon = 'https://i.imgur.com/Ti1XFhK.png';
 const eveningIcon = 'https://i.imgur.com/ahw0hUo.png';
 
-const hour = new Date().getHours();
-
-const greeting = `Good ${(hour < 12 && 'morning') || (hour < 18 && 'afternoon') || 'evening'}`;
+var hour = new Date().getHours();
+var greeting = 'Good ' + ((hour < 12 && 'Morning') || (hour < 18 && 'Afternoon') || 'Evening');
 const greetingIcon = (hour < 12 && morningIcon) || (hour < 18 && afternoonIcon) || eveningIcon;
-class Overview extends React.Component {
+
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { userAsync: [], loading: true };
+  }
+
   state = { visible: false };
 
   showDrawer = () => {
@@ -42,24 +50,48 @@ class Overview extends React.Component {
       visible: false,
     });
   };
+  /*   componentDidMount() {
+    this.getUserAsync();
+  } */
+
+  /*   async getUserAsync() {
+    const response = await fetch('api/currentuser');
+    const data = await response.json();
+    this.setState({ userAsync: data, loading: false });
+  } */
 
   render() {
-    const alerts = [
+    console.log('this props', this.props);
+    const {
+      currentUser = {
+        avatar: '',
+        name: '',
+      },
+      menu,
+    } = this.props;
+    const thingsToDo = [
       {
         title: '',
         content: 'Employee Sharyn Ballard has selected a new primary desired career track...',
+        to: '/resource/dashboard',
       },
       {
-        title: '',
-        content: 'Reminder: Have you followed up with Emmitt Dugas with his AWS training?',
+        title: 'Reminder',
+        content: 'Have you updated the latest list of open positions?',
+        to: '/resource/dashboard',
       },
     ];
 
     const goals = [
-      'Increase the Program Staffing by 10% in 2020!',
-      'Help each employee complete at least one certification in 2020!',
+      {
+        to: 'resource/dashboard',
+        content: 'Increase Employee Retention by 20% in 2020!',
+      },
+      {
+        to: '/resource/dashboard',
+        content: 'Communicate more with the Program Managers!',
+      },
     ];
-
     const { getFieldDecorator } = this.props.form;
     return (
       <PageHeaderWrapper>
@@ -78,7 +110,7 @@ class Overview extends React.Component {
           <Typography
             style={{
               fontWeight: 600,
-              fontSize: '31px',
+              fontSize: '33px',
               letterSpacing: '0.1px',
               color: 'black',
               textAlign: 'center',
@@ -86,19 +118,14 @@ class Overview extends React.Component {
           >
             {greeting}, Sidney
           </Typography>
-          <Typography style={{ textAlign: 'center' }}>
-            <a style={{ color: 'black', marginRight: '5px' }}>Have any questions? </a>
-            <a href="#">Visit Help Center</a>
-          </Typography>
           <Row gutter={[8, 8]}>
             <Col xs={12} span={6}>
-              <Alerts list={alerts} />
+              <ToDoList list={thingsToDo} />
             </Col>
             <Col xs={12} span={18}>
-              <ProgramGoalList list={goals} showDrawer={this.showDrawer} />
+              <GoalList list={goals} showDrawer={this.showDrawer} />
             </Col>
           </Row>
-
           <p
             style={{
               textAlign: 'center',
@@ -150,4 +177,4 @@ class Overview extends React.Component {
   }
 }
 
-export default connect(() => ({}))(Form.create()(Overview));
+export default connect(({}) => ({}))(Form.create()(Dashboard));

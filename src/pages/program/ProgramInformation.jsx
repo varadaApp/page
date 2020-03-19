@@ -24,6 +24,11 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { programEmployees } from '../Utils';
 
+const formItemLayout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 12 },
+};
+
 import 'react-table/react-table.css';
 
 const EditableContext = React.createContext();
@@ -184,18 +189,28 @@ class ProgramInformation extends React.Component {
         },
         {
           key: '1',
-          name: 'Program/Project Management',
+          name: 'Software Development',
         },
         {
           key: '2',
-          name: 'Software Developer',
-        },
-        {
-          key: '3',
           name: 'Systems Administration',
         },
       ],
       count: 4,
+      dataSourceCareerTracks: [
+        {
+          key: '0',
+          name: 'Program Ops (Technical)',
+        },
+        {
+          key: '1',
+          name: 'Software Development',
+        },
+        {
+          key: '2',
+          name: 'Systems Administration',
+        },
+      ],
       dataSourceSkills: [
         {
           key: '0',
@@ -236,6 +251,24 @@ class ProgramInformation extends React.Component {
         title: '',
         width: '20%',
         dataIndex: 'operation',
+      },
+    ];
+    this.columnsCareerTracks = [
+      {
+        title: 'Career Track',
+        dataIndex: 'name',
+        editable: true,
+      },
+      {
+        title: '',
+        width: '20%',
+        dataIndex: 'operation',
+        render: (text, record) =>
+          this.state.dataSource.length >= 1 ? (
+            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
+              <a>Delete</a>
+            </Popconfirm>
+          ) : null,
       },
     ];
     this.columnsSkills = [
@@ -364,112 +397,27 @@ class ProgramInformation extends React.Component {
     console.log('modalrow', row);
 
     info({
-      style: { top: 20 },
-      width: 1200,
+      width: 800,
       title: row.employeeName,
       content: (
         <div>
-          <p>Location: {row.locationName}</p>
-          <p>Career Track: {row.careerTrackName}</p>
-          <p>Career Track Tier: {row.careerTrackTier}</p>
-          <div style={row.employeeName === 'Sharyn Ballard' ? {} : { display: 'none' }}>
-            <Divider orientation="left">
-              <strong>
-                Primary Selected Career Track: Network Engineer Tier 2 (Program: Department of
-                Homeland Security Satellite Network)
-              </strong>
-            </Divider>
-            Open Positions Applied To:
-            <br />
-            Senior Network Manager
-            <br />
-            Job Requisition #14567
-            <br />
-            PM:Clarence Hodson
-            <br />
-            <br />
-            <a onClick={this.showSelectedCareerTrackModal}>Current Percentage Complete: 25%</a>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Trainings">
-                Advanced Networking -{' '}
-                <span className="attention">
-                  Training Recently Shown Interest, Needs Action
-                  <Icon type="warning" theme="filled" />
-                </span>
-                <br />
-                Networking Circuits - Interest Not Selected
-              </Descriptions.Item>
-              <Descriptions.Item label="Certifications">
-                CCNA -{' '}
-                <span className="in-progress">
-                  Certification Test Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                CCNP - Interest Not Selected
-              </Descriptions.Item>
-            </Descriptions>
-            <Divider orientation="left">
-              <strong>
-                Recommended Career Track: Software Developer Level 3 (Program: Department of Defense
-                Space Program)
-              </strong>
-            </Divider>
-            Open Positions Applied To:
-            <br />
-            Senior Software Developer
-            <br />
-            Job Requisition #14589
-            <br />
-            PM: Eladia Calderon
-            <br />
-            <br />
-            <a onClick={this.showRecommendedCareerTrackModal}>Current Percentage Complete: 35%</a>
-            <Descriptions
-              layout="vertical"
-              bordered
-              column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
-              size="small"
-            >
-              <Descriptions.Item label="Trainings">
-                Programming Level 3 Training -{' '}
-                <span className="in-progress">
-                  Training Scheduled
-                  <Icon type="calendar" theme="outlined" />
-                </span>
-                <br />
-                Database Level 3 Training -{' '}
-                <span className="in-progress">
-                  Training in Progress
-                  <Icon type="sync" spin />
-                </span>
-                <br />
-                Advanced Agile Training-{' '}
-                <span className="completed">
-                  Training Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-              <Descriptions.Item label="Certifications">
-                CCISP -{' '}
-                <span className="attention">
-                  Certification Recently Shown Interest, Needs Action
-                  <Icon type="warning" theme="filled" />
-                </span>
-                <br />
-                AWS Developer -{' '}
-                <span className="completed">
-                  Certification Complete
-                  <Icon type="check-circle" theme="outlined" />
-                </span>
-              </Descriptions.Item>
-            </Descriptions>
-          </div>
+          <span className="ant-form-text">Position Title: Linux System Administrator</span>
+          <br />
+          <span className="ant-form-text">Labor Category and Level: System Admin Level 2</span>
+          <br />
+          <span className="ant-form-text">Current Career Track: System Administration Level 2</span>
+          <br />
+          <span className="ant-form-text">Program Name: Department of Defense Space Program</span>
+          <br />
+          <span className="ant-form-text">Program Location: Washington, D.C.</span>
+          <br />
+          <span className="ant-form-text">Current Salary: $110,000</span>
+          <br />
+          <span className="ant-form-text">
+            Current Certifications: A+, Security+, Linux+, Splunk
+          </span>
+          <br />
+          <span className="ant-form-text">Current Clearance: Secret</span>
         </div>
       ),
       onOk() {},
@@ -485,6 +433,7 @@ class ProgramInformation extends React.Component {
       recommendedCareerTrackLoading,
       dataSourceCertifications,
       dataSourceSkills,
+      dataSourceCareerTracks,
     } = this.state;
     const { Step } = Steps;
     const components = {
@@ -539,15 +488,34 @@ class ProgramInformation extends React.Component {
         }),
       };
     });
+    const columnsCareerTracks = this.columnsCareerTracks.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: this.handleSave,
+        }),
+      };
+    });
 
     const formData = [
+      {
+        label: 'Program Location',
+        value: 'Washington, DC',
+      },
       {
         label: 'Program Manager',
         value: 'Sidney Watkins',
       },
       {
         label: 'Number of Employees',
-        value: '15',
+        value: '14',
       },
       {
         label: 'Clearance Level',
@@ -559,7 +527,7 @@ class ProgramInformation extends React.Component {
       },
       {
         label: 'Period of Performance Ends',
-        value: 'July 15, 2020',
+        value: 'December 15, 2020',
       },
     ];
 
@@ -572,7 +540,53 @@ class ProgramInformation extends React.Component {
           </div>
           <Divider />
           <Row gutter={[8, 8]} style={{ margin: '20px', padding: '10px' }}>
-            <Col className="program-info-careertract-container" xs={16} span={18}>
+            <Col
+              style={{ backgroundColor: 'rgb(240, 242, 245)', padding: 20, borderRadius: 5 }}
+              xs={8}
+            >
+              <Form>
+                {formData.map(d => (
+                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
+                    <p className="program-info-label" style={labelStyle}>
+                      {d.label}
+                    </p>
+                    <Row>
+                      <Col xs={20}>
+                        <p style={valueStyle} className="ant-form-text">
+                          {d.value}
+                        </p>
+                      </Col>
+                      <Col xs={4}>
+                        <Icon type="edit" />
+                        <span style={editStyle}>Edit</span>
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                ))}
+              </Form>
+            </Col>
+            <Col xs={1} />
+            <Col className="program-info-careertract-container" xs={15} span={18}>
+              <Form layout="inline">
+                <Form.Item>
+                  <Input style={{ width: 'auto' }} placeholder="Career Track Name" />
+                </Form.Item>
+                <Form.Item>
+                  <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+                    Add a Career Track
+                  </Button>
+                </Form.Item>
+              </Form>
+              <Table
+                components={components}
+                rowClassName={() => 'editable-row'}
+                bordered
+                dataSource={dataSourceCareerTracks}
+                columns={columnsCareerTracks}
+                pagination={false}
+              />
+              <br />
+              <Divider></Divider>
               <Col xs={12}>
                 <Select
                   showSearch
@@ -670,31 +684,6 @@ class ProgramInformation extends React.Component {
                 </div>
               )}
             </Col>
-            <Col
-              style={{ backgroundColor: 'rgb(240, 242, 245)', padding: 20, borderRadius: 10 }}
-              xs={8}
-            >
-              <Form>
-                {formData.map(d => (
-                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
-                    <p className="program-info-label" style={labelStyle}>
-                      {d.label}
-                    </p>
-                    <Row>
-                      <Col xs={20}>
-                        <p style={valueStyle} className="ant-form-text">
-                          {d.value}
-                        </p>
-                      </Col>
-                      <Col xs={4}>
-                        <Icon type="edit" />
-                        <span style={editStyle}>Edit</span>
-                      </Col>
-                    </Row>
-                  </Form.Item>
-                ))}
-              </Form>
-            </Col>
             {/* <Col style={{ padding: '10px', backgroundColor: 'rgb(240, 242, 245)' }} xs={12}>
               <Form layout="inline">
                 <Form.Item>
@@ -717,30 +706,46 @@ class ProgramInformation extends React.Component {
           </Row>
           <p style={employeeHeaderStyle}>Employees</p>
           <Divider />
+          <div className="export-button-container">
+            <Button type="primary" size="small">
+              Export to CSV
+            </Button>
+            <Divider type="vertical" />
+            <Button type="primary" size="small">
+              Export to PDF
+            </Button>
+          </div>
           <ReactTable
-            style={{ marginLeft: '20px', paddingLeft: '10px' }}
             data={data}
-            resolveData={d => d.map(row => row)}
+            resolveData={data => data.map(row => row)}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            getTdProps={() => ({
-              onClick: (e, handleOriginal) => {
-                if (handleOriginal) {
-                  handleOriginal();
-                }
-              },
-            })}
-            getTrProps={rowInfo => ({
-              onClick: (e, handleOriginal) => {
-                this.showRow(rowInfo.original);
-                if (handleOriginal) {
-                  handleOriginal();
-                }
-              },
-            })}
+            getTdProps={(state, rowInfo, column, instance) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  if (handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+              };
+            }}
+            getTrProps={(state, rowInfo, column) => {
+              return {
+                onClick: (e, handleOriginal) => {
+                  this.showRow(rowInfo.original);
+                  if (handleOriginal) {
+                    handleOriginal();
+                  }
+                },
+              };
+            }}
             columns={[
               {
                 Header: 'Employee',
                 accessor: 'employeeName',
+              },
+              {
+                Header: 'Position Title',
+                accessor: 'position',
               },
               {
                 Header: 'Current Status',
@@ -749,11 +754,7 @@ class ProgramInformation extends React.Component {
               {
                 id: 'currentCareerTrack',
                 Header: 'Current Career Track',
-                accessor: d => `${d.careerTrackName} Tier ${d.careerTrackTier}`,
-              },
-              {
-                Header: 'Location',
-                accessor: 'locationName',
+                accessor: d => `${d.careerTrackName}` + ' Tier ' + `${d.careerTrackTier}`,
               },
             ]}
             defaultPageSize={10}
