@@ -3,7 +3,7 @@ import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider, Select } fr
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { careerTrackData } from './Utils';
-
+import HoverCard from './common-components/HoverCard';
 // Import React Table
 import 'react-table/react-table.css';
 
@@ -321,6 +321,11 @@ class CareerTrackSearch extends React.Component {
             <h1 className="page-title">Career Track Search</h1>
           </div>
           <Divider />
+          <div className="hover-cards-container">
+            <HoverCard icon={<Icon type="star" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
+            <HoverCard icon={<Icon type="check" style={{fontSize: 80, color: "#fff"}} />} />
+            <HoverCard icon={<Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
+          </div>
           <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>

@@ -565,7 +565,7 @@ class ProgramInformation extends React.Component {
                 ))}
               </Form>
             </Col>
-            <Col xs={1} />
+            <Col xs={1}/>
             <Col className="program-info-careertract-container" xs={15} span={18}>
               <Form layout="inline">
                 <Form.Item>

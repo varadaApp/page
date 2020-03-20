@@ -474,24 +474,16 @@ class CurrentCareerTrack extends React.Component {
           >
             <h1 className="page-title">Sidney&apos;s Career Track</h1>
           </div>
-          <Divider />
+          
           <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={6}>
-              <div className="top-container">
-                {/* <div className="image-container"> */}
-                <img
-                  className="round-item-image"
-                  src={require('../assets/program-icon.png')}
-                  alt="atl"
-                />
-                {/* </div> */}
+              <div className="top-container to-right">
                 <div
                   style={{
                     color: 'black',
                     textAlign: 'left',
                     fontSize: '16px',
                     fontWeight: 600,
-                    marginTop: 20,
                   }}
                 >
                   Department of Defense Space Program
@@ -500,21 +492,13 @@ class CurrentCareerTrack extends React.Component {
               </div>
             </Col>
             <Col xs={6}>
-              <div className="top-container">
-                {/* <div className="image-container"> */}
-                <img
-                  className="round-item-image"
-                  src={require('../assets/track-icon.png')}
-                  alt="atl"
-                />
-                {/* </div> */}
+              <div className="top-container to-right">
                 <div
                   style={{
                     color: 'black',
                     textAlign: 'left',
                     fontSize: '16px',
                     fontWeight: 600,
-                    marginTop: 20,
                   }}
                 >
                   System Administration
@@ -523,21 +507,13 @@ class CurrentCareerTrack extends React.Component {
               </div>
             </Col>
             <Col xs={6}>
-              <div className="top-container">
-                {/* <div className="image-container"> */}
-                <img
-                  className="round-item-image"
-                  src={require('../assets/tier-icon.png')}
-                  alt="atl"
-                />
-                {/* </div> */}
+              <div className="top-container to-right">
                 <div
                   style={{
                     color: 'black',
                     textAlign: 'left',
                     fontSize: '16px',
                     fontWeight: 600,
-                    marginTop: 20,
                   }}
                 >
                   Level 2
@@ -546,21 +522,13 @@ class CurrentCareerTrack extends React.Component {
               </div>
             </Col>
             <Col xs={6}>
-              <div className="top-container">
-                {/* <div className="image-container"> */}
-                <img
-                  className="round-item-image"
-                  src={require('../assets/next-tier-icon.png')}
-                  alt="atl"
-                />
-                {/* </div> */}
+              <div className="top-container to-right">
                 <div
                   style={{
                     color: 'black',
                     textAlign: 'left',
                     fontSize: '16px',
                     fontWeight: 600,
-                    marginTop: 20,
                   }}
                 >
                   Level 3
@@ -569,39 +537,29 @@ class CurrentCareerTrack extends React.Component {
               </div>
             </Col>
           </Row>
-          <Divider />
+          
           <Row gutter={[8, 8]} style={{ marginRight: 10 }}>
             <Col xs={11}>
-              <div style={{ border: '1.5px solid #919197', borderRadius: 5, paddingBottom: 20 }}>
+              <div className="shadowed-box-container">
                 <div>
                   <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      height: 49,
-                      borderBottom: '1px solid #919197',
-                    }}
-                  >
+                    className="customized-top-container">
                     <span
                       style={{
                         fontSize: '14px',
                         fontWeight: 600,
                         lineHeight: 1.5,
-                        color: '#525257',
+                        textAlign: 'center',
+                        color: 'black',
                         margin: 10,
+                        width: '100%',
                         padding: 5,
                       }}
                     >
-                      Requirements for Primary Selected Career Track
+                      Requirements for Primary Career Track
                     </span>
                   </div>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    background: '#919197',
-                  }}
-                />
                 <Row
                   style={
                     {
@@ -628,7 +586,7 @@ class CurrentCareerTrack extends React.Component {
                     </p>
                     <Select
                       showSearch
-                      style={{ width: 350 }}
+
                       placeholder="Program"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -645,15 +603,8 @@ class CurrentCareerTrack extends React.Component {
                       </Option>
                     </Select>
                   </div>
-                  <Divider />
-                  <div
-                    style={{
-                      marginLeft: '20px',
-                      paddingLeft: '10px',
-                      marginRight: '20px',
-                      paddingRight: '10px',
-                    }}
-                  >
+                  
+                  <div>
                     <div
                       className="row-title"
                       onClick={() => this.toggleShow(0, 1, 'grow-class-1', 'measuringWrapper1')}
@@ -667,10 +618,6 @@ class CurrentCareerTrack extends React.Component {
                           style={{
                             color: '#525257',
                             fontSize: 13,
-                            marginLeft: '20px',
-                            paddingLeft: '10px',
-                            marginRight: '20px',
-                            paddingRight: '10px',
                           }}
                         >
                           <span>
@@ -681,12 +628,7 @@ class CurrentCareerTrack extends React.Component {
                         <div
                           style={
                             this.state.programValue === 'Department of Homeland Security Network'
-                              ? {
-                                  marginLeft: '20px',
-                                  paddingLeft: '10px',
-                                  marginRight: '20px',
-                                  paddingRight: '10px',
-                                }
+                              ? {}
                               : { display: 'none' }
                           }
                         >
@@ -735,12 +677,7 @@ class CurrentCareerTrack extends React.Component {
                         <div
                           style={
                             this.state.programValue === 'AWS Technical Support Program'
-                              ? {
-                                  marginLeft: '20px',
-                                  paddingLeft: '10px',
-                                  marginRight: '20px',
-                                  paddingRight: '10px',
-                                }
+                              ? {}
                               : { display: 'none' }
                           }
                         >
@@ -780,11 +717,10 @@ class CurrentCareerTrack extends React.Component {
                       </div>
                     </div>
                   </div>
-                  {this.state.programValue && <Divider />}
                   <div
                     style={
                       this.state.programValue === 'Department of Homeland Security Network'
-                        ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
+                        ? { }
                         : { display: 'none' }
                     }
                   >
@@ -795,7 +731,6 @@ class CurrentCareerTrack extends React.Component {
                       Trainings
                       <Icon className="" type={this.state.tab1[1].show ? 'up' : 'down'} />
                     </div>
-                    <Divider />
                     <div className="grow-class grow-class-2">
                       <div className="measuringWrapper2">
                         <Table
@@ -808,6 +743,7 @@ class CurrentCareerTrack extends React.Component {
                         />
                       </div>
                     </div>
+                    
                     <div
                       className="row-title "
                       onClick={() => this.toggleShow(2, 1, 'grow-class-3', 'measuringWrapper3')}
@@ -827,17 +763,13 @@ class CurrentCareerTrack extends React.Component {
                         />
                       </div>
                     </div>
+                    
                   </div>
                   {/* {this.state.programValue && <Divider/>} */}
                   <div
                     style={
                       this.state.programValue === 'AWS Technical Support Program'
-                        ? {
-                            marginLeft: '20px',
-                            paddingLeft: '10px',
-                            marginRight: '20px',
-                            paddingRight: '10px',
-                          }
+                        ? {}
                         : { display: 'none' }
                     }
                   >
@@ -862,27 +794,23 @@ class CurrentCareerTrack extends React.Component {
                     </div>
                   </div>
                 </Row>
+                <div className="filler" />
               </div>
             </Col>
             <Col xs={1} />
             <Col xs={12}>
-              <div style={{ border: '1.5px solid #919197', borderRadius: 5, paddingBottom: 20 }}>
+              <div className="shadowed-box-container">
                 <div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      height: 49,
-                      borderBottom: '1px solid #919197',
-                    }}
-                  >
+                  <div className="customized-top-container">
                     <span
                       style={{
                         fontSize: '14px',
                         fontWeight: 600,
                         lineHeight: 1.5,
-                        color: '#525257',
+                        color: 'black',
+                        textAlign: 'center',
                         margin: 10,
+                        width: '100%',
                         padding: 5,
                       }}
                     >
@@ -890,12 +818,6 @@ class CurrentCareerTrack extends React.Component {
                     </span>
                   </div>
                 </div>
-                <div
-                  style={{
-                    width: '100%',
-                    background: '#919197',
-                  }}
-                />
                 <Row>
                   <div
                     style={{
@@ -915,7 +837,7 @@ class CurrentCareerTrack extends React.Component {
                     </p>
                     <Select
                       showSearch
-                      style={{ width: 350 }}
+
                       placeholder="Program"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -932,15 +854,8 @@ class CurrentCareerTrack extends React.Component {
                       </Option>
                     </Select>
                   </div>
-                  <Divider />
-                  <div
-                    style={{
-                      marginLeft: '20px',
-                      paddingLeft: '10px',
-                      marginRight: '20px',
-                      paddingRight: '10px',
-                    }}
-                  >
+                  
+                  <div>
                     <div
                       className="row-title "
                       onClick={() => this.toggleShow(0, 2, 'grow-class-5', 'measuringWrapper5')}
@@ -954,10 +869,6 @@ class CurrentCareerTrack extends React.Component {
                           style={{
                             color: '#525257',
                             fontSize: 13,
-                            marginLeft: '20px',
-                            paddingLeft: '10px',
-                            marginRight: '20px',
-                            paddingRight: '10px',
                           }}
                         >
                           <span>
@@ -968,12 +879,7 @@ class CurrentCareerTrack extends React.Component {
                         <div
                           style={
                             this.state.programValue2 === 'Department of Defense Space Program'
-                              ? {
-                                  marginLeft: '20px',
-                                  paddingLeft: '10px',
-                                  marginRight: '20px',
-                                  paddingRight: '10px',
-                                }
+                              ? {}
                               : { display: 'none' }
                           }
                         >
@@ -1013,12 +919,7 @@ class CurrentCareerTrack extends React.Component {
                         <div
                           style={
                             this.state.programValue2 === 'AWS Technical Support Program'
-                              ? {
-                                  marginLeft: '20px',
-                                  paddingLeft: '10px',
-                                  marginRight: '20px',
-                                  paddingRight: '10px',
-                                }
+                              ? {}
                               : { display: 'none' }
                           }
                         >
@@ -1057,11 +958,10 @@ class CurrentCareerTrack extends React.Component {
                       </div>
                     </div>
                   </div>
-                  {this.state.programValue2 && <Divider />}
                   <div
                     style={
                       this.state.programValue2 === 'Department of Defense Space Program'
-                        ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
+                        ? { }
                         : { display: 'none' }
                     }
                   >
@@ -1084,7 +984,7 @@ class CurrentCareerTrack extends React.Component {
                         />
                       </div>
                     </div>
-                    <Divider />
+                    
                     <div
                       className="row-title "
                       onClick={() => this.toggleShow(2, 2, 'grow-class-7', 'measuringWrapper7')}
@@ -1104,11 +1004,12 @@ class CurrentCareerTrack extends React.Component {
                         />
                       </div>
                     </div>
+                    
                   </div>
                   <div
                     style={
                       this.state.programValue2 === 'AWS Technical Support Program'
-                        ? { marginLeft: 20, paddingLeft: 10, marginRight: 20, paddingRight: 10 }
+                        ? { }
                         : { display: 'none' }
                     }
                   >
@@ -1131,8 +1032,8 @@ class CurrentCareerTrack extends React.Component {
                         />
                       </div>
                     </div>
-                    <Divider />
-                    <div style={{ marginBottom: '10px', paddingBottom: '5px' }}>
+                    
+                    <div>
                       <div
                         className="row-title "
                         onClick={() => this.toggleShow(4, 2, 'grow-class-9', 'measuringWrapper9')}
@@ -1155,6 +1056,7 @@ class CurrentCareerTrack extends React.Component {
                     </div>
                   </div>
                 </Row>
+                <div className="filler" />
               </div>
             </Col>
           </Row>

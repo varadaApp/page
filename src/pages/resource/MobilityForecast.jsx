@@ -123,13 +123,33 @@ class Reporting extends React.Component {
                   </Row>
                 </div>
               </div>
-            </div>
-            <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
-            <div style={{ width: 150, display: 'inline-block' }}>Date Range:</div>
+          </div>
+          <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
+          <div style={{ width: 150, display: 'inline-block' }}>Date Range:</div>
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder="Select a Date Range"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+            onSelect={this.handleDateRangeSelect}
+          >
+            <Option value="0">&nbsp;</Option>
+            <Option value="1">Annually</Option>
+            <Option value="2">Monthly</Option>
+            <Option value="3">Quarter</Option>
+            <Option value="4">Custom Date Range</Option>
+          </Select>
+          <br />
+          <br />
+          <div style={this.state.selectedDateRange === '1' ? {} : { display: 'none' }}>
+            <div style={{ width: 150, display: 'inline-block' }}>Year:</div>
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder="Select a Date Range"
+              placeholder="Select a Year"
               optionFilterProp="children"
               filterOption={(input, option) =>
                 option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -137,139 +157,119 @@ class Reporting extends React.Component {
               onSelect={this.handleDateRangeSelect}
             >
               <Option value="0">&nbsp;</Option>
-              <Option value="1">Annually</Option>
-              <Option value="2">Monthly</Option>
-              <Option value="3">Quarter</Option>
-              <Option value="4">Custom Date Range</Option>
+              <Option value="1">2020</Option>
+              <Option value="2">2019</Option>
+              <Option value="3">2018</Option>
+              <Option value="4">2017</Option>
             </Select>
             <br />
             <br />
-            <div style={this.state.selectedDateRange === '1' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Year:</div>
-              <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder="Select a Year"
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-                onSelect={this.handleDateRangeSelect}
-              >
-                <Option value="0">&nbsp;</Option>
-                <Option value="1">2020</Option>
-                <Option value="2">2019</Option>
-                <Option value="3">2018</Option>
-                <Option value="4">2017</Option>
-              </Select>
-              <br />
-              <br />
-            </div>
-            <div style={this.state.selectedDateRange === '2' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Month:</div>
-              <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
-              <br />
-              <br />
-            </div>
-            <div style={this.state.selectedDateRange === '3' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Quarter:</div>
-              <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder="Select a Quarter"
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-                onSelect={this.handleDateRangeSelect}
-              >
-                <Option value="0">&nbsp;</Option>
-                <Option value="1">1st Quarter</Option>
-                <Option value="2">2nd Quarter</Option>
-                <Option value="3">3rd Quarter</Option>
-                <Option value="4">4th Quarter</Option>
-              </Select>
-              <br />
-              <br />
-            </div>
-            <div style={this.state.selectedDateRange === '4' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Custom Date Range:</div>
-              <RangePicker format={'MM/DD/YYYY'} />
-              <br />
-              <br />
-            </div>
-            <div style={{ width: 150, display: 'inline-block' }}>Select Program:</div>
+          </div>
+          <div style={this.state.selectedDateRange === '2' ? {} : { display: 'none' }}>
+            <div style={{ width: 150, display: 'inline-block' }}>Month:</div>
+            <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
+            <br />
+            <br />
+          </div>
+          <div style={this.state.selectedDateRange === '3' ? {} : { display: 'none' }}>
+            <div style={{ width: 150, display: 'inline-block' }}>Quarter:</div>
             <Select
               showSearch
               style={{ width: 200 }}
-              placeholder="Select a Program"
+              placeholder="Select a Quarter"
               optionFilterProp="children"
               filterOption={(input, option) =>
                 option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
+              onSelect={this.handleDateRangeSelect}
             >
               <Option value="0">&nbsp;</Option>
-              <Option value="1">AWS Technical Support Program</Option>
-              <Option value="2">DoD Space Program</Option>
-              <Option value="3">DHS Satellite Network</Option>
-              <Option value="4">DoJ Networks</Option>
-              <Option value="5">DoS Nuclear Defense System</Option>
-              <Option value="6">FBI Case Management System</Option>
+              <Option value="1">1st Quarter</Option>
+              <Option value="2">2nd Quarter</Option>
+              <Option value="3">3rd Quarter</Option>
+              <Option value="4">4th Quarter</Option>
             </Select>
             <br />
             <br />
-            <div style={{ width: 150, display: 'inline-block' }}>Select Employee:</div>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder="Select a Employee"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="0">&nbsp;</Option>
-              <Option value="1">Dorris Vaught</Option>
-              <Option value="2">Kris Shotwell</Option>
-              <Option value="3">Long Hudspeth</Option>
-              <Option value="4">Vincenzo Whiteley</Option>
-              <Option value="5">Reyes Holmes</Option>
-              <Option value="6">Deedra Bosch</Option>
-              <Option value="7">Sharyn Ballard</Option>
-              <Option value="8">Romeo Thompson</Option>
-              <Option value="9">Chere Nance</Option>
-              <Option value="10">Darryl Merryman</Option>
-            </Select>
+          </div>
+          <div style={this.state.selectedDateRange === '4' ? {} : { display: 'none' }}>
+            <div style={{ width: 150, display: 'inline-block' }}>Custom Date Range:</div>
+            <RangePicker format={'MM/DD/YYYY'} />
             <br />
             <br />
-            <div style={{ width: 150, display: 'inline-block' }}>Group By:</div>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="0">&nbsp;</Option>
-              <Option value="1">Employee</Option>
-              <Option value="2">Applied to Other JRs</Option>
-              <Option value="3">Certification Attainment</Option>
-              <Option value="4">Completion of Different Career Track</Option>
-              <Option value="5">Losing Coverage</Option>
-            </Select>
-            <br />
-            <br />
-            <Checkbox>Interested in Growth</Checkbox>
-            <br />
-            <Checkbox>Losing Coverage</Checkbox>
-            <br />
-            <Checkbox>Location Change</Checkbox>
-            <br />
-            <br />
-            <Button type="primary" onClick={this.handleRunReport}>
-              Run Report
-            </Button>
+          </div>
+          <div style={{ width: 150, display: 'inline-block' }}>Select Program:</div>
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder="Select a Program"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Option value="0">&nbsp;</Option>
+            <Option value="1">AWS Technical Support Program</Option>
+            <Option value="2">DoD Space Program</Option>
+            <Option value="3">DHS Satellite Network</Option>
+            <Option value="4">DoJ Networks</Option>
+            <Option value="5">DoS Nuclear Defense System</Option>
+            <Option value="6">FBI Case Management System</Option>
+          </Select>
+          <br />
+          <br />
+          <div style={{ width: 150, display: 'inline-block' }}>Select Employee:</div>
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder="Select a Employee"
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Option value="0">&nbsp;</Option>
+            <Option value="1">Dorris Vaught</Option>
+            <Option value="2">Kris Shotwell</Option>
+            <Option value="3">Long Hudspeth</Option>
+            <Option value="4">Vincenzo Whiteley</Option>
+            <Option value="5">Reyes Holmes</Option>
+            <Option value="6">Deedra Bosch</Option>
+            <Option value="7">Sharyn Ballard</Option>
+            <Option value="8">Romeo Thompson</Option>
+            <Option value="9">Chere Nance</Option>
+            <Option value="10">Darryl Merryman</Option>
+          </Select>
+          <br />
+          <br />
+          <div style={{ width: 150, display: 'inline-block' }}>Group By:</div>
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Option value="0">&nbsp;</Option>
+            <Option value="1">Employee</Option>
+            <Option value="2">Applied to Other JRs</Option>
+            <Option value="3">Certification Attainment</Option>
+            <Option value="4">Completion of Different Career Track</Option>
+            <Option value="5">Losing Coverage</Option>
+          </Select>
+          <br />
+          <br />
+          <Checkbox>Interested in Growth</Checkbox>
+          <br />
+          <Checkbox>Losing Coverage</Checkbox>
+          <br />
+          <Checkbox>Location Change</Checkbox>
+          <br />
+          <br />
+          <Button type="primary" onClick={this.handleRunReport}>
+            Run Report
+          </Button>
           </div>
           <br />
           <br />

@@ -130,17 +130,20 @@ class CareerManagement extends React.Component {
         title: 'Action',
         key: 'action',
         render: () => (
-          <span>
-            <a>
-              <Icon type="edit" />
-              Edit
-            </a>
-            <Divider type="vertical" />
-            <a>
-              <Icon type="delete" />
-              Delete
-            </a>
-          </span>
+          <div className="action-column">
+            <div className="action-item">
+              <a>
+                <Icon type="edit" />
+                Edit
+              </a>
+            </div>
+            <div className="action-item">
+              <a>
+                <Icon type="delete" />
+                Delete
+              </a>
+            </div>
+          </div>
         ),
       },
     ];
@@ -195,17 +198,20 @@ class CareerManagement extends React.Component {
         title: 'Action',
         key: 'action',
         render: () => (
-          <span>
-            <a>
-              <Icon type="edit" />
-              Edit
-            </a>
-            <Divider type="vertical" />
-            <a>
-              <Icon type="delete" />
-              Delete
-            </a>
-          </span>
+          <div className="action-column">
+            <div className="action-item">
+              <a>
+                <Icon type="edit" />
+                Edit
+              </a>
+            </div>
+            <div className="action-item">
+              <a>
+                <Icon type="delete" />
+                Delete
+              </a>
+            </div>
+          </div>
         ),
       },
     ];
@@ -243,24 +249,26 @@ class CareerManagement extends React.Component {
         title: 'Open Positions',
         dataIndex: 'position',
         key: 'position',
-        width: 100,
       },
       {
         title: 'Action',
         key: 'action',
         width: 300,
         render: () => (
-          <span>
-            <a>
-              <Icon type="edit" />
-              Edit
-            </a>
-            <Divider type="vertical" />
-            <a>
-              <Icon type="delete" />
-              Delete
-            </a>
-          </span>
+          <div className="action-column">
+            <div className="action-item">
+              <a>
+                <Icon type="edit" />
+                Edit
+              </a>
+            </div>
+            <div className="action-item">
+              <a>
+                <Icon type="delete" />
+                Delete
+              </a>
+            </div>
+          </div>
         ),
       },
     ];
@@ -312,17 +320,20 @@ class CareerManagement extends React.Component {
         key: 'action',
         width: 300,
         render: () => (
-          <span>
-            <a>
-              <Icon type="edit" />
-              Edit
-            </a>
-            <Divider type="vertical" />
-            <a>
-              <Icon type="delete" />
-              Delete
-            </a>
-          </span>
+          <div className="action-column">
+            <div className="action-item">
+              <a>
+                <Icon type="edit" />
+                Edit
+              </a>
+            </div>
+            <div className="action-item">
+              <a>
+                <Icon type="delete" />
+                Delete
+              </a>
+            </div>
+          </div>
         ),
       },
     ];
@@ -346,11 +357,6 @@ class CareerManagement extends React.Component {
                   Search Skills
                 </Link>
                 <div className="career-management-item-container">
-                  <img
-                    className="career-management-icon"
-                    src={require('../assets/skill-icon.png')}
-                    alt=""
-                  />
                   <div className="career-management-header-container">
                     <div
                       style={{ width: '100%' }}
@@ -368,7 +374,7 @@ class CareerManagement extends React.Component {
                         columns={skillColumns}
                         size="middle"
                         pagination={false}
-                        style={{ paddingBottom: 20 }}
+
                       />
                     </div>
                   </div>
@@ -385,11 +391,6 @@ class CareerManagement extends React.Component {
                   Search Certifcations
                 </Link>
                 <div className="career-management-item-container">
-                  <img
-                    className="career-management-icon"
-                    src={require('../assets/certification-icon.png')}
-                    alt=""
-                  />
                   <div className="career-management-header-container">
                     <div
                       style={{ width: '100%' }}
@@ -407,7 +408,7 @@ class CareerManagement extends React.Component {
                         columns={certificationColumns}
                         size="middle"
                         pagination={false}
-                        style={{ paddingBottom: 20 }}
+
                       />
                     </div>
                   </div>
@@ -421,11 +422,6 @@ class CareerManagement extends React.Component {
                   Search Career Tracks
                 </Link>
                 <div className="career-management-item-container">
-                  <img
-                    className="career-management-icon"
-                    src={require('../assets/desire-icon.png')}
-                    alt=""
-                  />
                   <div className="career-management-header-container">
                     <div
                       style={{ width: '100%' }}
@@ -443,7 +439,7 @@ class CareerManagement extends React.Component {
                         columns={desiredCareerTrackColumns}
                         size="middle"
                         pagination={false}
-                        style={{ paddingBottom: 20 }}
+
                       />
                     </div>
                   </div>
@@ -455,11 +451,6 @@ class CareerManagement extends React.Component {
                   Search Open Positions
                 </Link>
                 <div className="career-management-item-container">
-                  <img
-                    className="career-management-icon"
-                    src={require('../assets/interested-icon.png')}
-                    alt=""
-                  />
                   <div className="career-management-header-container">
                     <div
                       style={{ width: '100%' }}
@@ -477,7 +468,7 @@ class CareerManagement extends React.Component {
                         columns={positionsInterestedInColumns}
                         size="middle"
                         pagination={false}
-                        style={{ paddingBottom: 20 }}
+
                       />
                     </div>
                   </div>

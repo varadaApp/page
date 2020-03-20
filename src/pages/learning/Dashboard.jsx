@@ -95,9 +95,7 @@ class Dashboard extends React.Component {
               alignItems: 'center',
             }}
           >
-            <div style={{ width: '100px' }}>
-              <img style={{ width: '100%' }} src={greetingIcon} alt="" />
-            </div>
+            
           </div>
           <Typography
             style={{

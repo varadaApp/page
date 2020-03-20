@@ -247,10 +247,19 @@ ol {
   padding-right: 0px !important;
 }
 
+.action-column {
+  width: 60px;
+}
+
+.action-item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .row-title {
   font-size: 16px;
   font-weight: 500;
-  background: #7d69ac;
+  background: #d3cfd8;
   font-family: Montserrat;
   color: #fff;
   padding: 5px;
@@ -259,7 +268,6 @@ ol {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .row-title:hover {
@@ -269,7 +277,7 @@ ol {
 .page-title {
   font-size: 30px;
   font-family: Montserrat;
-  color: #fff;
+  color: rgba(0,0,0,0.5);
   font-weight: 500;
   line-height: 40px;
   margin-left: 20px;
@@ -277,7 +285,8 @@ ol {
 }
 
 .screen-header {
-  background-color: #7d69ac;
+  background: #d3cfd8;
+  border-radius: 5px;
   height: 120px;
   display: flex;
   align-items: flex-end;
@@ -285,10 +294,6 @@ ol {
 
 .skills-item-container {
   box-shadow: 0 3px 6px rgba(34, 37, 37, 0.15);
-}
-
-.career-track-management-table {
-  margin-left: 20px;
 }
 
 .career-management-item-container {
@@ -328,17 +333,66 @@ ol {
   border-radius: 5px;
 }
 
+.measuringWrapper1, .measuringWrapper2,
+.measuringWrapper3, .measuringWrapper4,
+.measuringWrapper5, .measuringWrapper6,
+.measuringWrapper7, .measuringWrapper8,
+.measuringWrapper9 {
+  padding: 10px;
+}
+
+.to-right{
+  background-image: linear-gradient(to right, #e7e4ed 50%, white 0);
+  background-position: right;
+}
+
+.to-right:hover {
+  background-position: left;
+}
+
 .image-container {
   display: flex;
   justify-content: center;
 }
 
+.filler {
+  background-color: #d3cfd8;
+  height: 20px;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.customized-top-container {
+  display: flex;
+  align-items: center;
+  height: 49;
+  background: transparent;
+  border-top-left-radius: 10;
+  border-top-right-radius: 10;
+}
+
+.shadowed-box-container:hover {
+  background: #e7e4ed;
+  transition: 1s;
+  color: #fff !important;
+}
+.shadowed-box-container {
+  border-radius: 10px;
+  transition: 1s;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0 3px 6px rgba(34, 37, 37, 0.15);
+}
+
 .top-container {
   padding: 10px;
-  height: 170px;
+  height: 110px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(34, 37, 37, 0.15);
+  transition: background-position 1s;
+  background-size: 200% 200%;
 }
 
 .round-item-image {
@@ -403,6 +457,7 @@ aside {
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
   height: 0;
+  background-color: #e7e4ed;
   overflow: hidden;
 }
 
@@ -4123,3 +4178,195 @@ a.ant-btn-sm {
 .ant-form-item-label {
   width: 200px !important;
 }
+
+
+// ******************************** USER CARD *********************************
+
+.hover-cards-container {
+  display: flex;
+  overflow-x: auto;
+}
+
+.hover-icon {
+  height: 80px;
+  width: 80px;
+}
+
+.hover-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+
+.skin { fill: #eab38f; }
+.eyes { fill: #1f1f1f; }
+.hair { fill: #2f1b0d; }
+.line { fill: none; stroke: #2f1b0d; stroke-width:2px; }
+
+.card {
+  width: 300px;
+  height: 150px;
+  background-color: #fff;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  margin: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card h1 {
+  text-align: center;
+}
+
+.card .additional {
+  position: absolute;
+  width: 150px;
+  height: 100%;
+  background: #e7e4ed;
+  transition: width 0.4s;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.card.green .additional {
+  background: linear-gradient(#92bCa6, #A2CCB6);
+}
+
+
+.card:hover .additional {
+  width: 100%;
+  border-radius: 0 5px 5px 0;
+}
+
+.card .additional .user-card {
+  width: 150px;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+
+.card .additional .user-card::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10%;
+  right: -2px;
+  height: 80%;
+  border-left: 2px solid rgba(0,0,0,0.025);
+}
+
+.card .additional .user-card .level,
+.card .additional .user-card .points {
+  top: 15%;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: bold;
+  background: rgba(0,0,0,0.09);
+  padding: 0.125rem 0.75rem;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.card .additional .user-card .points {
+  top: 85%;
+}
+
+.card .additional .user-card svg {
+  top: 50%;
+}
+
+.card .additional .more-info {
+  width: 300px;
+  float: left;
+  position: absolute;
+  left: 150px;
+  height: 100%;
+  padding-top: 25px;
+  padding-left: 10px;
+}
+
+.card .additional .more-info h1 {
+  color: black;
+  margin-bottom: 0;
+}
+
+.card.green .additional .more-info h1 {
+  color: #224C36;
+}
+
+.card .additional .coords {
+  margin: 0 1rem;
+  color: black;
+  font-size: 1rem;
+}
+
+.card.green .additional .coords {
+  color: #325C46;
+}
+
+.card .additional .coords span + span {
+  float: right;
+}
+
+.card .additional .stats {
+  font-size: 2rem;
+  display: flex;
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  top: auto;
+  color: black;
+}
+
+.card.green .additional .stats {
+  color: #325C46;
+}
+
+.card .additional .stats > div {
+  flex: 1;
+  text-align: center;
+}
+
+.card .additional .stats i {
+  display: block;
+}
+
+.card .additional .stats div.title {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card .additional .stats div.value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.5rem;
+}
+
+.card .additional .stats div.value.infinity {
+  font-size: 2.5rem;
+}
+
+.card .general {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.9em;
+  margin-left: 160px;
+  z-index: 10;
+}
+
+.card .general .more {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.9em;
+}
+
+

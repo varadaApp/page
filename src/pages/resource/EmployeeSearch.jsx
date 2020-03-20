@@ -314,81 +314,81 @@ class EmployeeSearch extends React.Component {
           <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
-              <AutoComplete
-                //allowClear={true}
-                style={autoCompleteStyle}
-                dataSource={dataSourceProgram}
-                placeholder="Program"
-                onChange={this.handleProgramSearch}
-                value={this.state.programValue}
-                filterOption={(inputValue, option) =>
-                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                }
-              />
-              <br />
-              <AutoComplete
-                //allowClear={true}
-                style={autoCompleteStyle}
-                dataSource={dataSourceLocation}
-                placeholder="Location"
-                onChange={this.handleLocationSearch}
-                value={this.state.locationValue}
-                filterOption={(inputValue, option) =>
-                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                }
-              />
-              <Select showSearch style={radiusStyle} placeholder="Radius">
-                <Option value="0">&nbsp;</Option>
-                <Option value="1">5</Option>
-                <Option value="2">10</Option>
-                <Option value="3">20</Option>
-                <Option value="4">30</Option>
-                <Option value="5">40</Option>
-                <Option value="6">50</Option>
-                <Option value="7">60</Option>
-                <Option value="8">75</Option>
-                <Option value="9">100</Option>
-                <Option value="10">150</Option>
-                <Option value="11">200</Option>
-              </Select>
-              <br />
-              <AutoComplete
-                //allowClear={true}
-                style={autoCompleteStyle}
-                dataSource={dataSourceCertification}
-                placeholder="Certification"
-                onChange={this.handleCertificationSearch}
-                value={this.state.certificationValue}
-                filterOption={(inputValue, option) =>
-                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                }
-              />
-              <br />
-              <AutoComplete
-                //allowClear={true}
-                style={autoCompleteStyle}
-                dataSource={dataSourceClearance}
-                placeholder="Clearance"
-                onChange={this.handleClearanceSearch}
-                value={this.state.clearanceValue}
-                filterOption={(inputValue, option) =>
-                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                }
-              />
-              <br />
-              <AutoComplete
-                //allowClear={true}
-                style={autoCompleteStyle}
-                dataSource={dataSourceCareerTrack}
-                placeholder="Career Track"
-                onChange={this.handleCareerTrackSearch}
-                value={this.state.careerTrackValue}
-                filterOption={(inputValue, option) =>
-                  option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                }
-              />
-            </div>
-            <div style={{ margin: '10px', float: 'right' }}>
+          <AutoComplete
+            //allowClear={true}
+            style={autoCompleteStyle}
+            dataSource={dataSourceProgram}
+            placeholder="Program"
+            onChange={this.handleProgramSearch}
+            value={this.state.programValue}
+            filterOption={(inputValue, option) =>
+              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
+          />
+          <br />
+          <AutoComplete
+            //allowClear={true}
+            style={autoCompleteStyle}
+            dataSource={dataSourceLocation}
+            placeholder="Location"
+            onChange={this.handleLocationSearch}
+            value={this.state.locationValue}
+            filterOption={(inputValue, option) =>
+              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
+          />
+          <Select showSearch style={radiusStyle} placeholder="Radius">
+            <Option value="0">&nbsp;</Option>
+            <Option value="1">5</Option>
+            <Option value="2">10</Option>
+            <Option value="3">20</Option>
+            <Option value="4">30</Option>
+            <Option value="5">40</Option>
+            <Option value="6">50</Option>
+            <Option value="7">60</Option>
+            <Option value="8">75</Option>
+            <Option value="9">100</Option>
+            <Option value="10">150</Option>
+            <Option value="11">200</Option>
+          </Select>
+          <br />
+          <AutoComplete
+            //allowClear={true}
+            style={autoCompleteStyle}
+            dataSource={dataSourceCertification}
+            placeholder="Certification"
+            onChange={this.handleCertificationSearch}
+            value={this.state.certificationValue}
+            filterOption={(inputValue, option) =>
+              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
+          />
+          <br />
+          <AutoComplete
+            //allowClear={true}
+            style={autoCompleteStyle}
+            dataSource={dataSourceClearance}
+            placeholder="Clearance"
+            onChange={this.handleClearanceSearch}
+            value={this.state.clearanceValue}
+            filterOption={(inputValue, option) =>
+              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
+          />
+          <br />
+          <AutoComplete
+            //allowClear={true}
+            style={autoCompleteStyle}
+            dataSource={dataSourceCareerTrack}
+            placeholder="Career Track"
+            onChange={this.handleCareerTrackSearch}
+            value={this.state.careerTrackValue}
+            filterOption={(inputValue, option) =>
+              option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
+          />
+          </div>
+          <div style={{ margin: '10px', float: 'right' }}>
               <Button style={{ width: '100px' }} onClick={this.handleClear}>
                 Clear
               </Button>
