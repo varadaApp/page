@@ -49,6 +49,7 @@ class CareerManagement extends React.Component {
       { big: 'A', small: 'a'},
       { big: 'B', small: 'b'},
       { big: 'C', small: 'c'},
+      { big: 'D', small: 'd'},
     ]
     names.forEach((item, i) => {
       this.toggleShow(i, `grow-class-${item.small}`, `measuringWrapper${item.big}`);
@@ -418,6 +419,33 @@ class CareerManagement extends React.Component {
                     </div>
                   </div>
                 </div>
+                <Link to="/employee/positionSearch">
+                    <Icon style={searchIconStyle} type="search" />
+                    Search Open Positions
+                  </Link>
+                  <div className="career-management-item-container">
+                    <div className="career-management-header-container">
+                      <div
+                        style={{ width: '100%' }}
+                        className="row-title"
+                        onClick={() => this.toggleShow(3, 'grow-class-d', 'measuringWrapperD')}
+                      >
+                        Open positions interested in
+                        <Icon type={this.state.tabs[3].show ? 'up' : 'down'} />
+                      </div>
+                    </div>
+                  <div className="grow-class grow-class-d">
+                    <div className="measuringWrapperD">
+                      <Table
+                        dataSource={positionsInterestedInDataSource}
+                        columns={positionsInterestedInColumns}
+                        size="middle"
+                        pagination={false}
+
+                      />
+                    </div>
+                  </div>
+                </div>                
               </Col>
               <Col style={{ padding: 20 }} xs={12}>
                 <Link to="/employee/growth/certifications">

@@ -78,6 +78,16 @@ class CurrentCareerTrack extends React.Component {
     this.handleProgramChange2 = this.handleProgramChange2.bind(this);
     this.handleProgramSelect2 = this.handleProgramSelect2.bind(this);
   }
+  
+  componentDidMount() {
+    const names = [
+      { big: '1', small: '1', index: 0, tab: 1},
+      { big: '5', small: '5', index: 0, tab: 2},
+    ]
+    names.forEach((item, i) => {
+      this.toggleShow(item.index, item.tab, `grow-class-${item.small}`, `measuringWrapper${item.big}`);
+    })
+  }
 
   showModal = () => {
     this.setState({
