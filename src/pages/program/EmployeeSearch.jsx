@@ -356,7 +356,7 @@ class EmployeeSearch extends React.Component {
             <h1 className="page-title">Employee Search</h1>
           </div>
           <Divider />
-          <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
+          <div style={{marginRight: 20, backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
               <AutoComplete

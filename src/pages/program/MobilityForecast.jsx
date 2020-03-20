@@ -88,7 +88,7 @@ class Reporting extends React.Component {
             <h1 className="page-title">Mobility Report</h1>
           </div>
           <Divider />
-          <div className="mobility-header-filter-container">
+          <div  style={{marginRight: 20}} className="mobility-header-filter-container">
             <h2 style={{ fontSize: '22px', color: 'black' }}>
               What would you like this report to contain?
             </h2>
@@ -249,7 +249,7 @@ class Reporting extends React.Component {
               <Button onClick={this.handleRunReport}>Run Report</Button>
             </div>
           </div>
-          <div style={this.state.runReport === 'run' ? {} : { display: 'none' }}>
+          <div style={this.state.runReport === 'run' ? {marginRight: 20} : { display: 'none' }}>
             <h1>Department of Defense Space Program Mobility Report</h1>
             <div className="mobility-report-table-header">
               <div />

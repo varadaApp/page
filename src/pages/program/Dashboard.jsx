@@ -115,7 +115,7 @@ class Dashboard extends React.Component {
           >
             {greeting}, Sidney
           </Typography>
-          <Row gutter={[8, 8]}>
+          <Row style={{marginRight: 20}} gutter={[8, 8]}>
             <Col xs={12} span={6}>
               <ToDoList title="Alerts" list={thingsToDo} />
             </Col>

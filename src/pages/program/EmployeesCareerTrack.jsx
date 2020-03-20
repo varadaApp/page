@@ -195,6 +195,7 @@ class EmployeesCareerTrack extends React.Component {
           <Divider />
           <ReactTable
             data={data}
+            style={{marginRight: 20}}
             resolveData={data => data.map(row => row)}
             defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
             getTdProps={(state, rowInfo, column, instance) => {

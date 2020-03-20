@@ -764,6 +764,7 @@ class ProgramInformation extends React.Component {
             style={{
               textAlign: 'center',
               marginTop: 24,
+              marginRight: 20
             }}
           >
             We <Icon type="heart" theme="twoTone" twoToneColor="#eb2f96" spin /> Sidney

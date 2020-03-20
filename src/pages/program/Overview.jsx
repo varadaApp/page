@@ -88,7 +88,7 @@ class Overview extends React.Component {
             <a style={{ color: 'black', marginRight: '5px' }}>Have any questions? </a>
             <a href="#">Visit Help Center</a>
           </Typography>
-          <Row gutter={[8, 8]}>
+          <Row style={{marginRight: 20}} gutter={[8, 8]}>
             <Col xs={12} span={6}>
               <Alerts list={alerts} />
             </Col>

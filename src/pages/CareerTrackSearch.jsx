@@ -314,6 +314,42 @@ class CareerTrackSearch extends React.Component {
       'Fort Belvoir VA',
     ];
 
+    const headerData = [
+      {
+        label: 'Trending Careers',
+        value: '5,312',
+        items: [
+          'Career #1',
+          'Career #2',
+          'Career #3',
+          'Career #4',
+        ],
+        icon: <Icon type="star" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>,
+      },
+      {
+        label: 'Recommended Positions',
+        value: '437',
+        items: [
+          'Position #1',
+          'Position #2',
+          'Position #3',
+          'Position #4',
+        ],
+        icon: <Icon type="check" style={{fontSize: 80, color: "#fff"}} />,
+      },
+      {
+        label: 'Recently Added',
+        value: '24',
+        items: [
+          'Position #1',
+          'Position #2',
+          'Position #3',
+          'Position #4',
+        ],
+        icon: <Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>,
+      },
+    ];
+
     return (
       <PageHeaderWrapper>
         <Card>
@@ -322,11 +358,11 @@ class CareerTrackSearch extends React.Component {
           </div>
           <Divider />
           <div className="hover-cards-container">
-            <HoverCard icon={<Icon type="star" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
-            <HoverCard icon={<Icon type="check" style={{fontSize: 80, color: "#fff"}} />} />
-            <HoverCard icon={<Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
+            <HoverCard value={headerData[0].value} label={headerData[0].label} items={headerData[0].items} icon={<Icon type="star" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
+            <HoverCard value={headerData[1].value} label={headerData[1].label} items={headerData[1].items} icon={<Icon type="check" style={{fontSize: 80, color: "#fff"}} />} />
+            <HoverCard value={headerData[2].value} label={headerData[2].label} items={headerData[2].items} icon={<Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
           </div>
-          <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
+          <div style={{ marginRight: 20, backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
               <AutoComplete

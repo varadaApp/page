@@ -7,10 +7,10 @@ export default props => {
         <div class="user-card">
           <div class="level center">
             <div>
-              Level 13
+              {props.label}
             </div>
             <div>
-              5,312 Points
+              {props.value}
             </div>
           </div>
           <div className="hover-icon-container">
@@ -21,7 +21,12 @@ export default props => {
         </div>
       </div>
       <div class="general">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          {props.items.map((item,index) => 
+            <div className="general-item" key={`${props.label}.${index}`}>
+              {item}
+            </div>
+            )
+          }
       </div>
     </div>
   )

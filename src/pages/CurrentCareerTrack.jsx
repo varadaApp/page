@@ -241,7 +241,6 @@ class CurrentCareerTrack extends React.Component {
         title: 'Training',
         dataIndex: 'training',
         key: 'training',
-        width: 450,
       },
       {
         title: 'Status',
@@ -255,7 +254,6 @@ class CurrentCareerTrack extends React.Component {
         title: 'Certification',
         dataIndex: 'certification',
         key: 'certification',
-        width: 450,
       },
       {
         title: 'Status',
@@ -486,7 +484,7 @@ class CurrentCareerTrack extends React.Component {
                     fontWeight: 600,
                   }}
                 >
-                  Department of Defense Space Program
+                  DOD Space Program
                 </div>
                 <div style={{ textAlign: 'left' }}>Current Program</div>
               </div>
@@ -553,6 +551,7 @@ class CurrentCareerTrack extends React.Component {
                         color: 'black',
                         margin: 10,
                         width: '100%',
+                        textTransform: 'uppercase',
                         padding: 5,
                       }}
                     >
@@ -811,6 +810,7 @@ class CurrentCareerTrack extends React.Component {
                         textAlign: 'center',
                         margin: 10,
                         width: '100%',
+                        textTransform: 'uppercase',
                         padding: 5,
                       }}
                     >

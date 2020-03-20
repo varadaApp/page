@@ -207,7 +207,7 @@ class Reporting extends React.Component {
             <h1 className="page-title">Employee Summary</h1>
           </div>
           <Divider />
-          <div className="attrition-report-table-header">
+          <div  style={{marginRight: 20}} className="attrition-report-table-header">
             <div />
             <div>
               <Button
@@ -228,7 +228,7 @@ class Reporting extends React.Component {
               </Button>
             </div>
           </div>
-          <Table bordered dataSource={dataSource} columns={columns} pagination={false} />
+          <Table  style={{marginRight: 20}} bordered dataSource={dataSource} columns={columns} pagination={false} />
           <p
             style={{
               textAlign: 'center',

@@ -54,7 +54,7 @@ class Goals extends React.Component {
                   backgroundColor: '#fef4d2',
                   borderRadius: '10px',
                   margin: '15px',
-                  width: '50%',
+                  width: '100%',
                 }}
                 bodyStyle={{
                   borderWidth: '0px',

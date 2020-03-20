@@ -207,14 +207,16 @@ class Dashboard extends React.Component {
               </div>
             </div>
           </div>
-          <Row gutter={[8, 8]}>
-            <Col xs={12} span={6}>
-              <ToDoList list={thingsToDo} />
-            </Col>
-            <Col xs={12} span={18}>
-              <GoalList list={goals} showDrawer={this.showDrawer} />
-            </Col>
-          </Row>
+          <div style={{marginRight: 20}}>
+            <Row gutter={[8, 8]}>
+              <Col xs={12} span={6}>
+                <ToDoList list={thingsToDo} />
+              </Col>
+              <Col xs={12} span={18}>
+                <GoalList list={goals} showDrawer={this.showDrawer} />
+              </Col>
+            </Row>
+          </div>
           <p
             style={{
               textAlign: 'center',

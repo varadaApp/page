@@ -110,7 +110,7 @@ export default () => (
       <div className="screen-header">
         <h1 className="page-title">Your Profile</h1>
       </div>
-      <Row gutter={[8, 8]}>
+      <Row style={{marginRight: 20}} gutter={[8, 8]}>
         <Col>
           <Divider />
           <Form {...formItemLayout}>
