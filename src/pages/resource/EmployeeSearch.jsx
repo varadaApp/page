@@ -10,6 +10,7 @@ import {
   Modal,
   Checkbox,
   Select,
+  Divider,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { FormattedMessage } from 'umi-plugin-react/locale';
@@ -311,6 +312,13 @@ class EmployeeSearch extends React.Component {
           <div className="screen-header">
             <h1 className="page-title">Employee Search</h1>
           </div>
+          <div style={{ display: 'flex', margin: 20, padding: 10 }}>
+            <Icon style={{ fontSize: 35 }} type="bulb" /> 
+            <div style={{ width: '80%', paddingLeft: 10 }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            </div>
+          </div>
+          <Divider />
           <div style={{ backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>

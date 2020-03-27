@@ -25,6 +25,12 @@ class Certifications extends React.Component {
           <div className="screen-header">
             <h1 className="page-title">Your Certifications</h1>
           </div>
+          <div style={{ display: 'flex', margin: 20, padding: 10 }}>
+            <Icon style={{ fontSize: 35 }} type="bulb" /> 
+            <div style={{ width: '80%', paddingLeft: 10 }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            </div>
+          </div>
           <Divider />
           <ReactTable
             data={data}

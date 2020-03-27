@@ -152,10 +152,23 @@ class Dashboard extends React.Component {
             <div>
               <div style={{ padding: 10 }}>
                 <Checkbox>
-                  <span style={{ fontSize: 18, color: 'black' }}>
-                    Interested in Growth (ie. New Certification, New Training, and/or Career Track
-                    Change)
+                <span style={{ fontSize: 18, marginRight: 10, color: 'black' }}>
+                    Interested In:
                   </span>
+                  <Select
+                    showSearch
+                    style={{ width: 250 }}
+                    placeholder="Select Interest"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }>
+                    <Option value="0">Growth</Option>
+                    <Option value="1">New Certification</Option>
+                    <Option value="2">New Training</Option>
+                    <Option value="3">Career Track</Option>
+                    <Option value="4">Satisfied with Current Position</Option>
+                  </Select>
                 </Checkbox>
               </div>
               <div style={{ padding: 10 }}>

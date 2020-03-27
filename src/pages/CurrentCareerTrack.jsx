@@ -476,13 +476,16 @@ class CurrentCareerTrack extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card className="current-career-track-main-container">
-          <div
-            className="screen-header"
-            style={{ fontSize: '25px', color: 'black', fontWeight: 600 }}
-          >
-            <h1 className="page-title">Sidney&apos;s Career Track</h1>
+          <div className="screen-header">
+              <h1 className="page-title">Sidney&apos;s Career Track</h1>
           </div>
-          
+          <div style={{ display: 'flex', margin: 20, padding: 10 }}>
+            <Icon style={{ fontSize: 35 }} type="bulb" /> 
+            <div style={{ width: '80%', paddingLeft: 10 }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+            </div>
+          </div>
+          <Divider />
           <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={6}>
               <div className="top-container to-right">
@@ -547,7 +550,7 @@ class CurrentCareerTrack extends React.Component {
           </Row>
           
           <Row gutter={[8, 8]} style={{ marginRight: 10 }}>
-            <Col xs={11}>
+            <Row xs={11}>
               <div className="shadowed-box-container">
                 <div>
                   <div
@@ -591,11 +594,10 @@ class CurrentCareerTrack extends React.Component {
                     }}
                   >
                     <p style={{ marginTop: '15px', paddingTop: '5px' }}>
-                      <h3 style={{ color: 'black' }}>Select another program</h3>
+                      <h3 style={{ color: 'black', fontSize: 14 }}>Select another program</h3>
                     </p>
                     <Select
                       showSearch
-
                       placeholder="Program"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -611,8 +613,13 @@ class CurrentCareerTrack extends React.Component {
                         AWS Technical Support Program
                       </Option>
                     </Select>
+                    <div style={{ margin: 10 }}>
+                      <span>
+                        <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                        {this.state.programValue || 'No program selected'}
+                      </span>
+                    </div>
                   </div>
-                  
                   <div>
                     <div
                       className="row-title"
@@ -623,105 +630,83 @@ class CurrentCareerTrack extends React.Component {
                     </div>
                     <div className="grow-class grow-class-1">
                       <div className="measuringWrapper1">
-                        <p
-                          style={{
-                            color: '#525257',
-                            fontSize: 13,
-                          }}
-                        >
-                          <span>
-                            <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
-                            {this.state.programValue || 'No program selected'}
-                          </span>
-                        </p>
                         <div
                           style={
                             this.state.programValue === 'Department of Homeland Security Network'
-                              ? {}
+                              ? { display: 'flex', justifyContent: 'space-between' }
                               : { display: 'none' }
                           }
                         >
-                          <div style={{ fontSize: 13 }}>
-                            <Divider className="content-divider" />
                             <div
-                              style={{ marginTop: 10, paddingTop: 5 }}
+                              className="career-track-info"
                               onClick={this.showPositionsModal2}
                             >
-                              <a>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Current Open Positions:
-                                </span>
-                                <span>12</span>
-                              </a>
+                              <div className="career-track-info-label">
+                                Current Open Positions
+                              </div>
+                              <div className="career-track-info-value" >12</div>
                             </div>
-                            <Divider className="content-divider" />
-                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal}>
-                              <a>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Current Percentage Complete:
-                                </span>
-                                <span>25%</span>
-                              </a>
+                            <div className="career-track-info" onClick={this.showModal}>
+                              <div className="career-track-info-label">
+                                Current Percentage Complete
+                              </div>
+                              <div className="career-track-info-value">25%</div>
                             </div>
-                            <Divider className="content-divider" />
-                            <div style={{ marginTop: 10, paddingTop: 5 }}>
-                              <span>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Overall Expected Completion Date:
-                                </span>
+                            <div className="career-track-info">
+                              <div className="career-track-info-label">
+                                  Overall Expected Completion Date
+                              </div>
+                              <div className="career-track-info-value">
                                 5/1/2020
-                              </span>
+                              </div>
                             </div>
-                            <Divider className="content-divider" />
-                            <div style={{ marginTop: 10, paddingTop: 5 }}>
-                              <span>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Program Location:
-                                </span>
+                            <div className="career-track-info">
+                              <div className="career-track-info-label">
+                                  Program Location
+                              </div>
+                            <div className="career-track-info-info">
                                 Washington, D.C.
-                              </span>
+                              </div>
                             </div>
-                          </div>
                         </div>
                         <div
                           style={
                             this.state.programValue === 'AWS Technical Support Program'
-                              ? {}
+                              ? {display: 'flex', justifyContent: 'space-between'}
                               : { display: 'none' }
                           }
                         >
-                          <div style={{ fontSize: 13 }}>
-                            <Divider className="content-divider" />
-                            <div
-                              style={{ marginTop: 10, paddingTop: 5 }}
+                          <div
+                              className="career-track-info"
                               onClick={this.showPositionsModal2}
                             >
-                              <a>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Current Open Positions:
-                                </span>
-                                <span>3</span>
-                              </a>
+                              <div className="career-track-info-label">
+                                Current Open Positions
+                              </div>
+                              <div className="career-track-info-value" >3</div>
                             </div>
-                            <Divider className="content-divider" />
-                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
-                              <a>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Current Percentage Complete:
-                                </span>
-                                <span>55%</span>
-                              </a>
+                            <div className="career-track-info" onClick={this.showModal}>
+                              <div className="career-track-info-label">
+                                Current Percentage Complete
+                              </div>
+                              <div className="career-track-info-value">55%</div>
                             </div>
-                            <Divider className="content-divider" />
-                            <div style={{ marginTop: 10, paddingTop: 5 }}>
-                              <span>
-                                <span style={{ fontWeight: 600, marginRight: 5 }}>
-                                  Overall Expected Completion Date:
-                                </span>
+                            <div className="career-track-info">
+                              <div className="career-track-info-label">
+                                  Overall Expected Completion Date
+                              </div>
+                              <div className="career-track-info-value">
                                 5/1/2020
-                              </span>
+                              </div>
                             </div>
-                          </div>
+                            <div className="career-track-info">
+                              <div className="career-track-info-label">
+                                  Program Location
+                              </div>
+                            <div className="career-track-info-info">
+                                Washington, D.C.
+                              </div>
+                            </div>
                         </div>
                       </div>
                     </div>
@@ -805,9 +790,8 @@ class CurrentCareerTrack extends React.Component {
                 </Row>
                 <div className="filler" />
               </div>
-            </Col>
-            <Col xs={1} />
-            <Col xs={12}>
+            </Row>
+            <Row xs={12}>
               <div className="shadowed-box-container">
                 <div>
                   <div className="customized-top-container">
@@ -847,7 +831,6 @@ class CurrentCareerTrack extends React.Component {
                     </p>
                     <Select
                       showSearch
-
                       placeholder="Program"
                       optionFilterProp="children"
                       filterOption={(input, option) =>
@@ -863,6 +846,10 @@ class CurrentCareerTrack extends React.Component {
                         AWS Technical Support Program
                       </Option>
                     </Select>
+                    <div style={{ margin: 10 }}>
+                      <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                      {this.state.programValue2 || 'No program selected'}
+                    </div>
                   </div>
                   
                   <div>
@@ -881,10 +868,6 @@ class CurrentCareerTrack extends React.Component {
                             fontSize: 13,
                           }}
                         >
-                          <span>
-                            <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
-                            {this.state.programValue2 || 'No program selected'}
-                          </span>
                         </p>
                         <div
                           style={
@@ -1068,7 +1051,7 @@ class CurrentCareerTrack extends React.Component {
                 </Row>
                 <div className="filler" />
               </div>
-            </Col>
+            </Row>
           </Row>
           <div className="divider-div" />
         </Card>
