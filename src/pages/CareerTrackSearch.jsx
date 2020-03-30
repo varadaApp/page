@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider, Select } from 'antd';
+import { Card, Icon, AutoComplete, Button, Table, Modal, Checkbox, Divider, Select, Row, Col } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { careerTrackData } from './Utils';
@@ -28,6 +28,24 @@ class CareerTrackSearch extends React.Component {
       certificationValue: '',
       clearanceValue: '',
       careerTrackValue: '',
+      programValue2: 'Department of Defense Space Program',
+      tab2: [
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+        {
+          show: false,
+        },
+      ],
     };
     this.handleProgramSearch = this.handleProgramSearch.bind(this);
     this.handleLocationSearch = this.handleLocationSearch.bind(this);
@@ -36,6 +54,8 @@ class CareerTrackSearch extends React.Component {
     this.handleCareerTrackSearch = this.handleCareerTrackSearch.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.showRow = this.showRow.bind(this);
+    this.handleProgramChange2 = this.handleProgramChange2.bind(this);
+    this.handleProgramSelect2 = this.handleProgramSelect2.bind(this);
   }
 
   showRow = row => {
@@ -76,6 +96,15 @@ class CareerTrackSearch extends React.Component {
     this.setState({ hideTable: true });
   };
 
+  handleProgramChange2(value) {
+    this.setState({ programValue2: value });
+  }
+
+  handleProgramSelect2(value) {
+    this.setState({ programValue2: value });
+  }
+
+
   handleCareerTrackSearch(value) {
     let filteredCareerTracks = careerTrackData().filter(
       careerTrack => careerTrack.careerTrackName === value,
@@ -102,6 +131,29 @@ class CareerTrackSearch extends React.Component {
     this.setState({ data: filteredCareerTracks });
     this.setState({ hideTable: false });
   }
+
+  componentDidMount() {
+    const names = [
+      { big: '5', small: '5', index: 0, tab: 2},
+    ]
+    names.forEach((item, i) => {
+      this.toggleShow(item.index, item.tab, `grow-class-${item.small}`, `measuringWrapper${item.big}`);
+    })
+  }
+  toggleShow = (index, tab, cName, wrapperClass) => {
+    this.setState(prevState => ({
+      [`tab${tab}`]: prevState[`tab${tab}`].map((item, i) =>
+        index === i ? { ...item, show: !item.show } : item,
+      ),
+    }));
+    let growDiv = document.querySelector(`.${cName}`);
+    if (growDiv.clientHeight) {
+      growDiv.style.height = 0;
+    } else {
+      var wrapper = document.querySelector(`.${wrapperClass}`);
+      growDiv.style.height = wrapper.clientHeight + 'px';
+    }
+  };
 
   handleClearanceSearch(value) {
     let filteredCareerTracks = careerTrackData().filter(
@@ -229,6 +281,136 @@ class CareerTrackSearch extends React.Component {
 
   render() {
     const { data } = this.state;
+    const dataSource4 = [
+      {
+        key: '1',
+        training: 'System Administration Level 3 Training',
+        status: (
+          <span className="in-progress">
+            Training Scheduled
+            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'Windows Server Administration Level 3 Training',
+        status: (
+          <span className="in-progress">
+            Training in Progress
+            <Icon style={{ margin: '5px' }} type="sync" spin />
+          </span>
+        ),
+      },
+      // {
+      //   key: '3',
+      //   training: 'Advanced Agile Traning',
+      //   status: (
+      //     <span className="completed">
+      //       Training Complete
+      //       <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+      //     </span>
+      //   ),
+      // },
+    ];
+
+    const dataSource5 = [
+      {
+        key: '1',
+        certification: 'VMWare',
+        status: (
+          <span className="attention">
+            Certification Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        certification: 'Cloudera CDH4 Administrator',
+        status: <Checkbox>Select to Show Interest in Certification</Checkbox>,
+      },
+    ];
+
+    const dataSource6 = [
+      {
+        key: '1',
+        training: 'System Administration Level 3 Training',
+        status: (
+          <span className="in-progress">
+            Training Scheduled
+            <Icon style={{ margin: '5px' }} type="calendar" theme="outlined" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        training: 'Windows Server Administration Level 3 Training',
+        status: (
+          <span className="in-progress">
+            Training in Progress
+            <Icon style={{ margin: '5px' }} type="sync" spin />
+          </span>
+        ),
+      },
+      // {
+      //   key: '3',
+      //   training: 'Advanced Agile Traning',
+      //   status: (
+      //     <span className="completed">
+      //       Training Complete
+      //       <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+      //     </span>
+      //   ),
+      // },
+    ];
+
+    const dataSource7 = [
+      {
+        key: '1',
+        certification: 'VMWare',
+        status: (
+          <span className="attention">
+            Certification Recently Shown Interest, Needs Action
+            <Icon style={{ margin: '5px' }} type="warning" theme="filled" />
+          </span>
+        ),
+      },
+      {
+        key: '2',
+        certification: 'AWS Administration',
+        status: (
+          <span style={{ margin: '5px' }} className="completed">
+            Certification Complete
+            <Icon style={{ margin: '5px' }} type="check-circle" theme="outlined" />
+          </span>
+        ),
+      },
+    ];
+    const columns = [
+      {
+        title: 'Training',
+        dataIndex: 'training',
+        key: 'training',
+      },
+      {
+        title: 'Status',
+        key: 'status',
+        render: props => props.status,
+      },
+    ];
+    const columns2 = [
+      {
+        title: 'Certification',
+        dataIndex: 'certification',
+        key: 'certification',
+      },
+      {
+        title: 'Status',
+        key: 'status',
+        render: props => props.status,
+      },
+    ];
     const styleHide = this.state.hideTable
       ? { display: 'none' }
       : { padding: '10px', margin: '20px' };
@@ -368,7 +550,268 @@ class CareerTrackSearch extends React.Component {
             <HoverCard value={headerData[1].value} label={headerData[1].label} items={headerData[1].items} icon={<Icon type="check" style={{fontSize: 80, color: "#fff"}} />} />
             <HoverCard value={headerData[2].value} label={headerData[2].label} items={headerData[2].items} icon={<Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
           </div>
-          <div style={{ marginRight: 20, backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
+          <Row style={{ marginRight: 20 }} xs={12}>
+              <div className="shadowed-box-container">
+                <div>
+                  <div className="customized-top-container">
+                    <span
+                      style={{
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        lineHeight: 1.5,
+                        color: 'black',
+                        textAlign: 'center',
+                        margin: 10,
+                        width: '100%',
+                        textTransform: 'uppercase',
+                        padding: 5,
+                      }}
+                    >
+                      Recommended Career Track
+                    </span>
+                  </div>
+                </div>
+                <Row>
+                  <div
+                    style={{
+                      flexGrow: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      padding: 10,
+                      margin: 20,
+                      marginTop: 0,
+                      paddingTop: 0,
+                      marginBottom: 0,
+                      paddingBottom: 0,
+                    }}
+                  >
+                    <p style={{ marginTop: '15px', paddingTop: '5px' }}>
+                      <h3 style={{ color: 'black' }}>Select another program</h3>
+                    </p>
+                    <Select
+                      showSearch
+                      placeholder="Program"
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                      onSelect={this.handleProgramSelect2}
+                      onChange={this.handleProgramChange2}
+                    >
+                      <Option value="Department of Defense Space Program">
+                        Department of Defense Space Program
+                      </Option>
+                      <Option value="AWS Technical Support Program">
+                        AWS Technical Support Program
+                      </Option>
+                    </Select>
+                    <div style={{ margin: 10 }}>
+                      <span style={{ fontWeight: 600, marginRight: 5 }}>Program:</span>
+                      {this.state.programValue2 || 'No program selected'}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(0, 2, 'grow-class-5', 'measuringWrapper5')}
+                    >
+                      System Administration Tier 3
+                      <Icon className="" type={this.state.tab2[0].show ? 'up' : 'down'} />
+                    </div>
+                    <div className="grow-class grow-class-5">
+                      <div className="measuringWrapper5">
+                        <p
+                          style={{
+                            color: '#525257',
+                            fontSize: 13,
+                          }}
+                        >
+                        </p>
+                        <div
+                          style={
+                            this.state.programValue2 === 'Department of Defense Space Program'
+                              ? {}
+                              : { display: 'none' }
+                          }
+                        >
+                          <div style={{ fontSize: 13 }}>
+                            <Divider className="content-divider" />
+                            {/* <div
+                              style={{ marginTop: 10, paddingTop: 5 }}
+                              onClick={this.showPositionsModal2}
+                            >
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Open Positions:
+                                </span>
+                                <span>4</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" /> */}
+                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal3}>
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Percentage Complete:
+                                </span>
+                                <span>35%</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Overall Expected Completion Date:
+                                </span>
+                                5/1/2020
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          style={
+                            this.state.programValue2 === 'AWS Technical Support Program'
+                              ? {}
+                              : { display: 'none' }
+                          }
+                        >
+                          <div style={{ fontSize: 13 }}>
+                            {/* <div
+                              style={{ marginTop: 10, paddingTop: 5 }}
+                              onClick={this.showPositionsModal2}
+                            >
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Open Positions:
+                                </span>
+                                <span>3</span>
+                              </a>
+                            </div> */}
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }} onClick={this.showModal2}>
+                              <a>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Current Percentage Complete:
+                                </span>
+                                <span>45%</span>
+                              </a>
+                            </div>
+                            <Divider className="content-divider" />
+                            <div style={{ marginTop: 10, paddingTop: 5 }}>
+                              <span>
+                                <span style={{ fontWeight: 600, marginRight: 5 }}>
+                                  Overall Expected Completion Date:
+                                </span>
+                                5/1/2020
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={
+                      this.state.programValue2 === 'Department of Defense Space Program'
+                        ? { }
+                        : { display: 'none' }
+                    }
+                  >
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(1, 2, 'grow-class-6', 'measuringWrapper6')}
+                    >
+                      Trainings
+                      <Icon className="" type={this.state.tab2[1].show ? 'up' : 'down'} />
+                    </div>
+                    <div className="grow-class grow-class-6">
+                      <div className="measuringWrapper6">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource4}
+                          columns={columns}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(2, 2, 'grow-class-7', 'measuringWrapper7')}
+                    >
+                      Certifications
+                      <Icon className="" type={this.state.tab2[2].show ? 'up' : 'down'} />
+                    </div>
+                    <div className="grow-class grow-class-7">
+                      <div className="measuringWrapper7">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource5}
+                          columns={columns2}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <div
+                    style={
+                      this.state.programValue2 === 'AWS Technical Support Program'
+                        ? { }
+                        : { display: 'none' }
+                    }
+                  >
+                    <div
+                      className="row-title "
+                      onClick={() => this.toggleShow(3, 2, 'grow-class-8', 'measuringWrapper8')}
+                    >
+                      Trainings
+                      <Icon className="" type={this.state.tab2[3].show ? 'up' : 'down'} />
+                    </div>
+                    <div className="grow-class grow-class-8">
+                      <div className="measuringWrapper8">
+                        <Table
+                          className="career-track-management-table"
+                          dataSource={dataSource6}
+                          columns={columns}
+                          size="middle"
+                          pagination={false}
+                          style={{ paddingBottom: 20 }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <div
+                        className="row-title "
+                        onClick={() => this.toggleShow(4, 2, 'grow-class-9', 'measuringWrapper9')}
+                      >
+                        Certifications
+                        <Icon className="" type={this.state.tab2[4].show ? 'up' : 'down'} />
+                      </div>
+                      <div className="grow-class grow-class-9">
+                        <div className="measuringWrapper9">
+                          <Table
+                            className="career-track-management-table"
+                            dataSource={dataSource7}
+                            columns={columns2}
+                            size="middle"
+                            pagination={false}
+                            style={{ paddingBottom: 20 }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Row>
+                <div className="filler" />
+              </div>
+            </Row>
+          <div style={{ marginTop: 20 ,marginRight: 20, backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
               <AutoComplete
