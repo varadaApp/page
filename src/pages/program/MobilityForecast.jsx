@@ -95,165 +95,164 @@ class Reporting extends React.Component {
           </div>
           <Divider />
           <div  style={{marginRight: 20}} className="mobility-header-filter-container">
-            <h2 style={{ fontSize: '22px', color: 'black' }}>
-              What would you like this report to contain?
-            </h2>
-            <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <div style={{ width: '30%' }}>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Month</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Opening Balance</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employees Joined</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employees Left</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Closing Balance</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Attrition %</Checkbox>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-              <br />
-            </div>
+              <Row>
+                <Col xs={12}>
+                  <h2 style={{ fontSize: '22px', color: 'black' }}>
+                    What would you like this report to contain?
+                  </h2>
+                  <div style={{ display: 'flex' }}>
+                    <div className="attrition-row">
+                      <Row>
+                        <Col span={12}>
+                          <Checkbox defaultChecked={true}>Month</Checkbox>
+                        </Col>
+                        <Col span={12}>
+                          <Checkbox defaultChecked={true}>Opening Balance</Checkbox>
+                        </Col>
+                        <Col span={12}>
+                          <Checkbox defaultChecked={true}>Employees Joined</Checkbox>
+                        </Col>
+                        <Col span={12}>
+                          <Checkbox defaultChecked={true}>Employees Left</Checkbox>
+                        </Col>
+                        <Col span={12}>
+                          <Checkbox defaultChecked={true}>Closing Balance</Checkbox>
+                        </Col>
+                        <Col span={12}>
+                          <Checkbox defaultChecked={true}>Attrition %</Checkbox>
+                        </Col>
+                      </Row>
+                    </div>
+                  </div>
+                </Col>
+                <Col xs={12}>
+                  <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
+                    <div className="mobility-row">
+                      <Select
+                        showSearch
+                        placeholder="Select a Employee"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                      >
+                        <Option value="0">&nbsp;</Option>
+                        <Option value="1">Dorris Vaught</Option>
+                        <Option value="2">Kris Shotwell</Option>
+                        <Option value="3">Long Hudspeth</Option>
+                        <Option value="4">Vincenzo Whiteley</Option>
+                        <Option value="5">Reyes Holmes</Option>
+                        <Option value="6">Deedra Bosch</Option>
+                        <Option value="7">Sharyn Ballard</Option>
+                        <Option value="8">Romeo Thompson</Option>
+                        <Option value="9">Chere Nance</Option>
+                        <Option value="10">Darryl Merryman</Option>
+                      </Select>
+                    </div>
+                    <div className="mobility-row">
+                      <Select
+                        showSearch
+                        placeholder="Select a Date Range"
+                        optionFilterProp="children"
+                        filterOption={(input, option) =>
+                          option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                        onSelect={this.handleDateRangeSelect}
+                      >
+                        <Option value="0">&nbsp;</Option>
+                        <Option value="1">Annually</Option>
+                        <Option value="2">Monthly</Option>
+                        <Option value="3">Quarter</Option>
+                        <Option value="4">Custom Date Range</Option>
+                      </Select>
+                    </div>
+                    {selectedDateRange === '1' && (
+                      <div className="mobility-row">
+                        <Select
+                          showSearch
+                          placeholder="Select a Year"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                          }
+                          onSelect={this.handleDateRangeSelect}
+                        >
+                          <Option value="0">&nbsp;</Option>
+                          <Option value="1">2020</Option>
+                          <Option value="2">2019</Option>
+                          <Option value="3">2018</Option>
+                          <Option value="4">2017</Option>
+                        </Select>
+                      </div>
+                    )}
+                    {selectedDateRange === '2' && (
+                      <div className="mobility-row">
+                        <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
+                      </div>
+                    )}
+                    {selectedDateRange === '3' && (
+                      <div className="mobility-row">
+                        <Select
+                          showSearch
+                          placeholder="Select a Quarter"
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                          }
+                          onSelect={this.handleDateRangeSelect}
+                        >
+                          <Option value="0">&nbsp;</Option>
+                          <Option value="1">1st Quarter</Option>
+                          <Option value="2">2nd Quarter</Option>
+                          <Option value="3">3rd Quarter</Option>
+                          <Option value="4">4th Quarter</Option>
+                        </Select>
+                      </div>
+                    )}
+                    {selectedDateRange === '4' && (
+                      <div className="mobility-row">
+                        <RangePicker format={'MM/DD/YYYY'} />
+                      </div>
+                    )}
+                </Col>
+              </Row>
             <br />
-            <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
-            <div style={{ display: 'flex' }}>
-              <div className="mobility-row">
-                <Select
-                  showSearch
-                  placeholder="Select a Employee"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  <Option value="0">&nbsp;</Option>
-                  <Option value="1">Dorris Vaught</Option>
-                  <Option value="2">Kris Shotwell</Option>
-                  <Option value="3">Long Hudspeth</Option>
-                  <Option value="4">Vincenzo Whiteley</Option>
-                  <Option value="5">Reyes Holmes</Option>
-                  <Option value="6">Deedra Bosch</Option>
-                  <Option value="7">Sharyn Ballard</Option>
-                  <Option value="8">Romeo Thompson</Option>
-                  <Option value="9">Chere Nance</Option>
-                  <Option value="10">Darryl Merryman</Option>
-                </Select>
-              </div>
-              <div className="mobility-row">
-                <Select
-                  showSearch
-                  placeholder="Select a Date Range"
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                  onSelect={this.handleDateRangeSelect}
-                >
-                  <Option value="0">&nbsp;</Option>
-                  <Option value="1">Annually</Option>
-                  <Option value="2">Monthly</Option>
-                  <Option value="3">Quarter</Option>
-                  <Option value="4">Custom Date Range</Option>
-                </Select>
-              </div>
-              {selectedDateRange === '1' && (
-                <div className="mobility-row">
+            <div style={{ display: 'flex', background: 'rgba(0,0,0,0.1)', padding: 10}}>
+              <h2 style={{ fontSize: '22px', color: 'black' }}>
+                How would you like this data grouped?
+              </h2>
+              <div>
+                <div className="attrition-row">
                   <Select
                     showSearch
-                    placeholder="Select a Year"
+                    placeholder="Group By"
                     optionFilterProp="children"
                     filterOption={(input, option) =>
                       option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                     }
-                    onSelect={this.handleDateRangeSelect}
                   >
                     <Option value="0">&nbsp;</Option>
-                    <Option value="1">2020</Option>
-                    <Option value="2">2019</Option>
-                    <Option value="3">2018</Option>
-                    <Option value="4">2017</Option>
+                    <Option value="1">Employee</Option>
+                    <Option value="2">Applied to Other JRs</Option>
+                    <Option value="3">Certification Attainment</Option>
+                    <Option value="4">Completion of Different Career Track</Option>
+                    <Option value="5">Losing Coverage</Option>
                   </Select>
                 </div>
-              )}
-              {selectedDateRange === '2' && (
-                <div className="mobility-row">
-                  <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
+                <div className="mobility-row-checkbox">
+                  <Checkbox>Interested in Growth</Checkbox>
                 </div>
-              )}
-              {selectedDateRange === '3' && (
-                <div className="mobility-row">
-                  <Select
-                    showSearch
-                    placeholder="Select a Quarter"
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
-                    onSelect={this.handleDateRangeSelect}
-                  >
-                    <Option value="0">&nbsp;</Option>
-                    <Option value="1">1st Quarter</Option>
-                    <Option value="2">2nd Quarter</Option>
-                    <Option value="3">3rd Quarter</Option>
-                    <Option value="4">4th Quarter</Option>
-                  </Select>
+                <div className="mobility-row-checkbox">
+                  <Checkbox>Losing Coverage</Checkbox>
                 </div>
-              )}
-              {selectedDateRange === '4' && (
-                <div className="mobility-row">
-                  <RangePicker format={'MM/DD/YYYY'} />
+                <div className="mobility-row-checkbox">
+                  <Checkbox>Location Change</Checkbox>
                 </div>
-              )}
-            </div>
-            <br />
-            <h2 style={{ fontSize: '22px', color: 'black' }}>
-              How would you like this data grouped?
-            </h2>
-            <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <Select
-                  showSearch
-                  placeholder="Group By"
-                  style={{ width: 200 }}
-                  optionFilterProp="children"
-                  filterOption={(input, option) =>
-                    option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                  }
-                >
-                  <Option value="0">&nbsp;</Option>
-                  <Option value="1">Employee</Option>
-                  <Option value="2">Applied to Other JRs</Option>
-                  <Option value="3">Certification Attainment</Option>
-                  <Option value="4">Completion of Different Career Track</Option>
-                  <Option value="5">Losing Coverage</Option>
-                </Select>
               </div>
             </div>
-            <br />
-
-            <div className="mobility-row-checkbox">
-              <Checkbox>Interested in Growth</Checkbox>
-            </div>
-            <div className="mobility-row-checkbox">
-              <Checkbox>Losing Coverage</Checkbox>
-            </div>
-            <div className="mobility-row-checkbox">
-              <Checkbox>Location Change</Checkbox>
-            </div>
-            <div style={{ float: 'right', marginTop: 10 }}>
-              <Button onClick={this.handleRunReport}>Run Report</Button>
-            </div>
+          </div>
+          <div style={{ float: 'right', marginTop: 10 }}>
+            <Button onClick={this.handleRunReport}>Run Report</Button>
           </div>
           <div style={this.state.runReport === 'run' ? {marginRight: 20} : { display: 'none' }}>
             <h1>Department of Defense Space Program Mobility Report</h1>

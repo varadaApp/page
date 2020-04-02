@@ -72,7 +72,7 @@ const props = {
 const data = [
   {
     label: 'Position Title',
-    value: 'Windows Server System Administrator',
+    value: 'Windows Server System Admin',
   },
   {
     label: 'Labor Category and Level',
@@ -80,7 +80,7 @@ const data = [
   },
   {
     label: 'Current Career Track',
-    value: 'System Administration Level 2',
+    value: 'System Admin Level 2',
   },
   {
     label: 'Program Name',

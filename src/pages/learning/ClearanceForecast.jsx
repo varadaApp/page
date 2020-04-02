@@ -32,7 +32,7 @@ class ClearanceForecast extends React.Component {
           employee: 'Sydney Watkins',
           program: 'Department of Defense Space Program',
           location: 'Washington, DC',
-          positionTitle: 'Windows Server System Adminstrator',
+          positionTitle: 'Windows Server System Admin',
           expectedForecastDate: '7/1/2020',
         },
       ],
@@ -115,34 +115,13 @@ class ClearanceForecast extends React.Component {
               What would you like this report to contain?
             </h2>
             <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <div style={{ width: '30%' }}>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Clearance</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employee</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Program</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Location</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Position Title</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Current Clearance</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Expected Forecast Date</Checkbox>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-              <br />
+              <Checkbox defaultChecked={true}>Clearance</Checkbox>
+              <Checkbox defaultChecked={true}>Employee</Checkbox>
+              <Checkbox defaultChecked={true}>Program</Checkbox>
+              <Checkbox defaultChecked={true}>Location</Checkbox>
+              <Checkbox defaultChecked={true}>Position Title</Checkbox>
+              <Checkbox defaultChecked={true}>Current Clearance</Checkbox>
+              <Checkbox defaultChecked={true}>Expected Forecast Date</Checkbox>
             </div>
             <br />
             <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>

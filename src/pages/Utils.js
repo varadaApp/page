@@ -51,7 +51,7 @@ export function trainingData() {
     { name: 'JavaScript' },
     { name: 'Juniper' },
     { name: 'Leadership' },
-    { name: 'Linux Administration' },
+    { name: 'Linux Admin' },
     { name: 'McAfee' },
     { name: 'Microsoft Office' },
     { name: 'NetApp' },
@@ -70,7 +70,7 @@ export function trainingData() {
     { name: 'SharePoint' },
     { name: 'VMWare' },
     { name: 'VTC Systems' },
-    { name: 'Windows Administration' },
+    { name: 'Windows Admin' },
     { name: 'Windows Desktop' },
     { name: 'Windows Server' },
   ];
@@ -87,7 +87,7 @@ export function certData() {
     { name: 'CCNE' },
     { name: 'CCNP' },
     { name: 'CISSP' },
-    { name: 'Cloudera CDH4 Administrator' },
+    { name: 'Cloudera CDH4 Admin' },
     { name: 'Cloudera CDH4 Developer' },
     { name: 'CSM' },
     { name: 'CTNS' },
@@ -194,7 +194,7 @@ export function careerTrackData() {
       certification: '',
     },
     {
-      careerTrackName: 'Database Administration',
+      careerTrackName: 'Database Admin',
       programName: 'DoJ Networks',
       positionTitle: '',
       locationName: 'Washington DC',
@@ -204,7 +204,7 @@ export function careerTrackData() {
       certification: '',
     },
     {
-      careerTrackName: 'Database Administration',
+      careerTrackName: 'Database Admin',
       programName: 'DoJ Networks',
       positionTitle: '',
       locationName: 'Washington DC',
@@ -564,7 +564,7 @@ export function careerTrackData() {
     },
 
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DoJ Networks',
       positionTitle: '',
       locationName: 'Washington DC',
@@ -574,7 +574,7 @@ export function careerTrackData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'FBI Case Management System',
       positionTitle: '',
       locationName: 'Chantilly VA',
@@ -584,7 +584,7 @@ export function careerTrackData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DHS Satellite Network',
       positionTitle: '',
       locationName: 'Chantilly VA',
@@ -595,7 +595,7 @@ export function careerTrackData() {
     },
 
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DoJ Networks',
       positionTitle: '',
       locationName: 'Washington DC',
@@ -606,7 +606,7 @@ export function careerTrackData() {
     },
 
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'FBI Case Management System',
       positionTitle: '',
       locationName: 'Chantilly VA',
@@ -626,7 +626,7 @@ export function careerTrackData() {
       certification: 'Splunk',
     },
     {
-      careerTrackName: 'System Administration',
+      careerTrackName: 'System Admin',
       programName: 'AWS Technical Support Program',
       positionTitle: '',
       locationName: 'Washington DC',
@@ -744,7 +744,7 @@ export function positionSearchData() {
     },
     {
       positionTitle: 'Oracle DBA',
-      careerTrackName: 'Database Administration',
+      careerTrackName: 'Database Admin',
       programName: 'DoJ Networks',
       locationName: 'Washington DC',
       clearanceLevel: 'DOJ SUITABILITY/ TS',
@@ -754,7 +754,7 @@ export function positionSearchData() {
     },
     {
       positionTitle: 'SQL Server DBA',
-      careerTrackName: 'Database Administration',
+      careerTrackName: 'Database Admin',
       programName: 'DoJ Networks',
       locationName: 'Washington DC',
       clearanceLevel: 'DOJ SUITABILITY/ TS',
@@ -1189,7 +1189,7 @@ export function positionSearchData() {
     },
 
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DoJ Networks',
       locationName: 'Washington DC',
       clearanceLevel: 'DOJ SUITABILITY/ TS',
@@ -1198,7 +1198,7 @@ export function positionSearchData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'FBI Case Management System',
       locationName: 'Chantilly VA',
       clearanceLevel: 'TS/SCI CI POLY',
@@ -1207,7 +1207,7 @@ export function positionSearchData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DHS Satellite Network',
       locationName: 'Chantilly VA',
       clearanceLevel: 'EOD SUITABILITY / SECRET',
@@ -1217,7 +1217,7 @@ export function positionSearchData() {
     },
 
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DoJ Networks',
       locationName: 'Washington DC',
       clearanceLevel: 'DOJ SUITABILITY/ TS',
@@ -1227,7 +1227,7 @@ export function positionSearchData() {
     },
 
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'FBI Case Management System',
       locationName: 'Chantilly VA',
       clearanceLevel: 'TS/SCI FSP',
@@ -1330,7 +1330,7 @@ export function enhancementSearchData() {
   const careerEnhancements = [
     {
       positionTitle: 'AWS Adminstrator',
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'AWS Technical Support Program',
       locationName: 'Washington DC',
       clearanceLevel: 'Secret',
@@ -1434,7 +1434,7 @@ export function enhancementSearchData() {
     },
     {
       positionTitle: 'Oracle DBA Coverage',
-      careerTrackName: 'Database Administration',
+      careerTrackName: 'Database Admin',
       programName: 'DoJ Networks',
       locationName: 'Washington DC',
       clearanceLevel: 'DOJ SUITABILITY/ TS',
@@ -1760,7 +1760,7 @@ export function enhancementSearchData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'FBI Case Management System',
       locationName: 'Chantilly VA',
       clearanceLevel: 'TS/SCI CI POLY',
@@ -1772,7 +1772,7 @@ export function enhancementSearchData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'DHS Satellite Network',
       locationName: 'Chantilly VA',
       clearanceLevel: 'EOD SUITABILITY / SECRET',
@@ -1784,7 +1784,7 @@ export function enhancementSearchData() {
       certification: '',
     },
     {
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       programName: 'FBI Case Management System',
       locationName: 'Chantilly VA',
       clearanceLevel: 'TS/SCI FSP',
@@ -1880,7 +1880,7 @@ export function employeesWithSelectedCareerTrackData() {
   const employees = [
     {
       employeeName: 'Sharyn Ballard',
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       careerTrackTier: 2,
       desiredCareerTrack: 'Systems Engineering',
       desiredCareerTrackCompletionDate: '7/1/2020',
@@ -1893,7 +1893,7 @@ export function employeesWithSelectedCareerTrackData() {
         name: 'Leadership',
       },
       currentGoal: 'Career Track Change to Systems Engineering',
-      position: 'Linux System Administrator',
+      position: 'Linux System Admin',
     },
     {
       employeeName: 'Romeo Thompson',
@@ -2113,9 +2113,9 @@ export function employeesWithSelectedCareerTrackData() {
     },
     {
       employeeName: 'Nickie Buie',
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       careerTrackTier: 1,
-      desiredCareerTrack: 'Systems Administration Tier 2',
+      desiredCareerTrack: 'Systems Admin Tier 2',
       inProgressCertifications: {
         progress: 'Green',
         name: 'AWS',
@@ -2137,10 +2137,10 @@ export function programEmployees() {
       progressStatus: 'Yellow',
       employeeName: 'Sharyn Ballard',
       locationName: 'Washington, DC',
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       careerTrackTier: 2,
       currentStatus: 'Career Track Change Expected: 7/1/2020',
-      position: 'Linux System Administrator',
+      position: 'Linux System Admin',
     },
     {
       progressStatus: 'Red',
@@ -2268,7 +2268,7 @@ export function programEmployees() {
       progressStatus: 'Yellow',
       employeeName: 'Nickie Buie',
       locationName: 'Washington, DC',
-      careerTrackName: 'Systems Administration',
+      careerTrackName: 'Systems Admin',
       careerTrackTier: 1,
       currentStatus: '',
       position: '',
@@ -2355,13 +2355,13 @@ export function employeeSearch() {
       employeeId: 7,
       employeeName: 'August Stranger',
       clearanceLevel: 'TOP SECRET',
-      careerTrackName: 'System Administration Tier 2',
+      careerTrackName: 'System Admin Tier 2',
       programName: 'FBI Case Management System',
       locationName: 'Fort Belvoir VA',
       programManagerName: 'Keeley Deleon',
       interestedIn: 'Open Position: Losing Coverage 7/1/2020',
       certification: 'Linux+',
-      position: 'Linux System Administrator',
+      position: 'Linux System Admin',
     },
   ];
   return employees;

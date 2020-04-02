@@ -31,7 +31,7 @@ class TrainingInterest extends React.Component {
           employee: 'Sydney Watkins',
           program: 'Department of Defense Space Program',
           location: 'Washington, DC',
-          positionTitle: 'Windows Server System Adminstrator',
+          positionTitle: 'Windows Server System Admin',
           interestDate: '1/1/2020',
         },
       ],
@@ -110,32 +110,13 @@ class TrainingInterest extends React.Component {
               What would you like this report to contain?
             </h2>
             <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <div style={{ width: '30%' }}>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Training</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employee</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Program</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Location</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Position Title</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Interest Date</Checkbox>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-              <br />
-            </div>
+              <Checkbox defaultChecked={true}>Training</Checkbox>
+              <Checkbox defaultChecked={true}>Employee</Checkbox>
+              <Checkbox defaultChecked={true}>Program</Checkbox>
+              <Checkbox defaultChecked={true}>Location</Checkbox>
+              <Checkbox defaultChecked={true}>Position Title</Checkbox>
+              <Checkbox defaultChecked={true}>Interest Date</Checkbox>
+            </div>            
             <br />
             <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
             <div style={{ display: 'flex' }}>
@@ -169,7 +150,7 @@ class TrainingInterest extends React.Component {
                   <Option value="17">JavaScript</Option>
                   <Option value="18">Juniper</Option>
                   <Option value="19">Leadership</Option>
-                  <Option value="20">Linux Administration</Option>
+                  <Option value="20">Linux Admin</Option>
                   <Option value="21">McAfee</Option>
                   <Option value="22">Microsoft Office</Option>
                   <Option value="23">NetApp</Option>
@@ -188,7 +169,7 @@ class TrainingInterest extends React.Component {
                   <Option value="36">SharePoint</Option>
                   <Option value="37">VMWare</Option>
                   <Option value="38">VTC Systems</Option>
-                  <Option value="39">Windows Administration</Option>
+                  <Option value="39">Windows Admin</Option>
                   <Option value="40">Windows Desktop</Option>
                   <Option value="41">Windows Server</Option>
                 </Select>

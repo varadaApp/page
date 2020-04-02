@@ -284,33 +284,14 @@ class Reporting extends React.Component {
               What would you like this report to contain?
             </h2>
             <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <div style={{ width: '30%' }}>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Month</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Opening Balance</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employees Joined</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employees Left</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Closing Balance</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Attrition %</Checkbox>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
+              <Checkbox defaultChecked={true}>Month</Checkbox>
+              <Checkbox defaultChecked={true}>Opening Balance</Checkbox>
+              <Checkbox defaultChecked={true}>Employees Joined</Checkbox>
+              <Checkbox defaultChecked={true}>Employees Left</Checkbox>
+              <Checkbox defaultChecked={true}>Closing Balance</Checkbox>
+              <Checkbox defaultChecked={true}>Attrition %</Checkbox>
             </div>
             <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
-            <div style={{ width: 150, display: 'inline-block' }}>Date Range:</div>
             <Select
               showSearch
               style={{ width: 200 }}
@@ -327,10 +308,7 @@ class Reporting extends React.Component {
               <Option value="3">Quarter</Option>
               <Option value="4">Custom Date Range</Option>
             </Select>
-            <br />
-            <br />
             <div style={this.state.selectedDateRange === '1' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Year:</div>
               <Select
                 showSearch
                 style={{ width: 200 }}
@@ -347,17 +325,11 @@ class Reporting extends React.Component {
                 <Option value="3">2018</Option>
                 <Option value="4">2017</Option>
               </Select>
-              <br />
-              <br />
             </div>
             <div style={this.state.selectedDateRange === '2' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Month:</div>
               <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
-              <br />
-              <br />
             </div>
             <div style={this.state.selectedDateRange === '3' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Quarter:</div>
               <Select
                 showSearch
                 style={{ width: 200 }}
@@ -374,16 +346,10 @@ class Reporting extends React.Component {
                 <Option value="3">3rd Quarter</Option>
                 <Option value="4">4th Quarter</Option>
               </Select>
-              <br />
-              <br />
             </div>
             <div style={this.state.selectedDateRange === '4' ? {} : { display: 'none' }}>
-              <div style={{ width: 150, display: 'inline-block' }}>Custom Date Range:</div>
               <RangePicker format={'MM/DD/YYYY'} />
-              <br />
-              <br />
             </div>
-            <div style={{ width: 150, display: 'inline-block' }}>Select Program:</div>
             <Select
               showSearch
               style={{ width: 200 }}
@@ -402,37 +368,34 @@ class Reporting extends React.Component {
               <Option value="6">FBI Case Management System</Option>
             </Select>
             <br />
-            <br />
-            <h2 style={{ fontSize: '22px', color: 'black' }}>
-              How would you like this data grouped?
-            </h2>
-            <div style={{ width: 150, display: 'inline-block' }}>Group By:</div>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              <Option value="0">&nbsp;</Option>
-              <Option value="1">Career Track</Option>
-              <Option value="2">Title</Option>
-              <Option value="3">Labor Category</Option>
-              <Option value="4">Location</Option>
-              <Option value="5">Tenure</Option>
-              <Option value="6">Certification</Option>
-              <Option value="7">Certification Interest</Option>
-              <Option value="8">Training</Option>
-              <Option value="9">Training Interest</Option>
-            </Select>
-            <br />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <h2 style={{ fontSize: '22px', color: 'black' }}>
+                How would you like this data grouped?
+              </h2>
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                optionFilterProp="children"
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                <Option value="0">&nbsp;</Option>
+                <Option value="1">Career Track</Option>
+                <Option value="2">Title</Option>
+                <Option value="3">Labor Category</Option>
+                <Option value="4">Location</Option>
+                <Option value="5">Tenure</Option>
+                <Option value="6">Certification</Option>
+                <Option value="7">Certification Interest</Option>
+                <Option value="8">Training</Option>
+                <Option value="9">Training Interest</Option>
+              </Select>
+            </div>
             <br />
             <Button type="primary" onClick={this.handleRunReport}>
               Run Report
             </Button>
-            <br />
-            <br />
           </div>
           <div style={this.state.runReport === 'run' ? {} : { display: 'none' }}>
             <h1>Department of Defense Space Program Attrition Report</h1>

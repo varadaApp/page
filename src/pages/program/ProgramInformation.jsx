@@ -193,7 +193,7 @@ class ProgramInformation extends React.Component {
         },
         {
           key: '2',
-          name: 'Systems Administration',
+          name: 'Systems Admin',
         },
       ],
       count: 4,
@@ -208,7 +208,7 @@ class ProgramInformation extends React.Component {
         },
         {
           key: '2',
-          name: 'Systems Administration',
+          name: 'Systems Admin',
         },
       ],
       dataSourceSkills: [
@@ -401,11 +401,11 @@ class ProgramInformation extends React.Component {
       title: row.employeeName,
       content: (
         <div>
-          <span className="ant-form-text">Position Title: Linux System Administrator</span>
+          <span className="ant-form-text">Position Title: Linux System Admin</span>
           <br />
           <span className="ant-form-text">Labor Category and Level: System Admin Level 2</span>
           <br />
-          <span className="ant-form-text">Current Career Track: System Administration Level 2</span>
+          <span className="ant-form-text">Current Career Track: System Admin Level 2</span>
           <br />
           <span className="ant-form-text">Program Name: Department of Defense Space Program</span>
           <br />
@@ -550,12 +550,12 @@ class ProgramInformation extends React.Component {
               style={{ backgroundColor: 'rgb(240, 242, 245)', padding: 20, borderRadius: 5 }}
               xs={8}
             >
-              <Form>
+              <div>
                 {formData.map(d => (
-                  <Form.Item style={{ fontSize: '14px', alignItems: 'center' }}>
-                    <p className="program-info-label" style={labelStyle}>
+                  <div style={{ fontSize: '14px', alignItems: 'center' }}>
+                    <div className="program-info-label" style={labelStyle}>
                       {d.label}
-                    </p>
+                    </div>
                     <Row>
                       <Col xs={20}>
                         <p style={valueStyle} className="ant-form-text">
@@ -567,9 +567,9 @@ class ProgramInformation extends React.Component {
                         <span style={editStyle}>Edit</span>
                       </Col>
                     </Row>
-                  </Form.Item>
+                  </div>
                 ))}
-              </Form>
+              </div>
             </Col>
             <Col xs={1}/>
             <Col className="program-info-careertract-container" xs={15} span={18}>
@@ -611,7 +611,7 @@ class ProgramInformation extends React.Component {
                   <Option value="0">&nbsp;</Option>
                   <Option value="1">Program/Project Management</Option>
                   <Option value="2">Software Developer</Option>
-                  <Option value="3">Systems Administration</Option>
+                  <Option value="3">Systems Admin</Option>
                   <Option value="4">Program Ops (Technical)</Option>
                 </Select>
               </Col>
@@ -710,62 +710,6 @@ class ProgramInformation extends React.Component {
               />
             </Col> */}
           </Row>
-          <p style={employeeHeaderStyle}>Employees</p>
-          <Divider />
-          <div className="export-button-container">
-            <Button type="primary" size="small">
-              Export to CSV
-            </Button>
-            <Divider type="vertical" />
-            <Button type="primary" size="small">
-              Export to PDF
-            </Button>
-          </div>
-          <ReactTable
-            data={data}
-            resolveData={data => data.map(row => row)}
-            defaultFilterMethod={(filter, row) => String(row[filter.id]) === filter.value}
-            getTdProps={(state, rowInfo, column, instance) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
-            getTrProps={(state, rowInfo, column) => {
-              return {
-                onClick: (e, handleOriginal) => {
-                  this.showRow(rowInfo.original);
-                  if (handleOriginal) {
-                    handleOriginal();
-                  }
-                },
-              };
-            }}
-            columns={[
-              {
-                Header: 'Employee',
-                accessor: 'employeeName',
-              },
-              {
-                Header: 'Position Title',
-                accessor: 'position',
-              },
-              {
-                Header: 'Current Status',
-                accessor: 'currentStatus',
-              },
-              {
-                id: 'currentCareerTrack',
-                Header: 'Current Career Track',
-                accessor: d => `${d.careerTrackName}` + ' Tier ' + `${d.careerTrackTier}`,
-              },
-            ]}
-            defaultPageSize={10}
-            className="-striped -highlight"
-          />
           <p
             style={{
               textAlign: 'center',

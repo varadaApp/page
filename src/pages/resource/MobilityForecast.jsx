@@ -11,6 +11,7 @@ import {
   DatePicker,
   Col,
   Row,
+  Divider,
 } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { FormattedMessage } from 'umi-plugin-react/locale';
@@ -112,27 +113,12 @@ class Reporting extends React.Component {
               What would you like this report to contain?
             </h2>
             <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <div style={{ width: '30%' }}>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employee</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Position Title</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Current Status</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Current Career Track</Checkbox>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-          </div>
+              <Checkbox defaultChecked={true}>Employee</Checkbox>
+              <Checkbox defaultChecked={true}>Position Title</Checkbox>
+              <Checkbox defaultChecked={true}>Current Status</Checkbox>
+              <Checkbox defaultChecked={true}>Current Career Track</Checkbox>
+            </div>
           <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
-          <div style={{ width: 150, display: 'inline-block' }}>Date Range:</div>
           <Select
             showSearch
             style={{ width: 200 }}
@@ -149,10 +135,7 @@ class Reporting extends React.Component {
             <Option value="3">Quarter</Option>
             <Option value="4">Custom Date Range</Option>
           </Select>
-          <br />
-          <br />
           <div style={this.state.selectedDateRange === '1' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Year:</div>
             <Select
               showSearch
               style={{ width: 200 }}
@@ -169,17 +152,11 @@ class Reporting extends React.Component {
               <Option value="3">2018</Option>
               <Option value="4">2017</Option>
             </Select>
-            <br />
-            <br />
           </div>
           <div style={this.state.selectedDateRange === '2' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Month:</div>
             <MonthPicker placeholder="Select month" format={'MM/YYYY'} />
-            <br />
-            <br />
           </div>
           <div style={this.state.selectedDateRange === '3' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Quarter:</div>
             <Select
               showSearch
               style={{ width: 200 }}
@@ -196,16 +173,10 @@ class Reporting extends React.Component {
               <Option value="3">3rd Quarter</Option>
               <Option value="4">4th Quarter</Option>
             </Select>
-            <br />
-            <br />
           </div>
           <div style={this.state.selectedDateRange === '4' ? {} : { display: 'none' }}>
-            <div style={{ width: 150, display: 'inline-block' }}>Custom Date Range:</div>
             <RangePicker format={'MM/DD/YYYY'} />
-            <br />
-            <br />
           </div>
-          <div style={{ width: 150, display: 'inline-block' }}>Select Program:</div>
           <Select
             showSearch
             style={{ width: 200 }}
@@ -223,9 +194,6 @@ class Reporting extends React.Component {
             <Option value="5">DoS Nuclear Defense System</Option>
             <Option value="6">FBI Case Management System</Option>
           </Select>
-          <br />
-          <br />
-          <div style={{ width: 150, display: 'inline-block' }}>Select Employee:</div>
           <Select
             showSearch
             style={{ width: 200 }}
@@ -247,11 +215,9 @@ class Reporting extends React.Component {
             <Option value="9">Chere Nance</Option>
             <Option value="10">Darryl Merryman</Option>
           </Select>
-          <br />
-          <br />
-          <div style={{ width: 150, display: 'inline-block' }}>Group By:</div>
           <Select
             showSearch
+            placeholder="Select a Group"
             style={{ width: 200 }}
             optionFilterProp="children"
             filterOption={(input, option) =>
@@ -265,20 +231,16 @@ class Reporting extends React.Component {
             <Option value="4">Completion of Different Career Track</Option>
             <Option value="5">Losing Coverage</Option>
           </Select>
-          <br />
-          <br />
-          <Checkbox>Interested in Growth</Checkbox>
-          <br />
-          <Checkbox>Losing Coverage</Checkbox>
-          <br />
-          <Checkbox>Location Change</Checkbox>
-          <br />
+          <div style={{display: 'flex'}}>
+            <Checkbox>Interested in Growth</Checkbox>
+            <Checkbox>Losing Coverage</Checkbox>
+            <Checkbox>Location Change</Checkbox>
+          </div>
           <br />
           <Button type="primary" onClick={this.handleRunReport}>
             Run Report
           </Button>
           </div>
-          <br />
           <br />
           <div style={this.state.runReport === 'run' ? {} : { display: 'none' }}>
             <h1>Department of Defense Space Program Mobility Report</h1>

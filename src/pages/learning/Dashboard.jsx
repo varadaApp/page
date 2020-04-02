@@ -88,15 +88,6 @@ class Dashboard extends React.Component {
     return (
       <PageHeaderWrapper>
         <Card>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            
-          </div>
           <Typography
             style={{
               fontWeight: 600,
@@ -108,12 +99,7 @@ class Dashboard extends React.Component {
           >
             {greeting}, Sidney
           </Typography>
-          <Row gutter={[8, 8]}>
-            <Col xs={12} span={6}>
-              <ToDoList list={thingsToDo} />
-            </Col>
-          </Row>
-
+          <ToDoList hasIcon list={thingsToDo} />
           <p
             style={{
               textAlign: 'center',

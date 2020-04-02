@@ -145,13 +145,13 @@ class EmployeesCareerTrack extends React.Component {
               size="small"
             >
               <Descriptions.Item label="Trainings">
-                System Administration Level 3 Training -{' '}
+                System Admin Level 3 Training -{' '}
                 <span class="in-progress">
                   Training Scheduled
                   <Icon type="calendar" theme="outlined" />
                 </span>
                 <br />
-                Windows Server Administration Level 3 Training -{' '}
+                Windows Server Admin Level 3 Training -{' '}
                 <span class="in-progress">
                   Training in Progress
                   <Icon type="sync" spin />
@@ -170,12 +170,12 @@ class EmployeesCareerTrack extends React.Component {
                   <Icon type="warning" theme="filled" />
                 </span>
                 <br />
-                Cloudera CDH4 Administrator - Certification Process Not Started
+                Cloudera CDH4 Admin - Certification Process Not Started
               </Descriptions.Item>
             </Descriptions>
             <Divider orientation="left">
               <strong>
-                Recommended Career Track: System Administration Tier 3 (Program: Department of
+                Recommended Career Track: System Admin Tier 3 (Program: Department of
                 Defense Space Program)
               </strong>
             </Divider>
@@ -187,13 +187,13 @@ class EmployeesCareerTrack extends React.Component {
               size="small"
             >
               <Descriptions.Item label="Trainings">
-                System Administration Level 3 Training -{' '}
+                System Admin Level 3 Training -{' '}
                 <span class="in-progress">
                   Training Scheduled
                   <Icon type="calendar" theme="outlined" />
                 </span>
                 <br />
-                Windows Server Administration Level 3 Training -{' '}
+                Windows Server Admin Level 3 Training -{' '}
                 <span class="in-progress">
                   Training in Progress
                   <Icon type="sync" spin />
@@ -212,7 +212,7 @@ class EmployeesCareerTrack extends React.Component {
                   <Icon type="warning" theme="filled" />
                 </span>
                 <br />
-                AWS Administration -{' '}
+                AWS Admin -{' '}
                 <span class="completed">
                   Certification Complete
                   <Icon type="check-circle" theme="outlined" />
@@ -505,7 +505,7 @@ class EmployeesCareerTrack extends React.Component {
         </Modal>
         <Modal
           visible={recommendedCareerTrackVisible}
-          title="System Administration Tier 3 Progress"
+          title="System Admin Tier 3 Progress"
           onOk={this.handleRecommendedCareerTrackOk}
           onCancel={this.handleRecommendedCareerTrackCancel}
           width={600}
@@ -531,7 +531,7 @@ class EmployeesCareerTrack extends React.Component {
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={12}>
-              <h3>System Administration Level 3 Training</h3>
+              <h3>System Admin Level 3 Training</h3>
               <Steps progressDot current={1} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"
@@ -541,7 +541,7 @@ class EmployeesCareerTrack extends React.Component {
                 <Step title="In Progress" description="Expected completion date: 4/15/2020" />
                 <Step title="Completed" description="100%" />
               </Steps>
-              <h3>Windows Server Administration Level 3 Training</h3>
+              <h3>Windows Server Admin Level 3 Training</h3>
               <Steps progressDot current={2} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"

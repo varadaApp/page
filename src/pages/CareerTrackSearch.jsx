@@ -284,7 +284,7 @@ class CareerTrackSearch extends React.Component {
     const dataSource4 = [
       {
         key: '1',
-        training: 'System Administration Level 3 Training',
+        training: 'System Admin Level 3 Training',
         status: (
           <span className="in-progress">
             Training Scheduled
@@ -294,7 +294,7 @@ class CareerTrackSearch extends React.Component {
       },
       {
         key: '2',
-        training: 'Windows Server Administration Level 3 Training',
+        training: 'Windows Server Admin Level 3 Training',
         status: (
           <span className="in-progress">
             Training in Progress
@@ -327,7 +327,7 @@ class CareerTrackSearch extends React.Component {
       },
       {
         key: '2',
-        certification: 'Cloudera CDH4 Administrator',
+        certification: 'Cloudera CDH4 Admin',
         status: <Checkbox>Select to Show Interest in Certification</Checkbox>,
       },
     ];
@@ -335,7 +335,7 @@ class CareerTrackSearch extends React.Component {
     const dataSource6 = [
       {
         key: '1',
-        training: 'System Administration Level 3 Training',
+        training: 'System Admin Level 3 Training',
         status: (
           <span className="in-progress">
             Training Scheduled
@@ -345,7 +345,7 @@ class CareerTrackSearch extends React.Component {
       },
       {
         key: '2',
-        training: 'Windows Server Administration Level 3 Training',
+        training: 'Windows Server Admin Level 3 Training',
         status: (
           <span className="in-progress">
             Training in Progress
@@ -378,7 +378,7 @@ class CareerTrackSearch extends React.Component {
       },
       {
         key: '2',
-        certification: 'AWS Administration',
+        certification: 'AWS Admin',
         status: (
           <span style={{ margin: '5px' }} className="completed">
             Certification Complete
@@ -423,7 +423,7 @@ class CareerTrackSearch extends React.Component {
       'DoS Nuclear Defense System',
       'FBI Case Management System',
     ];
-    const dataSourcePositionTitle = ['System Administrator', 'System Engineer'];
+    const dataSourcePositionTitle = ['System Admin', 'System Engineer'];
     const dataSourceCertification = [
       'A+',
       'Agile',
@@ -434,7 +434,7 @@ class CareerTrackSearch extends React.Component {
       'CCNE',
       'CCNP',
       'CISSP',
-      'Cloudera CDH4 Administrator',
+      'Cloudera CDH4 Admin',
       'Cloudera CDH4 Developer',
       'CSM',
       'CTNS',
@@ -477,15 +477,15 @@ class CareerTrackSearch extends React.Component {
     const dataSourceCareerTrack = [
       'Cyber IA',
       'Cyber IT',
-      'Database Administration',
+      'Database Admin',
       'Deskside/Field Services',
       'Help Desk',
-      'Network Administration',
+      'Network Admin',
       'Network Engineering',
       'Program Ops (Technical)',
       'Program/Project Management',
       'Software Development',
-      'Systems Administration',
+      'Systems Admin',
       'Systems Engineering',
       'Telecommunications/VOIP',
     ];
@@ -616,7 +616,7 @@ class CareerTrackSearch extends React.Component {
                       className="row-title "
                       onClick={() => this.toggleShow(0, 2, 'grow-class-5', 'measuringWrapper5')}
                     >
-                      System Administration Tier 3
+                      System Admin Tier 3
                       <Icon className="" type={this.state.tab2[0].show ? 'up' : 'down'} />
                     </div>
                     <div className="grow-class grow-class-5">

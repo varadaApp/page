@@ -121,7 +121,7 @@ class CareerManagement extends React.Component {
       },
       {
         key: '2',
-        name: 'Windows Server Administration Level 1',
+        name: 'Windows Server Admin Level 1',
         status: 'Desired - Training Scheduled: 35% Completed',
       },
     ];
@@ -184,7 +184,7 @@ class CareerManagement extends React.Component {
       },
       {
         key: '5',
-        name: 'AWS Administration',
+        name: 'AWS Admin',
         status: 'Acquired: 100% Completed',
       },
       {
@@ -296,7 +296,7 @@ class CareerManagement extends React.Component {
       },
       {
         key: '2',
-        position: 'System Administrator',
+        position: 'System Admin',
         program: 'FBI Project 3',
         location: 'Chantilly, VA',
         status: 'Contacted by Program Manager',

@@ -31,7 +31,7 @@ class CertificationForecast extends React.Component {
           employee: 'Sydney Watkins',
           program: 'Department of Defense Space Program',
           location: 'Washington, DC',
-          positionTitle: 'Windows Server System Adminstrator',
+          positionTitle: 'Windows Server System Admin',
           expectedForecastDate: '7/1/2020',
         },
       ],
@@ -111,31 +111,12 @@ class CertificationForecast extends React.Component {
               What would you like this report to contain?
             </h2>
             <div style={{ display: 'flex' }}>
-              <div className="attrition-row">
-                <div style={{ width: '30%' }}>
-                  <Row>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Certification</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Employee</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Program</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Location</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Position Title</Checkbox>
-                    </Col>
-                    <Col span={12}>
-                      <Checkbox defaultChecked={true}>Expected Forecast Date</Checkbox>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-              <br />
+              <Checkbox defaultChecked={true}>Certification</Checkbox>
+              <Checkbox defaultChecked={true}>Employee</Checkbox>
+              <Checkbox defaultChecked={true}>Program</Checkbox>
+              <Checkbox defaultChecked={true}>Location</Checkbox>
+              <Checkbox defaultChecked={true}>Position Title</Checkbox>
+              <Checkbox defaultChecked={true}>Expected Forecast Date</Checkbox>
             </div>
             <br />
             <h2 style={{ fontSize: '22px', color: 'black' }}>When and what should be included?</h2>
@@ -160,7 +141,7 @@ class CertificationForecast extends React.Component {
                   <Option value="7">CCNE</Option>
                   <Option value="8">CCNP</Option>
                   <Option value="9">CISSP</Option>
-                  <Option value="10">Cloudera CDH4 Administrator</Option>
+                  <Option value="10">Cloudera CDH4 Admin</Option>
                   <Option value="11">Cloudera CDH4 Developer</Option>
                   <Option value="12">CSM</Option>
                   <Option value="13">CTNS</Option>

@@ -345,7 +345,7 @@ class CurrentCareerTrack extends React.Component {
       },
       {
         key: '3',
-        certification: 'AWS Administration',
+        certification: 'AWS Admin',
         status: (
           <span style={{ margin: '5px' }} className="completed">
             Certification Complete
@@ -404,7 +404,7 @@ class CurrentCareerTrack extends React.Component {
                     fontWeight: 600,
                   }}
                 >
-                  System Administration
+                  System Admin
                 </div>
                 <div style={{ textAlign: 'left' }}>Current Career Track</div>
               </div>
@@ -759,7 +759,7 @@ class CurrentCareerTrack extends React.Component {
         </Modal>
         <Modal
           visible={visible2}
-          title="System Administration Tier 3"
+          title="System Admin Tier 3"
           onOk={this.handleOk2}
           onCancel={this.handleCancel2}
           width={700}
@@ -780,7 +780,7 @@ class CurrentCareerTrack extends React.Component {
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={12}>
-              <h3>System Administration Level 3 Training</h3>
+              <h3>System Admin Level 3 Training</h3>
               <Steps progressDot current={1} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"
@@ -790,7 +790,7 @@ class CurrentCareerTrack extends React.Component {
                 <Step title="In Progress" description="Expected completion date: 4/15/2020" />
                 <Step title="Completed" description="100%" />
               </Steps>
-              <h3>Windows Server Administration Level 3 Training</h3>
+              <h3>Windows Server Admin Level 3 Training</h3>
               <Steps progressDot current={2} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"
@@ -840,7 +840,7 @@ class CurrentCareerTrack extends React.Component {
         </Modal>
         <Modal
           visible={visible3}
-          title="System Administration Tier 3 Progress"
+          title="System Admin Tier 3 Progress"
           onOk={this.handleOk3}
           onCancel={this.handleCancel3}
           width={700}
@@ -861,7 +861,7 @@ class CurrentCareerTrack extends React.Component {
           </Row>
           <Row gutter={[8, 8]}>
             <Col span={12}>
-              <h3>System Administration Level 3 Training</h3>
+              <h3>System Admin Level 3 Training</h3>
               <Steps progressDot current={1} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"
@@ -871,7 +871,7 @@ class CurrentCareerTrack extends React.Component {
                 <Step title="In Progress" description="Expected completion date: 4/15/2020" />
                 <Step title="Completed" description="100%" />
               </Steps>
-              <h3>Windows Server Administration Level 3 Training</h3>
+              <h3>Windows Server Admin Level 3 Training</h3>
               <Steps progressDot current={2} direction="vertical" size="small">
                 <Step
                   title="Interest Showed"

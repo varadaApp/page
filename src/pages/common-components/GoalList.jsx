@@ -69,7 +69,7 @@ export default props => {
               backgroundColor: '#f0f2f5',
             }}
           >
-            Begin System Administration Level 3 Training Course (Training Scheduled).
+            Begin System Admin Level 3 Training Course (Training Scheduled).
           </Card>
         </Link>
         <Link to="/employee/manage">
@@ -84,7 +84,7 @@ export default props => {
               backgroundColor: '#f0f2f5',
             }}
           >
-            Complete Windows Server Administration Level 3 Training (Currently in Progress).
+            Complete Windows Server Admin Level 3 Training (Currently in Progress).
           </Card>
         </Link>
       </div>

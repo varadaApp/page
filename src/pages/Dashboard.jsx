@@ -98,11 +98,11 @@ class Dashboard extends React.Component {
       },
       {
         to: '/employee/manage',
-        content: 'Begin System Administration Level 3 Training Course (Training Scheduled).',
+        content: 'Begin System Admin Level 3 Training Course (Training Scheduled).',
       },
       {
         to: '/employee/manage',
-        content: 'Complete Windows Server Administration Level 3 Training (Currently in Progress).',
+        content: 'Complete Windows Server Admin Level 3 Training (Currently in Progress).',
       },
     ];
     return (

@@ -141,7 +141,7 @@ class ProgramInformation extends React.Component {
         },
         {
           key: '2',
-          name: 'Systems Administration',
+          name: 'Systems Admin',
         },
       ],
       count: 4,
@@ -156,7 +156,7 @@ class ProgramInformation extends React.Component {
         },
         {
           key: '2',
-          name: 'Systems Administration',
+          name: 'Systems Admin',
         },
       ],
       dataSourceSkills: [
@@ -322,13 +322,13 @@ class ProgramInformation extends React.Component {
         <div>
           <Form {...formItemLayout}>
             <Form.Item label="Position Title:">
-              <span className="ant-form-text">Linux System Administrator</span>
+              <span className="ant-form-text">Linux System Admin</span>
             </Form.Item>
             <Form.Item label="Labor Category and Level:">
               <span className="ant-form-text">System Admin Level 2</span>
             </Form.Item>
             <Form.Item label="Current Career Track:">
-              <span className="ant-form-text">System Administration Level 2</span>
+              <span className="ant-form-text">System Admin Level 2</span>
             </Form.Item>
             <Form.Item label="Program Name:">
               <span className="ant-form-text">Department of Defense Space Program</span>
@@ -569,7 +569,7 @@ class ProgramInformation extends React.Component {
                 <Option value="0">&nbsp;</Option>
                 <Option value="1">Program Ops (Technical)</Option>
                 <Option value="2">Software Development</Option>
-                <Option value="3">Systems Administration</Option>
+                <Option value="3">Systems Admin</Option>
               </Select>
               <Select
                 showSearch

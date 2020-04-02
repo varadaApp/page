@@ -70,7 +70,7 @@ class Goals extends React.Component {
               >
                 <ul>
                   <li>Apply to new position, your current program ends July 2020.</li>
-                  <li>Career track change to System Engineer from System Administration.</li>
+                  <li>Career track change to System Engineer from System Admin.</li>
                 </ul>
               </Card>
               <h1 style={{ marginTop: '20px' }}>Quarterly Goals:</h1>

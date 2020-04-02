@@ -190,7 +190,7 @@ class CareerManagement extends React.Component {
     const desiredCareerTrackDataSource = [
       {
         key: '1',
-        name: 'Department of Homeland Security Systems Administrator Tier 3',
+        name: 'Department of Homeland Security Systems Admin Tier 3',
         status: 'Training In Progress: 10% Completed',
         position: '8',
       },
