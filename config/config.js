@@ -237,6 +237,12 @@ export default {
               component: './Program/ProgramInformation',
             },
             {
+              path: '/program/reporting/employee-summary',
+              name: 'Employee Summary',
+              icon: 'file-done',
+              component: './Program/EmployeeSummary',
+            },
+            {
               path: '/program/employeeSearch',
               name: 'Employee Search',
               icon: 'search',
@@ -252,12 +258,6 @@ export default {
                   name: 'Attrition on Program',
                   icon: 'environment',
                   component: './Program/Attrition',
-                },
-                {
-                  path: '/program/reporting/employee-summary',
-                  name: 'Employee Summary',
-                  icon: 'file-done',
-                  component: './Program/EmployeeSummary',
                 },
                 {
                   path: '/program/reporting/mobility-forecast',

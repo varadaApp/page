@@ -82,6 +82,9 @@ class CurrentCareerTrack extends React.Component {
   componentDidMount() {
     const names = [
       { big: '1', small: '1', index: 0, tab: 1},
+      { big: '2', small: '2', index: 1, tab: 1},
+      { big: '2', small: '3', index: 2, tab: 1},
+      { big: '9', small: '9', index: 3, tab: 1},
     ]
     names.forEach((item, i) => {
       this.toggleShow(item.index, item.tab, `grow-class-${item.small}`, `measuringWrapper${item.big}`);
@@ -379,6 +382,22 @@ class CurrentCareerTrack extends React.Component {
           </div>
           <Divider />
           <Row style={{ margin: '20px', padding: '10px' }}>
+            <div className="top-container to-right">
+              <div>
+                <span className="careertrack-header-label">CURRENT PROGRAM</span> - DOD Space Program
+              </div>
+              <div>
+              <span className="careertrack-header-label">CURRENT CAREER TRACK</span> - System Administrator
+              </div>
+              <div>
+              <span className="careertrack-header-label">CURRENT TIER</span> - LEVEL 2
+              </div>
+              <div>
+              <span className="careertrack-header-label">NEXT TIER</span> - LEVEL 3
+              </div>
+            </div>
+          </Row>
+          {/* <Row style={{ margin: '20px', padding: '10px' }}>
             <Col xs={6}>
               <div className="top-container to-right">
                 <div
@@ -389,7 +408,7 @@ class CurrentCareerTrack extends React.Component {
                     fontWeight: 600,
                   }}
                 >
-                  DOD Space Program
+                  
                 </div>
                 <div style={{ textAlign: 'left' }}>Current Program</div>
               </div>
@@ -439,7 +458,7 @@ class CurrentCareerTrack extends React.Component {
                 <div style={{ textAlign: 'left' }}>Next Tier</div>
               </div>
             </Col>
-          </Row>
+          </Row> */}
           
           <Row gutter={[8, 8]} style={{ marginRight: 10 }}>
             <Row xs={11}>
@@ -513,62 +532,25 @@ class CurrentCareerTrack extends React.Component {
                     </div>
                   </div>
                   <div>
+                  <Row>
                     <div
-                      className="row-title"
-                      onClick={() => this.toggleShow(0, 1, 'grow-class-1', 'measuringWrapper1')}
+                      style={
+                        this.state.programValue === 'AWS Technical Support Program'
+                        ? { }
+                        : { display: 'none' }
+                      }
                     >
-                      System Engineer Tier 2
-                      <Icon type={this.state.tab1[0].show ? 'up' : 'down'} />
-                    </div>
-                    <div className="grow-class grow-class-1">
-                      <div className="measuringWrapper1">
+                      <Col className="padded-tab" xs={12}>
                         <div
-                          style={
-                            this.state.programValue === 'Department of Homeland Security Network'
-                              ? { display: 'flex', justifyContent: 'space-between' }
-                              : { display: 'none' }
-                          }
+                          className="row-title"
+                          onClick={() => this.toggleShow(0, 1, 'grow-class-1', 'measuringWrapper1')}
                         >
-                            <div
-                              className="career-track-info"
-                              onClick={this.showPositionsModal2}
-                            >
-                              <div className="career-track-info-label">
-                                Current Open Positions
-                              </div>
-                              <div className="career-track-info-value" >12</div>
-                            </div>
-                            <div className="career-track-info" onClick={this.showModal}>
-                              <div className="career-track-info-label">
-                                Current Percentage Complete
-                              </div>
-                              <div className="career-track-info-value">25%</div>
-                            </div>
-                            <div className="career-track-info">
-                              <div className="career-track-info-label">
-                                  Overall Expected Completion Date
-                              </div>
-                              <div className="career-track-info-value">
-                                5/1/2020
-                              </div>
-                            </div>
-                            <div className="career-track-info">
-                              <div className="career-track-info-label">
-                                  Program Location
-                              </div>
-                            <div className="career-track-info-info">
-                                Washington, D.C.
-                              </div>
-                            </div>
+                          System Engineer Tier 2
+                          <Icon type={this.state.tab1[0].show ? 'up' : 'down'} />
                         </div>
-                        <div
-                          style={
-                            this.state.programValue === 'AWS Technical Support Program'
-                              ? {display: 'flex', justifyContent: 'space-between'}
-                              : { display: 'none' }
-                          }
-                        >
-                          <div
+                        <div className="grow-class grow-class-1">
+                          <div className="measuringWrapper1">
+                            <div
                               className="career-track-info"
                               onClick={this.showPositionsModal2}
                             >
@@ -599,85 +581,125 @@ class CurrentCareerTrack extends React.Component {
                                 Washington, D.C.
                               </div>
                             </div>
+                            </div>
+                          </div>
+                      </Col>
+                      <Col className="padded-tab" xs={12}>
+                        <div
+                          className="row-title "
+                          onClick={() => this.toggleShow(3, 1, 'grow-class-4', 'measuringWrapper4')}
+                        >
+                          Certifications
+                          <Icon className="" type={this.state.tab1[3].show ? 'up' : 'down'} />
                         </div>
-                      </div>
+                        <div className="grow-class grow-class-4">
+                          <div className="measuringWrapper4">
+                            <Table
+                              className="career-track-management-table"
+                              dataSource={dataSource3}
+                              columns={columns2}
+                              size="middle"
+                              pagination={false}
+                              style={{ paddingBottom: 20 }}
+                            />
+                          </div>
+                        </div>
+                      </Col>
                     </div>
-                  </div>
-                  <div
-                    style={
-                      this.state.programValue === 'Department of Homeland Security Network'
+                    <div
+                      style={
+                        this.state.programValue === 'Department of Homeland Security Network'
                         ? { }
                         : { display: 'none' }
-                    }
-                  >
-                    <div
-                      className="row-title"
-                      onClick={() => this.toggleShow(1, 1, 'grow-class-2', 'measuringWrapper2')}
+                      }
                     >
-                      Trainings
-                      <Icon className="" type={this.state.tab1[1].show ? 'up' : 'down'} />
+                      <Col className="padded-tab" xs={8}>
+                        <div
+                          className="row-title"
+                          onClick={() => this.toggleShow(0, 1, 'grow-class-9', 'measuringWrapper9')}
+                        >
+                          System Engineer Tier 2
+                          <Icon type={this.state.tab1[0].show ? 'up' : 'down'} />
+                        </div>
+                        <div className="grow-class grow-class-9">
+                          <div className="measuringWrapper9">
+                            <div
+                                onClick={this.showPositionsModal2}
+                              >
+                                <div className="career-track-info-label">
+                                  Current Open Positions
+                                </div>
+                                <div className="career-track-info-value">12</div>
+                              </div>
+                              <div className="career-track-info" onClick={this.showModal}>
+                                <div className="career-track-info-label">
+                                  Current Percentage Complete
+                                </div>
+                                <div className="career-track-info-value">25%</div>
+                              </div>
+                              <div className="career-track-info">
+                                <div className="career-track-info-label">
+                                    Overall Expected Completion Date
+                                </div>
+                                <div className="career-track-info-value">
+                                  5/1/2020
+                                </div>
+                              </div>
+                              <div className="career-track-info">
+                                <div className="career-track-info-label">
+                                    Program Location
+                                </div>
+                              <div className="career-track-info-info">
+                                  Washington, D.C.
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </Col>
+                      <Col className="padded-tab" xs={8}>
+                        <div
+                        className="row-title"
+                        onClick={() => this.toggleShow(1, 1, 'grow-class-2', 'measuringWrapper2')}
+                        >
+                          Trainings
+                          <Icon className="" type={this.state.tab1[1].show ? 'up' : 'down'} />
+                        </div>
+                        <div className="grow-class grow-class-2">
+                          <div className="measuringWrapper2">
+                            <Table
+                              className="career-track-management-table"
+                              dataSource={dataSource1}
+                              columns={columns}
+                              size="middle"
+                              pagination={false}
+                              style={{ paddingBottom: 20 }}
+                            />
+                          </div>
+                        </div>
+                      </Col>
+                      <Col className="padded-tab" xs={8}>
+                        <div
+                        className="row-title "
+                        onClick={() => this.toggleShow(2, 1, 'grow-class-3', 'measuringWrapper3')}
+                        >
+                          Certifications
+                          <Icon className="" type={this.state.tab1[2].show ? 'up' : 'down'} />
+                        </div>
+                        <div className="grow-class grow-class-3">
+                          <div className="measuringWrapper3">
+                            <Table
+                              className="career-track-management-table"
+                              dataSource={dataSource2}
+                              columns={columns2}
+                              size="middle"
+                              pagination={false}
+                              style={{ paddingBottom: 20 }}
+                            />
+                          </div>
+                        </div>
+                      </Col>
                     </div>
-                    <div className="grow-class grow-class-2">
-                      <div className="measuringWrapper2">
-                        <Table
-                          className="career-track-management-table"
-                          dataSource={dataSource1}
-                          columns={columns}
-                          size="middle"
-                          pagination={false}
-                          style={{ paddingBottom: 20 }}
-                        />
-                      </div>
-                    </div>
-                    
-                    <div
-                      className="row-title "
-                      onClick={() => this.toggleShow(2, 1, 'grow-class-3', 'measuringWrapper3')}
-                    >
-                      Certifications
-                      <Icon className="" type={this.state.tab1[2].show ? 'up' : 'down'} />
-                    </div>
-                    <div className="grow-class grow-class-3">
-                      <div className="measuringWrapper3">
-                        <Table
-                          className="career-track-management-table"
-                          dataSource={dataSource2}
-                          columns={columns2}
-                          size="middle"
-                          pagination={false}
-                          style={{ paddingBottom: 20 }}
-                        />
-                      </div>
-                    </div>
-                    
-                  </div>
-                  {/* {this.state.programValue && <Divider/>} */}
-                  <div
-                    style={
-                      this.state.programValue === 'AWS Technical Support Program'
-                        ? {}
-                        : { display: 'none' }
-                    }
-                  >
-                    <div
-                      className="row-title "
-                      onClick={() => this.toggleShow(3, 1, 'grow-class-4', 'measuringWrapper4')}
-                    >
-                      Certifications
-                      <Icon className="" type={this.state.tab1[3].show ? 'up' : 'down'} />
-                    </div>
-                    <div className="grow-class grow-class-4">
-                      <div className="measuringWrapper4">
-                        <Table
-                          className="career-track-management-table"
-                          dataSource={dataSource3}
-                          columns={columns2}
-                          size="middle"
-                          pagination={false}
-                          style={{ paddingBottom: 20 }}
-                        />
-                      </div>
-                    </div>
+                  </Row>
                   </div>
                 </Row>
                 <div className="filler" />

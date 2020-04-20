@@ -5,6 +5,7 @@ import { Card, Icon, AutoComplete, Button, Modal, Checkbox, Divider, Select } fr
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import ReactTable from 'react-table';
 import { positionSearchData } from './Utils';
+import HoverCard from './common-components/HoverCard';
 
 // Import React Table
 import 'react-table/react-table.css';
@@ -336,6 +337,31 @@ class PositionSearch extends React.Component {
       'Chantilly VA',
       'Fort Belvoir VA',
     ];
+
+    const headerData = [
+      {
+        label: 'Recommended Positions',
+        value: '437',
+        items: [
+          'Position #1',
+          'Position #2',
+          'Position #3',
+          'Position #4',
+        ],
+        icon: <Icon type="check" style={{fontSize: 80, color: "#fff"}} />,
+      },
+      {
+        label: 'Recently Added',
+        value: '24',
+        items: [
+          'Position #1',
+          'Position #2',
+          'Position #3',
+          'Position #4',
+        ],
+        icon: <Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>,
+      },
+    ];
     return (
       <PageHeaderWrapper>
         <Card>
@@ -349,6 +375,10 @@ class PositionSearch extends React.Component {
             </div>
           </div>
           <Divider />
+          <div className="hover-cards-container">
+            <HoverCard value={headerData[0].value} label={headerData[0].label} items={headerData[0].items} icon={<Icon type="check" style={{fontSize: 80, color: "#fff"}} />} />
+            <HoverCard value={headerData[1].value} label={headerData[1].label} items={headerData[1].items} icon={<Icon type="bulb" style={{fontSize: 80}} theme="twoTone" twoToneColor="#fff"/>} />
+          </div>
           <div style={{ marginRight: 20, backgroundColor: '#f0f2f5', padding: '15px', paddingBottom: '50px' }}>
             <h2 style={{ fontSize: '22px', color: 'black' }}>Filter by:</h2>
             <div style={{ display: 'flex' }}>
